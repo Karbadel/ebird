@@ -1,0 +1,3282 @@
+[
+  {
+    "speciesCode": "absfin1",
+    "nombreEs": "Yal Plebeyo",
+    "nombreEn": "Ash-breasted Sierra Finch",
+    "sciName": "Geospizopsis plebejus",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35385.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "amekes",
+    "nombreEs": "Cernícalo Americano",
+    "nombreEn": "American Kestrel",
+    "sciName": "Falco sparverius",
+    "orden": "Falconiformes",
+    "familia": "Falconidae",
+    "taxonOrder": 12028.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "ameoys",
+    "nombreEs": "Ostrero Pío Americano",
+    "nombreEn": "American Oystercatcher",
+    "sciName": "Haematopus palliatus",
+    "orden": "Charadriiformes",
+    "familia": "Haematopodidae",
+    "taxonOrder": 5799.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "amgplo",
+    "nombreEs": "Chorlito Dorado Americano",
+    "nombreEn": "American Golden-Plover",
+    "sciName": "Pluvialis dominica",
+    "orden": "Charadriiformes",
+    "familia": "Charadriidae",
+    "taxonOrder": 5815.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "andavo1",
+    "nombreEs": "Avoceta Andina",
+    "nombreEn": "Andean Avocet",
+    "sciName": "Recurvirostra andina",
+    "orden": "Charadriiformes",
+    "familia": "Recurvirostridae",
+    "taxonOrder": 5779.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "andcon1",
+    "nombreEs": "Cóndor Andino",
+    "nombreEn": "Andean Condor",
+    "sciName": "Vultur gryphus",
+    "orden": "Cathartiformes",
+    "familia": "Cathartidae",
+    "taxonOrder": 7810.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "andduc1",
+    "nombreEs": "Malvasía Andina",
+    "nombreEn": "Andean Duck",
+    "sciName": "Oxyura ferruginea",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 780.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "andfla2",
+    "nombreEs": "Parina Grande",
+    "nombreEn": "Andean Flamingo",
+    "sciName": "Phoenicoparrus andinus",
+    "orden": "Phoenicopteriformes",
+    "familia": "Phoenicopteridae",
+    "taxonOrder": 6817.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "andfli1",
+    "nombreEs": "Carpintero Andino",
+    "nombreEn": "Andean Flicker",
+    "sciName": "Colaptes rupicola",
+    "orden": "Piciformes",
+    "familia": "Picidae",
+    "taxonOrder": 11924.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "andgoo1",
+    "nombreEs": "Cauquén Guayata",
+    "nombreEn": "Andean Goose",
+    "sciName": "Oressochen melanopterus",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 400.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "andgul1",
+    "nombreEs": "Gaviota Andina",
+    "nombreEn": "Andean Gull",
+    "sciName": "Chroicocephalus serranus",
+    "orden": "Charadriiformes",
+    "familia": "Laridae",
+    "taxonOrder": 6470.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "andhil3",
+    "nombreEs": "Colibrí Puneño",
+    "nombreEn": "Andean Hillstar",
+    "sciName": "Oreotrochilus estella",
+    "orden": "Apodiformes",
+    "familia": "Trochilidae",
+    "taxonOrder": 4494.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "andlap1",
+    "nombreEs": "Avefría Andina",
+    "nombreEn": "Andean Lapwing",
+    "sciName": "Vanellus resplendens",
+    "orden": "Charadriiformes",
+    "familia": "Charadriidae",
+    "taxonOrder": 5902.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "andneg1",
+    "nombreEs": "Negrito Andino",
+    "nombreEn": "Andean Negrito",
+    "sciName": "Lessonia oreas",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 17047.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "andswa2",
+    "nombreEs": "Golondrina Andina",
+    "nombreEn": "Andean Swallow",
+    "sciName": "Orochelidon andecola",
+    "orden": "Passeriformes",
+    "familia": "Hirundinidae",
+    "taxonOrder": 24139.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "andswi1",
+    "nombreEs": "Vencejo Andino",
+    "nombreEn": "Andean Swift",
+    "sciName": "Aeronautes andecolus",
+    "orden": "Apodiformes",
+    "familia": "Apodidae",
+    "taxonOrder": 4164.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "angpet1",
+    "nombreEs": "Abanto Marino Antártico",
+    "nombreEn": "Southern Giant-Petrel",
+    "sciName": "Macronectes giganteus",
+    "orden": "Procellariiformes",
+    "familia": "Procellariidae",
+    "taxonOrder": 7087.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "aplfal",
+    "nombreEs": "Halcón Aleto",
+    "nombreEn": "Aplomado Falcon",
+    "sciName": "Falco femoralis",
+    "orden": "Falconiformes",
+    "familia": "Falconidae",
+    "taxonOrder": 12092.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "ashgoo1",
+    "nombreEs": "Cauquén Cabecigrís",
+    "nombreEn": "Ashy-headed Goose",
+    "sciName": "Chloephaga poliocephala",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 409.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "aupowl1",
+    "nombreEs": "Mochuelo Patagón",
+    "nombreEn": "Austral Pygmy-Owl",
+    "sciName": "Glaucidium nana",
+    "orden": "Strigiformes",
+    "familia": "Strigidae",
+    "taxonOrder": 9053.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "ausbla1",
+    "nombreEs": "Tordo Patagón",
+    "nombreEn": "Austral Blackbird",
+    "sciName": "Curaeus curaeus",
+    "orden": "Passeriformes",
+    "familia": "Icteridae",
+    "taxonOrder": 33910.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "auscan1",
+    "nombreEs": "Canastero Austral",
+    "nombreEn": "Austral Canastero",
+    "sciName": "Asthenes anthoides",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15391.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "ausneg1",
+    "nombreEs": "Negrito Austral",
+    "nombreEn": "Austral Negrito",
+    "sciName": "Lessonia rufa",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 17046.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "auspar1",
+    "nombreEs": "Cotorra Cachaña",
+    "nombreEn": "Austral Parakeet",
+    "sciName": "Enicognathus ferrugineus",
+    "orden": "Psittaciformes",
+    "familia": "Psittacidae",
+    "taxonOrder": 13076.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "austhr1",
+    "nombreEs": "Zorzal Patagón",
+    "nombreEn": "Austral Thrush",
+    "sciName": "Turdus falcklandii",
+    "orden": "Passeriformes",
+    "familia": "Turdidae",
+    "taxonOrder": 28692.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "baisan",
+    "nombreEs": "Correlimos de Baird",
+    "nombreEn": "Baird's Sandpiper",
+    "sciName": "Calidris bairdii",
+    "orden": "Charadriiformes",
+    "familia": "Scolopacidae",
+    "taxonOrder": 6217.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "batsee1",
+    "nombreEs": "Semillero Colifajado",
+    "nombreEn": "Band-tailed Seedeater",
+    "sciName": "Catamenia analis",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35612.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bawcow4",
+    "nombreEs": "Tordo Músico",
+    "nombreEn": "Grayish Baywing",
+    "sciName": "Agelaioides badius",
+    "orden": "Passeriformes",
+    "familia": "Icteridae",
+    "taxonOrder": 33920.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bawnig1",
+    "nombreEs": "Chotacabras Ñañarca Grande",
+    "nombreEn": "Band-winged Nightjar",
+    "sciName": "Systellura longirostris",
+    "orden": "Caprimulgiformes",
+    "familia": "Caprimulgidae",
+    "taxonOrder": 3549.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bawnig3",
+    "nombreEs": "Chotacabras Ñañarca Chico",
+    "nombreEn": "Tschudi's Nightjar",
+    "sciName": "Quechuavis decussata",
+    "orden": "Caprimulgiformes",
+    "familia": "Caprimulgidae",
+    "taxonOrder": 3544.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bawswa1",
+    "nombreEs": "Golondrina Barranquera",
+    "nombreEn": "Blue-and-white Swallow",
+    "sciName": "Pygochelidon cyanoleuca",
+    "orden": "Passeriformes",
+    "familia": "Hirundinidae",
+    "taxonOrder": 24128.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "baytan3",
+    "nombreEs": "Tangara Naranjera",
+    "nombreEn": "Blue-and-yellow Tanager",
+    "sciName": "Rauenia bonariensis",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 34920.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bcbeag1",
+    "nombreEs": "Águila Mora",
+    "nombreEn": "Black-chested Buzzard-Eagle",
+    "sciName": "Geranoaetus melanoleucus",
+    "orden": "Accipitriformes",
+    "familia": "Accipitridae",
+    "taxonOrder": 8458.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bcnher",
+    "nombreEs": "Martinete Común",
+    "nombreEn": "Black-crowned Night Heron",
+    "sciName": "Nycticorax nycticorax",
+    "orden": "Pelecaniformes",
+    "familia": "Ardeidae",
+    "taxonOrder": 7600.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "belgul",
+    "nombreEs": "Gaviota Simeón",
+    "nombreEn": "Belcher's Gull",
+    "sciName": "Larus belcheri",
+    "orden": "Charadriiformes",
+    "familia": "Laridae",
+    "taxonOrder": 6509.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bfgdov1",
+    "nombreEs": "Palomita Cascabelita",
+    "nombreEn": "Bare-faced Ground Dove",
+    "sciName": "Metriopelia ceciliae",
+    "orden": "Columbiformes",
+    "familia": "Columbidae",
+    "taxonOrder": 2297.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bhsfin1",
+    "nombreEs": "Yal Cabecinegro",
+    "nombreEn": "Black-hooded Sierra Finch",
+    "sciName": "Phrygilus atriceps",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35343.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bichaw4",
+    "nombreEs": "Gavilán Chileno",
+    "nombreEn": "Chilean Hawk",
+    "sciName": "Astur chilensis",
+    "orden": "Accipitriformes",
+    "familia": "Accipitridae",
+    "taxonOrder": 8276.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bkbalb",
+    "nombreEs": "Albatros Ojeroso",
+    "nombreEn": "Black-browed Albatross",
+    "sciName": "Thalassarche melanophris",
+    "orden": "Procellariiformes",
+    "familia": "Diomedeidae",
+    "taxonOrder": 7006.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bkbplo",
+    "nombreEs": "Chorlito Gris",
+    "nombreEn": "Black-bellied Plover",
+    "sciName": "Pluvialis squatarola",
+    "orden": "Charadriiformes",
+    "familia": "Charadriidae",
+    "taxonOrder": 5811.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bkbsht1",
+    "nombreEs": "Gaucho Serrano",
+    "nombreEn": "Black-billed Shrike-Tyrant",
+    "sciName": "Agriornis montanus",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 17130.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bkfibi1",
+    "nombreEs": "Bandurria Austral",
+    "nombreEn": "Black-faced Ibis",
+    "sciName": "Theristicus melanopis",
+    "orden": "Pelecaniformes",
+    "familia": "Threskiornithidae",
+    "taxonOrder": 7487.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bkfibi2",
+    "nombreEs": "Bandurria Andina",
+    "nombreEn": "Andean Ibis",
+    "sciName": "Theristicus branickii",
+    "orden": "Pelecaniformes",
+    "familia": "Threskiornithidae",
+    "taxonOrder": 7488.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bknsti",
+    "nombreEs": "Cigüeñuela Cuellinegra",
+    "nombreEn": "Black-necked Stilt",
+    "sciName": "Himantopus mexicanus",
+    "orden": "Charadriiformes",
+    "familia": "Recurvirostridae",
+    "taxonOrder": 5770.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bktflo1",
+    "nombreEs": "Pinchaflor Gorjinegro",
+    "nombreEn": "Black-throated Flowerpiercer",
+    "sciName": "Diglossa brunneiventris",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35285.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "blacin1",
+    "nombreEs": "Remolinera Negra",
+    "nombreEn": "Blackish Cinclodes",
+    "sciName": "Cinclodes antarcticus",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15088.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "blaoys1",
+    "nombreEs": "Ostrero Negro Americano",
+    "nombreEn": "Blackish Oystercatcher",
+    "sciName": "Haematopus ater",
+    "orden": "Charadriiformes",
+    "familia": "Haematopodidae",
+    "taxonOrder": 5804.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "blasis1",
+    "nombreEs": "Jilguero Negro",
+    "nombreEn": "Black Siskin",
+    "sciName": "Spinus atratus",
+    "orden": "Passeriformes",
+    "familia": "Fringillidae",
+    "taxonOrder": 32655.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "blbgra1",
+    "nombreEs": "Semillero Volatinero",
+    "nombreEn": "Blue-black Grassquit",
+    "sciName": "Volatinia jacarina",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35510.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "blcsis2",
+    "nombreEs": "Jilguero Golinegro",
+    "nombreEn": "Black-chinned Siskin",
+    "sciName": "Spinus barbatus",
+    "orden": "Passeriformes",
+    "familia": "Fringillidae",
+    "taxonOrder": 32658.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "blhduc1",
+    "nombreEs": "Pato Rinconero",
+    "nombreEn": "Black-headed Duck",
+    "sciName": "Heteronetta atricapilla",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 776.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "blkrai",
+    "nombreEs": "Polluela Negruzca",
+    "nombreEn": "Black Rail",
+    "sciName": "Laterallus jamaicensis",
+    "orden": "Gruiformes",
+    "familia": "Rallidae",
+    "taxonOrder": 5651.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "blkski",
+    "nombreEs": "Rayador Americano",
+    "nombreEn": "Black Skimmer",
+    "sciName": "Rynchops niger",
+    "orden": "Charadriiformes",
+    "familia": "Laridae",
+    "taxonOrder": 6622.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "blkvul",
+    "nombreEs": "Zopilote Negro",
+    "nombreEn": "Black Vulture",
+    "sciName": "Coragyps atratus",
+    "orden": "Cathartiformes",
+    "familia": "Cathartidae",
+    "taxonOrder": 7811.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "blnswa2",
+    "nombreEs": "Cisne Cuellinegro",
+    "nombreEn": "Black-necked Swan",
+    "sciName": "Cygnus melancoryphus",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 381.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "blupet1",
+    "nombreEs": "Petrel Azulado",
+    "nombreEn": "Blue Petrel",
+    "sciName": "Halobaena caerulea",
+    "orden": "Procellariiformes",
+    "familia": "Procellariidae",
+    "taxonOrder": 7159.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "brcfly3",
+    "nombreEs": "Mosquero Rojizo",
+    "nombreEn": "Rufescent Flycatcher",
+    "sciName": "Myiophobus rufescens",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 16867.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "brhgul2",
+    "nombreEs": "Gaviota Cahuil",
+    "nombreEn": "Brown-hooded Gull",
+    "sciName": "Chroicocephalus maculipennis",
+    "orden": "Charadriiformes",
+    "familia": "Laridae",
+    "taxonOrder": 6471.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "brnowl",
+    "nombreEs": "Lechuza Común Americana",
+    "nombreEn": "American Barn Owl",
+    "sciName": "Tyto furcata",
+    "orden": "Strigiformes",
+    "familia": "Tytonidae",
+    "taxonOrder": 8633.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bryfin1",
+    "nombreEs": "Chirigüe Culigualdo",
+    "nombreEn": "Bright-rumped Yellow-Finch",
+    "sciName": "Sicalis uropygialis",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35461.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bthhue1",
+    "nombreEs": "Huet-Huet Gorjinegro",
+    "nombreEn": "Black-throated Huet-huet",
+    "sciName": "Pteroptochos tarnii",
+    "orden": "Passeriformes",
+    "familia": "Rhinocryptidae",
+    "taxonOrder": 14366.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "btsfin1",
+    "nombreEs": "Yal Platero",
+    "nombreEn": "Band-tailed Sierra Finch",
+    "sciName": "Rhopospina alaudina",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35421.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bubear2",
+    "nombreEs": "Bandurrita Ocrácea",
+    "nombreEn": "Buff-breasted Earthcreeper",
+    "sciName": "Upucerthia validirostris",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15078.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bulalb2",
+    "nombreEs": "Albatros de Buller",
+    "nombreEn": "Buller's Albatross",
+    "sciName": "Thalassarche bulleri",
+    "orden": "Procellariiformes",
+    "familia": "Diomedeidae",
+    "taxonOrder": 6997.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "burowl",
+    "nombreEs": "Mochuelo de Madriguera",
+    "nombreEn": "Burrowing Owl",
+    "sciName": "Athene cunicularia",
+    "orden": "Strigiformes",
+    "familia": "Strigidae",
+    "taxonOrder": 9133.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "burpar",
+    "nombreEs": "Loro Barranquero",
+    "nombreEn": "Burrowing Parakeet",
+    "sciName": "Cyanoliseus patagonus",
+    "orden": "Psittaciformes",
+    "familia": "Psittacidae",
+    "taxonOrder": 13081.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "buwcin1",
+    "nombreEs": "Remolinera Fusca",
+    "nombreEn": "Buff-winged Cinclodes",
+    "sciName": "Cinclodes fuscus",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15087.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "bwgdov1",
+    "nombreEs": "Palomita Alinegra",
+    "nombreEn": "Black-winged Ground Dove",
+    "sciName": "Metriopelia melanoptera",
+    "orden": "Columbiformes",
+    "familia": "Columbidae",
+    "taxonOrder": 2302.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "calqua",
+    "nombreEs": "Colín de California",
+    "nombreEn": "California Quail",
+    "sciName": "Callipepla californica",
+    "orden": "Galliformes",
+    "familia": "Odontophoridae",
+    "taxonOrder": 1094.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "cappet",
+    "nombreEs": "Petrel Damero",
+    "nombreEn": "Pintado Petrel",
+    "sciName": "Daption capense",
+    "orden": "Procellariiformes",
+    "familia": "Procellariidae",
+    "taxonOrder": 7097.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "categr1",
+    "nombreEs": "Garcilla Bueyera Occidental",
+    "nombreEn": "Western Cattle-Egret",
+    "sciName": "Ardea ibis",
+    "orden": "Pelecaniformes",
+    "familia": "Ardeidae",
+    "taxonOrder": 7724.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "cawfin1",
+    "nombreEs": "Yal Cejiblanco",
+    "nombreEn": "White-bridled Finch",
+    "sciName": "Melanodera melanodera",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35359.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "chicar1",
+    "nombreEs": "Caracara Chimango",
+    "nombreEn": "Chimango Caracara",
+    "sciName": "Daptrius chimango",
+    "orden": "Falconiformes",
+    "familia": "Falconidae",
+    "taxonOrder": 11970.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "chifla1",
+    "nombreEs": "Flamenco Chileno",
+    "nombreEn": "Chilean Flamingo",
+    "sciName": "Phoenicopterus chilensis",
+    "orden": "Phoenicopteriformes",
+    "familia": "Phoenicopteridae",
+    "taxonOrder": 6806.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "chifli1",
+    "nombreEs": "Carpintero Pitío",
+    "nombreEn": "Chilean Flicker",
+    "sciName": "Colaptes pitius",
+    "orden": "Piciformes",
+    "familia": "Picidae",
+    "taxonOrder": 11923.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "chimoc1",
+    "nombreEs": "Sinsonte Tenca",
+    "nombreEn": "Chilean Mockingbird",
+    "sciName": "Mimus thenca",
+    "orden": "Passeriformes",
+    "familia": "Mimidae",
+    "taxonOrder": 28070.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "chipig2",
+    "nombreEs": "Paloma Araucana",
+    "nombreEn": "Chilean Pigeon",
+    "sciName": "Patagioenas araucana",
+    "orden": "Columbiformes",
+    "familia": "Columbidae",
+    "taxonOrder": 1977.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "chisku1",
+    "nombreEs": "Págalo Chileno",
+    "nombreEn": "Chilean Skua",
+    "sciName": "Stercorarius chilensis",
+    "orden": "Charadriiformes",
+    "familia": "Stercorariidae",
+    "taxonOrder": 6367.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "chiswa1",
+    "nombreEs": "Golondrina Chilena",
+    "nombreEn": "Chilean Swallow",
+    "sciName": "Tachycineta leucopyga",
+    "orden": "Passeriformes",
+    "familia": "Hirundinidae",
+    "taxonOrder": 24068.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "chithr1",
+    "nombreEs": "Mirlo Chiguanco",
+    "nombreEn": "Chiguanco Thrush",
+    "sciName": "Turdus chiguanco",
+    "orden": "Passeriformes",
+    "familia": "Turdidae",
+    "taxonOrder": 28686.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "chitin1",
+    "nombreEs": "Tinamú Chileno",
+    "nombreEn": "Chilean Tinamou",
+    "sciName": "Nothoprocta perdicaria",
+    "orden": "Tinamiformes",
+    "familia": "Tinamidae",
+    "taxonOrder": 111.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "chiwig1",
+    "nombreEs": "Silbón Overo",
+    "nombreEn": "Chiloe Wigeon",
+    "sciName": "Mareca sibilatrix",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 524.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "chtsee1",
+    "nombreEs": "Semillero Gorjicastaño",
+    "nombreEn": "Chestnut-throated Seedeater",
+    "sciName": "Sporophila telasco",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35528.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "chutap1",
+    "nombreEs": "Tapaculo Chucao",
+    "nombreEn": "Chucao Tapaculo",
+    "sciName": "Scelorchilus rubecula",
+    "orden": "Passeriformes",
+    "familia": "Rhinocryptidae",
+    "taxonOrder": 14373.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "cibgrt1",
+    "nombreEs": "Dormilona Canela",
+    "nombreEn": "Cinnamon-bellied Ground-Tyrant",
+    "sciName": "Muscisaxicola capistratus",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 17107.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "cincon1",
+    "nombreEs": "Conirrostro Cinéreo",
+    "nombreEn": "Cinereous Conebill",
+    "sciName": "Conirostrum cinereum",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35265.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "cinhar1",
+    "nombreEs": "Aguilucho Vari",
+    "nombreEn": "Cinereous Harrier",
+    "sciName": "Circus cinereus",
+    "orden": "Accipitriformes",
+    "familia": "Accipitridae",
+    "taxonOrder": 8322.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "cintea",
+    "nombreEs": "Cerceta Colorada",
+    "nombreEn": "Cinnamon Teal",
+    "sciName": "Spatula cyanoptera",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 487.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "cocher1",
+    "nombreEs": "Garza Cuca",
+    "nombreEn": "Cocoi Heron",
+    "sciName": "Ardea cocoi",
+    "orden": "Pelecaniformes",
+    "familia": "Ardeidae",
+    "taxonOrder": 7762.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "codfin1",
+    "nombreEs": "Diuca Común",
+    "nombreEn": "Diuca Finch",
+    "sciName": "Diuca diuca",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35354.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "colplo1",
+    "nombreEs": "Chorlitejo de Azara",
+    "nombreEn": "Collared Plover",
+    "sciName": "Anarhynchus collaris",
+    "orden": "Charadriiformes",
+    "familia": "Charadriidae",
+    "taxonOrder": 5933.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "comgal1",
+    "nombreEs": "Gallineta Americana",
+    "nombreEn": "Common Gallinule",
+    "sciName": "Gallinula galeata",
+    "orden": "Gruiformes",
+    "familia": "Rallidae",
+    "taxonOrder": 5468.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "commin1",
+    "nombreEs": "Minero Común",
+    "nombreEn": "Common Miner",
+    "sciName": "Geositta cunicularia",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 14580.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "coopet",
+    "nombreEs": "Petrel de Cook",
+    "nombreEn": "Cook's Petrel",
+    "sciName": "Pterodroma cookii",
+    "orden": "Procellariiformes",
+    "familia": "Procellariidae",
+    "taxonOrder": 7145.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "corcan1",
+    "nombreEs": "Canastero Pálido",
+    "nombreEn": "Cordilleran Canastero",
+    "sciName": "Asthenes modesta",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15422.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "corpip1",
+    "nombreEs": "Bisbita Correndera",
+    "nombreEn": "Correndera Pipit",
+    "sciName": "Anthus correndera",
+    "orden": "Passeriformes",
+    "familia": "Motacillidae",
+    "taxonOrder": 31898.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "cosswa1",
+    "nombreEs": "Cisne Coscoroba",
+    "nombreEn": "Coscoroba Swan",
+    "sciName": "Coscoroba coscoroba",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 395.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "crachi1",
+    "nombreEs": "Chiricoca",
+    "nombreEn": "Crag Chilia",
+    "sciName": "Ochetorhynchus melanurus",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15009.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "crbcan4",
+    "nombreEs": "Canastero de Arequipa",
+    "nombreEn": "Dark-winged Canastero",
+    "sciName": "Asthenes arequipae",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15379.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "crbthr1",
+    "nombreEs": "Zorzal Chalchalero",
+    "nombreEn": "Creamy-bellied Thrush",
+    "sciName": "Turdus amaurochalinus",
+    "orden": "Passeriformes",
+    "familia": "Turdidae",
+    "taxonOrder": 28701.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "creduc1",
+    "nombreEs": "Ánade Juarjal",
+    "nombreEn": "Crested Duck",
+    "sciName": "Lophonetta specularioides",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 441.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "crgdov1",
+    "nombreEs": "Columbina Quiquagua",
+    "nombreEn": "Croaking Ground Dove",
+    "sciName": "Columbina cruziana",
+    "orden": "Columbiformes",
+    "familia": "Columbidae",
+    "taxonOrder": 2285.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "crwcin1",
+    "nombreEs": "Remolinera Común Meridional",
+    "nombreEn": "Cream-winged Cinclodes",
+    "sciName": "Cinclodes albiventris",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15097.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "cthhue1",
+    "nombreEs": "Huet-Huet Gorjicastaño",
+    "nombreEn": "Chestnut-throated Huet-huet",
+    "sciName": "Pteroptochos castaneus",
+    "orden": "Passeriformes",
+    "familia": "Rhinocryptidae",
+    "taxonOrder": 14365.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "dabcin1",
+    "nombreEs": "Remolinera Araucana",
+    "nombreEn": "Dark-bellied Cinclodes",
+    "sciName": "Cinclodes patagonicus",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15116.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "dafgrt1",
+    "nombreEs": "Dormilona Carinegra",
+    "nombreEn": "Dark-faced Ground-Tyrant",
+    "sciName": "Muscisaxicola maclovianus",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 17099.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "demwir1",
+    "nombreEs": "Tijeral Colilargo",
+    "nombreEn": "Des Murs's Wiretail",
+    "sciName": "Sylviorthorhynchus desmursii",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15314.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "dolgul2",
+    "nombreEs": "Gaviota Patagona",
+    "nombreEn": "Dolphin Gull",
+    "sciName": "Leucophaeus scoresbii",
+    "orden": "Charadriiformes",
+    "familia": "Laridae",
+    "taxonOrder": 6489.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "dorcht1",
+    "nombreEs": "Pitajo Canela",
+    "nombreEn": "d'Orbigny's Chat-Tyrant",
+    "sciName": "Ochthoeca oenanthoides",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 17208.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "dustap1",
+    "nombreEs": "Churrín Sombrío",
+    "nombreEn": "Dusky Tapaculo",
+    "sciName": "Scytalopus fuscus",
+    "orden": "Passeriformes",
+    "familia": "Rhinocryptidae",
+    "taxonOrder": 14401.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "dutcan1",
+    "nombreEs": "Canastero Colinegro",
+    "nombreEn": "Dusky-tailed Canastero",
+    "sciName": "Pseudasthenes humicola",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15536.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "eardov1",
+    "nombreEs": "Zenaida Torcaza",
+    "nombreEn": "Eared Dove",
+    "sciName": "Zenaida auriculata",
+    "orden": "Columbiformes",
+    "familia": "Columbidae",
+    "taxonOrder": 2400.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "eleter1",
+    "nombreEs": "Charrán Elegante",
+    "nombreEn": "Elegant Tern",
+    "sciName": "Thalasseus elegans",
+    "orden": "Charadriiformes",
+    "familia": "Laridae",
+    "taxonOrder": 6780.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "eursta",
+    "nombreEs": "Estornino Pinto",
+    "nombreEn": "European Starling",
+    "sciName": "Sturnus vulgaris",
+    "orden": "Passeriformes",
+    "familia": "Sturnidae",
+    "taxonOrder": 27813.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "fiediu1",
+    "nombreEs": "Diucón",
+    "nombreEn": "Fire-eyed Diucon",
+    "sciName": "Pyrope pyrope",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 17116.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "flistd1",
+    "nombreEs": "Quetro Austral",
+    "nombreEn": "Flightless Steamer-Duck",
+    "sciName": "Tachyeres pteneres",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 433.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "flystd1",
+    "nombreEs": "Quetro Volador",
+    "nombreEn": "Flying Steamer-Duck",
+    "sciName": "Tachyeres patachonicus",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 432.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "fragul",
+    "nombreEs": "Gaviota Pipizcan",
+    "nombreEn": "Franklin's Gull",
+    "sciName": "Leucophaeus pipixcan",
+    "orden": "Charadriiformes",
+    "familia": "Laridae",
+    "taxonOrder": 6494.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "giacoo1",
+    "nombreEs": "Focha Gigante",
+    "nombreEn": "Giant Coot",
+    "sciName": "Fulica gigantea",
+    "orden": "Gruiformes",
+    "familia": "Rallidae",
+    "taxonOrder": 5485.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "giahum1",
+    "nombreEs": "Colibrí Gigante",
+    "nombreEn": "Giant Hummingbird",
+    "sciName": "Patagona gigas",
+    "orden": "Apodiformes",
+    "familia": "Trochilidae",
+    "taxonOrder": 4718.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "gragoo",
+    "nombreEs": "Ánsar Común",
+    "nombreEn": "Graylag Goose",
+    "sciName": "Anser anser",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 275.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "gramin1",
+    "nombreEs": "Minero Gris",
+    "nombreEn": "Grayish Miner",
+    "sciName": "Geositta maritima",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 14604.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "grbani",
+    "nombreEs": "Garrapatero Asurcado",
+    "nombreEn": "Groove-billed Ani",
+    "sciName": "Crotophaga sulcirostris",
+    "orden": "Cuculiformes",
+    "familia": "Cuculidae",
+    "taxonOrder": 3027.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "grbfir1",
+    "nombreEs": "Colibrí Austral",
+    "nombreEn": "Green-backed Firecrown",
+    "sciName": "Sephanoides sephaniodes",
+    "orden": "Apodiformes",
+    "familia": "Trochilidae",
+    "taxonOrder": 4428.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "greegr",
+    "nombreEs": "Garceta Grande",
+    "nombreEn": "Great Egret",
+    "sciName": "Ardea alba",
+    "orden": "Pelecaniformes",
+    "familia": "Ardeidae",
+    "taxonOrder": 7729.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "grefri",
+    "nombreEs": "Rabihorcado Grande",
+    "nombreEn": "Great Frigatebird",
+    "sciName": "Fregata minor",
+    "orden": "Suliformes",
+    "familia": "Fregatidae",
+    "taxonOrder": 7323.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "gregre1",
+    "nombreEs": "Somormujo Macachón",
+    "nombreEn": "Great Grebe",
+    "sciName": "Podiceps major",
+    "orden": "Podicipediformes",
+    "familia": "Podicipedidae",
+    "taxonOrder": 6863.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "gresht1",
+    "nombreEs": "Gaucho Grande",
+    "nombreEn": "Great Shrike-Tyrant",
+    "sciName": "Agriornis lividus",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 17139.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "greyel",
+    "nombreEs": "Archibebe Patigualdo Grande",
+    "nombreEn": "Greater Yellowlegs",
+    "sciName": "Tringa melanoleuca",
+    "orden": "Charadriiformes",
+    "familia": "Scolopacidae",
+    "taxonOrder": 6154.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "grhowl2",
+    "nombreEs": "Búho Magallánico",
+    "nombreEn": "Lesser Horned Owl",
+    "sciName": "Bubo magellanicus",
+    "orden": "Strigiformes",
+    "familia": "Strigidae",
+    "taxonOrder": 8928.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "grtgra",
+    "nombreEs": "Zanate Mexicano",
+    "nombreEn": "Great-tailed Grackle",
+    "sciName": "Quiscalus mexicanus",
+    "orden": "Passeriformes",
+    "familia": "Icteridae",
+    "taxonOrder": 33864.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "gryfin1",
+    "nombreEs": "Chirigüe Sabanero",
+    "nombreEn": "Grassland Yellow-Finch",
+    "sciName": "Sicalis luteola",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35483.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "gryfin2",
+    "nombreEs": "Chirigüe Grande",
+    "nombreEn": "Greater Yellow-Finch",
+    "sciName": "Sicalis auriventris",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35466.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "gryfin3",
+    "nombreEs": "Chirigüe Oliváceo",
+    "nombreEn": "Greenish Yellow-Finch",
+    "sciName": "Sicalis olivascens",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35467.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "grygul",
+    "nombreEs": "Gaviota Garuma",
+    "nombreEn": "Gray Gull",
+    "sciName": "Leucophaeus modestus",
+    "orden": "Charadriiformes",
+    "familia": "Laridae",
+    "taxonOrder": 6488.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "grynod1",
+    "nombreEs": "Tiñosa Gris",
+    "nombreEn": "Gray Noddy",
+    "sciName": "Anous albivitta",
+    "orden": "Charadriiformes",
+    "familia": "Laridae",
+    "taxonOrder": 6653.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "gsgdov1",
+    "nombreEs": "Palomita Aimará",
+    "nombreEn": "Golden-spotted Ground Dove",
+    "sciName": "Metriopelia aymara",
+    "orden": "Columbiformes",
+    "familia": "Columbidae",
+    "taxonOrder": 2305.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "guacor1",
+    "nombreEs": "Cormorán Guanay",
+    "nombreEn": "Guanay Cormorant",
+    "sciName": "Leucocarbo bougainvilliorum",
+    "orden": "Suliformes",
+    "familia": "Phalacrocoracidae",
+    "taxonOrder": 7437.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "gubter2",
+    "nombreEs": "Pagaza Piconegra",
+    "nombreEn": "Gull-billed Tern",
+    "sciName": "Gelochelidon nilotica",
+    "orden": "Charadriiformes",
+    "familia": "Laridae",
+    "taxonOrder": 6710.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "gybsee1",
+    "nombreEs": "Agachona Mediana",
+    "nombreEn": "Gray-breasted Seedsnipe",
+    "sciName": "Thinocorus orbignyianus",
+    "orden": "Charadriiformes",
+    "familia": "Thinocoridae",
+    "taxonOrder": 5973.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "gybsht1",
+    "nombreEs": "Gaucho Gris",
+    "nombreEn": "Gray-bellied Shrike-Tyrant",
+    "sciName": "Agriornis micropterus",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 17142.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "gyfcin1",
+    "nombreEs": "Remolinera Chica",
+    "nombreEn": "Gray-flanked Cinclodes",
+    "sciName": "Cinclodes oustaleti",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15104.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "gyhsif1",
+    "nombreEs": "Yal Cabecigrís",
+    "nombreEn": "Gray-hooded Sierra Finch",
+    "sciName": "Phrygilus gayi",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35347.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "hoosis1",
+    "nombreEs": "Jilguero Encapuchado",
+    "nombreEn": "Hooded Siskin",
+    "sciName": "Spinus magellanicus",
+    "orden": "Passeriformes",
+    "familia": "Fringillidae",
+    "taxonOrder": 32638.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "horcoo1",
+    "nombreEs": "Focha Cornuda",
+    "nombreEn": "Horned Coot",
+    "sciName": "Fulica cornuta",
+    "orden": "Gruiformes",
+    "familia": "Rallidae",
+    "taxonOrder": 5484.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "houspa",
+    "nombreEs": "Gorrión Común",
+    "nombreEn": "House Sparrow",
+    "sciName": "Passer domesticus",
+    "orden": "Passeriformes",
+    "familia": "Passeridae",
+    "taxonOrder": 31534.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "houwre4",
+    "nombreEs": "Chochín Criollo Sureño",
+    "nombreEn": "Southern House Wren",
+    "sciName": "Troglodytes musculus",
+    "orden": "Passeriformes",
+    "familia": "Troglodytidae",
+    "taxonOrder": 27209.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "hrshaw",
+    "nombreEs": "Busardo Mixto",
+    "nombreEn": "Harris's Hawk",
+    "sciName": "Parabuteo unicinctus",
+    "orden": "Accipitriformes",
+    "familia": "Accipitridae",
+    "taxonOrder": 8445.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "hudgod",
+    "nombreEs": "Aguja Café",
+    "nombreEn": "Hudsonian Godwit",
+    "sciName": "Limosa haemastica",
+    "orden": "Charadriiformes",
+    "familia": "Scolopacidae",
+    "taxonOrder": 6048.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "humpen1",
+    "nombreEs": "Pingüino de Humboldt",
+    "nombreEn": "Humboldt Penguin",
+    "sciName": "Spheniscus humboldti",
+    "orden": "Sphenisciformes",
+    "familia": "Spheniscidae",
+    "taxonOrder": 6957.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "impcor6",
+    "nombreEs": "Cormorán Imperial",
+    "nombreEn": "Imperial Cormorant",
+    "sciName": "Leucocarbo atriceps",
+    "orden": "Suliformes",
+    "familia": "Phalacrocoracidae",
+    "taxonOrder": 7446.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "incter1",
+    "nombreEs": "Charrán Inca",
+    "nombreEn": "Inca Tern",
+    "sciName": "Larosterna inca",
+    "orden": "Charadriiformes",
+    "familia": "Laridae",
+    "taxonOrder": 6719.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "jamfla1",
+    "nombreEs": "Parina Chica",
+    "nombreEn": "James's Flamingo",
+    "sciName": "Phoenicoparrus jamesi",
+    "orden": "Phoenicopteriformes",
+    "familia": "Phoenicopteridae",
+    "taxonOrder": 6818.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "kelgoo1",
+    "nombreEs": "Cauquén Caranca",
+    "nombreEn": "Kelp Goose",
+    "sciName": "Chloephaga hybrida",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 406.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "kelgul",
+    "nombreEs": "Gaviota Cocinera",
+    "nombreEn": "Kelp Gull",
+    "sciName": "Larus dominicanus",
+    "orden": "Charadriiformes",
+    "familia": "Laridae",
+    "taxonOrder": 6533.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "kerpet",
+    "nombreEs": "Petrel de las Kermadec",
+    "nombreEn": "Kermadec Petrel",
+    "sciName": "Pterodroma neglecta",
+    "orden": "Procellariiformes",
+    "familia": "Procellariidae",
+    "taxonOrder": 7108.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "killde",
+    "nombreEs": "Chorlitejo Culirrojo",
+    "nombreEn": "Killdeer",
+    "sciName": "Charadrius vociferus",
+    "orden": "Charadriiformes",
+    "familia": "Charadriidae",
+    "taxonOrder": 5827.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "lakduc1",
+    "nombreEs": "Malvasía Argentina",
+    "nombreEn": "Lake Duck",
+    "sciName": "Oxyura vittata",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 786.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "leasan",
+    "nombreEs": "Correlimos Menudillo",
+    "nombreEn": "Least Sandpiper",
+    "sciName": "Calidris minutilla",
+    "orden": "Charadriiformes",
+    "familia": "Scolopacidae",
+    "taxonOrder": 6226.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "leasee1",
+    "nombreEs": "Agachona Chica",
+    "nombreEn": "Least Seedsnipe",
+    "sciName": "Thinocorus rumicivorus",
+    "orden": "Charadriiformes",
+    "familia": "Thinocoridae",
+    "taxonOrder": 5976.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "lesrhe2",
+    "nombreEs": "Ñandú Petiso",
+    "nombreEn": "Lesser Rhea",
+    "sciName": "Rhea pennata",
+    "orden": "Rheiformes",
+    "familia": "Rheidae",
+    "taxonOrder": 38.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "lesyel",
+    "nombreEs": "Archibebe Patigualdo Chico",
+    "nombreEn": "Lesser Yellowlegs",
+    "sciName": "Tringa flavipes",
+    "orden": "Charadriiformes",
+    "familia": "Scolopacidae",
+    "taxonOrder": 6145.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "libher",
+    "nombreEs": "Garceta Azul",
+    "nombreEn": "Little Blue Heron",
+    "sciName": "Egretta caerulea",
+    "orden": "Pelecaniformes",
+    "familia": "Ardeidae",
+    "taxonOrder": 7629.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "lotmea1",
+    "nombreEs": "Loica Común",
+    "nombreEn": "Long-tailed Meadowlark",
+    "sciName": "Leistes loyca",
+    "orden": "Passeriformes",
+    "familia": "Icteridae",
+    "taxonOrder": 33600.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "madpet1",
+    "nombreEs": "Potoyunco Magallánico",
+    "nombreEn": "Magellanic Diving-Petrel",
+    "sciName": "Pelecanoides magellani",
+    "orden": "Procellariiformes",
+    "familia": "Procellariidae",
+    "taxonOrder": 7275.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "magcor1",
+    "nombreEs": "Cormorán Magallánico",
+    "nombreEn": "Magellanic Cormorant",
+    "sciName": "Leucocarbo magellanicus",
+    "orden": "Suliformes",
+    "familia": "Phalacrocoracidae",
+    "taxonOrder": 7436.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "magoys1",
+    "nombreEs": "Ostrero Magallánico",
+    "nombreEn": "Magellanic Oystercatcher",
+    "sciName": "Haematopus leucopodus",
+    "orden": "Charadriiformes",
+    "familia": "Haematopodidae",
+    "taxonOrder": 5805.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "magpen1",
+    "nombreEs": "Pingüino Magallánico",
+    "nombreEn": "Magellanic Penguin",
+    "sciName": "Spheniscus magellanicus",
+    "orden": "Sphenisciformes",
+    "familia": "Spheniscidae",
+    "taxonOrder": 6959.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "magtap1",
+    "nombreEs": "Churrín Magallánico",
+    "nombreEn": "Magellanic Tapaculo",
+    "sciName": "Scytalopus magellanicus",
+    "orden": "Passeriformes",
+    "familia": "Rhinocryptidae",
+    "taxonOrder": 14402.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "magwoo1",
+    "nombreEs": "Picamaderos de Magallanes",
+    "nombreEn": "Magellanic Woodpecker",
+    "sciName": "Campephilus magellanicus",
+    "orden": "Piciformes",
+    "familia": "Picidae",
+    "taxonOrder": 11569.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "mallar3",
+    "nombreEs": "Ánade Azulón",
+    "nombreEn": "Mallard",
+    "sciName": "Anas platyrhynchos",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 545.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "manshe",
+    "nombreEs": "Pardela Pichoneta",
+    "nombreEn": "Manx Shearwater",
+    "sciName": "Puffinus puffinus",
+    "orden": "Procellariiformes",
+    "familia": "Procellariidae",
+    "taxonOrder": 7220.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "masboo",
+    "nombreEs": "Piquero Enmascarado",
+    "nombreEn": "Masked Booby",
+    "sciName": "Sula dactylatra",
+    "orden": "Suliformes",
+    "familia": "Sulidae",
+    "taxonOrder": 7349.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "maspet",
+    "nombreEs": "Paíño Ahumado",
+    "nombreEn": "Markham's Storm-Petrel",
+    "sciName": "Hydrobates markhami",
+    "orden": "Procellariiformes",
+    "familia": "Hydrobatidae",
+    "taxonOrder": 7076.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "maspet3",
+    "nombreEs": "Petrel Chileno",
+    "nombreEn": "Masatierra Petrel",
+    "sciName": "Pterodroma defilippiana",
+    "orden": "Procellariiformes",
+    "familia": "Procellariidae",
+    "taxonOrder": 7146.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "mcrtyr1",
+    "nombreEs": "Sietecolores",
+    "nombreEn": "Many-colored Rush Tyrant",
+    "sciName": "Tachuris rubrigastra",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 16196.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "mdxmal1",
+    "nombreEs": "Pato Criollo x Ánade Azulón (híbrido)",
+    "nombreEn": "Muscovy Duck x Mallard (hybrid)",
+    "sciName": "Cairina moschata x Anas platyrhynchos",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 551.0,
+    "category": "hybrid"
+  },
+  {
+    "speciesCode": "monpar",
+    "nombreEs": "Cotorra Argentina",
+    "nombreEn": "Monk Parakeet",
+    "sciName": "Myiopsitta monachus",
+    "orden": "Psittaciformes",
+    "familia": "Psittacidae",
+    "taxonOrder": 12819.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "mosfin1",
+    "nombreEs": "Yal Pechinegro",
+    "nombreEn": "Mourning Sierra Finch",
+    "sciName": "Rhopospina fruticeti",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35415.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "moucar1",
+    "nombreEs": "Caracara Andino",
+    "nombreEn": "Mountain Caracara",
+    "sciName": "Daptrius megalopterus",
+    "orden": "Falconiformes",
+    "familia": "Falconidae",
+    "taxonOrder": 11974.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "moupar2",
+    "nombreEs": "Catita Frentidorada",
+    "nombreEn": "Mountain Parakeet",
+    "sciName": "Psilopsiagon aurifrons",
+    "orden": "Psittaciformes",
+    "familia": "Psittacidae",
+    "taxonOrder": 12806.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "moutur1",
+    "nombreEs": "Huet-Huet Turca",
+    "nombreEn": "Moustached Turca",
+    "sciName": "Pteroptochos megapodius",
+    "orden": "Passeriformes",
+    "familia": "Rhinocryptidae",
+    "taxonOrder": 14367.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "musduc",
+    "nombreEs": "Pato Criollo",
+    "nombreEn": "Muscovy Duck",
+    "sciName": "Cairina moschata",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 445.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "neocor",
+    "nombreEs": "Cormorán Biguá",
+    "nombreEn": "Neotropic Cormorant",
+    "sciName": "Nannopterum brasilianum",
+    "orden": "Suliformes",
+    "familia": "Phalacrocoracidae",
+    "taxonOrder": 7431.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "norgip1",
+    "nombreEs": "Abanto Marino Subantártico",
+    "nombreEn": "Northern Giant-Petrel",
+    "sciName": "Macronectes halli",
+    "orden": "Procellariiformes",
+    "familia": "Procellariidae",
+    "taxonOrder": 7088.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "oashum1",
+    "nombreEs": "Colibrí del Atacama",
+    "nombreEn": "Oasis Hummingbird",
+    "sciName": "Rhodopis vesper",
+    "orden": "Apodiformes",
+    "familia": "Trochilidae",
+    "taxonOrder": 4775.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "ocftap1",
+    "nombreEs": "Churrín Grande",
+    "nombreEn": "Ochre-flanked Tapaculo",
+    "sciName": "Eugralla paradoxa",
+    "orden": "Passeriformes",
+    "familia": "Rhinocryptidae",
+    "taxonOrder": 14390.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "orntin1",
+    "nombreEs": "Tinamú Pisacca",
+    "nombreEn": "Ornate Tinamou",
+    "sciName": "Nothoprocta ornata",
+    "orden": "Tinamiformes",
+    "familia": "Tinamidae",
+    "taxonOrder": 106.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "osprey",
+    "nombreEs": "Águila Pescadora",
+    "nombreEn": "Osprey",
+    "sciName": "Pandion haliaetus",
+    "orden": "Accipitriformes",
+    "familia": "Pandionidae",
+    "taxonOrder": 7832.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "pafear1",
+    "nombreEs": "Bandurrita Saturada",
+    "nombreEn": "Patagonian Forest Earthcreeper",
+    "sciName": "Upucerthia saturatior",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15071.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "pasfin1",
+    "nombreEs": "Yal Patagón",
+    "nombreEn": "Patagonian Sierra Finch",
+    "sciName": "Phrygilus patagonicus",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35352.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "patmoc1",
+    "nombreEs": "Sinsonte Patagón",
+    "nombreEn": "Patagonian Mockingbird",
+    "sciName": "Mimus patagonicus",
+    "orden": "Passeriformes",
+    "familia": "Mimidae",
+    "taxonOrder": 28071.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "pattyr2",
+    "nombreEs": "Peutrén",
+    "nombreEn": "Patagonian Tyrant",
+    "sciName": "Colorhamphus parvirostris",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 17187.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "payfin1",
+    "nombreEs": "Chirigüe Austral",
+    "nombreEn": "Patagonian Yellow-Finch",
+    "sciName": "Sicalis lebruni",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35472.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "pcttyr1",
+    "nombreEs": "Cachudito Crestiblanco",
+    "nombreEn": "Pied-crested Tit-Tyrant",
+    "sciName": "Anairetes reguloides",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 16597.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "pecsan",
+    "nombreEs": "Correlimos Pectoral",
+    "nombreEn": "Pectoral Sandpiper",
+    "sciName": "Calidris melanotos",
+    "orden": "Charadriiformes",
+    "familia": "Scolopacidae",
+    "taxonOrder": 6227.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "pedpet1",
+    "nombreEs": "Potoyunco Peruano",
+    "nombreEn": "Peruvian Diving-Petrel",
+    "sciName": "Pelecanoides garnotii",
+    "orden": "Procellariiformes",
+    "familia": "Procellariidae",
+    "taxonOrder": 7263.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "pepowl1",
+    "nombreEs": "Mochuelo Peruano",
+    "nombreEn": "Peruvian Pygmy-Owl",
+    "sciName": "Glaucidium peruanum",
+    "orden": "Strigiformes",
+    "familia": "Strigidae",
+    "taxonOrder": 9055.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "perboo1",
+    "nombreEs": "Piquero Peruano",
+    "nombreEn": "Peruvian Booby",
+    "sciName": "Sula variegata",
+    "orden": "Suliformes",
+    "familia": "Sulidae",
+    "taxonOrder": 7362.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "perfal",
+    "nombreEs": "Halcón Peregrino",
+    "nombreEn": "Peregrine Falcon",
+    "sciName": "Falco peregrinus",
+    "orden": "Falconiformes",
+    "familia": "Falconidae",
+    "taxonOrder": 12114.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "permea1",
+    "nombreEs": "Loica Peruana",
+    "nombreEn": "Peruvian Meadowlark",
+    "sciName": "Leistes bellicosus",
+    "orden": "Passeriformes",
+    "familia": "Icteridae",
+    "taxonOrder": 33596.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "perpel1",
+    "nombreEs": "Pelícano Alcatraz",
+    "nombreEn": "Peruvian Pelican",
+    "sciName": "Pelecanus thagus",
+    "orden": "Pelecaniformes",
+    "familia": "Pelecanidae",
+    "taxonOrder": 7799.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "pershe2",
+    "nombreEs": "Colibrí Cora",
+    "nombreEn": "Peruvian Sheartail",
+    "sciName": "Thaumastura cora",
+    "orden": "Apodiformes",
+    "familia": "Trochilidae",
+    "taxonOrder": 4770.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "perter2",
+    "nombreEs": "Charrancito Peruano",
+    "nombreEn": "Peruvian Tern",
+    "sciName": "Sternula lorata",
+    "orden": "Charadriiformes",
+    "familia": "Laridae",
+    "taxonOrder": 6705.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "petkne1",
+    "nombreEs": "Alcaraván Peruano",
+    "nombreEn": "Peruvian Thick-knee",
+    "sciName": "Hesperoburhinus superciliaris",
+    "orden": "Charadriiformes",
+    "familia": "Burhinidae",
+    "taxonOrder": 5739.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "pibgre",
+    "nombreEs": "Zampullín Picogrueso",
+    "nombreEn": "Pied-billed Grebe",
+    "sciName": "Podilymbus podiceps",
+    "orden": "Podicipediformes",
+    "familia": "Podicipedidae",
+    "taxonOrder": 6855.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "pifshe",
+    "nombreEs": "Pardela Patirrosa",
+    "nombreEn": "Pink-footed Shearwater",
+    "sciName": "Ardenna creatopus",
+    "orden": "Procellariiformes",
+    "familia": "Procellariidae",
+    "taxonOrder": 7205.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "pigdov1",
+    "nombreEs": "Columbina Picuí",
+    "nombreEn": "Picui Ground Dove",
+    "sciName": "Columbina picui",
+    "orden": "Columbiformes",
+    "familia": "Columbidae",
+    "taxonOrder": 2282.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "plsfin1",
+    "nombreEs": "Yal Plomizo",
+    "nombreEn": "Plumbeous Sierra Finch",
+    "sciName": "Geospizopsis unicolor",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35376.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "plurai1",
+    "nombreEs": "Rascón Gallineta",
+    "nombreEn": "Plumbeous Rail",
+    "sciName": "Pardirallus sanguinolentus",
+    "orden": "Gruiformes",
+    "familia": "Rallidae",
+    "taxonOrder": 5415.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "pmtspi1",
+    "nombreEs": "Tijeral Colinegro",
+    "nombreEn": "Plain-mantled Tit-Spinetail",
+    "sciName": "Leptasthenura aegithaloides",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15320.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "pugtyr1",
+    "nombreEs": "Dormilona Puneña",
+    "nombreEn": "Puna Ground-Tyrant",
+    "sciName": "Muscisaxicola juninensis",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 17087.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "pumstp1",
+    "nombreEs": "Paíño Pincoya",
+    "nombreEn": "Pincoya Storm-Petrel",
+    "sciName": "Oceanites pincoyae",
+    "orden": "Procellariiformes",
+    "familia": "Oceanitidae",
+    "taxonOrder": 7018.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "punibi1",
+    "nombreEs": "Morito de la Puna",
+    "nombreEn": "Puna Ibis",
+    "sciName": "Plegadis ridgwayi",
+    "orden": "Pelecaniformes",
+    "familia": "Threskiornithidae",
+    "taxonOrder": 7471.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "punmin1",
+    "nombreEs": "Minero Puneño",
+    "nombreEn": "Puna Miner",
+    "sciName": "Geositta punensis",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 14592.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "punplo1",
+    "nombreEs": "Chorlitejo Andino",
+    "nombreEn": "Puna Plover",
+    "sciName": "Anarhynchus alticola",
+    "orden": "Charadriiformes",
+    "familia": "Charadriidae",
+    "taxonOrder": 5935.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "puntea1",
+    "nombreEs": "Cerceta de la Puna",
+    "nombreEn": "Puna Teal",
+    "sciName": "Spatula puna",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 484.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "puntin1",
+    "nombreEs": "Kiula Andina",
+    "nombreEn": "Puna Tinamou",
+    "sciName": "Tinamotis pentlandii",
+    "orden": "Tinamiformes",
+    "familia": "Tinamidae",
+    "taxonOrder": 44.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "purgal2",
+    "nombreEs": "Calamoncillo Americano",
+    "nombreEn": "Purple Gallinule",
+    "sciName": "Porphyrio martinica",
+    "orden": "Gruiformes",
+    "familia": "Rallidae",
+    "taxonOrder": 5515.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "rbsfin1",
+    "nombreEs": "Yal Dorsirrojo",
+    "nombreEn": "Red-backed Sierra Finch",
+    "sciName": "Idiopsar dorsalis",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35370.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "rebhaw2",
+    "nombreEs": "Busardo Dorsirrojo",
+    "nombreEn": "Variable Hawk",
+    "sciName": "Geranoaetus polyosoma",
+    "orden": "Accipitriformes",
+    "familia": "Accipitridae",
+    "taxonOrder": 8453.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "redkno",
+    "nombreEs": "Correlimos Gordo",
+    "nombreEn": "Red Knot",
+    "sciName": "Calidris canutus",
+    "orden": "Charadriiformes",
+    "familia": "Scolopacidae",
+    "taxonOrder": 6166.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "redsho1",
+    "nombreEs": "Cuchara Argentino",
+    "nombreEn": "Red Shoveler",
+    "sciName": "Spatula platalea",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 496.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "refcoo1",
+    "nombreEs": "Focha Frentirroja",
+    "nombreEn": "Red-fronted Coot",
+    "sciName": "Fulica rufifrons",
+    "orden": "Gruiformes",
+    "familia": "Rallidae",
+    "taxonOrder": 5483.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "regcoo1",
+    "nombreEs": "Focha de Ligas",
+    "nombreEn": "Red-gartered Coot",
+    "sciName": "Fulica armillata",
+    "orden": "Gruiformes",
+    "familia": "Rallidae",
+    "taxonOrder": 5486.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "relcor1",
+    "nombreEs": "Cormorán Chuita",
+    "nombreEn": "Red-legged Cormorant",
+    "sciName": "Poikilocarbo gaimardi",
+    "orden": "Suliformes",
+    "familia": "Phalacrocoracidae",
+    "taxonOrder": 7388.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "rettro",
+    "nombreEs": "Rabijunco Colirrojo",
+    "nombreEn": "Red-tailed Tropicbird",
+    "sciName": "Phaethon rubricauda",
+    "orden": "Phaethontiformes",
+    "familia": "Phaethontidae",
+    "taxonOrder": 6919.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "rinkin1",
+    "nombreEs": "Martín Gigante Neotropical",
+    "nombreEn": "Ringed Kingfisher",
+    "sciName": "Megaceryle torquata",
+    "orden": "Coraciiformes",
+    "familia": "Alcedinidae",
+    "taxonOrder": 10301.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "rinphe1",
+    "nombreEs": "Faisán Vulgar",
+    "nombreEn": "Ring-necked Pheasant",
+    "sciName": "Phasianus colchicus",
+    "orden": "Galliformes",
+    "familia": "Phasianidae",
+    "taxonOrder": 1477.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "rispet1",
+    "nombreEs": "Paíño Acollarado",
+    "nombreEn": "Ringed Storm-Petrel",
+    "sciName": "Hydrobates hornbyi",
+    "orden": "Procellariiformes",
+    "familia": "Hydrobatidae",
+    "taxonOrder": 7052.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "rngtyr1",
+    "nombreEs": "Dormilona Nuquirroja",
+    "nombreEn": "Rufous-naped Ground-Tyrant",
+    "sciName": "Muscisaxicola rufivertex",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 17095.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "robpoc1",
+    "nombreEs": "Pato Picazo",
+    "nombreEn": "Rosy-billed Pochard",
+    "sciName": "Netta peposaca",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 665.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "rocpig",
+    "nombreEs": "Paloma Bravía",
+    "nombreEn": "Rock Pigeon",
+    "sciName": "Columba livia",
+    "orden": "Columbiformes",
+    "familia": "Columbidae",
+    "taxonOrder": 1853.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "royalb3",
+    "nombreEs": "Albatros Real Septentrional",
+    "nombreEn": "Northern Royal Albatross",
+    "sciName": "Diomedea sanfordi",
+    "orden": "Procellariiformes",
+    "familia": "Diomedeidae",
+    "taxonOrder": 6973.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "rubmin1",
+    "nombreEs": "Minero Rojizo",
+    "nombreEn": "Rufous-banded Miner",
+    "sciName": "Geositta rufipennis",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 14596.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "rubsee2",
+    "nombreEs": "Agachona Grande",
+    "nombreEn": "Rufous-bellied Seedsnipe",
+    "sciName": "Attagis gayi",
+    "orden": "Charadriiformes",
+    "familia": "Thinocoridae",
+    "taxonOrder": 5968.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "rucdot1",
+    "nombreEs": "Chorlito Chileno",
+    "nombreEn": "Rufous-chested Dotterel",
+    "sciName": "Zonibyx modestus",
+    "orden": "Charadriiformes",
+    "familia": "Charadriidae",
+    "taxonOrder": 5825.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "rucspa1",
+    "nombreEs": "Chingolo Común",
+    "nombreEn": "Rufous-collared Sparrow",
+    "sciName": "Zonotrichia capensis",
+    "orden": "Passeriformes",
+    "familia": "Passerellidae",
+    "taxonOrder": 33158.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "rudtur",
+    "nombreEs": "Vuelvepiedras Común",
+    "nombreEn": "Ruddy Turnstone",
+    "sciName": "Arenaria interpres",
+    "orden": "Charadriiformes",
+    "familia": "Scolopacidae",
+    "taxonOrder": 6161.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "ruhgoo1",
+    "nombreEs": "Cauquén Colorado",
+    "nombreEn": "Ruddy-headed Goose",
+    "sciName": "Chloephaga rubidiceps",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 410.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "rulowl1",
+    "nombreEs": "Cárabo Bataraz",
+    "nombreEn": "Rufous-legged Owl",
+    "sciName": "Strix rufipes",
+    "orden": "Strigiformes",
+    "familia": "Strigidae",
+    "taxonOrder": 9228.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "ruthaw1",
+    "nombreEs": "Busardo Patagón",
+    "nombreEn": "Rufous-tailed Hawk",
+    "sciName": "Buteo ventralis",
+    "orden": "Accipitriformes",
+    "familia": "Accipitridae",
+    "taxonOrder": 8527.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "rutpla1",
+    "nombreEs": "Cortarramas Chileno",
+    "nombreEn": "Rufous-tailed Plantcutter",
+    "sciName": "Phytotoma rara",
+    "orden": "Passeriformes",
+    "familia": "Cotingidae",
+    "taxonOrder": 15887.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "saffin",
+    "nombreEs": "Chirigüe Azafranado",
+    "nombreEn": "Saffron Finch",
+    "sciName": "Sicalis flaveola",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35477.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "salalb1",
+    "nombreEs": "Albatros de Salvin",
+    "nombreEn": "Salvin's Albatross",
+    "sciName": "Thalassarche salvini",
+    "orden": "Procellariiformes",
+    "familia": "Diomedeidae",
+    "taxonOrder": 7003.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "sander",
+    "nombreEs": "Correlimos Tridáctilo",
+    "nombreEn": "Sanderling",
+    "sciName": "Calidris alba",
+    "orden": "Charadriiformes",
+    "familia": "Scolopacidae",
+    "taxonOrder": 6189.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "sbgtyr1",
+    "nombreEs": "Dormilona Chica",
+    "nombreEn": "Spot-billed Ground-Tyrant",
+    "sciName": "Muscisaxicola maculirostris",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 17082.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "scrcow1",
+    "nombreEs": "Tordo Chillón",
+    "nombreEn": "Screaming Cowbird",
+    "sciName": "Molothrus rufoaxillaris",
+    "orden": "Passeriformes",
+    "familia": "Icteridae",
+    "taxonOrder": 33816.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "sctear1",
+    "nombreEs": "Bandurrita Común",
+    "nombreEn": "Scale-throated Earthcreeper",
+    "sciName": "Upucerthia dumetaria",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15072.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "seacin1",
+    "nombreEs": "Remolinera Costera Chilena",
+    "nombreEn": "Seaside Cinclodes",
+    "sciName": "Cinclodes nigrofumosus",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15120.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "sedwre",
+    "nombreEs": "Cucarachero Sabanero",
+    "nombreEn": "Grass Wren",
+    "sciName": "Cistothorus platensis",
+    "orden": "Passeriformes",
+    "familia": "Troglodytidae",
+    "taxonOrder": 27304.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "semplo",
+    "nombreEs": "Chorlitejo Semipalmeado",
+    "nombreEn": "Semipalmated Plover",
+    "sciName": "Charadrius semipalmatus",
+    "orden": "Charadriiformes",
+    "familia": "Charadriidae",
+    "taxonOrder": 5834.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "semsan",
+    "nombreEs": "Correlimos Semipalmeado",
+    "nombreEn": "Semipalmated Sandpiper",
+    "sciName": "Calidris pusilla",
+    "orden": "Charadriiformes",
+    "familia": "Scolopacidae",
+    "taxonOrder": 6232.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "shbmin1",
+    "nombreEs": "Minero Austral",
+    "nombreEn": "Short-billed Miner",
+    "sciName": "Geositta antarctica",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 14605.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "sheowl",
+    "nombreEs": "Búho Campestre",
+    "nombreEn": "Short-eared Owl",
+    "sciName": "Asio flammeus",
+    "orden": "Strigiformes",
+    "familia": "Strigidae",
+    "taxonOrder": 9276.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "shicow",
+    "nombreEs": "Tordo Renegrido",
+    "nombreEn": "Shiny Cowbird",
+    "sciName": "Molothrus bonariensis",
+    "orden": "Passeriformes",
+    "familia": "Icteridae",
+    "taxonOrder": 33817.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "silgre1",
+    "nombreEs": "Zampullín Plateado",
+    "nombreEn": "Silvery Grebe",
+    "sciName": "Podiceps occipitalis",
+    "orden": "Podicipediformes",
+    "familia": "Podicipedidae",
+    "taxonOrder": 6882.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "siltea1",
+    "nombreEs": "Cerceta Capuchina",
+    "nombreEn": "Silver Teal",
+    "sciName": "Spatula versicolor",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 481.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "slbfin3",
+    "nombreEs": "Yal Picofino",
+    "nombreEn": "Slender-billed Finch",
+    "sciName": "Xenospingus concolor",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35408.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "slbpar1",
+    "nombreEs": "Cotorra Choroy",
+    "nombreEn": "Slender-billed Parakeet",
+    "sciName": "Enicognathus leptorhynchus",
+    "orden": "Psittaciformes",
+    "familia": "Psittacidae",
+    "taxonOrder": 13079.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "slbpri1",
+    "nombreEs": "Prión Picofino",
+    "nombreEn": "Slender-billed Prion",
+    "sciName": "Pachyptila belcheri",
+    "orden": "Procellariiformes",
+    "familia": "Procellariidae",
+    "taxonOrder": 7171.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "slccoo1",
+    "nombreEs": "Focha Andina",
+    "nombreEn": "Slate-colored Coot",
+    "sciName": "Fulica ardesiaca",
+    "orden": "Gruiformes",
+    "familia": "Rallidae",
+    "taxonOrder": 5506.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "snoegr",
+    "nombreEs": "Garceta Nívea",
+    "nombreEn": "Snowy Egret",
+    "sciName": "Egretta thula",
+    "orden": "Pelecaniformes",
+    "familia": "Ardeidae",
+    "taxonOrder": 7645.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "snoplo5",
+    "nombreEs": "Chorlitejo Nivoso",
+    "nombreEn": "Snowy Plover",
+    "sciName": "Anarhynchus nivosus",
+    "orden": "Charadriiformes",
+    "familia": "Charadriidae",
+    "taxonOrder": 5941.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "soasni3",
+    "nombreEs": "Agachadiza Magallánica",
+    "nombreEn": "Magellanic Snipe",
+    "sciName": "Gallinago magellanica",
+    "orden": "Charadriiformes",
+    "familia": "Scolopacidae",
+    "taxonOrder": 6116.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "soater1",
+    "nombreEs": "Charrán Sudamericano",
+    "nombreEn": "South American Tern",
+    "sciName": "Sterna hirundinacea",
+    "orden": "Charadriiformes",
+    "familia": "Laridae",
+    "taxonOrder": 6735.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "sooshe",
+    "nombreEs": "Pardela Sombría",
+    "nombreEn": "Sooty Shearwater",
+    "sciName": "Ardenna grisea",
+    "orden": "Procellariiformes",
+    "familia": "Procellariidae",
+    "taxonOrder": 7213.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "souful1",
+    "nombreEs": "Fulmar Austral",
+    "nombreEn": "Southern Fulmar",
+    "sciName": "Fulmarus glacialoides",
+    "orden": "Procellariiformes",
+    "familia": "Procellariidae",
+    "taxonOrder": 7095.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "soulap1",
+    "nombreEs": "Avefría Tero",
+    "nombreEn": "Southern Lapwing",
+    "sciName": "Vanellus chilensis",
+    "orden": "Charadriiformes",
+    "familia": "Charadriidae",
+    "taxonOrder": 5896.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "speduc2",
+    "nombreEs": "Ánade Anteojillo",
+    "nombreEn": "Spectacled Duck",
+    "sciName": "Speculanas specularis",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 444.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "spfgal1",
+    "nombreEs": "Gallineta Pintada",
+    "nombreEn": "Spot-flanked Gallinule",
+    "sciName": "Porphyriops melanops",
+    "orden": "Gruiformes",
+    "familia": "Rallidae",
+    "taxonOrder": 5451.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "spvear1",
+    "nombreEs": "Colibrí Rutilante",
+    "nombreEn": "Sparkling Violetear",
+    "sciName": "Colibri coruscans",
+    "orden": "Apodiformes",
+    "familia": "Trochilidae",
+    "taxonOrder": 4354.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "spwpig3",
+    "nombreEs": "Paloma Moteada Común",
+    "nombreEn": "Spot-winged Pigeon",
+    "sciName": "Patagioenas maculosa",
+    "orden": "Columbiformes",
+    "familia": "Columbidae",
+    "taxonOrder": 1953.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "stbbit1",
+    "nombreEs": "Avetorillo Listado",
+    "nombreEn": "Stripe-backed Bittern",
+    "sciName": "Botaurus involucris",
+    "orden": "Pelecaniformes",
+    "familia": "Ardeidae",
+    "taxonOrder": 7564.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "stbear2",
+    "nombreEs": "Bandurrita Piquirrecta",
+    "nombreEn": "Straight-billed Earthcreeper",
+    "sciName": "Ochetorhynchus ruficaudus",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15004.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "strwoo6",
+    "nombreEs": "Pico Bataraz Grande",
+    "nombreEn": "Striped Woodpecker",
+    "sciName": "Veniliornis lignarius",
+    "orden": "Piciformes",
+    "familia": "Picidae",
+    "taxonOrder": 11480.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "sttspi1",
+    "nombreEs": "Tijeral Listado",
+    "nombreEn": "Streaked Tit-Spinetail",
+    "sciName": "Leptasthenura striata",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15331.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "surfbi",
+    "nombreEs": "Correlimos de Rompientes",
+    "nombreEn": "Surfbird",
+    "sciName": "Calidris virgata",
+    "orden": "Charadriiformes",
+    "familia": "Scolopacidae",
+    "taxonOrder": 6174.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "swtgul1",
+    "nombreEs": "Gaviota Tijereta",
+    "nombreEn": "Swallow-tailed Gull",
+    "sciName": "Creagrus furcatus",
+    "orden": "Charadriiformes",
+    "familia": "Laridae",
+    "taxonOrder": 6446.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "tamcon1",
+    "nombreEs": "Conirrostro de Tamarugal",
+    "nombreEn": "Tamarugo Conebill",
+    "sciName": "Conirostrum tamarugense",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35263.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "tatdot1",
+    "nombreEs": "Chorlito Cabezón",
+    "nombreEn": "Tawny-throated Dotterel",
+    "sciName": "Oreopholus ruficollis",
+    "orden": "Charadriiformes",
+    "familia": "Charadriidae",
+    "taxonOrder": 5820.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "thtray1",
+    "nombreEs": "Rayadito Común",
+    "nombreEn": "Thorn-tailed Rayadito",
+    "sciName": "Aphrastura spinicauda",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15308.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "torduc1",
+    "nombreEs": "Pato Torrentero",
+    "nombreEn": "Torrent Duck",
+    "sciName": "Merganetta armata",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 468.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "triher",
+    "nombreEs": "Garceta Tricolor",
+    "nombreEn": "Tricolored Heron",
+    "sciName": "Egretta tricolor",
+    "orden": "Pelecaniformes",
+    "familia": "Ardeidae",
+    "taxonOrder": 7630.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "truter",
+    "nombreEs": "Charrán Coroniblanco",
+    "nombreEn": "Snowy-crowned Tern",
+    "sciName": "Sterna trudeaui",
+    "orden": "Charadriiformes",
+    "familia": "Laridae",
+    "taxonOrder": 6732.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "turvul",
+    "nombreEs": "Aura Gallipavo",
+    "nombreEn": "Turkey Vulture",
+    "sciName": "Cathartes aura",
+    "orden": "Cathartiformes",
+    "familia": "Cathartidae",
+    "taxonOrder": 7815.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "tuttyr1",
+    "nombreEs": "Cachudito Piquinegro",
+    "nombreEn": "Tufted Tit-Tyrant",
+    "sciName": "Anairetes parulus",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 16609.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "twbplo1",
+    "nombreEs": "Chorlitejo Malvinero",
+    "nombreEn": "Two-banded Plover",
+    "sciName": "Anarhynchus falklandicus",
+    "orden": "Charadriiformes",
+    "familia": "Charadriidae",
+    "taxonOrder": 5936.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "uplgoo1",
+    "nombreEs": "Cauquén Común",
+    "nombreEn": "Upland Goose",
+    "sciName": "Chloephaga picta",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 401.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "verfly",
+    "nombreEs": "Mosquero Cardenal",
+    "nombreEn": "Vermilion Flycatcher",
+    "sciName": "Pyrocephalus rubinus",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 17029.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "wavalb",
+    "nombreEs": "Albatros de Galápagos",
+    "nombreEn": "Waved Albatross",
+    "sciName": "Phoebastria irrorata",
+    "orden": "Procellariiformes",
+    "familia": "Diomedeidae",
+    "taxonOrder": 6986.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "wbctyr1",
+    "nombreEs": "Pitajo Gris",
+    "nombreEn": "White-browed Chat-Tyrant",
+    "sciName": "Ochthoeca leucophrys",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 17212.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "wepdov1",
+    "nombreEs": "Zenaida Peruana",
+    "nombreEn": "West Peruvian Dove",
+    "sciName": "Zenaida meloda",
+    "orden": "Columbiformes",
+    "familia": "Columbidae",
+    "taxonOrder": 2388.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "wespet1",
+    "nombreEs": "Pardela de Westland",
+    "nombreEn": "Westland Petrel",
+    "sciName": "Procellaria westlandica",
+    "orden": "Procellariiformes",
+    "familia": "Procellariidae",
+    "taxonOrder": 7197.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "wfgtyr1",
+    "nombreEs": "Dormilona Gigante",
+    "nombreEn": "White-fronted Ground-Tyrant",
+    "sciName": "Muscisaxicola albifrons",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 17091.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whbmoc1",
+    "nombreEs": "Sinsonte Trescolas",
+    "nombreEn": "White-banded Mockingbird",
+    "sciName": "Mimus triurus",
+    "orden": "Passeriformes",
+    "familia": "Mimidae",
+    "taxonOrder": 28080.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whbsee2",
+    "nombreEs": "Agachona Patagona",
+    "nombreEn": "White-bellied Seedsnipe",
+    "sciName": "Attagis malouinus",
+    "orden": "Charadriiformes",
+    "familia": "Thinocoridae",
+    "taxonOrder": 5972.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whcela1",
+    "nombreEs": "Fiofío Crestiblanco",
+    "nombreEn": "White-crested Elaenia",
+    "sciName": "Elaenia albiceps",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 16712.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whcpet1",
+    "nombreEs": "Pardela Gorjiblanca",
+    "nombreEn": "White-chinned Petrel",
+    "sciName": "Procellaria aequinoctialis",
+    "orden": "Procellariiformes",
+    "familia": "Procellariidae",
+    "taxonOrder": 7192.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whcpin",
+    "nombreEs": "Ánade Gargantillo",
+    "nombreEn": "White-cheeked Pintail",
+    "sciName": "Anas bahamensis",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 585.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whfibi",
+    "nombreEs": "Morito Cariblanco",
+    "nombreEn": "White-faced Ibis",
+    "sciName": "Plegadis chihi",
+    "orden": "Pelecaniformes",
+    "familia": "Threskiornithidae",
+    "taxonOrder": 7468.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whimbr3",
+    "nombreEs": "Zarapito Trinador Americano",
+    "nombreEn": "Hudsonian Whimbrel",
+    "sciName": "Numenius hudsonicus",
+    "orden": "Charadriiformes",
+    "familia": "Scolopacidae",
+    "taxonOrder": 6011.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whimon1",
+    "nombreEs": "Monjita Blanca",
+    "nombreEn": "White Monjita",
+    "sciName": "Xolmis irupero",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 17120.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whshil1",
+    "nombreEs": "Colibrí Cordillerano",
+    "nombreEn": "White-sided Hillstar",
+    "sciName": "Oreotrochilus leucopleurus",
+    "orden": "Apodiformes",
+    "familia": "Trochilidae",
+    "taxonOrder": 4497.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whtcar1",
+    "nombreEs": "Caracara Araucano",
+    "nombreEn": "White-throated Caracara",
+    "sciName": "Daptrius albogularis",
+    "orden": "Falconiformes",
+    "familia": "Falconidae",
+    "taxonOrder": 11975.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whtear1",
+    "nombreEs": "Bandurrita de Arica",
+    "nombreEn": "White-throated Earthcreeper",
+    "sciName": "Upucerthia albigula",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15077.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whtgre3",
+    "nombreEs": "Zampullín Pimpollo",
+    "nombreEn": "White-tufted Grebe",
+    "sciName": "Rollandia rolland",
+    "orden": "Podicipediformes",
+    "familia": "Podicipedidae",
+    "taxonOrder": 6821.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whthaw1",
+    "nombreEs": "Busardo Gorjiblanco",
+    "nombreEn": "White-throated Hawk",
+    "sciName": "Buteo albigula",
+    "orden": "Accipitriformes",
+    "familia": "Accipitridae",
+    "taxonOrder": 8500.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whtkit",
+    "nombreEs": "Elanio Maromero",
+    "nombreEn": "White-tailed Kite",
+    "sciName": "Elanus leucurus",
+    "orden": "Accipitriformes",
+    "familia": "Accipitridae",
+    "taxonOrder": 7843.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whttap1",
+    "nombreEs": "Tapaculo Gorjiblanco",
+    "nombreEn": "White-throated Tapaculo",
+    "sciName": "Scelorchilus albicollis",
+    "orden": "Passeriformes",
+    "familia": "Rhinocryptidae",
+    "taxonOrder": 14370.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whttre2",
+    "nombreEs": "Picolezna Comesebo",
+    "nombreEn": "White-throated Treerunner",
+    "sciName": "Pygarrhichas albogularis",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15002.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whttro",
+    "nombreEs": "Rabijunco Menor",
+    "nombreEn": "White-tailed Tropicbird",
+    "sciName": "Phaethon lepturus",
+    "orden": "Phaethontiformes",
+    "familia": "Phaethontidae",
+    "taxonOrder": 6908.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whwcin1",
+    "nombreEs": "Remolinera Castaña",
+    "nombreEn": "White-winged Cinclodes",
+    "sciName": "Cinclodes atacamensis",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15113.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "whwcoo1",
+    "nombreEs": "Focha Aliblanca",
+    "nombreEn": "White-winged Coot",
+    "sciName": "Fulica leucoptera",
+    "orden": "Gruiformes",
+    "familia": "Rallidae",
+    "taxonOrder": 5512.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "willet1",
+    "nombreEs": "Playero Aliblanco",
+    "nombreEn": "Willet",
+    "sciName": "Tringa semipalmata",
+    "orden": "Charadriiformes",
+    "familia": "Scolopacidae",
+    "taxonOrder": 6147.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "wilpha",
+    "nombreEs": "Falaropo Tricolor",
+    "nombreEn": "Wilson's Phalarope",
+    "sciName": "Phalaropus tricolor",
+    "orden": "Charadriiformes",
+    "familia": "Scolopacidae",
+    "taxonOrder": 6119.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "wispet",
+    "nombreEs": "Paíño de Wilson",
+    "nombreEn": "Wilson's Storm-Petrel",
+    "sciName": "Oceanites oceanicus",
+    "orden": "Procellariiformes",
+    "familia": "Oceanitidae",
+    "taxonOrder": 7013.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "wrlrus1",
+    "nombreEs": "Junquero",
+    "nombreEn": "Wren-like Rushbird",
+    "sciName": "Phleocryptes melanops",
+    "orden": "Passeriformes",
+    "familia": "Furnariidae",
+    "taxonOrder": 15062.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "wtsfin1",
+    "nombreEs": "Yal Gorjiblanco",
+    "nombreEn": "White-throated Sierra Finch",
+    "sciName": "Idiopsar erythronotus",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35371.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "wvspet1",
+    "nombreEs": "Paíño de Elliot",
+    "nombreEn": "Elliot's Storm-Petrel",
+    "sciName": "Oceanites gracilis",
+    "orden": "Procellariiformes",
+    "familia": "Oceanitidae",
+    "taxonOrder": 7020.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "wwdfin1",
+    "nombreEs": "Diuca Aliblanca",
+    "nombreEn": "Glacier Finch",
+    "sciName": "Idiopsar speculifer",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35372.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "y00678",
+    "nombreEs": "Caracara Carancho",
+    "nombreEn": "Crested Caracara",
+    "sciName": "Caracara plancus",
+    "orden": "Falconiformes",
+    "familia": "Falconidae",
+    "taxonOrder": 11962.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "ybttyr1",
+    "nombreEs": "Cachudito Piquiamarillo",
+    "nombreEn": "Yellow-billed Tit-Tyrant",
+    "sciName": "Anairetes flavirostris",
+    "orden": "Passeriformes",
+    "familia": "Tyrannidae",
+    "taxonOrder": 16604.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "ycnher",
+    "nombreEs": "Martinete Coronado",
+    "nombreEn": "Yellow-crowned Night Heron",
+    "sciName": "Nyctanassa violacea",
+    "orden": "Pelecaniformes",
+    "familia": "Ardeidae",
+    "taxonOrder": 7591.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "yebfin1",
+    "nombreEs": "Yal Cejiamarillo",
+    "nombreEn": "Yellow-bridled Finch",
+    "sciName": "Melanodera xanthogramma",
+    "orden": "Passeriformes",
+    "familia": "Thraupidae",
+    "taxonOrder": 35362.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "yebpin1",
+    "nombreEs": "Ánade Maicero",
+    "nombreEn": "Yellow-billed Pintail",
+    "sciName": "Anas georgica",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 606.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "yebtea1",
+    "nombreEs": "Cerceta Barcina",
+    "nombreEn": "Yellow-billed Teal",
+    "sciName": "Anas flavirostris",
+    "orden": "Anseriformes",
+    "familia": "Anatidae",
+    "taxonOrder": 629.0,
+    "category": "species"
+  },
+  {
+    "speciesCode": "yewbla2",
+    "nombreEs": "Varillero Aliamarillo",
+    "nombreEn": "Yellow-winged Blackbird",
+    "sciName": "Agelasticus thilius",
+    "orden": "Passeriformes",
+    "familia": "Icteridae",
+    "taxonOrder": 33931.0,
+    "category": "species"
+  }
+]

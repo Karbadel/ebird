@@ -1,0 +1,4489 @@
+[
+  {
+    "locId": "L64676629",
+    "nombre": "Fundo San Juan",
+    "lat": -45.5530495,
+    "lng": -71.9731472,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L24954943",
+    "nombre": "Hospital Regional de Coyhaique",
+    "lat": -45.5686006,
+    "lng": -72.0735312,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L67012417",
+    "nombre": "Cerro Mirador",
+    "lat": -45.4060915,
+    "lng": -72.6946416,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L3928254",
+    "nombre": "Coyhaique--Plaza de Armas",
+    "lat": -45.5712368,
+    "lng": -72.0684591,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L69780104",
+    "nombre": "Pangal",
+    "lat": -45.370679,
+    "lng": -72.697836,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L75686603",
+    "nombre": "585 Almirante Simpson, Puerto Aysen, Aysén, CL (-45.408, -72.702)",
+    "lat": -45.4077541,
+    "lng": -72.7023759,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L53726891",
+    "nombre": "Parcela",
+    "lat": -45.5630008,
+    "lng": -71.9758629,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L75724962",
+    "nombre": "Ruta X -616- Pampa Pinuer",
+    "lat": -45.5579982,
+    "lng": -72.0835156,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L14747081",
+    "nombre": "Puerto Aysén--Humedal Urbano Las Ranas",
+    "lat": -45.3986223,
+    "lng": -72.6890581,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L57631126",
+    "nombre": "Quincho el Verdin",
+    "lat": -45.5647174,
+    "lng": -72.0328367,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L7687064",
+    "nombre": "Río Aysén--Sector Puntilla",
+    "lat": -45.4161961,
+    "lng": -72.7046442,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L22506165",
+    "nombre": "Lago Cisne",
+    "lat": -48.4370179,
+    "lng": -72.6167512,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L38916270",
+    "nombre": "Río Simpson--Puente Huemules",
+    "lat": -45.8064617,
+    "lng": -71.9201229,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L11935528",
+    "nombre": "Puerto Guadal--Alma Verde",
+    "lat": -46.847233,
+    "lng": -72.694068,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L75538973",
+    "nombre": "Carretera Austral, Cisnes, Aysén, CL (-44.57, -72.439)",
+    "lat": -44.5698551,
+    "lng": -72.4385618,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L12003274",
+    "nombre": "Puerto Guadal--Humedal Urbano",
+    "lat": -46.845654,
+    "lng": -72.699967,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L75446584",
+    "nombre": "Aeródromo Puerto Aysén (WPA)",
+    "lat": -45.39919,
+    "lng": -72.67038,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L75265154",
+    "nombre": "Estacionamiento sendero Lagunas Altas",
+    "lat": -47.1224847,
+    "lng": -72.4900864,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L12014534",
+    "nombre": "Playa Los Maquis",
+    "lat": -46.8171092,
+    "lng": -72.6539548,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L43497319",
+    "nombre": "Puntilla Mallin",
+    "lat": -43.784353,
+    "lng": -72.945487,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L37843689",
+    "nombre": "X-698, El Blanco, Aysén, CL (-45.819, -71.939)",
+    "lat": -45.8191948,
+    "lng": -71.9390437,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L72396604",
+    "nombre": "Rampa Hospital",
+    "lat": -45.40633,
+    "lng": -72.70305,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L31572536",
+    "nombre": "Puntilla mallin",
+    "lat": -43.784679,
+    "lng": -72.945652,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L52555257",
+    "nombre": "Playas del Bajo Palena--La Barra",
+    "lat": -43.7582725,
+    "lng": -72.9661694,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L14286521",
+    "nombre": "RN Cerro Castillo--Sector Portezuelo",
+    "lat": -46.0662898,
+    "lng": -72.0173279,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L74289545",
+    "nombre": "Canal moraleda",
+    "lat": -44.248435,
+    "lng": -73.2376264,
+    "region": "Aisén del General Carlos Ibáñez del Campo"
+  },
+  {
+    "locId": "L7567563",
+    "nombre": "Universidad de Antofagasta",
+    "lat": -23.7031259,
+    "lng": -70.4217242,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L13392837",
+    "nombre": "Antofagasta--Poza de los Gringos",
+    "lat": -23.7074486,
+    "lng": -70.4296374,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L9502372",
+    "nombre": "RN Los Flamencos--Laguna Chaxa (Parque Laguna)",
+    "lat": -23.2878293,
+    "lng": -68.1775689,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L2111817",
+    "nombre": "Arrecifes Tawn",
+    "lat": -23.64408,
+    "lng": -70.40142,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L4950099",
+    "nombre": "Antofagasta--Plaza Pablo Neruda",
+    "lat": -23.6222713,
+    "lng": -70.3948492,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L5044931",
+    "nombre": "Paseo del mar (Antofagasta)",
+    "lat": -23.6583619,
+    "lng": -70.4032913,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L6634730",
+    "nombre": "531 Mall Plaza, Antofagasta, Región de Antofagasta, CL (-23.645, -70.402)",
+    "lat": -23.6449149,
+    "lng": -70.4019489,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L592363",
+    "nombre": "RN Los Flamencos--Laguna Miñiques",
+    "lat": -23.7673578,
+    "lng": -67.7927684,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L19108086",
+    "nombre": "Humedal Las Vertientes quebrada Carrizo",
+    "lat": -23.6981633,
+    "lng": -70.4140303,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L39814460",
+    "nombre": "Sede Antofagasta - Universidad Católica del Norte",
+    "lat": -23.6815512,
+    "lng": -70.4107212,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L516577",
+    "nombre": "San Pedro de Atacama",
+    "lat": -22.9084359,
+    "lng": -68.2027817,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L4236827",
+    "nombre": "Machuca--Laguna al sur",
+    "lat": -22.6112377,
+    "lng": -68.0592299,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L724695",
+    "nombre": "Vados del Putana",
+    "lat": -22.533805,
+    "lng": -68.0335236,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L22505385",
+    "nombre": "Retén Tocorpuri",
+    "lat": -22.4978499,
+    "lng": -68.059259,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L43875560",
+    "nombre": "Humedal al sur del Geyser Blanco",
+    "lat": -22.3746402,
+    "lng": -68.0307296,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L724725",
+    "nombre": "Geysers del Tatio",
+    "lat": -22.3357862,
+    "lng": -68.0125809,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L75029671",
+    "nombre": "1395243, San Pedro de Atacama CL-Región de Antofagasta -23.57024, -67.92368",
+    "lat": -23.570242,
+    "lng": -67.923679,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L1098965",
+    "nombre": "Socaire (Quebrada de Nacimiento)",
+    "lat": -23.6167272,
+    "lng": -67.85182,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L2961343",
+    "nombre": "RN Los Flamencos--Lagunas Miscanti y Miñiques [usar hotspots específicos]",
+    "lat": -23.7542139,
+    "lng": -67.7863312,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L75029643",
+    "nombre": "Ruta 23 CH, San Pedro de Atacama CL-Región de Antofagasta -23.65510, -67.81880",
+    "lat": -23.655101,
+    "lng": -67.818801,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L724716",
+    "nombre": "Socaire",
+    "lat": -23.5906548,
+    "lng": -67.8897572,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L3255029",
+    "nombre": "RN Los Flamencos--Bosque de Tambillo",
+    "lat": -23.1200457,
+    "lng": -68.0791426,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L74970102",
+    "nombre": "Ruta 23 CH, San Pedro de Atacama CL-Región de Antofagasta -23.18415, -68.00808",
+    "lat": -23.184145,
+    "lng": -68.008082,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L74969680",
+    "nombre": "Ruta 23 CH, San Pedro de Atacama CL-Región de Antofagasta -23.11523, -68.08322",
+    "lat": -23.11523,
+    "lng": -68.083224,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L74968691",
+    "nombre": "1395243, San Pedro de Atacama CL-Región de Antofagasta -22.93395, -68.19224",
+    "lat": -22.933954,
+    "lng": -68.192241,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L13047536",
+    "nombre": "Parque El Loa",
+    "lat": -22.4803806,
+    "lng": -68.929328,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L74884157",
+    "nombre": "Ruta 23, Solor, Antofagasta, CL (-22.938, -68.179)",
+    "lat": -22.9378669,
+    "lng": -68.1792974,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L74904954",
+    "nombre": "1395243, San Pedro de Atacama CL-Región de Antofagasta (-23.1886,-68.0085)",
+    "lat": -23.18862,
+    "lng": -68.008463,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L74896418",
+    "nombre": "1395243, San Pedro de Atacama CL-Región de Antofagasta (-23.1869,-67.9904)",
+    "lat": -23.186862,
+    "lng": -67.99041,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L6701508",
+    "nombre": "Aeropuerto Andrés Sabella (ANF)",
+    "lat": -23.4490538,
+    "lng": -70.4405574,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L3215153",
+    "nombre": "Katarpe",
+    "lat": -22.8374205,
+    "lng": -68.2004535,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L64816046",
+    "nombre": "Mirador Juan Lopez",
+    "lat": -23.5148129,
+    "lng": -70.5315068,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L11815667",
+    "nombre": "Rio Vilama",
+    "lat": -22.8699449,
+    "lng": -68.1814173,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L2466880",
+    "nombre": "Río Loa--Puente Ruta 24",
+    "lat": -22.2781364,
+    "lng": -69.5607519,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L10234761",
+    "nombre": "Valle del Arcoiris",
+    "lat": -22.6413497,
+    "lng": -68.2407894,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L24056337",
+    "nombre": "Sector Coloso, Antofagasta CL-Antofagasta",
+    "lat": -23.76094,
+    "lng": -70.459756,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L3452815",
+    "nombre": "RM La Rinconada",
+    "lat": -23.4656503,
+    "lng": -70.4937744,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L718040",
+    "nombre": "Mejillones--Playa",
+    "lat": -23.0910425,
+    "lng": -70.4216874,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L1050665",
+    "nombre": "Mejillones--Pelágico",
+    "lat": -22.8647872,
+    "lng": -70.6668091,
+    "region": "Antofagasta"
+  },
+  {
+    "locId": "L16870251",
+    "nombre": "Bayona, Santa Ema",
+    "lat": -38.479964,
+    "lng": -72.0271572,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L20636804",
+    "nombre": "Lomas Del Carmen",
+    "lat": -38.7191887,
+    "lng": -72.6526975,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L11980665",
+    "nombre": "Huiscapi--Humedal",
+    "lat": -39.3002441,
+    "lng": -72.40649,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L75753091",
+    "nombre": "Camino Playa Los Pinos, Puerto Saavedra, Araucanía, CL (-38.809, -73.401)",
+    "lat": -38.8091466,
+    "lng": -73.4011542,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L16335910",
+    "nombre": "Labranza--Humedal",
+    "lat": -38.7506995,
+    "lng": -72.7507954,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L7490912",
+    "nombre": "Vegas de Chivilcán",
+    "lat": -38.7112333,
+    "lng": -72.6005333,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L5054215",
+    "nombre": "Villarrica--Humedal Urbano Mallolafken",
+    "lat": -39.278091,
+    "lng": -72.2206329,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L19071403",
+    "nombre": "Río Imperial--Cruce en balsa",
+    "lat": -38.7474934,
+    "lng": -73.4081302,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L857358",
+    "nombre": "Humedal Río Imperial",
+    "lat": -38.7068456,
+    "lng": -73.3442116,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L1080287",
+    "nombre": "Piedra Alta (Piureo - Puaucho)",
+    "lat": -38.9151122,
+    "lng": -73.3563137,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L770492",
+    "nombre": "Puaucho--Playa",
+    "lat": -38.9433223,
+    "lng": -73.341186,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L772324",
+    "nombre": "Lago Budi--Puerto Domínguez",
+    "lat": -38.8947905,
+    "lng": -73.2558382,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L35449093",
+    "nombre": "Villarrica--Humedal Los Boldos",
+    "lat": -39.2855153,
+    "lng": -72.2208434,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L75683187",
+    "nombre": "Ruta S-36, Carahue CL-Región de La Araucania -38.69559, -73.29255",
+    "lat": -38.69559,
+    "lng": -73.292554,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L56688304",
+    "nombre": "Casa Conejeros, Bolilche, Nueva Imperial.",
+    "lat": -38.6580401,
+    "lng": -72.9360716,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L13215737",
+    "nombre": "Humedal Fundo El Carmen",
+    "lat": -38.7144093,
+    "lng": -72.6660533,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L25972740",
+    "nombre": "Lago Villarrica--Desagüe",
+    "lat": -39.27484,
+    "lng": -72.228691,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L75682040",
+    "nombre": "S-847, Río Guacho, Araucanía, CL (-39.429, -72.017)",
+    "lat": -39.4294783,
+    "lng": -72.0165283,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L5717144",
+    "nombre": "Pucón--Playa grande",
+    "lat": -39.2668257,
+    "lng": -71.9758051,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L22647106",
+    "nombre": "Avenida Los Pablos, Temuco CL-La Araucanía -38.74875, -72.64881",
+    "lat": -38.748754,
+    "lng": -72.648807,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L10189875",
+    "nombre": "Colonia Liles",
+    "lat": -38.8203949,
+    "lng": -73.3996095,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L6475907",
+    "nombre": "Puerto Saavedra--Sector Los Pinos",
+    "lat": -38.7916653,
+    "lng": -73.4076136,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L21760630",
+    "nombre": "Humedal Los Boldos",
+    "lat": -38.7678022,
+    "lng": -72.7334105,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L75535762",
+    "nombre": "Camping Piedra Blanca",
+    "lat": -38.889935,
+    "lng": -73.2626967,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L75536594",
+    "nombre": "4931070, Loncoche CL-Región de La Araucania -39.34407, -72.65028",
+    "lat": -39.344073,
+    "lng": -72.650278,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L2958047",
+    "nombre": "Laguna Lomas del Carmen (Los Patos)",
+    "lat": -38.7219267,
+    "lng": -72.6565817,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L75431019",
+    "nombre": "Estacionamiento Faroles",
+    "lat": -38.457692,
+    "lng": -71.363111,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L47163886",
+    "nombre": "RN Malalcahuello--Resort y Centro de Ski Corralco",
+    "lat": -38.4136352,
+    "lng": -71.5477412,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L75374040",
+    "nombre": "Camino Boroa Norte, Toltén CL-Región de La Araucania (-39.2249,-73.1369)",
+    "lat": -39.224892,
+    "lng": -73.136936,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L66626362",
+    "nombre": "Fundo Chelle",
+    "lat": -39.0196796,
+    "lng": -73.2510798,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L75127765",
+    "nombre": "S-887, Pucón, Araucanía, CL (-39.36, -71.966)",
+    "lat": -39.3604165,
+    "lng": -71.965993,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L16842505",
+    "nombre": "Humedal al costado del by-pass",
+    "lat": -38.7186857,
+    "lng": -73.1652923,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L40885232",
+    "nombre": "Ciclovía Las Raíces - Lonquimay, Lonquimay CL-Región de La Araucania -38.46817, -71.35889",
+    "lat": -38.468166,
+    "lng": -71.358889,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L74816701",
+    "nombre": "Camino Internacional Monseñor Francisco Valdés Subercaseaux, Curarrehue CL-Región de La Araucania (-39.5633,-71.5183)",
+    "lat": -39.563318,
+    "lng": -71.518289,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L10054880",
+    "nombre": "Puerto Saavedra--Costanera",
+    "lat": -38.7877482,
+    "lng": -73.3986514,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L571105",
+    "nombre": "MN Cerro Ñielol",
+    "lat": -38.7262994,
+    "lng": -72.589419,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L53984883",
+    "nombre": "Río Cautín--Orilla Labranza",
+    "lat": -38.77562,
+    "lng": -72.75232,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L27099188",
+    "nombre": "Pucón--Plaza de Armas",
+    "lat": -39.273145,
+    "lng": -71.977749,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L74289802",
+    "nombre": "Ruta 181, Las Vertientes, Araucanía, CL (-38,497, -71,521)",
+    "lat": -38.4973131,
+    "lng": -71.521135,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L74229358",
+    "nombre": "1 Calle Edmundo Fahrenkrog, Lonquimay, Araucanía, CL (-38,459, -71,365)",
+    "lat": -38.4587082,
+    "lng": -71.3645348,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L74238446",
+    "nombre": "parque pumalal",
+    "lat": -38.648383,
+    "lng": -72.5588608,
+    "region": "Araucanía"
+  },
+  {
+    "locId": "L75764277",
+    "nombre": "1022376, Arica CL-Región de Arica y Parinacota -18.53269, -70.25355",
+    "lat": -18.532687,
+    "lng": -70.253549,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L572426",
+    "nombre": "PN Lauca--Las Cuevas",
+    "lat": -18.1670566,
+    "lng": -69.4337654,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L14186231",
+    "nombre": "PN Lauca--Laguna Chica",
+    "lat": -18.2185463,
+    "lng": -69.3181249,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L75753856",
+    "nombre": "A-210, Arica, Arica y Parinacota, CL (-18,406, -70,33)",
+    "lat": -18.4059595,
+    "lng": -70.329541,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L55927735",
+    "nombre": "PN Lauca--Muelle",
+    "lat": -18.2359891,
+    "lng": -69.182306,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L2349056",
+    "nombre": "PN Lauca--Estación CONAF",
+    "lat": -18.2507578,
+    "lng": -69.1767775,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L75764297",
+    "nombre": "Ruta A-345, Camarones CL-Región de Arica y Parinacota -18.98770, -69.75514",
+    "lat": -18.9877,
+    "lng": -69.755136,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L75758577",
+    "nombre": "17900 Ruta 11, Putre, Arica y Parinacota, CL (-18.251, -69.177)",
+    "lat": -18.2512521,
+    "lng": -69.1769052,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L75761171",
+    "nombre": "Carretera Internacional CH 11, Chucuyo, Arica y Parinacota, CL (-18.22, -69.305)",
+    "lat": -18.220107,
+    "lng": -69.3053389,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L4429853",
+    "nombre": "PN Lauca--Río Lauca (CH11)",
+    "lat": -18.2160957,
+    "lng": -69.3241261,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L75754086",
+    "nombre": "A-210, Arica, Arica y Parinacota, CL (-18,431, -70,31)",
+    "lat": -18.4314788,
+    "lng": -70.3096493,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L75761201",
+    "nombre": "Carretera Internacional CH 11, Putre, Arica y Parinacota, CL (-18.204, -69.344)",
+    "lat": -18.2039483,
+    "lng": -69.3442335,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L4313484",
+    "nombre": "Valle del Río Lluta--Poconchile",
+    "lat": -18.4518884,
+    "lng": -70.0663054,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L5903098",
+    "nombre": "Valle del Río Camarones--Camarones",
+    "lat": -19.0077761,
+    "lng": -69.8589975,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L75743700",
+    "nombre": "Carretera Internacional CH 11, Putre, Arica y Parinacota, CL (-18.156, -69.471)",
+    "lat": -18.156321,
+    "lng": -69.4711051,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L75743754",
+    "nombre": "A-147, Putre, Arica y Parinacota, CL (-18.206, -69.539)",
+    "lat": -18.2064844,
+    "lng": -69.5389686,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L777355",
+    "nombre": "Valle del Río Camarones--Cuya",
+    "lat": -19.1457358,
+    "lng": -70.17869,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L75743727",
+    "nombre": "A-147, Putre, Arica y Parinacota, CL (-18.197, -69.548)",
+    "lat": -18.1966153,
+    "lng": -69.5479526,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L570508",
+    "nombre": "Putre",
+    "lat": -18.1964537,
+    "lng": -69.5565677,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L75730885",
+    "nombre": "Qantati",
+    "lat": -18.1983718,
+    "lng": -69.565359,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L65801605",
+    "nombre": "Presencias Tutelares de Arica",
+    "lat": -18.6330699,
+    "lng": -70.256635,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L75689469",
+    "nombre": "598 A-147, Putre, Arica y Parinacota, CL (-18.198, -69.561)",
+    "lat": -18.1983168,
+    "lng": -69.5605648,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L603748",
+    "nombre": "PN Lauca--Parinacota",
+    "lat": -18.2026148,
+    "lng": -69.2682409,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L21263195",
+    "nombre": "Churina",
+    "lat": -18.3930145,
+    "lng": -69.9583637,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L75672061",
+    "nombre": "3061 Avenida Alcalde Manuel Castillo Ibaceta, Arica, Arica y Parinacota, CL (-18.495, -70.288)",
+    "lat": -18.4946669,
+    "lng": -70.2878286,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L1048923",
+    "nombre": "Molinos",
+    "lat": -18.3821935,
+    "lng": -69.9457765,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L75729966",
+    "nombre": "Alto Parinacota",
+    "lat": -18.2471378,
+    "lng": -69.253917,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L4858445",
+    "nombre": "Cuevas de Anzota",
+    "lat": -18.5479645,
+    "lng": -70.3306796,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L516559",
+    "nombre": "Zapahuira",
+    "lat": -18.3363581,
+    "lng": -69.58148,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L668852",
+    "nombre": "Río Lluta--Desembocadura",
+    "lat": -18.4165392,
+    "lng": -70.3224081,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L75660883",
+    "nombre": "Unnamed Road, Chaca, Arica y Parinacota, CL (-18.804, -70.163)",
+    "lat": -18.8039321,
+    "lng": -70.1626482,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L683071",
+    "nombre": "Playa La Lisera",
+    "lat": -18.4933642,
+    "lng": -70.3262115,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L45491743",
+    "nombre": "Humedal DesembocaduradelRíoLluta, Arica, Arica y Parinacota",
+    "lat": -18.4150167,
+    "lng": -70.3240365,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L75500667",
+    "nombre": "Unnamed Road, Arica, Arica y Parinacota, CL (-18,488, -70,241)",
+    "lat": -18.4879008,
+    "lng": -70.2407454,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L3539317",
+    "nombre": "kmt. 38.5",
+    "lat": -18.4062475,
+    "lng": -70.005548,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L74845559",
+    "nombre": "Huanta, Arica, Arica y Parinacota",
+    "lat": -18.4012673,
+    "lng": -69.9975615,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L1048910",
+    "nombre": "Arica--Puerto",
+    "lat": -18.4724046,
+    "lng": -70.3238511,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L571139",
+    "nombre": "Arica--Pelágico",
+    "lat": -18.4952381,
+    "lng": -70.3791046,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L1048926",
+    "nombre": "PN Lauca--Chucuyo",
+    "lat": -18.2161033,
+    "lng": -69.3014574,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L25823660",
+    "nombre": "Playa Chinchorro",
+    "lat": -18.4597193,
+    "lng": -70.3047856,
+    "region": "Arica y Parinacota"
+  },
+  {
+    "locId": "L75750088",
+    "nombre": "Punta Totoral, Caldera CL-Región de Atacama -27.31120, -70.92942",
+    "lat": -27.311198,
+    "lng": -70.929421,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L1030665",
+    "nombre": "Tranque La Ola",
+    "lat": -26.4626206,
+    "lng": -69.0631056,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L16836433",
+    "nombre": "Parque Kaukari",
+    "lat": -27.3756817,
+    "lng": -70.3314847,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L505082",
+    "nombre": "Huasco Bajo - puente",
+    "lat": -28.4709171,
+    "lng": -71.1776733,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L51015328",
+    "nombre": "Estación 6, Fundo La Arena, Huasco Bajo",
+    "lat": -28.4676947,
+    "lng": -71.164199,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L51014225",
+    "nombre": "Estación 5, Huasco, Atacama",
+    "lat": -28.4603812,
+    "lng": -71.177455,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L20304235",
+    "nombre": "El Salvador--Piscinas y potreros",
+    "lat": -26.2564404,
+    "lng": -69.6429985,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L75333028",
+    "nombre": "330 Avenida El Tofo, El Salvador, Atacama, CL (-26.248, -69.631)",
+    "lat": -26.2475415,
+    "lng": -69.6308813,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L17770340",
+    "nombre": "Tranque María Isabel",
+    "lat": -27.3393831,
+    "lng": -70.7779548,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L44577592",
+    "nombre": "Caldera, Atacama, CL (-27.319, -70.93)",
+    "lat": -27.3191734,
+    "lng": -70.9304756,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L29357513",
+    "nombre": "Río Copiapó - agua somera 2",
+    "lat": -27.3121358,
+    "lng": -70.9291266,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L8879303",
+    "nombre": "DIEGO DE ALMAGRO",
+    "lat": -26.3937373,
+    "lng": -70.0555576,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L75161942",
+    "nombre": "Camino a Caleta Carrizal Bajo, Huasco CL-Región de Atacama (-28.0904,-71.1457)",
+    "lat": -28.090382,
+    "lng": -71.145706,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L504551",
+    "nombre": "Carrizal Bajo--Humedal",
+    "lat": -28.0840212,
+    "lng": -71.1426115,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L8511396",
+    "nombre": "Caleta y Laguna del Totoral",
+    "lat": -27.8311278,
+    "lng": -71.0858425,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L21011467",
+    "nombre": "Ruta C-10--Quebrada Seca, Llanura Desierto Florido",
+    "lat": -27.5494623,
+    "lng": -70.8513933,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L75108559",
+    "nombre": "Camino Puero Viejo SN Humedal Desembocadura Rio Copiapo",
+    "lat": -27.320599,
+    "lng": -70.919922,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L5026018",
+    "nombre": "Huasco--Muelle",
+    "lat": -28.4607583,
+    "lng": -71.2237087,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L36972466",
+    "nombre": "Estanque En Nicolasa",
+    "lat": -28.5301183,
+    "lng": -71.01949,
+    "region": "Atacama"
+  },
+  {
+    "locId": "L3679772",
+    "nombre": "Canal Ifarle",
+    "lat": -36.7441942,
+    "lng": -73.0833186,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L12050676",
+    "nombre": "Laguna Recamo y Redacamo",
+    "lat": -36.7300526,
+    "lng": -73.1076598,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L2987405",
+    "nombre": "Sendero Lirquén--Tomé",
+    "lat": -36.7021182,
+    "lng": -72.9782047,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L58656790",
+    "nombre": "Depa",
+    "lat": -36.793927,
+    "lng": -73.084159,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L12050710",
+    "nombre": "Complejo Humedal Rocuant-Andalién--Playa Isla Los Reyes",
+    "lat": -36.7294982,
+    "lng": -73.0922676,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L10559998",
+    "nombre": "Canal El Morro--Desembocadura",
+    "lat": -36.7233074,
+    "lng": -73.1026922,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L8044645",
+    "nombre": "Lenga--Pueblo y Playa",
+    "lat": -36.7666943,
+    "lng": -73.1711555,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L59530661",
+    "nombre": "Casa",
+    "lat": -36.832585,
+    "lng": -73.0017667,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L16183814",
+    "nombre": "Laguna Tierras Nobles",
+    "lat": -37.4382095,
+    "lng": -72.6222085,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L14673431",
+    "nombre": "Laguna Junquillar",
+    "lat": -36.9018256,
+    "lng": -73.1271161,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L691243",
+    "nombre": "Río Andalien--Desembocadura",
+    "lat": -36.7418086,
+    "lng": -73.0162556,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L16435812",
+    "nombre": "Humedal Playa Negra Cosmito",
+    "lat": -36.7470596,
+    "lng": -73.0141961,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L2345204",
+    "nombre": "Complejo Humedal Rocuant-Andalién",
+    "lat": -36.738403,
+    "lng": -73.0557292,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L20411484",
+    "nombre": "Talcahuano, Bío Bío, CL (-36.752, -73.087)",
+    "lat": -36.7517832,
+    "lng": -73.0872582,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L35642802",
+    "nombre": "Ruta Interportuaria, Talcahuano CL-Región del Biobío -36.73325, -73.06822",
+    "lat": -36.733247,
+    "lng": -73.068223,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L63783646",
+    "nombre": "Humedal colcura",
+    "lat": -37.116014,
+    "lng": -73.150558,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L50237128",
+    "nombre": "Sendero río Pingueral",
+    "lat": -36.5303608,
+    "lng": -72.9112648,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L18181690",
+    "nombre": "Los Tordos",
+    "lat": -36.8546128,
+    "lng": -72.995856,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L22420601",
+    "nombre": "Canal Ifarle - Almirante Neff",
+    "lat": -36.7482637,
+    "lng": -73.0769598,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L9748180",
+    "nombre": "Laguna Lo Galindo",
+    "lat": -36.7990402,
+    "lng": -73.041114,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L10740631",
+    "nombre": "Cocholgüe",
+    "lat": -36.5947612,
+    "lng": -72.976668,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L7751324",
+    "nombre": "Coliumo--Playa",
+    "lat": -36.5541503,
+    "lng": -72.9569744,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L51556430",
+    "nombre": "Cocholgüe--Caleta Grande",
+    "lat": -36.5925962,
+    "lng": -72.978062,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L75429603",
+    "nombre": "Rodrigo de Triana 146, Hualpén CL-Región del Biobío -36.80273, -73.08475",
+    "lat": -36.802732,
+    "lng": -73.084752,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L18113859",
+    "nombre": "Costanera Biobío (Calle Porvenir)",
+    "lat": -36.9510273,
+    "lng": -73.0248545,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L68422772",
+    "nombre": "Canal ifarle por Claudio Gay",
+    "lat": -36.7577817,
+    "lng": -73.0844805,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L833866",
+    "nombre": "Río Carampangue--Desembocadura",
+    "lat": -37.2350095,
+    "lng": -73.2970691,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L1020637",
+    "nombre": "Brisa del Sol",
+    "lat": -36.7704412,
+    "lng": -73.0698287,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L8011828",
+    "nombre": "SN Humedal Los Batros y Laguna Grande--Parque Humedal Los Batros",
+    "lat": -36.8352766,
+    "lng": -73.1240323,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L7676901",
+    "nombre": "Estero Coliumo--Desembocadura",
+    "lat": -36.5578172,
+    "lng": -72.9542184,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L3438912",
+    "nombre": "Parque Alessandri",
+    "lat": -36.9404177,
+    "lng": -73.1466918,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L20308839",
+    "nombre": "Lenga--Laguna Patos",
+    "lat": -36.773922,
+    "lng": -73.1316071,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L25595482",
+    "nombre": "Cantera ruta de la madera",
+    "lat": -36.973607,
+    "lng": -72.9619932,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L74967160",
+    "nombre": "Intersección administración de Maule",
+    "lat": -37.010096,
+    "lng": -73.182729,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L51674720",
+    "nombre": "1120 Avenida Costanera, Concepción, Bío Bío, CL (-36.808, -73.094)",
+    "lat": -36.8075066,
+    "lng": -73.0940433,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L5501272",
+    "nombre": "Parque Ecuador",
+    "lat": -36.8336761,
+    "lng": -73.0496407,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L28210929",
+    "nombre": "Transbordador Lota-Isla Santa María",
+    "lat": -37.057339,
+    "lng": -73.3150617,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L862580",
+    "nombre": "Isla Santa María",
+    "lat": -37.0348991,
+    "lng": -73.5074615,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L8219517",
+    "nombre": "Parque Laguna Redonda",
+    "lat": -36.8126409,
+    "lng": -73.0678811,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L74647424",
+    "nombre": "Poligono 5",
+    "lat": -37.0440989,
+    "lng": -73.481185,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L28236345",
+    "nombre": "Punta Delicada",
+    "lat": -37.0359145,
+    "lng": -73.4786063,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L74647418",
+    "nombre": "Poligono 6",
+    "lat": -37.0449955,
+    "lng": -73.4787272,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L22709708",
+    "nombre": "Isla Santa María--Camino a la Lobería",
+    "lat": -37.0595609,
+    "lng": -73.5255507,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L74580251",
+    "nombre": "122 Julio Montt, Ramadillas, Bío Bío, CL (-37.304, -73.262)",
+    "lat": -37.3043576,
+    "lng": -73.2622893,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L30197773",
+    "nombre": "Los Coigües, Los Angeles, Bío Bío, CL (-37.41, -72.248)",
+    "lat": -37.4103706,
+    "lng": -72.2484018,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L12942235",
+    "nombre": "Lebu--Paseo Costa Mar",
+    "lat": -37.5967211,
+    "lng": -73.6549473,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L37698947",
+    "nombre": "Canal Ifarle - Carriel norte",
+    "lat": -36.767292,
+    "lng": -73.075378,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L74468768",
+    "nombre": "Muelle",
+    "lat": -36.6193028,
+    "lng": -72.9588985,
+    "region": "Bío-Bío"
+  },
+  {
+    "locId": "L75738921",
+    "nombre": "Camino A Tongoy",
+    "lat": -30.2247277,
+    "lng": -71.4215784,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L9781622",
+    "nombre": "Estero Tongoy--Humedal Alto",
+    "lat": -30.2832371,
+    "lng": -71.4486091,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L3670378",
+    "nombre": "Playa Ñague",
+    "lat": -31.8484289,
+    "lng": -71.5208054,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L5414382",
+    "nombre": "Plantación en Acceso a Playa Ñague",
+    "lat": -31.8481012,
+    "lng": -71.5159884,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L673642",
+    "nombre": "Río Elqui--Desembocadura",
+    "lat": -29.8933968,
+    "lng": -71.2727094,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L5458420",
+    "nombre": "Estancia Yerba Buena",
+    "lat": -29.5729946,
+    "lng": -71.299682,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L3042071",
+    "nombre": "Cerro Grande",
+    "lat": -29.9434816,
+    "lng": -71.2182069,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L9564126",
+    "nombre": "Playa Chigualoco",
+    "lat": -31.7564294,
+    "lng": -71.5101361,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L4470806",
+    "nombre": "Brisas del romero",
+    "lat": -29.8878186,
+    "lng": -71.1276084,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L2747280",
+    "nombre": "Los Vilos--Caleta San Pedro",
+    "lat": -31.908343,
+    "lng": -71.5091243,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L75738653",
+    "nombre": "Cerro vietnam",
+    "lat": -30.059657,
+    "lng": -71.352718,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L782616",
+    "nombre": "Illapel--Sector urbano",
+    "lat": -31.6312733,
+    "lng": -71.1651945,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L75686256",
+    "nombre": "Cerro El Jote",
+    "lat": -29.8701309,
+    "lng": -71.2055619,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L2823328",
+    "nombre": "Río Illapel--Illapel",
+    "lat": -31.6354045,
+    "lng": -71.1647208,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L604466",
+    "nombre": "Río Choapa--Desembocadura",
+    "lat": -31.6204244,
+    "lng": -71.5592766,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L6997022",
+    "nombre": "Trayecto entre Punta de Choros e Islas",
+    "lat": -29.2555518,
+    "lng": -71.5003967,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L2383613",
+    "nombre": "Los Vilos",
+    "lat": -31.9136023,
+    "lng": -71.5056539,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L18363722",
+    "nombre": "Huentelauquén Sur--Empanadas Hacienda",
+    "lat": -31.6116196,
+    "lng": -71.5244186,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L53181916",
+    "nombre": "Mi Jardín",
+    "lat": -31.7814926,
+    "lng": -70.9591367,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L34518011",
+    "nombre": "Ovalle, Coquimbo, CL (-30.888, -71.621)",
+    "lat": -30.88768,
+    "lng": -71.6214783,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L34564247",
+    "nombre": "Ovalle, Coquimbo, CL (-30.893, -71.620)",
+    "lat": -30.8934502,
+    "lng": -71.6195672,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L75390848",
+    "nombre": "CasaMolle",
+    "lat": -29.982314,
+    "lng": -70.940359,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L27514595",
+    "nombre": "Avenida Costanera, Coquimbo, Coquimbo, CL (-29,961, -71,327)",
+    "lat": -29.9607341,
+    "lng": -71.3267757,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L34561475",
+    "nombre": "Ovalle, Coquimbo, CL (-30.885, -71.608)",
+    "lat": -30.8851246,
+    "lng": -71.6082747,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L75421333",
+    "nombre": "El Molle Cerró",
+    "lat": -29.981141,
+    "lng": -70.938267,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L5651833",
+    "nombre": "Ruta 5 Norte--Peaje Puerto Oscuro",
+    "lat": -31.4201671,
+    "lng": -71.5707779,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L75500004",
+    "nombre": "El Molle humedal",
+    "lat": -29.975644,
+    "lng": -70.956734,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L40855846",
+    "nombre": "Talinay Bajo, Coquimbo, CL (-30.904, -71.65)",
+    "lat": -30.9043225,
+    "lng": -71.6504697,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L75470587",
+    "nombre": "Colegio",
+    "lat": -29.961842,
+    "lng": -71.248118,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L3148424",
+    "nombre": "Tongoy--Playa Grande",
+    "lat": -30.264452,
+    "lng": -71.4957824,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L75438325",
+    "nombre": "Ovalle, Coquimbo, CL (-30.895, -71.62)",
+    "lat": -30.8949829,
+    "lng": -71.619517,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L1819585",
+    "nombre": "SN Humedales de Tongoy--Salinas Grande",
+    "lat": -30.2981285,
+    "lng": -71.537872,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L38558642",
+    "nombre": "Ovalle, Coquimbo, CL (-30.868, -71.603)",
+    "lat": -30.8678554,
+    "lng": -71.6028382,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L33416892",
+    "nombre": "Humedal Río Elqui - Desde Libertad Hasta Espejo De Agua",
+    "lat": -29.8944932,
+    "lng": -71.2681731,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L75385053",
+    "nombre": "El Molle",
+    "lat": -29.979525,
+    "lng": -70.951988,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L4146260",
+    "nombre": "Huentelauquén Sur--Tranque Hacienda",
+    "lat": -31.6432434,
+    "lng": -71.5262425,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L13303520",
+    "nombre": "Huentelauquén--Salina Las Ventanas",
+    "lat": -31.6072056,
+    "lng": -71.5704614,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L24306575",
+    "nombre": "Huentelauquén--Terrenos agrícolas",
+    "lat": -31.6105316,
+    "lng": -71.5607448,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L4835235",
+    "nombre": "Ruta D-71--Acceso a Canela",
+    "lat": -31.4091064,
+    "lng": -71.4893889,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L9641385",
+    "nombre": "Estero El Culebrón--Sector oriente",
+    "lat": -29.9674579,
+    "lng": -71.3146145,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L16231972",
+    "nombre": "Huentelauquén--Laguna Campos Dunarios",
+    "lat": -31.5868686,
+    "lng": -71.5517939,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L26583588",
+    "nombre": "Huentelauquén Norte--Casco antiguo del pueblo",
+    "lat": -31.5874973,
+    "lng": -71.5400396,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L11096122",
+    "nombre": "Quebrada de Martínez",
+    "lat": -30.112948,
+    "lng": -71.1853174,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L34631767",
+    "nombre": "Avenida Costanera, Coquimbo, Coquimbo, CL (-29.961, -71.322)",
+    "lat": -29.9610655,
+    "lng": -71.3217536,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L35618111",
+    "nombre": "Charca 6",
+    "lat": -29.9607027,
+    "lng": -71.3199287,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L509064",
+    "nombre": "SN Laguna Conchalí",
+    "lat": -31.8780678,
+    "lng": -71.4966631,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L7710509",
+    "nombre": "Charca Estacional acceso a Pichidangui",
+    "lat": -32.1396664,
+    "lng": -71.5131688,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L870252",
+    "nombre": "Playa la Serena",
+    "lat": -29.9052275,
+    "lng": -71.2747478,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L6358848",
+    "nombre": "Quebrada El Arrayán--Cerro Los Jotes",
+    "lat": -30.0403149,
+    "lng": -71.0184789,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L68985440",
+    "nombre": "Ovalle--Sitio eriazo Población Limarí",
+    "lat": -30.593,
+    "lng": -71.18237,
+    "region": "Coquimbo"
+  },
+  {
+    "locId": "L55435848",
+    "nombre": "Condominio Nueva Kennedy, Rancagua CL-Región del Libertador General Bernardo O'Higgins",
+    "lat": -34.139827,
+    "lng": -70.73954,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L58862647",
+    "nombre": "Villa Horizonte y alrededores",
+    "lat": -34.151815,
+    "lng": -70.69966,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L13463492",
+    "nombre": "Peña Blanca--Laguna norte",
+    "lat": -34.5023553,
+    "lng": -71.696842,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L512176",
+    "nombre": "Pichilemu--Humedal Urbano Laguna Petrel",
+    "lat": -34.3824693,
+    "lng": -71.9981289,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L65781374",
+    "nombre": "1056 Pasaje Director Samuel Díaz Betancourt, Santa Cruz, O'Higgins, CL (-34.628, -71.361)",
+    "lat": -34.6280017,
+    "lng": -71.3613174,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L4643219",
+    "nombre": "popeta",
+    "lat": -34.4362216,
+    "lng": -70.7860708,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L6447140",
+    "nombre": "Barrancas",
+    "lat": -34.5010846,
+    "lng": -71.9843636,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L75738612",
+    "nombre": "9540086, La Estrella CL-Región del Libertador General Bernardo O'Higgins -34.19041, -71.50289",
+    "lat": -34.190414,
+    "lng": -71.502893,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L5702480",
+    "nombre": "Estero Paredones--Desembocadura",
+    "lat": -34.640026,
+    "lng": -72.042367,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L5844916",
+    "nombre": "Central Rapel",
+    "lat": -34.0394883,
+    "lng": -71.589534,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L16915740",
+    "nombre": "Lomita quebrada",
+    "lat": -34.420421,
+    "lng": -72.03013,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L39290973",
+    "nombre": "Liceo SOFOFA EPL, Rancagua CL-Región del Libertador General Bernardo O'Higgins",
+    "lat": -34.154362,
+    "lng": -70.735324,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L28804590",
+    "nombre": "Río Cachapoal--Humedal Las Cruces del Cachapoal",
+    "lat": -34.418553,
+    "lng": -71.1424014,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L75545882",
+    "nombre": "I-120, Litueche, O'Higgins, CL (-34,094, -71,662)",
+    "lat": -34.0940243,
+    "lng": -71.6621533,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L35595849",
+    "nombre": "La Soledad",
+    "lat": -34.0159633,
+    "lng": -70.7606935,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L75505101",
+    "nombre": "Ensenada Pupuya CL-Región del Libertador General Bernardo O'Higgins (-33.9707,-71.8913)",
+    "lat": -33.970704,
+    "lng": -71.891341,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L21970354",
+    "nombre": "Estero Codegua--Humedal El Cupio",
+    "lat": -33.9700883,
+    "lng": -70.7147783,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L50508696",
+    "nombre": "Punta de Lobos--Parque",
+    "lat": -34.4253547,
+    "lng": -72.0462799,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L15765089",
+    "nombre": "Punta de Lobos--Llanos",
+    "lat": -34.4278274,
+    "lng": -72.0478338,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L3099689",
+    "nombre": "Pichilemu--Laguna El Bajel",
+    "lat": -34.3911455,
+    "lng": -71.9996846,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L75266623",
+    "nombre": "Antena, Las Cabras CL",
+    "lat": -34.285854,
+    "lng": -71.295529,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L50640982",
+    "nombre": "Embalse San Hernán",
+    "lat": -34.533611,
+    "lng": -71.164722,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L75089246",
+    "nombre": "Camino interior Vehículos Codelco, Rancagua CL-Región del Libertador General Bernardo O'Higgins",
+    "lat": -34.175264,
+    "lng": -70.749771,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L3357480",
+    "nombre": "Bucalemu--Humedal",
+    "lat": -34.6513558,
+    "lng": -72.0031285,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L75033101",
+    "nombre": "Laguna Los Chercanes",
+    "lat": -34.6555235,
+    "lng": -72.0215919,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L29164223",
+    "nombre": "Sector Rocoso Playa Chica Bucalemu",
+    "lat": -34.6503342,
+    "lng": -72.0504286,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L66163149",
+    "nombre": "Bucalemu Pelágico (Miramar)",
+    "lat": -34.6399049,
+    "lng": -72.0489195,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L911904",
+    "nombre": "Río Cachapoal--Puente Chacayes",
+    "lat": -34.2349381,
+    "lng": -70.4822731,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L67090338",
+    "nombre": "Humedal La Vega de Pupuya",
+    "lat": -33.9901569,
+    "lng": -71.8807507,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L74749537",
+    "nombre": "014 El Sol, Cachapoal, O'Higgins, CL (-34.15, -70.722)",
+    "lat": -34.1500414,
+    "lng": -70.7215865,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L13875547",
+    "nombre": "Humedales de La Capilla",
+    "lat": -34.4885075,
+    "lng": -70.9402959,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L691235",
+    "nombre": "Estero Nilahue--Salinas de Cáhuil",
+    "lat": -34.5060615,
+    "lng": -71.9860268,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L25912177",
+    "nombre": "Pichilemu--La Puntilla",
+    "lat": -34.3805923,
+    "lng": -72.0165622,
+    "region": "Libertador General Bernardo O'Higgins"
+  },
+  {
+    "locId": "L75759851",
+    "nombre": "Avenida Alcalde René Soriano Bórquez 2240, Osorno CL-Región de Los Lagos -40.57990, -73.11398",
+    "lat": -40.5799,
+    "lng": -73.113983,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L75759750",
+    "nombre": "Puerto Varas, Los Lagos, CL (-41.372, -72.971)",
+    "lat": -41.3721171,
+    "lng": -72.9713691,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L75759789",
+    "nombre": "262 Longitudinal Sur, Sector: Límite Regional - Quellón, Puerto Montt, Los Lagos, CL (-41.41, -72.957)",
+    "lat": -41.409854,
+    "lng": -72.9567987,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L9302170",
+    "nombre": "Villa Parque Austral, Osorno, Región de los Lagos, CL (-40.586, -73.113)",
+    "lat": -40.5858874,
+    "lng": -73.1131691,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L32411277",
+    "nombre": "Parque Industrial, Osorno CL-Región de Los Lagos",
+    "lat": -40.607921,
+    "lng": -73.098032,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L807764",
+    "nombre": "Las Quemas Altas",
+    "lat": -40.6284479,
+    "lng": -73.117919,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L39488883",
+    "nombre": "Factoria",
+    "lat": -41.5484039,
+    "lng": -72.30682,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L16570878",
+    "nombre": "Laguna Asentamiento Baquedano",
+    "lat": -40.599624,
+    "lng": -73.147752,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L6338339",
+    "nombre": "Lagunas de Valle Volcanes",
+    "lat": -41.463447,
+    "lng": -72.8923,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L28252005",
+    "nombre": "Cahuala",
+    "lat": -42.6892327,
+    "lng": -73.9008399,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L28895033",
+    "nombre": "Río Chamiza--Puente Chamiza",
+    "lat": -41.482955,
+    "lng": -72.845243,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L68551805",
+    "nombre": "Avenida Los Fundadores, Puerto Montt CL-Región de Los Lagos -41.42201, -72.91152",
+    "lat": -41.422015,
+    "lng": -72.911522,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L4381126",
+    "nombre": "Humedal Antiñir (La Paloma)",
+    "lat": -41.4473185,
+    "lng": -72.9426232,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L75762751",
+    "nombre": "Condominio Tierra Noble",
+    "lat": -40.598512,
+    "lng": -73.120863,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L33818276",
+    "nombre": "Quillaipe, Rancho Santana",
+    "lat": -41.5388183,
+    "lng": -72.73654,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L9090479",
+    "nombre": "Sitio Invernada Chorlos La Vara",
+    "lat": -41.440338,
+    "lng": -72.9097961,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L7686276",
+    "nombre": "Las Vegas (entre Estero Curaco y Río Rahue)",
+    "lat": -40.5347551,
+    "lng": -73.2483602,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L27112093",
+    "nombre": "Puerto Rosales sur",
+    "lat": -41.289363,
+    "lng": -72.858245,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L39561787",
+    "nombre": "Acceso Humedal y Laguna Quenuir, Maullín CL-Región de Los Lagos (-41.5929,-73.6718)",
+    "lat": -41.592949,
+    "lng": -73.671814,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L13052367",
+    "nombre": "5710000, Maullín CL-Los Lagos -41.58452, -73.67041",
+    "lat": -41.584519,
+    "lng": -73.670412,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L6713635",
+    "nombre": "Río Maullín--Llanquihue",
+    "lat": -41.2678335,
+    "lng": -73.0086565,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L10266967",
+    "nombre": "Sitio Arqueológico Monte Verde",
+    "lat": -41.5030421,
+    "lng": -73.2078893,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L774640",
+    "nombre": "Aucar",
+    "lat": -42.164485,
+    "lng": -73.4812617,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L1033571",
+    "nombre": "Transbordador Pargua-Chacao",
+    "lat": -41.8143142,
+    "lng": -73.4916687,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L4323129",
+    "nombre": "Ancud--Muelle Pudeto",
+    "lat": -41.8744601,
+    "lng": -73.8000597,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L23107643",
+    "nombre": "Sendero Humedal Putemún, Castro CL-Los Lagos -42.42709, -73.73796",
+    "lat": -42.427093,
+    "lng": -73.737964,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L6198027",
+    "nombre": "Laguna El Salto--Ilque",
+    "lat": -41.6464582,
+    "lng": -73.09532,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L75689733",
+    "nombre": "W-455, Dalcahue, Los Lagos, CL (-42.359, -73.611)",
+    "lat": -42.3590629,
+    "lng": -73.610928,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L10674205",
+    "nombre": "Estero Rulo",
+    "lat": -41.7014081,
+    "lng": -73.0948125,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L3437903",
+    "nombre": "La Pasada",
+    "lat": -41.6045969,
+    "lng": -73.596468,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L8208770",
+    "nombre": "Huito",
+    "lat": -41.7157551,
+    "lng": -73.1532212,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L516521",
+    "nombre": "Caulín",
+    "lat": -41.8259378,
+    "lng": -73.6275078,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L7964305",
+    "nombre": "Chamiza--Humedal",
+    "lat": -41.498,
+    "lng": -72.856,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L3016701",
+    "nombre": "Llanquihue--Humedal Las Ranas",
+    "lat": -41.262477,
+    "lng": -73.0065,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L53277528",
+    "nombre": "Centro SOTOMÓ Aquachile",
+    "lat": -41.6419198,
+    "lng": -72.3741317,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L10495783",
+    "nombre": "Puerto Varas--Muelle",
+    "lat": -41.317067,
+    "lng": -72.981546,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L75505058",
+    "nombre": "847 Brahms, Osorno, Los Lagos, CL (-40.592, -73.166)",
+    "lat": -40.5919933,
+    "lng": -73.1655483,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L75497583",
+    "nombre": "Carretera Austral, Hualaihué, Los Lagos, CL (-41,959, -72,46)",
+    "lat": -41.9589913,
+    "lng": -72.4596536,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L37840438",
+    "nombre": "2424 Diego Barros Arana, Osorno, Los Lagos, CL (-40.586, -73.115)",
+    "lat": -40.5861269,
+    "lng": -73.1154415,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L7382322",
+    "nombre": "Calbuco--Puerto",
+    "lat": -41.7639252,
+    "lng": -73.1318591,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L3760159",
+    "nombre": "Vegas de Bellavista",
+    "lat": -40.3559573,
+    "lng": -73.2559884,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L75398985",
+    "nombre": "Camping Las Tranqueras",
+    "lat": -41.2216454,
+    "lng": -72.5537348,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L21854496",
+    "nombre": "5520594, Puerto Montt CL-Los Lagos -41.37034, -72.72324",
+    "lat": -41.370343,
+    "lng": -72.723244,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L75355152",
+    "nombre": "U-775, Puerto Octay, Los Lagos, CL (-40,899, -72,737)",
+    "lat": -40.898954,
+    "lng": -72.737163,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L75335404",
+    "nombre": "U-10, Trumao, Los Lagos, CL (-40.358, -73.19)",
+    "lat": -40.3578,
+    "lng": -73.19031,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L36852298",
+    "nombre": "Puente chaula",
+    "lat": -41.5988567,
+    "lng": -72.7058333,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L60157913",
+    "nombre": "Parque Tepuheico--Plaza Los Mañíos",
+    "lat": -42.7623582,
+    "lng": -73.9628792,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L4051381",
+    "nombre": "Quillaipe",
+    "lat": -41.5307483,
+    "lng": -72.7408648,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L75238609",
+    "nombre": "Surgidero Vodudahué, Hualaihué CL-Región de Los Lagos -42.47907, -72.40188",
+    "lat": -42.479068,
+    "lng": -72.401876,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L9118765",
+    "nombre": "480 Lord Cochrane, Ancud, Región de los Lagos, CL (-41,866, -73,831)",
+    "lat": -41.8660624,
+    "lng": -73.831365,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L66451607",
+    "nombre": "Ruta W-483, Castro CL-Región de Los Lagos -42.42215, -73.75975",
+    "lat": -42.422152,
+    "lng": -73.759749,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L8856273",
+    "nombre": "620 Costanera, Ancud, Región de los Lagos, CL (-41,867, -73,83)",
+    "lat": -41.8671479,
+    "lng": -73.8300969,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L9841550",
+    "nombre": "Parque Metropolitano de Puerto Montt",
+    "lat": -41.4735893,
+    "lng": -72.9263101,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L74901711",
+    "nombre": "Fundo Riggi, Ruta 225 CH, Puerto Varas, Los Lagos, CL (-41.059, -72.019)",
+    "lat": -41.058585,
+    "lng": -72.0194565,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L8069288",
+    "nombre": "Humedal Peulla",
+    "lat": -41.08438,
+    "lng": -72.021397,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L45888464",
+    "nombre": "Osorno, Los Lagos, CL (-40.546, -73.185)",
+    "lat": -40.5456635,
+    "lng": -73.1849795,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L55694686",
+    "nombre": "Playa Aguantao",
+    "lat": -42.5314714,
+    "lng": -73.5875076,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L41372296",
+    "nombre": "Canal Calbuco -- Parte Sur",
+    "lat": -41.7967607,
+    "lng": -73.1268142,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L2135756",
+    "nombre": "Río Negro--Desembocadura",
+    "lat": -41.9661276,
+    "lng": -72.46346,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L50295639",
+    "nombre": "Paso Huar",
+    "lat": -41.69296,
+    "lng": -73.023215,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L2879941",
+    "nombre": "Río Pelluco--Desembocadura",
+    "lat": -41.4878855,
+    "lng": -72.9007137,
+    "region": "Los Lagos"
+  },
+  {
+    "locId": "L18557618",
+    "nombre": "Los Notros de Curiñanco",
+    "lat": -39.8229956,
+    "lng": -73.280643,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L7187513",
+    "nombre": "Playa Curiñanco",
+    "lat": -39.7278117,
+    "lng": -73.3975124,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L75767041",
+    "nombre": "4931328, Panguipulli CL-Región de Los Ríos -39.65591, -72.20165",
+    "lat": -39.655915,
+    "lng": -72.201652,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L75744932",
+    "nombre": "Trip to Vergara Dávila Municipal Park",
+    "lat": -39.875487,
+    "lng": -73.388398,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L39729832",
+    "nombre": "Isla Teja, Los Alamos cabaña",
+    "lat": -39.8072222,
+    "lng": -73.2693056,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L11069466",
+    "nombre": "Cementerio Municipal de Valdivia",
+    "lat": -39.8297525,
+    "lng": -73.217405,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L11113357",
+    "nombre": "Humedal Krahmer",
+    "lat": -39.8358442,
+    "lng": -73.2267836,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L67128504",
+    "nombre": "Lago Riñihue",
+    "lat": -39.8305226,
+    "lng": -72.388864,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L75142119",
+    "nombre": "Futrono pueblo",
+    "lat": -40.1299123,
+    "lng": -72.3800265,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L14813136",
+    "nombre": "Parcela Mallín, Punucapa, Los Ríos, CL (-39.751, -73.272)",
+    "lat": -39.7512897,
+    "lng": -73.2715836,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L13429313",
+    "nombre": "Humedal Circunvalación",
+    "lat": -39.8454222,
+    "lng": -73.2560506,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L7971647",
+    "nombre": "Isla Teja--Humedal Santa Inés",
+    "lat": -39.8127154,
+    "lng": -73.2554363,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L5135650",
+    "nombre": "Parque Saval",
+    "lat": -39.8057255,
+    "lng": -73.2553983,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L75694176",
+    "nombre": "Puerto Futrono",
+    "lat": -40.1393821,
+    "lng": -72.3948839,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L9209738",
+    "nombre": "Bahía Maiquillahue",
+    "lat": -39.4587474,
+    "lng": -73.2619246,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L12256776",
+    "nombre": "Mehuín--Río",
+    "lat": -39.4457216,
+    "lng": -73.2090884,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L2295108",
+    "nombre": "Reserva Punta Curiñanco--Mirador chungungo",
+    "lat": -39.7180562,
+    "lng": -73.4103173,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L75502016",
+    "nombre": "5101736, Valdivia CL-Región de Los Ríos -39.80495, -73.04337",
+    "lat": -39.804952,
+    "lng": -73.043366,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L31326432",
+    "nombre": "Punucapa—El Robledal",
+    "lat": -39.7517828,
+    "lng": -73.2712682,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L75395962",
+    "nombre": "Cerros de Huellehue",
+    "lat": -39.814742,
+    "lng": -73.140118,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L976634",
+    "nombre": "Cabo Blanco",
+    "lat": -39.7884884,
+    "lng": -73.2486405,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L75198774",
+    "nombre": "Trip to Home 4",
+    "lat": -39.846532,
+    "lng": -73.205543,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L4568339",
+    "nombre": "Lago Ranco--Pueblo",
+    "lat": -40.3217143,
+    "lng": -72.4816761,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L856481",
+    "nombre": "Río Mehuin--Estuario (Puente negro)",
+    "lat": -39.4379579,
+    "lng": -73.1983316,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L21621960",
+    "nombre": "Campus Valdivia - Universidad San Sebastián",
+    "lat": -39.8215156,
+    "lng": -73.249948,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L58190725",
+    "nombre": "Parque Rocura",
+    "lat": -39.8089361,
+    "lng": -73.2128423,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L27141005",
+    "nombre": "Dunas de Alpue",
+    "lat": -39.5061366,
+    "lng": -73.2464219,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L12256772",
+    "nombre": "Río Mehuín--Desembocadura",
+    "lat": -39.445596,
+    "lng": -73.2210174,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L74386889",
+    "nombre": "Ruta T-20, Mariquina CL-Los Ríos Region -39.43800, -73.20431",
+    "lat": -39.437996,
+    "lng": -73.204311,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L2480037",
+    "nombre": "Río Cruces--Puente Río Cruces",
+    "lat": -39.8237322,
+    "lng": -73.2634637,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L61018932",
+    "nombre": "Villa Nahuel",
+    "lat": -39.4273667,
+    "lng": -73.19177,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L12178768",
+    "nombre": "Sendero Pisada del Diablo",
+    "lat": -40.3130245,
+    "lng": -72.4639496,
+    "region": "Los Ríos"
+  },
+  {
+    "locId": "L2094373",
+    "nombre": "Leñadura (Matus/Blank)",
+    "lat": -53.2151435,
+    "lng": -70.9500933,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L66500819",
+    "nombre": "Vertedero Municipal de Punta Arenas (ingreso al camino de acceso)",
+    "lat": -53.2383865,
+    "lng": -70.9505274,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L75756216",
+    "nombre": "Seno Obstrucción, Natales, Magallanes y la Antártica Chilena, CL (-52.204, -72.486)",
+    "lat": -52.2036127,
+    "lng": -72.4860101,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L66490157",
+    "nombre": "Vertedero Municipal de Punta Arenas (camino de acceso)",
+    "lat": -53.2302684,
+    "lng": -70.9916442,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L75754286",
+    "nombre": "Ruta 9 Norte, Natales CL-Magallanes and Antartica Chilena Region -51.66203, -72.53532",
+    "lat": -51.662029,
+    "lng": -72.535324,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L2361441",
+    "nombre": "Leñadura (parcela experimento)",
+    "lat": -53.219146,
+    "lng": -70.945639,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L28148455",
+    "nombre": "Estadio Ramón Cañas Montalva, Punta Arenas CL-Región de Magallanes y de la Antártica Chilena -53.15324, -70.89350",
+    "lat": -53.153242,
+    "lng": -70.893496,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L2967905",
+    "nombre": "Costanera Norte",
+    "lat": -51.7119438,
+    "lng": -72.5106883,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L59246716",
+    "nombre": "Punta Arenas (hogar)",
+    "lat": -53.1623989,
+    "lng": -70.8947973,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L7951293",
+    "nombre": "Caleta Eugenia",
+    "lat": -54.9320561,
+    "lng": -67.3143831,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L7581734",
+    "nombre": "Ruta Y-905--Desembocadura en Islote Magel",
+    "lat": -54.9282392,
+    "lng": -67.414062,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L7988120",
+    "nombre": "Leñadura, Nuestra casa",
+    "lat": -53.2145727,
+    "lng": -70.9476647,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L3082758",
+    "nombre": "Punta Carrera",
+    "lat": -53.585687,
+    "lng": -70.930131,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L8496306",
+    "nombre": "Kilometro 45 a 60 Ruta 9",
+    "lat": -53.546194,
+    "lng": -70.937634,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L75692270",
+    "nombre": "Primavera, Magallanes y la Antártica Chilena, CL (-52.948, -69.906)",
+    "lat": -52.9477639,
+    "lng": -69.9055025,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L4211562",
+    "nombre": "Humedal Urbano Parque María Behety",
+    "lat": -53.1794724,
+    "lng": -70.9256959,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L606243",
+    "nombre": "Humedal Tres Puentes",
+    "lat": -53.1162328,
+    "lng": -70.8813,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L572347",
+    "nombre": "Cruce Bahía Azul",
+    "lat": -52.4948009,
+    "lng": -69.5207977,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L38900114",
+    "nombre": "Ruta 9 Sur, Punta Arenas CL-Región de Magallanes y de la Antártica Chilena -53.54372, -70.93771",
+    "lat": -53.543721,
+    "lng": -70.937707,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L4079673",
+    "nombre": "Leñadura",
+    "lat": -53.2262346,
+    "lng": -70.9432015,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L8568564",
+    "nombre": "Plaza de Armas de Punta Arenas",
+    "lat": -53.1625247,
+    "lng": -70.9080825,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L5751020",
+    "nombre": "Río de las Minas--Desembocadura",
+    "lat": -53.1630859,
+    "lng": -70.8897972,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L29730609",
+    "nombre": "Punta Árbol-Mount Tarn, Punta Arenas CL-Región de Magallanes y de la Antártica Chilena -53.74666, -70.97041",
+    "lat": -53.746664,
+    "lng": -70.97041,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L75556141",
+    "nombre": "Mount Tarn, Punta Arenas CL-Región de Magallanes y de la Antártica Chilena -53.76022, -70.97445",
+    "lat": -53.760224,
+    "lng": -70.974453,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L3610108",
+    "nombre": "Cabo San Isidro",
+    "lat": -53.78471,
+    "lng": -70.97553,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L5585889",
+    "nombre": "Villa Tehuelches",
+    "lat": -52.4270111,
+    "lng": -71.4141369,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L75393098",
+    "nombre": "Ruta 9 Norte, Torres del Paine CL-Región de Magallanes y de la Antártica Chilena -51.01692, -72.50834",
+    "lat": -51.016918,
+    "lng": -72.508343,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L13775453",
+    "nombre": "Punta Arenas--Fragata Lord Lonsdale",
+    "lat": -53.1823577,
+    "lng": -70.9244342,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L4420517",
+    "nombre": "Laguna Figueroa",
+    "lat": -51.3874769,
+    "lng": -72.4432898,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L6712847",
+    "nombre": "Humedal Urbano Laguna Pudeto",
+    "lat": -53.1562594,
+    "lng": -70.9191781,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L5490392",
+    "nombre": "PN Torres del Paine--Lago el Toro (administración CONAF)",
+    "lat": -51.1786973,
+    "lng": -72.9562783,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L68415097",
+    "nombre": "Estancia Felicidad",
+    "lat": -53.159385,
+    "lng": -69.097904,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L6251790",
+    "nombre": "Bahía Róbalo",
+    "lat": -54.938829,
+    "lng": -67.6662111,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L74809046",
+    "nombre": "Miraflores 1132, Natales CL-Magallanes and Antartica Chilena Region -51.72979, -72.49248",
+    "lat": -51.729789,
+    "lng": -72.492484,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L14831253",
+    "nombre": "Cruce Ruta 9 (Punta Prat) - Río La Caleta, Punta Arenas CL-Magallanes y La Antártica Chilena -53.04218, -71.23600",
+    "lat": -53.042178,
+    "lng": -71.236002,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L74702347",
+    "nombre": "Camino Punta Prat, Punta Arenas CL-Región de Magallanes y de la Antártica Chilena -53.12035, -71.35264",
+    "lat": -53.120346,
+    "lng": -71.352639,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L74593286",
+    "nombre": "Río Grande--Puente Kauelche",
+    "lat": -53.09542,
+    "lng": -71.33481,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L5001684",
+    "nombre": "Río San Juan",
+    "lat": -53.647169,
+    "lng": -70.960983,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L1181915",
+    "nombre": "Santa Maria",
+    "lat": -53.3603935,
+    "lng": -70.9634131,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L74733830",
+    "nombre": "Ciaike",
+    "lat": -52.23497,
+    "lng": -70.273495,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L14161964",
+    "nombre": "Río Hollemberg",
+    "lat": -51.9086714,
+    "lng": -72.4340203,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L75181725",
+    "nombre": "Acceso Costero Pto. Bories, Natales, Magallanes y la Antártica Chilena, CL (-51.696, -72.529)",
+    "lat": -51.6958021,
+    "lng": -72.5287355,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L72185587",
+    "nombre": "Cabo Negro (laboratorio)",
+    "lat": -52.9321334,
+    "lng": -70.8135133,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L6297397",
+    "nombre": "Tercera Barranca",
+    "lat": -50.929023,
+    "lng": -72.683682,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L47055654",
+    "nombre": "Jardín Mutschke, Punta Arenas CL-Región de Magallanes y de la Antártica Chilena (-53.1522,-70.9231)",
+    "lat": -53.152228,
+    "lng": -70.923135,
+    "region": "Magallanes"
+  },
+  {
+    "locId": "L29518355",
+    "nombre": "Colegio Concepción de Parral",
+    "lat": -36.162335,
+    "lng": -71.8329207,
+    "region": "Maule"
+  },
+  {
+    "locId": "L21190642",
+    "nombre": "Estero Los Puercos--Puente Los Puertos",
+    "lat": -35.3772644,
+    "lng": -71.8316609,
+    "region": "Maule"
+  },
+  {
+    "locId": "L75745444",
+    "nombre": "Pencahue",
+    "lat": -35.4178517,
+    "lng": -71.7206117,
+    "region": "Maule"
+  },
+  {
+    "locId": "L75554953",
+    "nombre": "Capilla de Palacios, Maule, CL (-35.803, -71.468)",
+    "lat": -35.8032617,
+    "lng": -71.4682376,
+    "region": "Maule"
+  },
+  {
+    "locId": "L28108924",
+    "nombre": "Llongocura",
+    "lat": -35.1657971,
+    "lng": -71.9875589,
+    "region": "Maule"
+  },
+  {
+    "locId": "L516551",
+    "nombre": "Río Mataquito--Desembocadura",
+    "lat": -34.9909099,
+    "lng": -72.182579,
+    "region": "Maule"
+  },
+  {
+    "locId": "L2725594",
+    "nombre": "Estero Iloca--Desembocadura",
+    "lat": -34.9478179,
+    "lng": -72.1869242,
+    "region": "Maule"
+  },
+  {
+    "locId": "L40356524",
+    "nombre": "Constitución--Playa de las Termópilas",
+    "lat": -35.3260852,
+    "lng": -72.4280816,
+    "region": "Maule"
+  },
+  {
+    "locId": "L3087161",
+    "nombre": "Río Curanilahue--Desembocadura",
+    "lat": -35.8071781,
+    "lng": -72.5711882,
+    "region": "Maule"
+  },
+  {
+    "locId": "L19669638",
+    "nombre": "1161 Yungay, Curicó, Maule, CL (-34.978, -71.242)",
+    "lat": -34.9775591,
+    "lng": -71.2415509,
+    "region": "Maule"
+  },
+  {
+    "locId": "L62229054",
+    "nombre": "UCM San Isidro, Curicó, Maule, CL (-35,028, -71,195)",
+    "lat": -35.0279519,
+    "lng": -71.1948323,
+    "region": "Maule"
+  },
+  {
+    "locId": "L993515",
+    "nombre": "Río Huenchullami--Desembocadura",
+    "lat": -35.1189257,
+    "lng": -72.2085857,
+    "region": "Maule"
+  },
+  {
+    "locId": "L17027335",
+    "nombre": "Río Rari",
+    "lat": -35.7707116,
+    "lng": -71.4111034,
+    "region": "Maule"
+  },
+  {
+    "locId": "L57473521",
+    "nombre": "Parcela",
+    "lat": -34.8416891,
+    "lng": -71.0556067,
+    "region": "Maule"
+  },
+  {
+    "locId": "L56711255",
+    "nombre": "Parque Tricahue--administración y camping",
+    "lat": -35.7019312,
+    "lng": -71.0737537,
+    "region": "Maule"
+  },
+  {
+    "locId": "L75302268",
+    "nombre": "Rio Maule sur",
+    "lat": -35.716036,
+    "lng": -71.123682,
+    "region": "Maule"
+  },
+  {
+    "locId": "L30592781",
+    "nombre": "Pelarco",
+    "lat": -35.3888545,
+    "lng": -71.5448871,
+    "region": "Maule"
+  },
+  {
+    "locId": "L22860777",
+    "nombre": "Tranque Llaca Llaca",
+    "lat": -35.0533316,
+    "lng": -72.0187449,
+    "region": "Maule"
+  },
+  {
+    "locId": "L984722",
+    "nombre": "Los Queñes",
+    "lat": -35.0002263,
+    "lng": -70.8120346,
+    "region": "Maule"
+  },
+  {
+    "locId": "L2034297",
+    "nombre": "Cerro de la Virgen",
+    "lat": -35.4158799,
+    "lng": -71.6900826,
+    "region": "Maule"
+  },
+  {
+    "locId": "L27799354",
+    "nombre": "Boyeruca",
+    "lat": -34.6879045,
+    "lng": -72.049989,
+    "region": "Maule"
+  },
+  {
+    "locId": "L635302",
+    "nombre": "Constitución--Piedra de la Iglesia",
+    "lat": -35.3289912,
+    "lng": -72.4337196,
+    "region": "Maule"
+  },
+  {
+    "locId": "L74449191",
+    "nombre": "salto la placeta , Maule, CL (-35.43, -71.127)",
+    "lat": -35.4301818,
+    "lng": -71.1268093,
+    "region": "Maule"
+  },
+  {
+    "locId": "L12069070",
+    "nombre": "Río Pinotalca--Desembocadura",
+    "lat": -35.5644962,
+    "lng": -72.6172232,
+    "region": "Maule"
+  },
+  {
+    "locId": "L38733669",
+    "nombre": "Llongocura",
+    "lat": -35.1619949,
+    "lng": -71.9898911,
+    "region": "Maule"
+  },
+  {
+    "locId": "L633604",
+    "nombre": "Río Reloca--Desembocadura",
+    "lat": -35.6648974,
+    "lng": -72.5976563,
+    "region": "Maule"
+  },
+  {
+    "locId": "L41638120",
+    "nombre": "HN2",
+    "lat": -35.1125493,
+    "lng": -72.2043475,
+    "region": "Maule"
+  },
+  {
+    "locId": "L20318303",
+    "nombre": "Monte el Manzano",
+    "lat": -36.2391505,
+    "lng": -71.7798615,
+    "region": "Maule"
+  },
+  {
+    "locId": "L769453",
+    "nombre": "Humedal Junquillar",
+    "lat": -35.2461799,
+    "lng": -72.3905468,
+    "region": "Maule"
+  },
+  {
+    "locId": "L38880077",
+    "nombre": "Mataquito Interior",
+    "lat": -34.9821562,
+    "lng": -71.8110582,
+    "region": "Maule"
+  },
+  {
+    "locId": "L74165825",
+    "nombre": "Cancha de Puente Alto, Linares, Chile",
+    "lat": -35.7983788,
+    "lng": -71.58684,
+    "region": "Maule"
+  },
+  {
+    "locId": "L24288725",
+    "nombre": "El Yaky",
+    "lat": -35.1645918,
+    "lng": -72.2654946,
+    "region": "Maule"
+  },
+  {
+    "locId": "L32325869",
+    "nombre": "Playa Desembocadura La Trinchera",
+    "lat": -35.1170189,
+    "lng": -72.2081616,
+    "region": "Maule"
+  },
+  {
+    "locId": "L52525571",
+    "nombre": "Quinta Normal, Región Metropolitana, CL (-33,442, -70,707)",
+    "lat": -33.4416906,
+    "lng": -70.7072389,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L26582630",
+    "nombre": "Plaza Estados Unidos",
+    "lat": -33.4337681,
+    "lng": -70.7376435,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L75616646",
+    "nombre": "Plaza Viaocan",
+    "lat": -33.6047224,
+    "lng": -70.8925113,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L17461419",
+    "nombre": "Paseo Pie Andino 4669, Lo Barnechea CL-Metropolitana de Santiago -33.32701, -70.51437",
+    "lat": -33.327014,
+    "lng": -70.514366,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L56578949",
+    "nombre": "Depita",
+    "lat": -33.4491264,
+    "lng": -70.6087168,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L52440423",
+    "nombre": "Centro Ecuestre Equilibre",
+    "lat": -33.5010726,
+    "lng": -70.5155841,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L591445",
+    "nombre": "Chicauma--Espinal y bosque esclerófilo",
+    "lat": -33.208244,
+    "lng": -70.9394073,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L75755652",
+    "nombre": "Cementerio Chocalán, Melipilla CL-Región Metropolitana de Santiago -33.71539, -71.20739",
+    "lat": -33.715391,
+    "lng": -71.207387,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L75753740",
+    "nombre": "Avenida Padre Hurtado Sur 2078–2272, La Reina",
+    "lat": -33.435324,
+    "lng": -70.537295,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L51940431",
+    "nombre": "Huertos familiares",
+    "lat": -33.14797,
+    "lng": -70.799434,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L2405196",
+    "nombre": "Parque Aguas de Ramón",
+    "lat": -33.4345214,
+    "lng": -70.502851,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L3915064",
+    "nombre": "Parquemet--Cerro San Cristóbal--Jardín Mapulemu",
+    "lat": -33.4146263,
+    "lng": -70.6198288,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L944335",
+    "nombre": "Lo Curro--Rocas escalada",
+    "lat": -33.3585634,
+    "lng": -70.5540276,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L12473603",
+    "nombre": "Municipalidad de Cerro Navia",
+    "lat": -33.4345328,
+    "lng": -70.7288643,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L3481561",
+    "nombre": "Parque Bicentenario de Vitacura (no contar cisnes / don't count swans)",
+    "lat": -33.3980197,
+    "lng": -70.6022,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L75760740",
+    "nombre": "Nueva Tobalaba",
+    "lat": -33.4164226,
+    "lng": -70.6064287,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L762620",
+    "nombre": "Parque Padre Hurtado",
+    "lat": -33.431692,
+    "lng": -70.5450153,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L41147672",
+    "nombre": "Ruta 78, Maipú CL-Región Metropolitana de Santiago (-33.4974,-70.7848)",
+    "lat": -33.497366,
+    "lng": -70.784821,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L836842",
+    "nombre": "Curacaví--Lo Águila",
+    "lat": -33.4155381,
+    "lng": -71.1405945,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L12681802",
+    "nombre": "Parque Eduardo Frei Montalva (La Florida)",
+    "lat": -33.5117747,
+    "lng": -70.5877157,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L75747137",
+    "nombre": "Camino Fundo La Laguna, Lampa CL-Región Metropolitana de Santiago -33.19444, -70.83106",
+    "lat": -33.194436,
+    "lng": -70.831064,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L1643984",
+    "nombre": "Cerro Los Piques",
+    "lat": -33.3864292,
+    "lng": -70.5151528,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L34074028",
+    "nombre": "Parque Mapocho Río--Entre Costanera y Carrascal (Cerro Navia)",
+    "lat": -33.4132402,
+    "lng": -70.7329416,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L3086280",
+    "nombre": "Humedal Urbano Küla-Kura (O'Higgins)",
+    "lat": -33.3404653,
+    "lng": -70.7317336,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L75343619",
+    "nombre": "Humedal Los Corrales",
+    "lat": -33.5594071,
+    "lng": -70.9092831,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L570658",
+    "nombre": "SN Laguna Batuco",
+    "lat": -33.2064427,
+    "lng": -70.8279133,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L6518510",
+    "nombre": "Parque El Llano",
+    "lat": -33.4849873,
+    "lng": -70.6501418,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L75677654",
+    "nombre": "Universidad Adolfo Ibáñez",
+    "lat": -33.489656,
+    "lng": -70.515871,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L704452",
+    "nombre": "Parque Quinta Normal",
+    "lat": -33.441605,
+    "lng": -70.6845888,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L59718204",
+    "nombre": "Oficina ROC",
+    "lat": -33.4295809,
+    "lng": -70.6015067,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L7795226",
+    "nombre": "Parque Juan XXIII",
+    "lat": -33.4603675,
+    "lng": -70.5883014,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L6350092",
+    "nombre": "Plaza de los Bomberos",
+    "lat": -33.5325999,
+    "lng": -70.6721869,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L6333296",
+    "nombre": "Cerro Renca",
+    "lat": -33.3921148,
+    "lng": -70.7119936,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L9236260",
+    "nombre": "Parque Quilapilún",
+    "lat": -33.0922816,
+    "lng": -70.7321478,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L12292075",
+    "nombre": "Cerro Manquehuito",
+    "lat": -33.3554611,
+    "lng": -70.5666547,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L75432094",
+    "nombre": "Morning Glory , Alhué, Región Metropolitana, CL (-34.096, -71.181)",
+    "lat": -34.0959958,
+    "lng": -71.1814869,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L835520",
+    "nombre": "Laguna Carén",
+    "lat": -33.4306915,
+    "lng": -70.8422362,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L1048773",
+    "nombre": "Pirque",
+    "lat": -33.6620677,
+    "lng": -70.5682755,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L3914417",
+    "nombre": "Parque Uruguay",
+    "lat": -33.4220439,
+    "lng": -70.6155213,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L75469419",
+    "nombre": "Ruta Cueva del Manzano",
+    "lat": -33.567281,
+    "lng": -70.381131,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L29215293",
+    "nombre": "Rivera Mapocho",
+    "lat": -33.592555,
+    "lng": -70.896205,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L62977589",
+    "nombre": "Altos de Chicauma",
+    "lat": -33.2083824,
+    "lng": -70.9503607,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L74962431",
+    "nombre": "Parque Mahuida--Sendero Loma Pelada",
+    "lat": -33.454376,
+    "lng": -70.5126498,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L56010356",
+    "nombre": "Parque Europa - Ciudad del Sol",
+    "lat": -33.5960869,
+    "lng": -70.5889945,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L2772617",
+    "nombre": "Parquemet--Cerro San Cristóbal--Acceso Pedro de Valdivia",
+    "lat": -33.4150223,
+    "lng": -70.6182289,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L516158",
+    "nombre": "Embalse El Yeso",
+    "lat": -33.6474929,
+    "lng": -70.0670242,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L3839168",
+    "nombre": "Cerro Chena--Pukará/Huanca de Chena",
+    "lat": -33.615075,
+    "lng": -70.7469213,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L31022323",
+    "nombre": "Sendero Templo Bahai Y Ascenso Al Cerro La Cruz",
+    "lat": -33.4811205,
+    "lng": -70.5210438,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L75032683",
+    "nombre": "Rey Alberto 3614–3674, San Miguel CL-Región Metropolitana de Santiago (-33.4867,-70.6535)",
+    "lat": -33.486691,
+    "lng": -70.653467,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L74286722",
+    "nombre": "Camino a Valle Nevado, Lo Barnechea CL-Santiago Metropolitan Region -33.36009, -70.29097",
+    "lat": -33.360088,
+    "lng": -70.290971,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L11421853",
+    "nombre": "Las Vertientes",
+    "lat": -33.5895504,
+    "lng": -70.4681163,
+    "region": "Región Metropolitana de Santiago"
+  },
+  {
+    "locId": "L516522",
+    "nombre": "Pica",
+    "lat": -20.4873261,
+    "lng": -69.3197823,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L9561951",
+    "nombre": "Iquique--Playa Bellavista",
+    "lat": -20.2172296,
+    "lng": -70.1560049,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L75490456",
+    "nombre": "A-75, Pica, Tarapacá, CL (-20,511, -69,379)",
+    "lat": -20.5105618,
+    "lng": -69.3793074,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L75527821",
+    "nombre": "Panamericana Norte, Pozo Almonte, Tarapacá, CL (-20,62, -69,619)",
+    "lat": -20.6204987,
+    "lng": -69.6189982,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L75446905",
+    "nombre": "8 Pintados - Matilla - Pica, Pica, Tarapacá, CL (-20,496, -69,336)",
+    "lat": -20.4955415,
+    "lng": -69.335874,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L75447426",
+    "nombre": "272 San Andrés, Pica, Tarapacá, CL (-20,493, -69,333)",
+    "lat": -20.4934246,
+    "lng": -69.3325015,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L2603291",
+    "nombre": "Monumento Arturo Prat",
+    "lat": -20.222496,
+    "lng": -70.1525545,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L718035",
+    "nombre": "Península Cavancha",
+    "lat": -20.2357846,
+    "lng": -70.1519966,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L61634684",
+    "nombre": "Playa Blanca",
+    "lat": -20.3300411,
+    "lng": -70.1432294,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L46824326",
+    "nombre": "Pica--Plaza",
+    "lat": -20.4911401,
+    "lng": -69.3292692,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L75184282",
+    "nombre": "caleta los verde",
+    "lat": -20.4301317,
+    "lng": -70.1625995,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L54518854",
+    "nombre": "Oasis Del Regimiento Tarapaca",
+    "lat": -20.126939,
+    "lng": -69.748538,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L72661874",
+    "nombre": "Oasis del Tarapacá (medio)",
+    "lat": -20.126804,
+    "lng": -69.749181,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L904625",
+    "nombre": "Río Loa--Desembocadura",
+    "lat": -21.4292013,
+    "lng": -70.0585485,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L74453276",
+    "nombre": "CL (-20.175, -70.189)",
+    "lat": -20.1752434,
+    "lng": -70.1894292,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L74454128",
+    "nombre": "CL (-20,126, -70,29)",
+    "lat": -20.1259133,
+    "lng": -70.2895094,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L74453239",
+    "nombre": "CL (-20.084, -70.363)",
+    "lat": -20.0840432,
+    "lng": -70.3626094,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L74453169",
+    "nombre": "CL (-20.106, -70.343)",
+    "lat": -20.1055505,
+    "lng": -70.3432592,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L74453956",
+    "nombre": "CL (-20,143, -70,276)",
+    "lat": -20.1426864,
+    "lng": -70.2760971,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L29074756",
+    "nombre": "CL (-20.187, -70.197)",
+    "lat": -20.187028,
+    "lng": -70.1966728,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L11759678",
+    "nombre": "Iquique--Muelle Prat",
+    "lat": -20.2110095,
+    "lng": -70.1537914,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L74557494",
+    "nombre": "Plaza Condell Oeste",
+    "lat": -20.21392,
+    "lng": -70.149707,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L2855952",
+    "nombre": "Iquique--Pelágico",
+    "lat": -20.2101783,
+    "lng": -70.2145729,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L33344738",
+    "nombre": "La Tirana--Tranques",
+    "lat": -20.3615018,
+    "lng": -69.6429866,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L74185630",
+    "nombre": "8 Pintados - Matilla - Pica, Pica, Tarapacá, CL (-20.496, -69.336)",
+    "lat": -20.4956619,
+    "lng": -69.3358636,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L74207236",
+    "nombre": "Pica Cocha Concova",
+    "lat": -20.48422,
+    "lng": -69.3113917,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L1074934",
+    "nombre": "Quebrada de Quisma",
+    "lat": -20.5163484,
+    "lng": -69.3236232,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L1079853",
+    "nombre": "Playa Chanavaya",
+    "lat": -20.8934966,
+    "lng": -70.1364183,
+    "region": "Tarapacá"
+  },
+  {
+    "locId": "L25193190",
+    "nombre": "Colegio Cristiano de Quilpué",
+    "lat": -33.0471985,
+    "lng": -71.4350568,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L5838048",
+    "nombre": "CL-Viña del Mar-Calle Lampa- -33,0283x-71,5475",
+    "lat": -33.028328,
+    "lng": -71.547497,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L7108192",
+    "nombre": "Estero Quilpué--El Belloto",
+    "lat": -33.0398441,
+    "lng": -71.4033772,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L8866748",
+    "nombre": "Estero Reñaca--Desembocadura",
+    "lat": -32.9730507,
+    "lng": -71.544781,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L6176778",
+    "nombre": "Viña del Mar--Borde Costero",
+    "lat": -33.0086995,
+    "lng": -71.5527749,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L75754789",
+    "nombre": "Avenida El Peral 2905, Cartagena CL-Región de Valparaíso (-33.5327,-71.5942)",
+    "lat": -33.532742,
+    "lng": -71.594153,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L4662394",
+    "nombre": "Lagunita Arturo Phillips",
+    "lat": -33.6295391,
+    "lng": -71.6257203,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L551450",
+    "nombre": "SN Laguna El Peral",
+    "lat": -33.5052153,
+    "lng": -71.607154,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L75753014",
+    "nombre": "2661174, San Antonio CL-Valparaíso Region -33.63670, -71.50542",
+    "lat": -33.636703,
+    "lng": -71.505424,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L1172903",
+    "nombre": "Cuesta de Chacabuco",
+    "lat": -32.9583195,
+    "lng": -70.670135,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L12747406",
+    "nombre": "SN Humedal de Tunquén--Sendero a Playa Tunquén",
+    "lat": -33.2760229,
+    "lng": -71.6529286,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L75753386",
+    "nombre": "Desembocadura estero Viña del Mar",
+    "lat": -33.022609,
+    "lng": -71.551677,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L4119152",
+    "nombre": "Cantalao",
+    "lat": -33.4313244,
+    "lng": -71.6994347,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L570152",
+    "nombre": "Punta de Tralca",
+    "lat": -33.4268569,
+    "lng": -71.7039871,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L12555321",
+    "nombre": "Calle 2 poniente entre 9 y 10 norte, Viña del mar",
+    "lat": -33.0134818,
+    "lng": -71.5522207,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L504548",
+    "nombre": "Estero Mantagua",
+    "lat": -32.8844165,
+    "lng": -71.5067482,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L41038578",
+    "nombre": "Ciclovía Avenida Phillips, Santo Domingo CL-Región de Valparaíso -33.63047, -71.62415",
+    "lat": -33.630471,
+    "lng": -71.624151,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L572344",
+    "nombre": "Río Aconcagua--Desembocadura Humedal Urbano",
+    "lat": -32.917422,
+    "lng": -71.5067911,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L3952221",
+    "nombre": "Parque Quinta Vergara",
+    "lat": -33.0292644,
+    "lng": -71.5531665,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L39298719",
+    "nombre": "Cerro La Huinca",
+    "lat": -32.9783201,
+    "lng": -71.2681818,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L760564",
+    "nombre": "Jardín Botánico Nacional de Viña del Mar",
+    "lat": -33.0451975,
+    "lng": -71.5008774,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L16217594",
+    "nombre": "Playa Mirasol Humedal",
+    "lat": -33.3208823,
+    "lng": -71.6514373,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L843121",
+    "nombre": "Estero Marga Marga--Puente El Olivar",
+    "lat": -33.0505709,
+    "lng": -71.5018773,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L4612317",
+    "nombre": "SN Islote Peña Blanca y Punta Peña Blanca",
+    "lat": -33.3652841,
+    "lng": -71.6935855,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L5884993",
+    "nombre": "Quebrada San José",
+    "lat": -33.3220052,
+    "lng": -71.6502357,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L28024799",
+    "nombre": "Parque La Giganta",
+    "lat": -32.7515498,
+    "lng": -70.7560429,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L572759",
+    "nombre": "PN La Campana--Ocoa",
+    "lat": -32.9273735,
+    "lng": -71.0856199,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L23274970",
+    "nombre": "Sendero costero entre Algarrobo y Canelillo",
+    "lat": -33.3641544,
+    "lng": -71.687241,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L29443571",
+    "nombre": "Torre Bioceanica",
+    "lat": -33.593787,
+    "lng": -71.613899,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L70968576",
+    "nombre": "Quintero, Valparaíso, CL (-32.882, -71.496) Posada del Parque",
+    "lat": -32.8817934,
+    "lng": -71.4958828,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L75678389",
+    "nombre": "Paseo Bellamar, San Antonio CL-Región de Valparaíso -33.58351, -71.61319",
+    "lat": -33.583514,
+    "lng": -71.613189,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L861844",
+    "nombre": "Humedal Urbano Cartagena",
+    "lat": -33.5350454,
+    "lng": -71.6022348,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L69456597",
+    "nombre": "Cerro San Francisco de Curimón",
+    "lat": -32.782691,
+    "lng": -70.682434,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L3644292",
+    "nombre": "Colegio El Roble",
+    "lat": -33.671126,
+    "lng": -71.601579,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L39543095",
+    "nombre": "Ruta 60, Panquehue, Valparaíso, CL (-32.771, -70.848)",
+    "lat": -32.7709537,
+    "lng": -70.8481815,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L11646829",
+    "nombre": "Parque Natural Kan-Kan",
+    "lat": -33.038707,
+    "lng": -71.553607,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L75504193",
+    "nombre": "Laguna Lafquen",
+    "lat": -32.898943,
+    "lng": -71.0864957,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L44590119",
+    "nombre": "Sendero De Los Piqueros, Maitencillo, Valparaíso, CL (-32.683, -71.445)",
+    "lat": -32.683282,
+    "lng": -71.4452368,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L9212935",
+    "nombre": "Quintero--Potrero",
+    "lat": -32.8047357,
+    "lng": -71.53865,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L27871992",
+    "nombre": "Quebrada Carvajal",
+    "lat": -33.4254,
+    "lng": -71.6083,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L1639512",
+    "nombre": "Punta Las Salinas",
+    "lat": -33.4942736,
+    "lng": -71.6427469,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L13901798",
+    "nombre": "Parque Tricao--Humedal Giverny",
+    "lat": -33.7258271,
+    "lng": -71.6349889,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L35621779",
+    "nombre": "Borde costero--Quintay",
+    "lat": -33.1923067,
+    "lng": -71.6990535,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L4577109",
+    "nombre": "Estero Mantagua--Playa",
+    "lat": -32.87705,
+    "lng": -71.50989,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L504553",
+    "nombre": "SN Humedal Río Maipo--Desembocadura",
+    "lat": -33.62058,
+    "lng": -71.62755,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L3628539",
+    "nombre": "San Antonio--Caleta",
+    "lat": -33.581961,
+    "lng": -71.6145381,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L777338",
+    "nombre": "Punta Curaumilla",
+    "lat": -33.1033338,
+    "lng": -71.7254448,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L606195",
+    "nombre": "Humedal Urbano Estero Catapilco--Desembocadura",
+    "lat": -32.6327613,
+    "lng": -71.426518,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L27311807",
+    "nombre": "Ribera estero San Francisco",
+    "lat": -32.741878,
+    "lng": -70.444639,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L570174",
+    "nombre": "Quintero--Pelágico",
+    "lat": -32.7693779,
+    "lng": -71.5838242,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L4105087",
+    "nombre": "SN Humedal de Tunquén--Desembocadura Estero Casablanca",
+    "lat": -33.278503,
+    "lng": -71.6624451,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L18244019",
+    "nombre": "Playa Amarilla",
+    "lat": -32.9227896,
+    "lng": -71.5245795,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L75138738",
+    "nombre": "Curaumilla Norte--Pelágico",
+    "lat": -33.037,
+    "lng": -71.75415,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L75138219",
+    "nombre": "Tunquén--Pelágico",
+    "lat": -33.2940237,
+    "lng": -71.7619655,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L74839368",
+    "nombre": "Apina, Hanga Roa, Valparaíso, CL (-27.151, -109.44)",
+    "lat": -27.1510423,
+    "lng": -109.4403874,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L604818",
+    "nombre": "SN Humedal Salinas de Pullally y Dunas de Longotoma--Desembocadura",
+    "lat": -32.4044258,
+    "lng": -71.4070772,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L3013157",
+    "nombre": "Motu Nui / Motu Iti",
+    "lat": -27.2000032,
+    "lng": -109.4542229,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L5708848",
+    "nombre": "Playa de San Alfonso",
+    "lat": -33.3500499,
+    "lng": -71.6539371,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L9189821",
+    "nombre": "Humedal Ojos de Mar--Laguna Llolleo norte",
+    "lat": -33.6044567,
+    "lng": -71.6222363,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L59749111",
+    "nombre": "Piedra Del Trueno",
+    "lat": -33.4246648,
+    "lng": -71.709532,
+    "region": "Valparaíso"
+  },
+  {
+    "locId": "L75759562",
+    "nombre": "1009 Pasaje Mallorca, Chillán, Ñuble, CL (-36,596, -72,065)",
+    "lat": -36.5958539,
+    "lng": -72.0645759,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L21591416",
+    "nombre": "Chillán--Barrio Toledo",
+    "lat": -36.5852325,
+    "lng": -72.0728148,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L22214961",
+    "nombre": "Humedal urbano  Maipú de O'Higgins",
+    "lat": -36.6192683,
+    "lng": -72.1380876,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L75757350",
+    "nombre": "637 5 de Abril, Chillán, Ñuble, CL (-36.608, -72.101)",
+    "lat": -36.6083677,
+    "lng": -72.1014478,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L59112271",
+    "nombre": "Callejon Los Parceleros Norte, Chillán, Ñuble, CL (-36.54, -71.992)",
+    "lat": -36.5402423,
+    "lng": -71.9916705,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L20473017",
+    "nombre": "Universidad de Concepción--Campus Chillán",
+    "lat": -36.595976,
+    "lng": -72.0841944,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L629576",
+    "nombre": "Río Itata--Desembocadura",
+    "lat": -36.3874329,
+    "lng": -72.8610706,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L75611128",
+    "nombre": "Casa Chillán",
+    "lat": -36.5361638,
+    "lng": -71.9895972,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L13383465",
+    "nombre": "Cobquecura--Playa Lobería",
+    "lat": -36.1300325,
+    "lng": -72.8050624,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L22713758",
+    "nombre": "Cobquecura--Sector Aeródromo",
+    "lat": -36.124987,
+    "lng": -72.805309,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L58622750",
+    "nombre": "N-102-M, Pilicura, Ñuble, CL (-36.111, -72.807)",
+    "lat": -36.110835,
+    "lng": -72.8074333,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L75766921",
+    "nombre": "Unnamed Road Pemuco 2",
+    "lat": -36.9622323,
+    "lng": -72.140978,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L75766842",
+    "nombre": "N-85, Pemuco, Ñuble, CL (-36.978, -72.216)",
+    "lat": -36.9783784,
+    "lng": -72.215909,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L1309608",
+    "nombre": "Termas de Chillán",
+    "lat": -36.9067285,
+    "lng": -71.4109504,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L75506969",
+    "nombre": "Pasaje Número 3, Coihueco, Ñuble, CL (-36.612, -71.99)",
+    "lat": -36.6123741,
+    "lng": -71.9903877,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L71932133",
+    "nombre": "Tranque",
+    "lat": -36.653628,
+    "lng": -72.290971,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L28906878",
+    "nombre": "3820163, Chillán Viejo CL-Región de Ñuble -36.65494, -72.28820",
+    "lat": -36.654935,
+    "lng": -72.288197,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L75424101",
+    "nombre": "Ruta N-544, San Nicolás CL-Región de Ñuble -36.50320, -72.12840",
+    "lat": -36.5032,
+    "lng": -72.128404,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L67635103",
+    "nombre": "3810665, Chillán CL-Región de Ñuble -36.55110, -72.11847",
+    "lat": -36.551097,
+    "lng": -72.118475,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L15640349",
+    "nombre": "Dadinco- San Nicolas",
+    "lat": -36.5241081,
+    "lng": -72.1785735,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L50171339",
+    "nombre": "Ruta N-224, Coelemu CL-Región de Ñuble -36.51409, -72.74604",
+    "lat": -36.514094,
+    "lng": -72.746045,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L61335070",
+    "nombre": "Luis Rocuant Trucios, Chillán CL-Región de Ñuble (-36.5980,-72.0598)",
+    "lat": -36.597995,
+    "lng": -72.059771,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L74641030",
+    "nombre": "Río",
+    "lat": -36.6875864,
+    "lng": -72.4419403,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L75188007",
+    "nombre": "N-59-Q, Ñuble, CL (-36.895, -72.092)",
+    "lat": -36.8953391,
+    "lng": -72.0916941,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L73955724",
+    "nombre": "Laguna Las Tagüitas",
+    "lat": -36.59781,
+    "lng": -71.99973,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L65288108",
+    "nombre": "Chillán--Población Pedro Lagos",
+    "lat": -36.6176625,
+    "lng": -72.1140123,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L56500065",
+    "nombre": "3810665, Chillán CL-Región de Ñuble (-36.5521,-72.1135)",
+    "lat": -36.552059,
+    "lng": -72.113479,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L74535731",
+    "nombre": "Bosquecito",
+    "lat": -36.909571,
+    "lng": -71.823863,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L629570",
+    "nombre": "Laguna de Santa Elena",
+    "lat": -36.8034434,
+    "lng": -72.3825645,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L629575",
+    "nombre": "Laguna Avendaño",
+    "lat": -36.7526393,
+    "lng": -72.4488258,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L19274374",
+    "nombre": "Perales",
+    "lat": -36.428333,
+    "lng": -72.871238,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L22810759",
+    "nombre": "Playa santa Rita",
+    "lat": -36.197505,
+    "lng": -72.821423,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L37805812",
+    "nombre": "3800005, Chillán CL-Región de Ñuble -36.55435, -72.09622",
+    "lat": -36.55435,
+    "lng": -72.096224,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L8278169",
+    "nombre": "Taucú",
+    "lat": -36.1692184,
+    "lng": -72.8080407,
+    "region": "Ñuble"
+  },
+  {
+    "locId": "L13383687",
+    "nombre": "Río Cobquecura--Puente Las Niñas",
+    "lat": -36.1347362,
+    "lng": -72.8006239,
+    "region": "Ñuble"
+  }
+]

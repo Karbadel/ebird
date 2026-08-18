@@ -1,0 +1,31 @@
+# Secretos / credenciales
+.env
+web/.env
+
+# Dependencias y entornos
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Build
+web/dist/
+*.tsbuildinfo
+
+# Exports locales de exploración (CSV de especies, etc.) — solo la carpeta raíz
+/data/
+
+# Material fuente pesado (KMZ, ZIP, etc.) — inputs, no se versionan
+material adicional/
+*.zip
+
+# Logs
+logs/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
