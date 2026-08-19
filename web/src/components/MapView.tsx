@@ -145,9 +145,9 @@ export default function MapView() {
       (_f: Feature, ll: L.LatLng) =>
         L.circleMarker(ll, { renderer: canvas, radius, color, weight: 1, fillColor: color, fillOpacity });
 
-    // Capas KMZ
+    // Capas KMZ — aerogeneradores como campo de contexto (punto neutro atenuado)
     if (id === 'turb')
-      return loadLayers('aerogeneradores.geojson', { pointToLayer: pt('#2c455d', 2.5, 0.7), onEachFeature: bindName });
+      return loadLayers('aerogeneradores.geojson', { pointToLayer: pt('#8f8168', 1.8, 0.5), onEachFeature: bindName });
     if (id === 'protected')
       return loadLayers('areas_protegidas.geojson', {
         style: () => ({ renderer: canvas, color: '#416180', weight: 1, fillColor: '#b5d9fd', fillOpacity: 0.18 }),
@@ -167,8 +167,15 @@ export default function MapView() {
       return loadRisk('lineas.geojson', { style: () => ({ renderer: canvas, color: '#2c6ea6', weight: 1.4 }) });
     if (id === 'nidos')
       return loadRisk('nidos.geojson', { pointToLayer: pt('#ff00a5', 4), onEachFeature: bindPopup('Nido de cóndor (evidencia eBird C3/C4)') });
+    // Colisiones — evento crítico: aspa terracota con halo, por encima del campo de turbinas
     if (id === 'colisiones')
-      return loadRisk('colisiones.geojson', { pointToLayer: pt('#111111', 4, 0.9), onEachFeature: bindPopup('Colisión de cóndor confirmada') });
+      return loadRisk('colisiones.geojson', {
+        pointToLayer: (_f, ll) =>
+          L.marker(ll, {
+            icon: L.divIcon({ className: '', html: '<span class="collide">✕</span>', iconSize: [22, 22], iconAnchor: [11, 11] }),
+          }),
+        onEachFeature: bindPopup('Colisión de cóndor confirmada'),
+      });
     if (id === 'vertederos')
       return loadRisk('vertederos.geojson', {
         style: () => ({ renderer: canvas, color: '#8a4b12', weight: 1, fillColor: '#8a4b12', fillOpacity: 0.25 }),

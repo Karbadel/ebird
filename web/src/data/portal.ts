@@ -48,48 +48,13 @@ export const CARDS_2: [IconKey, string, string | string[], string][] = [
   ['layers', 'Capas geoespaciales disponibles', 'Accede a datos geoespaciales para análisis y planificación territorial.', 'Ver capas disponibles →'],
 ];
 
-export interface Park { n: string; r: string; ll: [number, number]; }
-export const PARKS: Park[] = [
-  { n: 'Canela', r: 'Coquimbo', ll: [-31.4, -71.45] },
-  { n: 'Punta Palmeras', r: 'Coquimbo', ll: [-30.62, -71.42] },
-  { n: 'Taltal', r: 'Antofagasta', ll: [-25.42, -70.49] },
-  { n: 'Renaico', r: 'Araucanía', ll: [-37.72, -72.6] },
-  { n: 'Sierra Gorda', r: 'Antofagasta', ll: [-22.9, -69.32] },
-  { n: 'Cabo Negro', r: 'Magallanes', ll: [-52.94, -70.84] },
-  { n: 'La Cebada', r: 'Valparaíso', ll: [-32.55, -71.35] },
-  { n: 'San Juan', r: 'Atacama', ll: [-27.95, -70.7] },
-];
-
-export interface Collision { n: string; r: string; ll: [number, number]; c: number; y: string; }
-export const COLL: Collision[] = [
-  { n: 'Canela Baja', r: 'Coquimbo', ll: [-31.36, -71.48], c: 41, y: '2019–2025' },
-  { n: 'Punta Palmeras', r: 'Coquimbo', ll: [-30.58, -71.38], c: 27, y: '2021–2024' },
-  { n: 'La Cebada', r: 'Valparaíso', ll: [-32.55, -71.35], c: 24, y: '2020–2022' },
-  { n: 'Renaico', r: 'Araucanía', ll: [-37.7, -72.55], c: 18, y: '2022–2023' },
-  { n: 'San Juan', r: 'Atacama', ll: [-27.95, -70.7], c: 14, y: '2023–2025' },
-  { n: 'Taltal', r: 'Antofagasta', ll: [-25.45, -70.52], c: 8, y: '2024' },
-];
-
-export const NET_SEGMENTS: [number, number][][] = [
-  [[-31.4, -71.45], [-33.0, -71.3]],
-  [[-33.0, -71.3], [-33.45, -70.65]],
-  [[-25.4, -70.5], [-23.6, -70.4]],
-  [[-37.7, -72.6], [-36.8, -73.05]],
-];
-
-export const RIDGE: [number, number][] = [
-  [-18, -69.4], [-22, -68.9], [-26, -69.0], [-30, -70.2], [-33, -70.0],
-  [-36, -70.8], [-40, -71.5], [-44, -72.0], [-48, -72.6], [-52, -72.4], [-55, -69.5],
-];
+// Escala de categorías del índice de riesgo (leyenda y barras).
 export const RISK_COLORS = ['#5b8a63', '#7f9a58', '#d8b445', '#c9793c', '#a8452f'];
 export const RISK_LABELS = ['Muy bajo', 'Bajo', 'Medio', 'Alto', 'Muy alto'];
 
-export const MONTHS = ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
-export const CONDOR_MONTHLY = [38, 31, 44, 52, 61, 47, 39, 58, 72, 84, 69, 51];
-
-export const DOCS: [string, string, string][] = [
-  ['Documento con medidas y buenas prácticas para el desarrollo de proyectos eólicos', 'varios documentos PDF, otros', 'PDF'],
-  ['Medidas ejecutadas en Chile', 'Medidas ya aplicadas en proyectos eólicos del país', 'Registro'],
-  ['Medidas propuestas', 'En evaluación por el comité', 'Registro'],
-  ['Estudios', 'Antecedentes técnicos y científicos asociados', 'Estudio'],
+// Medidas de mitigación aplicables (recomendaciones de dominio, no dato del sitio).
+export const MEASURES: { t: string; tag: string }[] = [
+  { t: 'Detención por demanda ante avistamiento', tag: 'Operación' },
+  { t: 'Pintado de una pala (contraste visual)', tag: 'Diseño' },
+  { t: 'Retiro de carroña en el área del parque', tag: 'Manejo' },
 ];

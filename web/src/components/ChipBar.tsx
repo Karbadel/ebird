@@ -5,11 +5,10 @@ export default function ChipBar() {
   const f = useFilterStore();
   const chips = activeChips(f);
 
-  if (chips.length === 0) return null;
-
   const remove = (id: string) => {
     if (id.startsWith('sp:')) f.toggleSpecies(id.slice(3));
     else if (id === 'query') f.update('query', '');
+    else if (id === 'place') f.update('place', '');
     else if (id === 'group') f.update('group', '');
     else if (id === 'region') f.update('region', '');
     else if (id === 'order') f.update('order', '');
@@ -26,7 +25,19 @@ export default function ChipBar() {
 
   return (
     <div className="plate" id="chipbar">
-      <span className="lbl">Filtros activos</span>
+      <div className="search-wrap" style={{ flex: '1 1 180px', minWidth: 0, border: 0, padding: 0 }}>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.7" style={{ flex: 'none' }}>
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+        <input
+          value={f.place}
+          onChange={(e) => f.update('place', e.target.value)}
+          placeholder="Buscar región o localidad…"
+          autoComplete="off"
+        />
+      </div>
+      {chips.length > 0 && <div className="cdiv" />}
       <div id="chips">
         {chips.map((c) => (
           <span className="chip" key={c.id}>
@@ -39,9 +50,6 @@ export default function ChipBar() {
           </span>
         ))}
       </div>
-      <button className="btn btn-ghost" id="clear" style={{ height: 24, fontSize: 12 }} onClick={f.reset}>
-        Limpiar
-      </button>
     </div>
   );
 }

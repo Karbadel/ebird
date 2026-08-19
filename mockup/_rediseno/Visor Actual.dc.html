@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  body { margin: 0; background: #f2f2f3; color: #1d1f20; font-family: Barlow, system-ui, sans-serif; font-size: 15px; line-height: 1.55; }
+  * , *::before, *::after { box-sizing: border-box; }
+  a { color: #5980a6; }
+  a:hover { color: #2c455d; }
+  .leaflet-tile-pane { filter: grayscale(1) contrast(.86) brightness(1.06); }
+  .leaflet-container { background: #e2e4e6; font-family: Barlow, system-ui, sans-serif; }
+  .leaflet-control-attribution { font-size: 10px; border-radius: 0; background: rgba(242,242,243,.88); }
+</style>
+</helmet>
+
+<header style="display:flex;background:#1d2d3d;color:#f2f2f3;border-bottom:2px solid #597ea3">
+  <div style="display:flex;gap:10.2px;align-items:flex-start;width:300px;flex:none;padding:13.6px;background:#16232f;border-right:1px solid #416180">
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px">
+      <path d="M2 8.5 8 11l4-4 4 4 6-2.5"></path>
+      <path d="M12 7v6"></path>
+      <path d="m8 11 4 6 4-6"></path>
+      <path d="M12 17v4"></path>
+    </svg>
+    <div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:20px;margin:0 0 3px;line-height:1.08;text-transform:uppercase;letter-spacing:-0.015em">Cóndores y Energía Eólica en Chile</h1>
+      <p style="margin:0;font-size:11.5px;line-height:1.35;color:rgba(242,242,243,.68)">Portal de información para la compatibilidad entre proyectos eólicos y conservación del cóndor andino</p>
+    </div>
+  </div>
+  <nav style="display:flex;flex:1;overflow-x:auto">
+    <sc-for list="{{ nav }}" as="it" hint-placeholder-count="8">
+      <a href="#secciones" style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;min-width:96px;padding:10.2px 6.8px;text-decoration:none;color:rgba(242,242,243,.78);border-right:1px solid rgba(242,242,243,.14);border-bottom:2px solid transparent;cursor:pointer" style-hover="background:rgba(242,242,243,.08);color:#f2f2f3">
+        <span>{{ it.svg }}</span>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:12px;letter-spacing:.09em;text-transform:uppercase;text-align:center">{{ it.n }}</span>
+        <span style="font-size:10px;opacity:.62;text-align:center;line-height:1.2">{{ it.s }}</span>
+      </a>
+    </sc-for>
+  </nav>
+</header>
+
+<section style="display:grid;grid-template-columns:300px 1fr;height:640px;border-bottom:1px solid rgba(29,31,32,.16)">
+  <aside style="border-right:1px solid rgba(29,31,32,.16);overflow:auto;padding:13.6px;background:#f2f2f3">
+    <div>
+      <span style="display:flex;align-items:center;gap:7px;margin-bottom:10.2px;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(29,31,32,.55)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5Z"></path><path d="m3 12 9 5 9-5"></path><path d="m3 17 9 5 9-5"></path></svg>
+        Capas principales
+      </span>
+      <div>
+        <sc-for list="{{ layers }}" as="l" hint-placeholder-count="14">
+          <label style="display:grid;grid-template-columns:14px 13px 1fr;gap:6.8px;align-items:center;padding:4px 0;font-size:13px;cursor:pointer" style-hover="background:rgba(89,128,166,.09)">
+            <input type="checkbox" checked="{{ l.on }}" disabled="{{ l.pend }}" style="accent-color:#416180;width:14px;height:14px" />
+            <span style="width:13px;height:13px;border:1px solid #1d2d3d;background:{{ l.sw }}"></span>
+            <span>{{ l.n }}
+              <span style="display:block;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:rgba(29,31,32,.45)">{{ l.srcLabel }}</span>
+            </span>
+          </label>
+        </sc-for>
+      </div>
+      <button style="display:inline-flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:6.8px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;line-height:1.2;color:#1d1f20;background:transparent;border:1px solid rgba(29,31,32,.16);border-radius:0;padding:6.8px 12.2px" style-hover="background:rgba(29,31,32,.07)">☰ Ocultar leyenda</button>
+    </div>
+
+    <div style="margin-top:20.4px;padding-top:13.6px;border-top:1px solid rgba(29,31,32,.16)">
+      <span style="display:block;margin-bottom:10.2px;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(29,31,32,.55)">Búsqueda</span>
+      <div style="position:relative;display:flex;align-items:center;gap:7px;border:1px solid rgba(29,31,32,.16);padding:6px 9px">
+        <input placeholder="Buscar especie (con o sin acento)…" style="flex:1;border:0;background:transparent;font:inherit;font-size:13px;outline:none;min-width:0" />
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:.55;flex:none"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+      </div>
+    </div>
+
+    <div style="margin-top:20.4px;padding-top:13.6px;border-top:1px solid rgba(29,31,32,.16)">
+      <span style="display:block;margin-bottom:10.2px;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(29,31,32,.55)">Ubicación</span>
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;padding:3px 0">
+        <span style="width:16px;height:16px;flex:none;border-radius:50%;border:1.5px solid #5980a6;background:#5980a6;box-shadow:inset 0 0 0 4px #f2f2f3"></span>
+        Chile continental
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;padding:3px 0">
+        <span style="width:16px;height:16px;flex:none;border-radius:50%;border:1.5px solid rgba(29,31,32,.16)"></span>
+        Territorio Antártico Chileno
+      </label>
+      <button style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;color:#5980a6;background:transparent;border:1px solid transparent;padding:0;margin-top:4px">Encuadrar todo →</button>
+    </div>
+
+    <div style="margin-top:20.4px;padding-top:13.6px;border-top:1px solid rgba(29,31,32,.16)">
+      <span style="display:block;margin-bottom:10.2px;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(29,31,32,.55)">Filtros de observación</span>
+      <select style="width:100%;min-height:32px;padding:6px 10px;font:inherit;font-size:13px;color:#1d1f20;background:transparent;border:1px solid rgba(29,31,32,.16);border-radius:0">
+        <option>Todo Chile</option>
+        <option>Coquimbo</option>
+      </select>
+      <div style="display:flex;width:100%;margin-top:6.8px;border:1px solid rgba(29,31,32,.16)">
+        <label style="display:inline-flex;align-items:center;justify-content:center;flex:1;padding:7px 12px;font-size:13px;cursor:pointer">7 d</label>
+        <label style="display:inline-flex;align-items:center;justify-content:center;flex:1;padding:7px 12px;font-size:13px;cursor:pointer;background:#5980a6;color:#f2f2f3;border-left:1px solid rgba(29,31,32,.16)">30 d</label>
+        <label style="display:inline-flex;align-items:center;justify-content:center;flex:1;padding:7px 12px;font-size:13px;cursor:pointer;border-left:1px solid rgba(29,31,32,.16)">Rango</label>
+      </div>
+      <label style="display:grid;grid-template-columns:14px 1fr;gap:6.8px;align-items:center;padding:4px 0;font-size:13px;cursor:pointer;margin-top:6.8px">
+        <input type="checkbox" checked="{{ true }}" style="accent-color:#416180;width:14px;height:14px" /> Solo registros validados
+      </label>
+      <label style="display:grid;grid-template-columns:14px 1fr;gap:6.8px;align-items:center;padding:4px 0;font-size:13px;cursor:pointer">
+        <input type="checkbox" style="accent-color:#416180;width:14px;height:14px" /> Solo registros notables
+      </label>
+    </div>
+  </aside>
+
+  <div style="position:relative">
+    <div ref="{{ mapRef }}" style="position:absolute;inset:0"></div>
+
+    <div style="position:absolute;z-index:600;top:14px;left:14px;padding:10.2px 13.6px;max-width:330px;background:rgba(29,45,61,.92);backdrop-filter:blur(3px);color:#f2f2f3;border:1px solid #416180;box-shadow:0 3px 10px rgba(43,43,45,.16)">
+      <button style="position:absolute;top:5px;right:7px;cursor:pointer;border:0;background:none;font-size:14px;line-height:1;padding:2px 4px;color:rgba(242,242,243,.5)">─</button>
+      <span style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(242,242,243,.6)">Especie seleccionada</span>
+      <h3 style="margin:0 0 6.8px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:17px;line-height:1.12">Cóndor andino</h3>
+      <p style="margin:2px 0 0;font-size:11.5px;opacity:.7">Andean Condor · <i>Vultur gryphus</i></p>
+      <div style="display:flex;gap:5px;margin-top:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;font-size:11px;padding:3px 10px;background:#f5f5f8;color:#424244">Rapaces</span>
+        <span style="display:inline-flex;align-items:center;font-size:11px;padding:3px 10px;background:#eef6ff;color:#2c455d">Notable</span>
+        <span style="display:inline-flex;align-items:center;font-size:11px;padding:3px 10px;border:1px solid #5980a6;color:#94bce3">Nativa</span>
+      </div>
+      <button style="display:inline-flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:6.8px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;background:transparent;border:1px solid #597ea3;color:#f2f2f3;padding:6.8px 12.2px">Ver ficha →</button>
+      <div style="margin-top:10.2px;padding-top:6.8px;border-top:1px solid rgba(242,242,243,.22)">
+        <span style="display:block;margin-bottom:5px;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(242,242,243,.6)">Riesgo de colisión</span>
+        <sc-for list="{{ riskLegend }}" as="r" hint-placeholder-count="5">
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;padding:1px 0">
+            <i style="width:22px;height:11px;display:block;background:{{ r.c }}"></i>{{ r.label }}
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="position:absolute;z-index:600;top:14px;left:360px;right:104px;padding:6px 8px;display:flex;gap:6px;align-items:center;overflow:hidden;background:rgba(242,242,243,.95);backdrop-filter:blur(3px);border:1px solid rgba(29,31,32,.16);box-shadow:0 3px 10px rgba(43,43,45,.16)">
+      <span style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(29,31,32,.55);white-space:nowrap">Filtros activos</span>
+      <div style="display:flex;gap:6px;overflow-x:auto;min-width:0">
+        <sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+          <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 5px 0 8px;font-size:11.5px;white-space:nowrap;border:1px solid #94bce3;background:#eef6ff;color:#2c455d">
+            <span>{{ c }}</span>
+            <button style="cursor:pointer;width:14px;height:14px;display:grid;place-items:center;color:#416180;border:0;background:none;padding:0">×</button>
+          </span>
+        </sc-for>
+      </div>
+      <button style="margin-left:auto;height:24px;font-size:12px;cursor:pointer;background:transparent;border:0;color:#5980a6;font-family:'Barlow Condensed',sans-serif;font-weight:600">Limpiar</button>
+    </div>
+
+    <div style="position:absolute;z-index:600;bottom:14px;left:14px;padding:10.2px 13.6px;width:214px;background:rgba(29,45,61,.92);backdrop-filter:blur(3px);color:#f2f2f3;border:1px solid #416180;box-shadow:0 3px 10px rgba(43,43,45,.16)">
+      <button style="position:absolute;top:5px;right:7px;cursor:pointer;border:0;background:none;font-size:14px;line-height:1;padding:2px 4px;color:rgba(242,242,243,.5)">─</button>
+      <span style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(242,242,243,.6)">Registros eBird · Cóndor andino</span>
+      <div style="display:flex;gap:20.4px;margin-top:6.8px">
+        <div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:30px;line-height:1;font-variant-numeric:tabular-nums">1.284</div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(242,242,243,.6)">Registros</span>
+        </div>
+        <div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:30px;line-height:1;font-variant-numeric:tabular-nums">147</div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(242,242,243,.6)">Localidades</span>
+        </div>
+      </div>
+      <button style="display:inline-flex;align-items:center;justify-content:center;width:100%;margin-top:6.8px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;background:transparent;border:1px solid #597ea3;color:#f2f2f3;padding:6.8px 12.2px">Ver en el mapa →</button>
+    </div>
+
+    <div style="position:absolute;top:14px;right:14px;z-index:610;display:flex;flex-direction:column;background:rgba(242,242,243,.95);border:1px solid rgba(29,31,32,.16);box-shadow:0 3px 10px rgba(43,43,45,.16)">
+      <sc-for list="{{ ctl }}" as="b" hint-placeholder-count="5">
+        <button title="{{ b.t }}" style="cursor:pointer;width:32px;height:32px;display:grid;place-items:center;font-family:'Barlow Condensed',sans-serif;font-size:16px;color:#1d1f20;background:none;border:0;border-top:1px solid rgba(29,31,32,.16)" style-hover="background:#eef6ff">{{ b.g }}</button>
+      </sc-for>
+    </div>
+
+    <nav style="position:absolute;top:50%;right:54px;transform:translateY(-50%);z-index:640;display:flex;flex-direction:column;padding:4px;gap:2px;background:rgba(242,242,243,.95);backdrop-filter:blur(3px);border:1px solid rgba(29,31,32,.16);box-shadow:0 3px 10px rgba(43,43,45,.16)">
+      <sc-for list="{{ rail }}" as="t" hint-placeholder-count="7">
+        <button style="position:relative;cursor:pointer;width:34px;height:34px;display:grid;place-items:center;border:0;background:{{ t.bg }};color:{{ t.fg }}" style-hover="background:#eef6ff;color:#2c455d">
+          <span>{{ t.svg }}</span>
+        </button>
+      </sc-for>
+    </nav>
+
+    <aside style="position:absolute;top:14px;right:104px;bottom:14px;width:344px;z-index:620;display:flex;flex-direction:column;background:rgba(242,242,243,.95);backdrop-filter:blur(3px);border:1px solid rgba(29,31,32,.16);box-shadow:0 3px 10px rgba(43,43,45,.16)">
+      <div style="display:flex;align-items:baseline;gap:10.2px;padding:10.2px 13.6px;border-bottom:1px solid rgba(29,31,32,.16)">
+        <div style="flex:1">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:30px;line-height:1;font-variant-numeric:tabular-nums">2.418</div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(29,31,32,.55)">Observaciones · todo Chile</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;padding:8px 13.6px;border-bottom:1px solid rgba(29,31,32,.16)">
+        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+          <button style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:11px;padding:3px 8px;border:1px solid {{ g.color }};background:{{ g.bg }};color:{{ g.fg }}">
+            <span style="width:8px;height:8px;display:inline-block;background:{{ g.dot }}"></span>{{ g.label }} <b style="font-variant-numeric:tabular-nums">{{ g.n }}</b>
+          </button>
+        </sc-for>
+      </div>
+      <div style="flex:1;overflow:auto">
+        <sc-for list="{{ obs }}" as="o" hint-placeholder-count="8">
+          <button style="display:block;width:100%;text-align:left;background:transparent;border:0;border-bottom:1px solid rgba(29,31,32,.16);cursor:pointer;padding:10.2px 13.6px;font:inherit" style-hover="background:rgba(89,128,166,.09)">
+            <div style="display:flex;align-items:baseline;gap:8px">
+              <h4 style="margin:0;flex:1;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:16px;line-height:1.12">{{ o.es }}</h4>
+              <span style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-variant-numeric:tabular-nums">{{ o.count }}</span>
+            </div>
+            <div style="font-size:12px;font-style:italic;color:rgba(29,31,32,.55)">{{ o.sci }}</div>
+            <div style="display:flex;gap:10.2px;font-size:11px;margin-top:4px;color:rgba(29,31,32,.6)">
+              <span>{{ o.loc }}</span>
+              <span style="font-variant-numeric:tabular-nums">{{ o.date }}</span>
+              <span>{{ o.state }}</span>
+            </div>
+          </button>
+        </sc-for>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section id="secciones" style="max-width:1480px;margin:0 auto;padding:27.2px 20.4px">
+  <div style="display:flex;align-items:baseline;gap:13.6px;margin-bottom:13.6px">
+    <h2 style="margin:0;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:26px;text-transform:uppercase">Explorar el portal</h2>
+    <span style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(29,31,32,.55)">Reunión N°1 Comité · identificación de información</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(236px,1fr));gap:1px;background:rgba(29,31,32,.16);border:1px solid rgba(29,31,32,.16)">
+    <sc-for list="{{ cards1 }}" as="c" hint-placeholder-count="5">
+      <article style="background:#f2f2f3;padding:20.4px 13.6px;display:flex;flex-direction:column;gap:6.8px" style-hover="background:#eef6ff">
+        <span style="width:38px;height:38px;display:grid;place-items:center;border:1px solid #416180;color:#416180;margin-bottom:6.8px">{{ c.svg }}</span>
+        <h4 style="margin:0;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:16px;line-height:1.15">{{ c.t }}</h4>
+        <p style="margin:0;font-size:12.5px;line-height:1.45;flex:1;color:rgba(29,31,32,.66)">{{ c.b }}</p>
+        <a href="#secciones" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;color:#416180">{{ c.a }}</a>
+      </article>
+    </sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(236px,1fr));gap:1px;background:rgba(29,31,32,.16);border:1px solid rgba(29,31,32,.16);margin-top:20.4px">
+    <sc-for list="{{ cards2 }}" as="c" hint-placeholder-count="5">
+      <article style="background:#f2f2f3;padding:20.4px 13.6px;display:flex;flex-direction:column;gap:6.8px" style-hover="background:#eef6ff">
+        <span style="width:38px;height:38px;display:grid;place-items:center;border:1px solid #416180;color:#416180;margin-bottom:6.8px">{{ c.svg }}</span>
+        <h4 style="margin:0;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:16px;line-height:1.15">{{ c.t }}</h4>
+        <p style="margin:0;font-size:12.5px;line-height:1.45;flex:1;color:rgba(29,31,32,.66)">{{ c.b }}</p>
+        <a href="#secciones" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;color:#416180">{{ c.a }}</a>
+      </article>
+    </sc-for>
+  </div>
+</section>
+
+<footer style="background:#1d2d3d;color:#f2f2f3">
+  <div style="max-width:1480px;margin:0 auto;padding:20.4px;display:flex;align-items:center;gap:20.4px;flex-wrap:wrap">
+    <div style="width:132px;flex:none;padding:10.2px;border:1px solid #597ea3;font-family:'Barlow Condensed',sans-serif;font-size:13px;line-height:1.1;text-transform:uppercase">Ministerio de Energía · Gobierno de Chile</div>
+    <p style="flex:1;min-width:240px;margin:0;font-size:12.5px;color:rgba(242,242,243,.72)">Proyecto desarrollado por el Ministerio de Energía<br />en colaboración con instituciones públicas, privadas y académicas.</p>
+    <div style="display:flex;gap:13.6px;align-items:center">
+      <a href="#secciones" style="color:rgba(242,242,243,.82);font-size:12.5px;text-decoration:none">Contacto</a>
+      <a href="#secciones" style="color:rgba(242,242,243,.82);font-size:12.5px;text-decoration:none">Términos de uso</a>
+      <a href="#secciones" style="color:rgba(242,242,243,.82);font-size:12.5px;text-decoration:none">Política de privacidad</a>
+    </div>
+  </div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const ICON = {
+  home: '<path d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z"/>',
+  users: '<circle cx="9" cy="8" r="3"/><path d="M2 20a7 7 0 0 1 14 0"/><path d="M17 11a3 3 0 1 0 0-6"/><path d="M19 20a5 5 0 0 0-3-4.6"/>',
+  map: '<path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/>',
+  book: '<path d="M4 4h7v16H4z"/><path d="M13 4h7v16h-7z"/>',
+  file: '<path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/><path d="M9 13h6M9 17h4"/>',
+  down: '<path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/>',
+  net: '<circle cx="12" cy="6" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M12 8.5 6.5 15.8M12 8.5l5.5 7.3M7.5 18h9"/>',
+  info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/>',
+  alert: '<path d="M12 4 3 20h18z"/><path d="M12 10v5M12 17.5h.01"/>',
+  bulb: '<path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9V18h7v-4.1A6 6 0 0 0 12 3Z"/>',
+  layers: '<path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/>',
+  clip: '<path d="M9 3h6v3H9z"/><path d="M6 5h12v16H6z"/><path d="M9 12h6M9 16h4"/>',
+};
+const svg = (k, s) => React.createElement('svg', {
+  width: s, height: s, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor',
+  strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round',
+  dangerouslySetInnerHTML: { __html: ICON[k] },
+});
+
+const LAYERS = [
+  ['habitat', 'Idoneidad de hábitat', 'Estrada Pacheco et al. 2025', 'linear-gradient(90deg,#1c8eb0,#f5f3b6,#da3726)', true],
+  ['ebird_densidad', 'Densidad de avistamientos (eBird)', 'eBird · 75.111 registros', 'linear-gradient(90deg,#fff7ec,#fc8d59,#990000)', false],
+  ['obs', 'Observaciones eBird', 'API eBird 2.0 · ≤ 30 días', '#d6ebff', true],
+  ['nidos', 'Nidos de cóndor (evidencia eBird)', 'eBird C3/C4 · 81 sitios', '#ff00a5', false],
+  ['colisiones', 'Colisiones de cóndor confirmadas', 'Registro consolidado', '#111111', false],
+  ['wind', 'Parques eólicos', 'MINENERGIA', '#c0392b', false],
+  ['lineas', 'Líneas de transmisión', 'Coordinador · SIC', '#2c6ea6', false],
+  ['vertederos', 'Vertederos (formales e ilegales)', 'MMA', '#8a4b12', false],
+  ['veranadas', 'Veranadas (trashumancia)', 'Ganadería', '#2e7d32', false],
+  ['turb', 'Aerogeneradores', 'MINENERGIA · jun 2026', '#2c455d', false],
+  ['protected', 'Áreas Protegidas (SNAP)', 'MMA 2024', '#b5d9fd', false],
+  ['airports', 'Aeropuertos y conos de aproximación', 'DGAC', '#98989b', false],
+  ['projects', 'Proyectos de Energía', '*.kmz IDE Energía', '#597ea3', false, true],
+  ['windpot', 'Potencial eólico', '*.kmz MINENERGIA', '#d8b445', false, true],
+];
+
+const OBS = [
+  ['Cóndor andino', 'Vultur gryphus', 'Cuesta Los Andes', '2026-08-16', 4, 'validado', -32.83, -70.6],
+  ['Aguilucho', 'Geranoaetus polyosoma', 'Canela Baja', '2026-08-16', 2, 'validado', -31.36, -71.48],
+  ['Jote de cabeza negra', 'Coragyps atratus', 'Punta Palmeras', '2026-08-15', 11, 'validado', -30.58, -71.38],
+  ['Cóndor andino', 'Vultur gryphus', 'Renaico', '2026-08-15', 1, 'sin revisar', -37.7, -72.55],
+  ['Tórtola', 'Zenaida auriculata', 'La Cebada', '2026-08-14', 23, 'validado', -32.55, -71.35],
+  ['Queltehue', 'Vanellus chilensis', 'Taltal', '2026-08-14', 6, 'validado', -25.45, -70.52],
+  ['Cernícalo', 'Falco sparverius', 'San Juan', '2026-08-13', 1, 'validado', -27.95, -70.7],
+  ['Loro tricahue', 'Cyanoliseus patagonus', 'Sierra Gorda', '2026-08-12', 14, 'sin revisar', -22.9, -69.32],
+];
+
+class Component extends DCLogic {
+  componentDidMount() { this.initMap(); }
+
+  initMap() {
+    const el = this.mapEl;
+    if (!el) return;
+    if (!window.L) { setTimeout(() => this.initMap(), 120); return; }
+    const L = window.L;
+    const map = L.map(el, { zoomControl: false, attributionControl: true });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '© OpenStreetMap · CARTO', subdomains: 'abcd', maxZoom: 19,
+    }).addTo(map);
+    map.fitBounds([[-56, -76], [-17, -66]], { padding: [20, 20] });
+    OBS.forEach((o) => {
+      const icon = L.divIcon({
+        html: `<span style="display:grid;place-items:center;width:26px;height:26px;border:1px solid #2c455d;background:rgba(242,242,243,.92);font-family:'Barlow Condensed',sans-serif;font-size:12px;color:#1d2d3d;font-variant-numeric:tabular-nums">${o[4]}</span>`,
+        className: '', iconSize: [26, 26], iconAnchor: [13, 13],
+      });
+      L.marker([o[6], o[7]], { icon }).addTo(map);
+    });
+  }
+
+  renderVals() {
+    return {
+      mapRef: (el) => { this.mapEl = el; },
+      nav: [
+        ['home', 'Inicio', 'Portada'],
+        ['users', 'Comité Técnico', 'Reunión N°1'],
+        ['map', 'Visor geoespacial', 'Mapas y capas'],
+        ['book', 'Medidas y buenas prácticas', 'Documentos y guías'],
+        ['file', 'Estudios', 'Biblioteca técnica'],
+        ['down', 'Descarga de datos', 'Datos y documentos'],
+        ['net', 'Actores relevantes', 'Quiénes participan'],
+        ['info', 'Metodología', 'Cómo se construye la información'],
+      ].map(([k, n, s]) => ({ n, s, svg: svg(k, 19) })),
+      layers: LAYERS.map(([id, n, src, sw, on, pend]) => ({
+        id, n, sw, on, pend: !!pend, srcLabel: pend ? `por cargar · ${src}` : src,
+      })),
+      riskLegend: [
+        { c: '#a8452f', label: 'Muy alto' }, { c: '#c9793c', label: 'Alto' },
+        { c: '#d8b445', label: 'Medio' }, { c: '#7f9a58', label: 'Bajo' },
+        { c: '#5b8a63', label: 'Muy bajo' },
+      ],
+      chips: ['Rango · 18 jul – 17 ago', 'Estado · validados', 'Especie · Cóndor andino'],
+      ctl: [{ t: 'Panel de resultados', g: '☰' }, { t: 'Acercar', g: '+' }, { t: 'Alejar', g: '−' }, { t: 'Vista inicial', g: '⌂' }, { t: 'Medir distancia', g: '📏' }],
+      rail: [
+        ['file', true], ['book', false], ['clip', false], ['map', false],
+        ['alert', false], ['net', false], ['users', false],
+      ].map(([k, on]) => ({
+        svg: svg(k, 18), bg: on ? '#416180' : 'transparent', fg: on ? '#f2f2f3' : 'rgba(29,31,32,.62)',
+      })),
+      groups: [
+        ['Rapaces', '#a4441e', 412, true], ['Acuáticas', '#2c6a5b', 688, false],
+        ['Marinas / costeras', '#35617a', 502, false], ['Passeriformes', '#6f7a45', 611, false],
+        ['Loros', '#c07a2b', 205, false],
+      ].map(([label, color, n, on]) => ({
+        label, color, n, bg: on ? color : 'transparent', fg: on ? '#f2f2f3' : '#1d1f20',
+        dot: on ? '#f2f2f3' : color,
+      })),
+      obs: OBS.map(([es, sci, loc, date, count, state]) => ({ es, sci, loc, date, count, state })),
+      cards1: [
+        ['alert', 'Mapa de riesgo', 'Identifica las zonas con mayor riesgo para el cóndor andino en relación con proyectos eólicos.', 'Explorar mapa →'],
+        ['clip', 'Registro de colisiones de cóndores', 'Información histórica y georreferenciada de colisiones de cóndores con aerogeneradores.', 'Ver registro →'],
+        ['book', 'Medidas y buenas prácticas', 'Documentos, guías y recomendaciones para prevenir y minimizar impactos en cóndores.', 'Explorar documentos →'],
+        ['file', 'Estudios', 'Biblioteca de estudios nacionales e internacionales sobre cóndores y energía eólica.', 'Ver estudios →'],
+        ['down', 'Descarga de datos', 'Descarga capas geoespaciales y documentos en distintos formatos.', 'Ir a descargas →'],
+      ].map(([k, t, b, a]) => ({ t, b, a, svg: svg(k, 20) })),
+      cards2: [
+        ['users', 'Comité técnico · Reunión N°1', 'Acta de reunión, presentaciones, acuerdos y compromisos, lista de participantes.', 'Ver todos los documentos →'],
+        ['clip', 'Medidas implementadas en Chile', 'Conoce las medidas ya aplicadas en proyectos eólicos del país.', 'Ver medidas implementadas →'],
+        ['bulb', 'Medidas propuestas', 'Recomendaciones técnicas y operacionales en evaluación por el comité.', 'Ver medidas propuestas →'],
+        ['net', 'Actores relevantes', 'Organismos públicos, desarrolladores, academia, ONG y otros actores involucrados en esta temática.', 'Ver todos los actores →'],
+        ['layers', 'Capas geoespaciales disponibles', 'Accede a datos geoespaciales para análisis y planificación territorial.', 'Ver capas disponibles →'],
+      ].map(([k, t, b, a]) => ({ t, b, a, svg: svg(k, 20) })),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -13,6 +13,7 @@ export function useFiltered() {
     [
       observations,
       f.species,
+      f.place,
       f.group,
       f.order,
       f.family,

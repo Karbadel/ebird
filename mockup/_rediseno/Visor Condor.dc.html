@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  body { margin: 0; background: #e8e0cf; color: #21281f; font-family: Barlow, system-ui, sans-serif; font-size: 15px; line-height: 1.5; }
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: #1b4436; }
+  a:hover { color: #a4441e; }
+  .warm .leaflet-tile-pane { filter: sepia(.42) saturate(.72) brightness(1.08) contrast(.88); }
+  .warm .leaflet-container { background: #ded3ba; font-family: Barlow, system-ui, sans-serif; }
+  .warm .leaflet-control-attribution { font-size: 9.5px; border-radius: 0; background: rgba(251,247,238,.86); }
+  @media (max-width: 1180px) { #legend-plate { display: none; } }
+</style>
+</helmet>
+
+<div style="height:100vh;min-height:760px;display:flex;flex-direction:column;background:#f3ecdd">
+  <header style="display:flex;align-items:stretch;background:#1b4436;color:#fbf7ee;border-bottom:3px solid #de9426;flex:none">
+    <div style="display:flex;align-items:center;gap:11px;padding:10px 16px;border-right:1px solid rgba(251,247,238,.18)">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#de9426" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none">
+        <path d="M2 8.5 8 11l4-4 4 4 6-2.5"></path>
+        <path d="M12 7v6"></path>
+        <path d="m8 11 4 6 4-6"></path>
+        <path d="M12 17v4"></path>
+      </svg>
+      <div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:19px;text-transform:uppercase;letter-spacing:.03em;line-height:1.05">Cóndor andino y energía eólica</div>
+        <div style="font-size:10.5px;letter-spacing:.06em;color:rgba(251,247,238,.62)"><i>Vultur gryphus</i> · Comité técnico · Ministerio de Energía</div>
+      </div>
+    </div>
+    <nav style="display:flex;flex:1;overflow-x:auto">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="6">
+        <a href="#visor" style="display:flex;align-items:center;padding:0 16px;text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;color:{{ n.fg }};background:{{ n.bg }};border-right:1px solid rgba(251,247,238,.14);border-bottom:3px solid {{ n.bd }}" style-hover="background:rgba(251,247,238,.12);color:#fbf7ee">{{ n.label }}</a>
+      </sc-for>
+    </nav>
+    <div style="display:flex;align-items:center;gap:14px;padding:0 16px;border-left:1px solid rgba(251,247,238,.18)">
+      <div style="text-align:right">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;line-height:1;font-variant-numeric:tabular-nums">1.284</div>
+        <span style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(251,247,238,.6)">Registros de cóndor</span>
+      </div>
+      <div style="text-align:right">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;line-height:1;font-variant-numeric:tabular-nums;color:#de9426">132</div>
+        <span style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(251,247,238,.6)">Colisiones</span>
+      </div>
+    </div>
+  </header>
+
+  <section id="visor" style="flex:1;min-height:0;display:grid;grid-template-columns:64px 332px 1fr">
+    <nav style="background:#173c2f;display:flex;flex-direction:column;align-items:center;padding:10px 0;gap:2px">
+      <sc-for list="{{ rail }}" as="r" hint-placeholder-count="7">
+        <button title="{{ r.label }}" style="width:48px;height:48px;display:grid;place-items:center;cursor:pointer;border:0;background:{{ r.bg }};color:{{ r.fg }}" style-hover="background:rgba(251,247,238,.14);color:#fbf7ee">
+          <span>{{ r.svg }}</span>
+        </button>
+      </sc-for>
+      <span style="margin-top:auto;font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(251,247,238,.42);writing-mode:vertical-rl">Visor</span>
+    </nav>
+
+    <aside style="background:#fbf7ee;border-right:1px solid rgba(33,40,31,.28);display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden">
+      <div style="display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid rgba(33,40,31,.14)">
+        <span style="flex:1;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:.04em">Capas</span>
+        <span style="display:inline-flex;align-items:center;padding:2px 8px;background:#1b4436;color:#fbf7ee;font-size:11px;font-weight:600;white-space:nowrap">4 activas</span>
+        <button title="Colapsar panel" style="width:26px;height:26px;display:grid;place-items:center;cursor:pointer;background:transparent;border:1px solid rgba(33,40,31,.28);color:#21281f;font-size:13px" style-hover="background:#1b4436;color:#fbf7ee">‹</button>
+      </div>
+
+      <div style="padding:10px 14px;border-bottom:1px solid rgba(33,40,31,.14);display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center;gap:7px;border:1px solid rgba(33,40,31,.28);background:#f3ecdd;padding:6px 9px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="opacity:.6;flex:none"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+          <input placeholder="Filtrar capas…" style="flex:1;border:0;background:transparent;font:inherit;font-size:13px;outline:none;min-width:0" />
+        </div>
+        <div style="display:flex;gap:5px;flex-wrap:wrap">
+          <sc-for list="{{ quickFilters }}" as="q" hint-placeholder-count="4">
+            <button style="cursor:pointer;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:4px 9px;border:1px solid {{ q.bd }};background:{{ q.bg }};color:{{ q.fg }}">{{ q.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="flex:1;min-height:0;overflow:auto">
+        <sc-for list="{{ layerGroups }}" as="g" hint-placeholder-count="6">
+          <div style="border-bottom:1px solid rgba(33,40,31,.14)">
+            <div style="display:flex;align-items:center;gap:8px;padding:9px 14px;background:#f3ecdd;cursor:pointer">
+              <span style="flex:1;font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#1b4436">{{ g.title }}</span>
+              <span style="display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:18px;padding:0 5px;font-size:11px;font-weight:700;background:{{ g.badgeBg }};color:{{ g.badgeFg }}">{{ g.onCount }}</span>
+              <span style="font-size:12px;color:rgba(33,40,31,.55)">{{ g.caret }}</span>
+            </div>
+            <sc-if value="{{ g.open }}" hint-placeholder-val="{{ true }}">
+              <div style="padding:4px 0 8px">
+                <sc-for list="{{ g.items }}" as="l" hint-placeholder-count="3">
+                  <label style="display:grid;grid-template-columns:16px 14px 1fr auto;gap:9px;align-items:center;padding:6px 14px;font-size:13.5px;cursor:pointer" style-hover="background:#f3ecdd">
+                    <input type="checkbox" checked="{{ l.on }}" disabled="{{ l.pend }}" style="accent-color:#1b4436;width:16px;height:16px" />
+                    <span style="width:14px;height:14px;border:1px solid #21281f;background:{{ l.sw }}"></span>
+                    <span style="min-width:0">{{ l.n }}
+                      <span style="display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:rgba(33,40,31,.5)">{{ l.src }}</span>
+                    </span>
+                    <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;white-space:nowrap;color:{{ l.tagColor }}">{{ l.tag }}</span>
+                  </label>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="padding:10px 14px;border-top:1px solid rgba(33,40,31,.28);display:flex;gap:8px">
+        <button style="flex:1;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;padding:7px 10px;background:transparent;border:1px solid rgba(33,40,31,.28);color:#21281f" style-hover="background:#f3ecdd">Limpiar</button>
+        <button style="flex:1;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;padding:7px 10px;background:#1b4436;border:1px solid #1b4436;color:#fbf7ee" style-hover="background:#2c6a5b">Ver leyenda</button>
+      </div>
+    </aside>
+
+    <div class="warm" style="position:relative;min-width:0;min-height:0">
+      <div ref="{{ mapRef }}" style="position:absolute;inset:0"></div>
+
+      <div style="position:absolute;top:14px;left:14px;right:376px;z-index:600;display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:rgba(251,247,238,.96);border:1px solid rgba(33,40,31,.28);box-shadow:0 8px 24px -12px rgba(27,38,30,.5);padding:7px 9px">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1b4436" stroke-width="1.7" style="flex:none"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+        <input placeholder="Buscar región, localidad o parque eólico…" style="flex:1 1 150px;min-width:0;border:0;background:transparent;font:inherit;font-size:13.5px;outline:none" />
+        <div style="width:1px;align-self:stretch;background:rgba(33,40,31,.14)"></div>
+        <div style="display:flex;gap:6px;flex:1 1 auto;min-width:0;overflow-x:auto">
+          <sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+            <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 5px 0 9px;font-size:11.5px;white-space:nowrap;border:1px solid #1b4436;background:#f3ecdd;color:#1b4436">{{ c }}
+              <button style="cursor:pointer;width:15px;height:15px;display:grid;place-items:center;border:0;background:none;color:#a4441e;font-size:12px;padding:0">×</button>
+            </span>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="position:absolute;top:66px;right:376px;z-index:600;display:flex;flex-direction:column;background:rgba(251,247,238,.96);border:1px solid rgba(33,40,31,.28);box-shadow:0 8px 24px -12px rgba(27,38,30,.5)">
+        <sc-for list="{{ ctl }}" as="b" hint-placeholder-count="5">
+          <button title="{{ b.t }}" style="cursor:pointer;width:34px;height:34px;display:grid;place-items:center;font-family:'Barlow Condensed',sans-serif;font-size:16px;color:#21281f;background:none;border:0;border-top:1px solid rgba(33,40,31,.14)" style-hover="background:#f3ecdd">{{ b.g }}</button>
+        </sc-for>
+      </div>
+
+      <aside style="position:absolute;top:14px;right:14px;bottom:14px;width:348px;z-index:620;display:flex;flex-direction:column;background:#fbf7ee;border:1px solid rgba(33,40,31,.28);box-shadow:0 18px 50px -18px rgba(27,38,30,.45)">
+        <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:#1b4436;color:#fbf7ee;flex:none">
+          <span style="flex:1;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Punto seleccionado</span>
+          <button title="Colapsar" style="width:24px;height:24px;display:grid;place-items:center;cursor:pointer;background:transparent;border:1px solid rgba(251,247,238,.4);color:#fbf7ee;font-size:12px">─</button>
+          <button title="Cerrar" style="width:24px;height:24px;display:grid;place-items:center;cursor:pointer;background:transparent;border:1px solid rgba(251,247,238,.4);color:#fbf7ee;font-size:12px">✕</button>
+        </div>
+
+        <div style="flex:1;min-height:0;overflow:auto">
+          <div style="padding:14px 14px 0">
+            <span style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(33,40,31,.55)">Coquimbo · Canela Baja</span>
+            <h3 style="margin:2px 0 0;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:25px;line-height:1.05">Parque eólico Canela</h3>
+            <div style="font-size:12px;font-variant-numeric:tabular-nums;color:rgba(33,40,31,.6)">−31,3600 · −71,4800</div>
+          </div>
+
+          <div style="margin:14px;padding:12px 14px;background:#f3ecdd;border:1px solid rgba(33,40,31,.28);display:flex;align-items:center;gap:14px">
+            <div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:38px;line-height:1;color:#a8452f;font-variant-numeric:tabular-nums">78<span style="font-size:18px;opacity:.55">/100</span></div>
+              <span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(33,40,31,.55)">Índice de riesgo</span>
+            </div>
+            <span style="margin-left:auto;padding:4px 11px;background:#a8452f;color:#fbf7ee;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap">Muy alto</span>
+          </div>
+
+          <div style="padding:0 14px">
+            <span style="font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(33,40,31,.55)">Factores del índice</span>
+            <div style="margin-top:8px;display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{ factors }}" as="f" hint-placeholder-count="6">
+                <div>
+                  <div style="display:flex;align-items:baseline;gap:8px;font-size:13px">
+                    <span style="flex:1">{{ f.label }}</span>
+                    <b style="font-family:'Barlow Condensed',sans-serif;font-size:15px;color:{{ f.color }};font-variant-numeric:tabular-nums">{{ f.value }}</b>
+                    <span style="font-size:10.5px;color:rgba(33,40,31,.5);font-variant-numeric:tabular-nums">{{ f.weight }}</span>
+                  </div>
+                  <div style="height:7px;margin-top:3px;border:1px solid rgba(33,40,31,.28);background:#f3ecdd">
+                    <i style="display:block;height:100%;width:{{ f.pct }};background:{{ f.color }}"></i>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="margin:18px 14px 0;padding-top:14px;border-top:1px solid rgba(33,40,31,.14)">
+            <span style="font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(33,40,31,.55)">Cóndor en 25 km</span>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px">
+              <sc-for list="{{ nearby }}" as="s" hint-placeholder-count="3">
+                <div>
+                  <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;line-height:1;font-variant-numeric:tabular-nums;color:{{ s.color }}">{{ s.v }}</div>
+                  <span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(33,40,31,.55)">{{ s.k }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="margin:18px 14px 0;padding-top:14px;border-top:1px solid rgba(33,40,31,.14)">
+            <span style="font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(33,40,31,.55)">Registros de cóndor recientes</span>
+            <table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:7px">
+              <tbody>
+                <sc-for list="{{ records }}" as="r" hint-placeholder-count="5">
+                  <tr style="cursor:pointer">
+                    <td style="padding:6px 4px 6px 0;border-bottom:1px solid rgba(33,40,31,.1);white-space:nowrap;font-variant-numeric:tabular-nums">{{ r.date }}</td>
+                    <td style="padding:6px 4px;border-bottom:1px solid rgba(33,40,31,.1)">{{ r.loc }}</td>
+                    <td style="padding:6px 0 6px 4px;border-bottom:1px solid rgba(33,40,31,.1);text-align:right;font-variant-numeric:tabular-nums">{{ r.n }}</td>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="margin:18px 14px 14px;padding-top:14px;border-top:1px solid rgba(33,40,31,.14)">
+            <span style="font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(33,40,31,.55)">Medidas aplicables</span>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">
+              <sc-for list="{{ measures }}" as="m" hint-placeholder-count="3">
+                <a href="#visor" style="display:flex;align-items:baseline;gap:8px;text-decoration:none;padding:7px 9px;background:#f3ecdd;border-left:3px solid #de9426">
+                  <span style="flex:1;font-size:12.5px;color:#21281f">{{ m.t }}</span>
+                  <span style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1b4436">{{ m.tag }}</span>
+                </a>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;padding:10px;border-top:1px solid rgba(33,40,31,.28);flex:none">
+          <button style="flex:1;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;padding:8px;background:transparent;border:1px solid rgba(33,40,31,.28)" style-hover="background:#f3ecdd">Exportar CSV</button>
+          <button style="flex:1;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;padding:8px;background:#a4441e;border:1px solid #a4441e;color:#fbf7ee" style-hover="background:#8c3817">Ficha del sitio</button>
+        </div>
+      </aside>
+
+      <div id="legend-plate" style="position:absolute;bottom:14px;left:14px;z-index:600;background:rgba(23,60,47,.94);color:#fbf7ee;border:1px solid #1b4436;box-shadow:0 8px 24px -12px rgba(27,38,30,.6);padding:10px 13px;width:268px">
+        <span style="font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(251,247,238,.6)">Riesgo de colisión para el cóndor</span>
+        <div style="display:flex;margin-top:7px">
+          <sc-for list="{{ riskLegend }}" as="r" hint-placeholder-count="5">
+            <div style="flex:1;text-align:center">
+              <i style="display:block;height:12px;background:{{ r.c }}"></i>
+              <span style="font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:rgba(251,247,238,.75)">{{ r.short }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:9px;padding-top:8px;border-top:1px solid rgba(251,247,238,.22)">
+          <span style="display:grid;place-items:center;width:22px;height:22px;border:1.5px solid #fbf7ee;font-family:'Barlow Condensed',sans-serif;font-size:11px">4</span>
+          <span style="font-size:11px;color:rgba(251,247,238,.78);flex:1">Registro de cóndor · nº de individuos</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:5px">
+          <span style="width:22px;height:22px;background:#a4441e;display:grid;place-items:center;font-size:11px;color:#fbf7ee">✕</span>
+          <span style="font-size:11px;color:rgba(251,247,238,.78);flex:1">Colisión confirmada</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const ICON = {
+  layers: '<path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/>',
+  file: '<path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/><path d="M9 13h6M9 17h4"/>',
+  map: '<path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/>',
+  alert: '<path d="M12 4 3 20h18z"/><path d="M12 10v5M12 17.5h.01"/>',
+  net: '<circle cx="12" cy="6" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M12 8.5 6.5 15.8M12 8.5l5.5 7.3M7.5 18h9"/>',
+  users: '<circle cx="9" cy="8" r="3"/><path d="M2 20a7 7 0 0 1 14 0"/><path d="M17 11a3 3 0 1 0 0-6"/><path d="M19 20a5 5 0 0 0-3-4.6"/>',
+  down: '<path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/>',
+  clip: '<path d="M9 3h6v3H9z"/><path d="M6 5h12v16H6z"/><path d="M9 12h6M9 16h4"/>',
+};
+const svg = (k, s) => React.createElement('svg', {
+  width: s, height: s, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor',
+  strokeWidth: 1.6, strokeLinecap: 'round', strokeLinejoin: 'round',
+  dangerouslySetInnerHTML: { __html: ICON[k] },
+});
+
+const GROUPS = [
+  ['Riesgo · superficies', [
+    ['Idoneidad de hábitat del cóndor', 'Estrada Pacheco et al. 2025', 'linear-gradient(90deg,#1c8eb0,#f5f3b6,#da3726)', true],
+    ['Densidad de avistamientos', 'eBird · 75.111 registros', 'linear-gradient(90deg,#fff7ec,#fc8d59,#990000)', false],
+  ]],
+  ['Cóndor', [
+    ['Registros de cóndor (eBird)', 'API eBird 2.0 · ≤ 30 días', '#2c6a5b', true],
+    ['Nidos y dormideros', 'eBird C3/C4 · 81 sitios', '#ff00a5', true],
+    ['Veranadas (trashumancia)', 'Ganadería', '#6f7a45', false],
+  ]],
+  ['Colisiones y mortalidad', [
+    ['Colisiones confirmadas', 'Registro consolidado · 132', '#a4441e', true],
+    ['Rescates y ejemplares heridos', 'SAG · monitoreos', '#c9793c', false],
+  ]],
+  ['Infraestructura eólica', [
+    ['Parques eólicos', 'MINENERGIA', '#21281f', false],
+    ['Aerogeneradores', 'MINENERGIA · jun 2026', '#4c5347', false],
+    ['Líneas de transmisión', 'Coordinador · SIC', '#35617a', false],
+  ]],
+  ['Atrayentes de carroña', [
+    ['Vertederos (formales e ilegales)', 'MMA', '#8a4b12', false],
+  ]],
+  ['Contexto territorial', [
+    ['Áreas Protegidas (SNAP)', 'MMA 2024', '#2c6a5b', false],
+    ['Aeropuertos y conos de aproximación', 'DGAC', '#98989b', false],
+  ]],
+  ['Por cargar', [
+    ['Proyectos de Energía', '*.kmz IDE Energía', '#c07a2b', false, true],
+    ['Potencial eólico', '*.kmz MINENERGIA', '#de9426', false, true],
+  ]],
+];
+
+const MARKERS = [
+  ['obs', 4, -32.83, -70.6], ['obs', 7, -31.9, -70.9], ['obs', 2, -31.36, -71.48],
+  ['obs', 11, -30.58, -71.38], ['coll', 0, -31.36, -71.52], ['coll', 0, -30.62, -71.42],
+  ['obs', 3, -33.4, -70.3], ['obs', 6, -34.6, -70.7],
+];
+
+class Component extends DCLogic {
+  componentDidMount() { this.boot(); }
+
+  boot() {
+    const el = this.mapEl;
+    if (!el) return;
+    if (!window.L) { setTimeout(() => this.boot(), 120); return; }
+    const L = window.L;
+    const map = L.map(el, { zoomControl: false, attributionControl: true });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '© OpenStreetMap · CARTO', subdomains: 'abcd', maxZoom: 19,
+    }).addTo(map);
+    map.fitBounds([[-36, -74], [-29, -69]], { padding: [24, 24] });
+    MARKERS.forEach(([kind, n, lat, lng]) => {
+      const html = kind === 'coll'
+        ? '<span style="display:grid;place-items:center;width:24px;height:24px;background:#a4441e;color:#fbf7ee;font-size:12px;box-shadow:0 3px 8px rgba(27,38,30,.4)">✕</span>'
+        : `<span style="display:grid;place-items:center;width:28px;height:28px;border:1.5px solid #21281f;background:#fbf7ee;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:13px;color:#21281f;box-shadow:0 3px 8px rgba(27,38,30,.35)">${n}</span>`;
+      const size = kind === 'coll' ? 24 : 28;
+      L.marker([lat, lng], { icon: L.divIcon({ html, className: '', iconSize: [size, size], iconAnchor: [size / 2, size / 2] }) }).addTo(map);
+    });
+  }
+
+  renderVals() {
+    return {
+      mapRef: (el) => { this.mapEl = el; },
+      nav: [
+        ['Visor', true], ['Riesgo', false], ['Colisiones', false], ['Medidas', false],
+        ['Estudios', false], ['Datos', false], ['Comité', false],
+      ].map(([label, on]) => ({
+        label, fg: on ? '#fbf7ee' : 'rgba(251,247,238,.72)',
+        bg: on ? 'rgba(251,247,238,.12)' : 'transparent', bd: on ? '#de9426' : 'transparent',
+      })),
+      rail: [
+        ['layers', 'Capas', true], ['file', 'Registros de cóndor', false], ['map', 'Sitios', false],
+        ['alert', 'Riesgo', false], ['clip', 'Colisiones', false], ['net', 'Temporal', false],
+        ['users', 'Comité', false], ['down', 'Descargas', false],
+      ].map(([k, label, on]) => ({
+        label, svg: svg(k, 21), bg: on ? '#de9426' : 'transparent',
+        fg: on ? '#21281f' : 'rgba(251,247,238,.72)',
+      })),
+      quickFilters: [
+        ['Riesgo', true], ['Colisiones', true], ['Eólico', false], ['Solo activas', false],
+      ].map(([label, on]) => ({
+        label, bg: on ? '#1b4436' : 'transparent', fg: on ? '#fbf7ee' : '#1b4436', bd: '#1b4436',
+      })),
+      layerGroups: GROUPS.map(([title, items], i) => {
+        const open = i < 4;
+        const onCount = items.filter((x) => x[3]).length;
+        return {
+          title, open, caret: open ? '▾' : '▸',
+          onCount: onCount ? `${onCount}` : '—',
+          badgeBg: onCount ? '#1b4436' : '#ece2cd',
+          badgeFg: onCount ? '#fbf7ee' : 'rgba(33,40,31,.55)',
+          items: items.map(([n, src, sw, on, pend]) => ({
+            n, src, sw, on: !!on, pend: !!pend,
+            tag: pend ? 'kmz' : on ? 'activa' : '',
+            tagColor: pend ? 'rgba(33,40,31,.45)' : '#1b4436',
+          })),
+        };
+      }),
+      chips: ['Rango · 18 jul – 17 ago', 'Estado · validados', 'Región · Coquimbo'],
+      ctl: [{ t: 'Acercar', g: '+' }, { t: 'Alejar', g: '−' }, { t: 'Vista inicial', g: '⌂' }, { t: 'Medir distancia', g: '📏' }, { t: 'Capa base', g: '◲' }],
+      riskLegend: [
+        { c: '#5b8a63', short: 'Muy bajo' }, { c: '#7f9a58', short: 'Bajo' },
+        { c: '#d8b445', short: 'Medio' }, { c: '#c9793c', short: 'Alto' },
+        { c: '#a8452f', short: 'Muy alto' },
+      ],
+      factors: [
+        { label: 'Idoneidad de hábitat', value: '82%', weight: '30%', pct: '82%', color: '#a8452f' },
+        { label: 'Densidad de registros', value: '61%', weight: '20%', pct: '61%', color: '#c9793c' },
+        { label: 'Distancia a aerogenerador', value: '2,4 km', weight: '20%', pct: '74%', color: '#c9793c' },
+        { label: 'Nidos / dormideros cercanos', value: '3 sitios', weight: '15%', pct: '68%', color: '#c9793c' },
+        { label: 'Atrayentes de carroña', value: '35%', weight: '10%', pct: '35%', color: '#d8b445' },
+        { label: 'Área protegida', value: 'no', weight: '5%', pct: '8%', color: '#5b8a63' },
+      ],
+      nearby: [
+        { v: '214', k: 'Registros', color: '#21281f' },
+        { v: '3', k: 'Nidos', color: '#21281f' },
+        { v: '41', k: 'Colisiones', color: '#a4441e' },
+      ],
+      records: [
+        { date: '2026-08-16', loc: 'Cuesta Los Andes', n: 4 },
+        { date: '2026-08-15', loc: 'Canela Baja', n: 2 },
+        { date: '2026-08-14', loc: 'Quebrada Los Choros', n: 7 },
+        { date: '2026-08-12', loc: 'Cerro Tamaya', n: 1 },
+        { date: '2026-08-11', loc: 'Punta Palmeras', n: 11 },
+      ],
+      measures: [
+        { t: 'Detención por demanda ante avistamiento', tag: 'Operación' },
+        { t: 'Pintado de una pala (contraste visual)', tag: 'Diseño' },
+        { t: 'Retiro de carroña en el área del parque', tag: 'Manejo' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

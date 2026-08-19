@@ -11,6 +11,7 @@ export interface Chip {
 export function activeChips(f: Filters): Chip[] {
   const chips: Chip[] = [];
   if (f.query.trim()) chips.push({ id: 'query', k: 'Búsqueda', v: f.query.trim() });
+  if (f.place.trim()) chips.push({ id: 'place', k: 'Lugar', v: f.place.trim() });
   if (f.group) chips.push({ id: 'group', k: 'Grupo', v: GROUPS[f.group as Group]?.label ?? f.group });
   f.species.forEach((s) => chips.push({ id: `sp:${s}`, k: 'Especie', v: s }));
   if (f.region) chips.push({ id: 'region', k: 'Región', v: f.region });

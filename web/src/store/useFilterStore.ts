@@ -4,6 +4,7 @@ import type { Observation } from '../types';
 export interface Filters {
   species: string[];
   query: string;
+  place: string;
   group: string;
   order: string;
   family: string;
@@ -21,6 +22,7 @@ export interface Filters {
 export const DEFAULT_FILTERS: Filters = {
   species: [],
   query: '',
+  place: '',
   group: '',
   order: '',
   family: '',
@@ -53,10 +55,14 @@ export const useFilterStore = create<FilterState>((set) => ({
   reset: () => set({ ...DEFAULT_FILTERS }),
 }));
 
+const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+
 /** Aplica todos los filtros (combinables) a la lista de observaciones. */
 export function applyFilters(obs: Observation[], f: Filters): Observation[] {
+  const place = f.place.trim() ? norm(f.place) : '';
   return obs.filter((o) => {
     if (f.species.length && !f.species.includes(o.es)) return false;
+    if (place && !norm(o.region).includes(place) && !norm(o.loc).includes(place)) return false;
     if (f.group && o.grp !== f.group) return false;
     if (f.order && o.order !== f.order) return false;
     if (f.family && o.family !== f.family) return false;

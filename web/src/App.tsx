@@ -2,15 +2,13 @@ import { useEffect } from 'react';
 import PortalHeader from './components/PortalHeader';
 import PortalSidebar from './components/PortalSidebar';
 import MapView from './components/MapView';
-import TitlePlate from './components/TitlePlate';
 import ChipBar from './components/ChipBar';
-import StatPlate from './components/StatPlate';
 import MapControls from './components/MapControls';
 import ResultsPanel from './components/ResultsPanel';
 import TabRail from './components/TabRail';
-import RiskResultPlate from './components/RiskResultPlate';
+import SiteSheet from './components/SiteSheet';
+import LegendPlate from './components/LegendPlate';
 import MeasurePlate from './components/MeasurePlate';
-import SpeciesSheet from './components/SpeciesSheet';
 import Sections from './components/Sections';
 import Footer from './components/Footer';
 import Loader from './components/Loader';
@@ -25,19 +23,17 @@ export default function App() {
   return (
     <>
       <PortalHeader />
-      <section className="hero">
+      <section className="hero" id="visor">
+        <TabRail />
         <PortalSidebar />
-        <div className="mapwrap">
+        <div className="mapwrap warm">
           <MapView />
-          <TitlePlate />
           <ChipBar />
-          <StatPlate />
           <MapControls />
-          <RiskResultPlate />
           <MeasurePlate />
-          <TabRail />
           <ResultsPanel />
-          <SpeciesSheet />
+          <SiteSheet />
+          <LegendPlate />
         </div>
       </section>
       <Sections />
