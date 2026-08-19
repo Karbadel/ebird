@@ -6,6 +6,7 @@ import { aggregateSites, type Site } from '../lib/derive';
 import { mapInstance, CHILE, FIT } from '../lib/mapInstance';
 import { usePortalStore } from '../store/usePortalStore';
 import { useRiskStore } from '../store/useRiskStore';
+import { useMeasureStore, segmentKm, fmtKm } from '../store/useMeasureStore';
 
 type RGB = [number, number, number];
 // Rampas de color de los choropleth (idénticas al visor de riesgo fuente).
@@ -44,11 +45,14 @@ export default function MapView() {
   const riskQueryActive = useRiskStore((s) => s.queryActive);
   const riskResult = useRiskStore((s) => s.result);
   const loadRiskData = useRiskStore((s) => s.loadData);
+  const measureActive = useMeasureStore((s) => s.active);
+  const measurePoints = useMeasureStore((s) => s.points);
 
   const groupsRef = useRef<Record<string, L.Layer>>({});
   const pinsRef = useRef<L.LayerGroup | null>(null);
   const canvasRef = useRef<L.Canvas | null>(null);
   const riskMarkerRef = useRef<L.CircleMarker | null>(null);
+  const measureLayerRef = useRef<L.LayerGroup | null>(null);
   const loadingRef = useRef<Set<string>>(new Set());
   const filteredRef = useRef<Site[]>([]);
   const activeRef = useRef<string | null>(activeSite);
@@ -221,19 +225,25 @@ export default function MapView() {
     const pins = L.layerGroup();
     pinsRef.current = pins;
     groupsRef.current = { obs: pins };
+    measureLayerRef.current = L.layerGroup().addTo(map);
     map.on('zoomend moveend', () => {
       if (map.hasLayer(pins)) drawPins();
     });
     map.on('click', (e) => {
-      if (useRiskStore.getState().queryActive) {
-        useRiskStore.getState().runQuery(e.latlng.lat, e.latlng.lng);
+      const risk = useRiskStore.getState();
+      if (risk.queryActive) {
+        risk.runQuery(e.latlng.lat, e.latlng.lng);
+        return;
       }
+      const measure = useMeasureStore.getState();
+      if (measure.active) measure.addPoint(e.latlng.lat, e.latlng.lng);
     });
 
     return () => {
       map.remove();
       mapInstance.map = null;
       pinsRef.current = null;
+      measureLayerRef.current = null;
       groupsRef.current = {};
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -290,11 +300,33 @@ export default function MapView() {
   }, [flyTarget, consumeFly]);
 
   // Modo consulta de riesgo: cursor de mira + precarga de los datos del motor.
+  // Al activarlo, desactiva la regla (modos mutuamente excluyentes).
+  useEffect(() => {
+    if (riskQueryActive) {
+      loadRiskData();
+      useMeasureStore.getState().deactivate();
+    }
+  }, [riskQueryActive, loadRiskData]);
+
+  // Modo medición: cursor de mira, sin zoom por doble clic, y apaga la consulta
+  // de riesgo si estuviera activa.
+  useEffect(() => {
+    const map = mapInstance.map;
+    if (!map) return;
+    if (measureActive) {
+      map.doubleClickZoom.disable();
+      const risk = useRiskStore.getState();
+      if (risk.queryActive) risk.toggleQuery();
+    } else {
+      map.doubleClickZoom.enable();
+    }
+  }, [measureActive]);
+
+  // Cursor de mira mientras cualquiera de los dos modos de consulta esté activo.
   useEffect(() => {
     const container = mapInstance.map?.getContainer();
-    if (container) container.style.cursor = riskQueryActive ? 'crosshair' : '';
-    if (riskQueryActive) loadRiskData();
-  }, [riskQueryActive, loadRiskData]);
+    if (container) container.style.cursor = riskQueryActive || measureActive ? 'crosshair' : '';
+  }, [riskQueryActive, measureActive]);
 
   // Marcador del punto consultado, coloreado por categoría de riesgo.
   useEffect(() => {
@@ -314,6 +346,38 @@ export default function MapView() {
       }).addTo(map);
     }
   }, [riskResult]);
+
+  // Regla: polilínea punteada + vértices + etiqueta de distancia acumulada por punto.
+  useEffect(() => {
+    const layer = measureLayerRef.current;
+    if (!layer) return;
+    layer.clearLayers();
+    if (measurePoints.length === 0) return;
+
+    const latlngs = measurePoints.map((p) => L.latLng(p.lat, p.lng));
+    if (latlngs.length > 1) {
+      L.polyline(latlngs, { color: '#c0392b', weight: 2, dashArray: '5,4' }).addTo(layer);
+    }
+    let cum = 0;
+    measurePoints.forEach((p, i) => {
+      if (i > 0) cum += segmentKm(measurePoints[i - 1]!, p);
+      const last = i === measurePoints.length - 1;
+      L.circleMarker([p.lat, p.lng], {
+        radius: last ? 5 : 3.5,
+        color: '#c0392b',
+        weight: 2,
+        fillColor: '#ffffff',
+        fillOpacity: 1,
+      }).addTo(layer);
+      if (i > 0) {
+        L.marker([p.lat, p.lng], {
+          interactive: false,
+          keyboard: false,
+          icon: L.divIcon({ className: 'measure-label', html: `<span>${fmtKm(cum)}</span>`, iconSize: [0, 0] }),
+        }).addTo(layer);
+      }
+    });
+  }, [measurePoints]);
 
   return <div id="map" />;
 }
