@@ -92,6 +92,13 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
 #panel { position: absolute; top: 14px; right: 58px; bottom: 14px; width: 344px; z-index: 620;
   display: flex; flex-direction: column; }
 
+#riskResult { top: 60px; left: 360px; width: 300px; z-index: 615; padding: 12px 14px;
+  max-height: calc(100% - 90px); overflow: auto; }
+#riskResult #riskClose { position: absolute; top: 8px; right: 8px; all: unset; cursor: pointer;
+  font-size: 14px; color: var(--color-text); }
+#riskResult #riskClose:hover { color: var(--color-accent-700); }
+@media (max-width: 1180px) { #riskResult { left: 14px; } }
+
 #species { position: absolute; top: 14px; right: 58px; bottom: 14px; width: 372px; z-index: 630;
   background: color-mix(in srgb, var(--color-bg) 97%, transparent); backdrop-filter: blur(3px);
   border: 1px solid var(--color-divider); box-shadow: var(--shadow-lg); display: flex; flex-direction: column; }

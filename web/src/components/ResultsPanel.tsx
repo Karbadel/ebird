@@ -6,6 +6,7 @@ import { useFiltered } from '../lib/useFiltered';
 import { searchSpecies } from '../lib/search';
 import { aggregateSites } from '../lib/derive';
 import { buildCatalog, type CatalogEntry } from '../lib/catalog';
+import RiskPanel from './RiskPanel';
 import { COLL, CONDOR_MONTHLY, MONTHS, DOCS } from '../data/portal';
 import { GROUPS, type Group, type Observation } from '../types';
 
@@ -35,6 +36,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: 'especies', label: 'Especies' },
   { id: 'tabla', label: 'Tabla' },
   { id: 'sitios', label: 'Sitios' },
+  { id: 'riesgo', label: 'Riesgo' },
   { id: 'tiempo', label: 'Temporal' },
   { id: 'comite', label: 'Comité' },
 ];
@@ -91,10 +93,14 @@ export default function ResultsPanel() {
         ))}
       </div>
       <div className="phead">
-        <div style={{ flex: 1 }}>
-          <div className="fig mono">{fmt(total)}</div>
-          <span className="lbl">{scope}</span>
-        </div>
+        {tab === 'riesgo' ? (
+          <span className="lbl">Motor de índice de riesgo de colisión</span>
+        ) : (
+          <div style={{ flex: 1 }}>
+            <div className="fig mono">{fmt(total)}</div>
+            <span className="lbl">{scope}</span>
+          </div>
+        )}
       </div>
       {OBS_TABS.includes(tab) && (
         <GroupTags counts={groupCounts} active={f.group} onToggle={(g) => f.update('group', f.group === g ? '' : g)} />
@@ -104,6 +110,7 @@ export default function ResultsPanel() {
         {tab === 'especies' && <Especies catalog={catalog} onOpen={openSpecies} />}
         {tab === 'tabla' && <Tabla rows={rows} />}
         {tab === 'sitios' && <Sitios rows={filtered} />}
+        {tab === 'riesgo' && <RiskPanel />}
         {tab === 'tiempo' && <Tiempo />}
         {tab === 'comite' && <Comite />}
         {tab === 'colisiones' && <Colisiones onBack={() => setTab('lista')} />}

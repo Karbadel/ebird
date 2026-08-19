@@ -1,74 +1,37 @@
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
-import type { Feature } from 'geojson';
+import type { Feature, FeatureCollection } from 'geojson';
 import { useFiltered } from '../lib/useFiltered';
 import { aggregateSites, type Site } from '../lib/derive';
 import { mapInstance, CHILE, FIT } from '../lib/mapInstance';
 import { usePortalStore } from '../store/usePortalStore';
-import { COLL, NET_SEGMENTS, RIDGE, RISK_COLORS } from '../data/portal';
+import { useRiskStore } from '../store/useRiskStore';
 
-function ridgeLon(lat: number): number {
-  for (let i = 0; i < RIDGE.length - 1; i++) {
-    const [a, al] = RIDGE[i]!;
-    const [b, bl] = RIDGE[i + 1]!;
-    if (lat <= a && lat >= b) return al + (bl - al) * ((lat - a) / (b - a));
+type RGB = [number, number, number];
+// Rampas de color de los choropleth (idénticas al visor de riesgo fuente).
+const HABITAT_RAMP: RGB[] = [
+  [28, 142, 176], [110, 181, 167], [169, 214, 159], [207, 227, 174], [245, 243, 182],
+  [254, 235, 169], [254, 210, 135], [253, 181, 97], [249, 120, 65], [218, 55, 38],
+];
+const EBIRD_RAMP: RGB[] = [
+  [255, 247, 236], [254, 224, 182], [253, 187, 132], [252, 141, 89], [227, 74, 51], [153, 0, 0],
+];
+function rampColor(v: number, ramp: RGB[]): string {
+  const t = Math.max(0, Math.min(1, v)) * (ramp.length - 1);
+  const i0 = Math.floor(t);
+  const i1 = Math.min(ramp.length - 1, i0 + 1);
+  const f = t - i0;
+  const a = ramp[i0]!;
+  const b = ramp[i1]!;
+  return `rgb(${Math.round(a[0] + f * (b[0] - a[0]))},${Math.round(a[1] + f * (b[1] - a[1]))},${Math.round(a[2] + f * (b[2] - a[2]))})`;
+}
+function maxProp(fc: FeatureCollection, key: string): number {
+  let m = 0;
+  for (const ft of fc.features) {
+    const v = ft.properties?.[key];
+    if (typeof v === 'number') m = Math.max(m, v);
   }
-  return RIDGE[RIDGE.length - 1]![1];
-}
-
-function buildRisk(): L.LayerGroup {
-  const g = L.layerGroup();
-  const step = 0.5;
-  for (let lat = -18; lat > -55; lat -= step) {
-    const rl = ridgeLon(lat);
-    for (let o = -2.5; o <= 0.5; o += step) {
-      const lon = rl + o;
-      if (lon < -75.5) continue;
-      const latBand =
-        Math.exp(-Math.pow((lat + 31.5) / 6.5, 2)) * 0.75 +
-        Math.exp(-Math.pow((lat + 38) / 5.5, 2)) * 0.5;
-      const near = Math.exp(-Math.pow((o + 1) / 1.1, 2));
-      const jitter = ((Math.sin(lat * 12.9898 + lon * 78.233) + 1) / 2) * 0.28;
-      const v = Math.min(1, latBand * 0.85 + near * 0.35 + jitter * 0.4);
-      const k = Math.min(4, Math.floor(v * 5));
-      if (k === 0 && jitter < 0.12) continue;
-      L.rectangle([[lat - step, lon], [lat, lon + step]], {
-        stroke: false,
-        fillColor: RISK_COLORS[k],
-        fillOpacity: 0.34 + k * 0.09,
-        interactive: false,
-      }).addTo(g);
-    }
-  }
-  return g;
-}
-
-function buildColl(): L.LayerGroup {
-  const g = L.layerGroup();
-  COLL.forEach((c) => {
-    const s = 26 + Math.round(c.c / 4);
-    L.marker(c.ll, {
-      icon: L.divIcon({
-        className: '',
-        iconSize: [s, s],
-        iconAnchor: [s / 2, s / 2],
-        html: `<div class="collide" style="width:${s}px;height:${s}px">✕${c.c}</div>`,
-      }),
-    })
-      .bindTooltip(`${c.c} colisiones · ${c.n}, ${c.r} (${c.y})`, { direction: 'top', offset: [0, -s / 2] })
-      .addTo(g);
-  });
-  return g;
-}
-
-function buildNet(): L.LayerGroup {
-  const g = L.layerGroup();
-  NET_SEGMENTS.forEach((seg) => {
-    L.polyline(seg, { color: '#2b2b2d', weight: 1.5, dashArray: '6 4' })
-      .bindTooltip('Infraestructura eléctrica · trazado esquemático', { direction: 'top' })
-      .addTo(g);
-  });
-  return g;
+  return m || 1;
 }
 
 export default function MapView() {
@@ -78,10 +41,14 @@ export default function MapView() {
   const setActiveSite = usePortalStore((s) => s.setActiveSite);
   const flyTarget = usePortalStore((s) => s.flyTarget);
   const consumeFly = usePortalStore((s) => s.consumeFly);
+  const riskQueryActive = useRiskStore((s) => s.queryActive);
+  const riskResult = useRiskStore((s) => s.result);
+  const loadRiskData = useRiskStore((s) => s.loadData);
 
   const groupsRef = useRef<Record<string, L.Layer>>({});
   const pinsRef = useRef<L.LayerGroup | null>(null);
   const canvasRef = useRef<L.Canvas | null>(null);
+  const riskMarkerRef = useRef<L.CircleMarker | null>(null);
   const loadingRef = useRef<Set<string>>(new Set());
   const filteredRef = useRef<Site[]>([]);
   const activeRef = useRef<string | null>(activeSite);
@@ -160,32 +127,82 @@ export default function MapView() {
       const n = feature.properties?.['nombre'];
       if (n) layer.bindTooltip(String(n), { sticky: true });
     };
-    const load = async (file: string, options: L.GeoJSONOptions): Promise<L.Layer> => {
-      const res = await fetch(`${import.meta.env.BASE_URL}data/layers/${file}`);
+    const bindPopup = (text: string) => (_f: Feature, l: L.Layer) => l.bindPopup(text);
+    const fetchJson = async (path: string): Promise<FeatureCollection> => {
+      const res = await fetch(`${import.meta.env.BASE_URL}${path}`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return L.geoJSON(await res.json(), options);
+      return (await res.json()) as FeatureCollection;
     };
+    const loadLayers = (file: string, options: L.GeoJSONOptions) => async () =>
+      L.geoJSON(await fetchJson(`data/layers/${file}`), options);
+    const loadRisk = (file: string, options: L.GeoJSONOptions) => async () =>
+      L.geoJSON(await fetchJson(`data/riesgo/${file}`), options);
+    const pt = (color: string, radius = 3, fillOpacity = 0.85) =>
+      (_f: Feature, ll: L.LatLng) =>
+        L.circleMarker(ll, { renderer: canvas, radius, color, weight: 1, fillColor: color, fillOpacity });
+
+    // Capas KMZ
     if (id === 'turb')
-      return () =>
-        load('aerogeneradores.geojson', {
-          pointToLayer: (_f, ll) =>
-            L.circleMarker(ll, { renderer: canvas, radius: 2.5, color: '#2c455d', weight: 1, fillColor: '#2c455d', fillOpacity: 0.7 }),
-          onEachFeature: bindName,
-        });
+      return loadLayers('aerogeneradores.geojson', { pointToLayer: pt('#2c455d', 2.5, 0.7), onEachFeature: bindName });
     if (id === 'protected')
-      return () =>
-        load('areas_protegidas.geojson', {
-          style: () => ({ renderer: canvas, color: '#416180', weight: 1, fillColor: '#b5d9fd', fillOpacity: 0.18 }),
-          onEachFeature: bindName,
-        });
+      return loadLayers('areas_protegidas.geojson', {
+        style: () => ({ renderer: canvas, color: '#416180', weight: 1, fillColor: '#b5d9fd', fillOpacity: 0.18 }),
+        onEachFeature: bindName,
+      });
     if (id === 'airports')
-      return () =>
-        load('aeropuertos.geojson', {
-          style: () => ({ renderer: canvas, color: '#597ea3', weight: 1, fillColor: '#597ea3', fillOpacity: 0.08 }),
-          pointToLayer: (_f, ll) =>
-            L.circleMarker(ll, { renderer: canvas, radius: 3, color: '#597ea3', weight: 1, fillOpacity: 0.6 }),
-          onEachFeature: bindName,
+      return loadLayers('aeropuertos.geojson', {
+        style: () => ({ renderer: canvas, color: '#597ea3', weight: 1, fillColor: '#597ea3', fillOpacity: 0.08 }),
+        pointToLayer: pt('#597ea3', 3, 0.6),
+        onEachFeature: bindName,
+      });
+
+    // Capas de riesgo — puntos / líneas / polígonos
+    if (id === 'wind')
+      return loadRisk('wind.geojson', { pointToLayer: pt('#c0392b', 4), onEachFeature: bindPopup('Parque eólico') });
+    if (id === 'lineas')
+      return loadRisk('lineas.geojson', { style: () => ({ renderer: canvas, color: '#2c6ea6', weight: 1.4 }) });
+    if (id === 'nidos')
+      return loadRisk('nidos.geojson', { pointToLayer: pt('#ff00a5', 4), onEachFeature: bindPopup('Nido de cóndor (evidencia eBird C3/C4)') });
+    if (id === 'colisiones')
+      return loadRisk('colisiones.geojson', { pointToLayer: pt('#111111', 4, 0.9), onEachFeature: bindPopup('Colisión de cóndor confirmada') });
+    if (id === 'vertederos')
+      return loadRisk('vertederos.geojson', {
+        style: () => ({ renderer: canvas, color: '#8a4b12', weight: 1, fillColor: '#8a4b12', fillOpacity: 0.25 }),
+        pointToLayer: pt('#8a4b12', 3, 0.7),
+      });
+    if (id === 'veranadas')
+      return loadRisk('veranadas.geojson', { style: () => ({ renderer: canvas, color: '#2e7d32', weight: 1, fillColor: '#2e7d32', fillOpacity: 0.18 }) });
+
+    // Capas de riesgo — choropleth (normalizadas)
+    if (id === 'habitat')
+      return async () => {
+        const fc = await fetchJson('data/riesgo/habitat.geojson');
+        return L.geoJSON(fc, {
+          style: (feat) => {
+            const hs = feat?.properties?.['hs_mean'];
+            const ok = typeof hs === 'number';
+            return { renderer: canvas, stroke: false, fillColor: ok ? rampColor(hs, HABITAT_RAMP) : '#cfd6d2', fillOpacity: ok ? 0.6 : 0.1 };
+          },
+          onEachFeature: (f, l) => {
+            const hs = f.properties?.['hs_mean'];
+            l.bindPopup(typeof hs === 'number' ? `Idoneidad de hábitat: ${hs.toFixed(2)}` : 'Sin dato');
+          },
         });
+      };
+    if (id === 'ebird_densidad')
+      return async () => {
+        const fc = await fetchJson('data/riesgo/ebird_densidad.geojson');
+        const max = maxProp(fc, 'n_localities');
+        return L.geoJSON(fc, {
+          style: (feat) => {
+            const v = feat?.properties?.['n_localities'];
+            const n = typeof v === 'number' ? v : 0;
+            return { renderer: canvas, stroke: false, fillColor: rampColor(Math.sqrt(n / max), EBIRD_RAMP), fillOpacity: 0.55 };
+          },
+          onEachFeature: (f, l) => l.bindPopup(`Densidad eBird: ${f.properties?.['n_localities'] ?? 0} localidades`),
+        });
+      };
+
     return null;
   }
 
@@ -203,14 +220,14 @@ export default function MapView() {
 
     const pins = L.layerGroup();
     pinsRef.current = pins;
-    groupsRef.current = {
-      risk: buildRisk(),
-      coll: buildColl(),
-      obs: pins,
-      net: buildNet(),
-    };
+    groupsRef.current = { obs: pins };
     map.on('zoomend moveend', () => {
       if (map.hasLayer(pins)) drawPins();
+    });
+    map.on('click', (e) => {
+      if (useRiskStore.getState().queryActive) {
+        useRiskStore.getState().runQuery(e.latlng.lat, e.latlng.lng);
+      }
     });
 
     return () => {
@@ -271,6 +288,32 @@ export default function MapView() {
       consumeFly();
     }
   }, [flyTarget, consumeFly]);
+
+  // Modo consulta de riesgo: cursor de mira + precarga de los datos del motor.
+  useEffect(() => {
+    const container = mapInstance.map?.getContainer();
+    if (container) container.style.cursor = riskQueryActive ? 'crosshair' : '';
+    if (riskQueryActive) loadRiskData();
+  }, [riskQueryActive, loadRiskData]);
+
+  // Marcador del punto consultado, coloreado por categoría de riesgo.
+  useEffect(() => {
+    const map = mapInstance.map;
+    if (!map) return;
+    if (riskMarkerRef.current) {
+      map.removeLayer(riskMarkerRef.current);
+      riskMarkerRef.current = null;
+    }
+    if (riskResult) {
+      riskMarkerRef.current = L.circleMarker([riskResult.lat, riskResult.lng], {
+        radius: 9,
+        color: riskResult.category.color,
+        weight: 2,
+        fillColor: riskResult.category.color,
+        fillOpacity: 0.5,
+      }).addTo(map);
+    }
+  }, [riskResult]);
 
   return <div id="map" />;
 }

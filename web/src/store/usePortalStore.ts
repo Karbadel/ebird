@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import type { Observation } from '../types';
 
-export type Tab = 'lista' | 'tabla' | 'sitios' | 'especies' | 'tiempo' | 'comite' | 'colisiones';
+export type Tab = 'lista' | 'especies' | 'tabla' | 'sitios' | 'riesgo' | 'tiempo' | 'comite' | 'colisiones';
 
 export interface PortalLayer {
   id: string;
@@ -13,16 +13,27 @@ export interface PortalLayer {
 }
 
 const LAYERS: PortalLayer[] = [
-  { id: 'risk', n: 'Mapa de Riesgo', src: 'Modelo demostrativo', sw: '#c9793c', on: true },
-  { id: 'coll', n: 'Registro de colisiones de cóndores', src: 'Comité · registro consolidado', sw: 'var(--color-text)', on: true },
+  // Riesgo (superficies)
+  { id: 'habitat', n: 'Idoneidad de hábitat', src: 'Estrada Pacheco et al. 2025', sw: 'linear-gradient(90deg,#1c8eb0,#f5f3b6,#da3726)', on: true },
+  { id: 'ebird_densidad', n: 'Densidad de avistamientos (eBird)', src: 'eBird · 75.111 registros', sw: 'linear-gradient(90deg,#fff7ec,#fc8d59,#990000)', on: false },
+  // Observaciones eBird (tiempo real)
   { id: 'obs', n: 'Observaciones eBird', src: 'API eBird 2.0 · ≤ 30 días', sw: 'var(--color-accent-200)', on: true },
+  // Biológico
+  { id: 'nidos', n: 'Nidos de cóndor (evidencia eBird)', src: 'eBird C3/C4 · 81 sitios', sw: '#ff00a5', on: false },
+  { id: 'colisiones', n: 'Colisiones de cóndor confirmadas', src: 'Registro consolidado', sw: '#111111', on: false },
+  // Infraestructura
+  { id: 'wind', n: 'Parques eólicos', src: 'MINENERGIA', sw: '#c0392b', on: false },
+  { id: 'lineas', n: 'Líneas de transmisión', src: 'Coordinador · SIC', sw: '#2c6ea6', on: false },
+  // Atrayentes de carroña
+  { id: 'vertederos', n: 'Vertederos (formales e ilegales)', src: 'MMA', sw: '#8a4b12', on: false },
+  { id: 'veranadas', n: 'Veranadas (trashumancia)', src: 'Ganadería', sw: '#2e7d32', on: false },
+  // Capas KMZ
   { id: 'turb', n: 'Aerogeneradores', src: 'MINENERGIA · jun 2026', sw: '#2c455d', on: false },
-  { id: 'parkAreas', n: 'Áreas de Parques Eólicos', src: '*.kmz MINENERGIA', sw: 'var(--color-accent-500)', on: false, pend: true },
   { id: 'protected', n: 'Áreas Protegidas (SNAP)', src: 'MMA 2024', sw: 'var(--color-accent-300)', on: false },
-  { id: 'net', n: 'Infraestructura eléctrica', src: 'INE Energía', sw: '#2b2b2d', on: false },
-  { id: 'projects', n: 'Proyectos de Energía', src: '*.kmz IDE Energía', sw: 'var(--color-accent-600)', on: false, pend: true },
   { id: 'airports', n: 'Aeropuertos y conos de aproximación', src: 'DGAC', sw: 'var(--color-neutral-500)', on: false },
-  { id: 'windpot', n: 'Potencial eólico', src: '*.kmz MINENERGIA · Recurso Eólico en Chile', sw: '#d8b445', on: false, pend: true },
+  // Pendientes
+  { id: 'projects', n: 'Proyectos de Energía', src: '*.kmz IDE Energía', sw: 'var(--color-accent-600)', on: false, pend: true },
+  { id: 'windpot', n: 'Potencial eólico', src: '*.kmz MINENERGIA', sw: '#d8b445', on: false, pend: true },
 ];
 
 interface PortalState {
