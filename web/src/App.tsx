@@ -7,6 +7,7 @@ import ChipBar from './components/ChipBar';
 import StatPlate from './components/StatPlate';
 import MapControls from './components/MapControls';
 import ResultsPanel from './components/ResultsPanel';
+import TabRail from './components/TabRail';
 import RiskResultPlate from './components/RiskResultPlate';
 import MeasurePlate from './components/MeasurePlate';
 import SpeciesSheet from './components/SpeciesSheet';
@@ -34,6 +35,7 @@ export default function App() {
           <MapControls />
           <RiskResultPlate />
           <MeasurePlate />
+          <TabRail />
           <ResultsPanel />
           <SpeciesSheet />
         </div>

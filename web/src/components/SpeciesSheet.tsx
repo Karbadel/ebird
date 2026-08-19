@@ -34,6 +34,7 @@ function exportCsv(rows: Observation[], name: string) {
 
 export default function SpeciesSheet() {
   const sp = usePortalStore((s) => s.species);
+  const sheetOpen = usePortalStore((s) => s.sheetOpen);
   const close = usePortalStore((s) => s.closeSpecies);
   const fly = usePortalStore((s) => s.fly);
   const observations = useDataStore((s) => s.observations);
@@ -43,10 +44,10 @@ export default function SpeciesSheet() {
 
   // Cierra la ficha si la especie ya no está en los resultados (nueva búsqueda/filtro).
   useEffect(() => {
-    if (sp && !filtered.some((o) => o.es === sp.es)) close();
-  }, [filtered, sp, close]);
+    if (sheetOpen && sp && !filtered.some((o) => o.es === sp.es)) close();
+  }, [filtered, sp, sheetOpen, close]);
 
-  if (!sp || !stats) return null;
+  if (!sheetOpen || !sp || !stats) return null;
 
   const maxReg = Math.max(1, ...stats.byRegion.map((r) => r.n));
   const rows = observations.filter((o) => o.es === sp.es);
@@ -55,8 +56,8 @@ export default function SpeciesSheet() {
     <aside id="species">
       <div className="phead" style={{ borderBottom: '1px solid var(--color-divider)' }}>
         <span className="lbl" style={{ flex: 1 }}>Ficha de especie</span>
-        <button className="btn btn-ghost" onClick={close} style={{ fontSize: 18, padding: '0 6px' }}>
-          ×
+        <button className="sheet-close" onClick={close} title="Cerrar ficha" aria-label="Cerrar ficha">
+          ✕
         </button>
       </div>
 

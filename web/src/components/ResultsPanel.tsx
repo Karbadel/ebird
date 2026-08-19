@@ -31,15 +31,6 @@ function speciesCountBy(obs: Observation[], keyFn: (o: Observation) => string): 
   return out;
 }
 const OBS_TABS: Tab[] = ['lista', 'tabla', 'sitios', 'especies'];
-const TABS: { id: Tab; label: string }[] = [
-  { id: 'lista', label: 'Lista' },
-  { id: 'especies', label: 'Especies' },
-  { id: 'tabla', label: 'Tabla' },
-  { id: 'sitios', label: 'Sitios' },
-  { id: 'riesgo', label: 'Riesgo' },
-  { id: 'tiempo', label: 'Temporal' },
-  { id: 'comite', label: 'Comité' },
-];
 
 export default function ResultsPanel() {
   const filtered = useFiltered();
@@ -85,13 +76,6 @@ export default function ResultsPanel() {
 
   return (
     <aside id="panel" className="plate">
-      <div className="tabs" role="tablist">
-        {TABS.map((t) => (
-          <button key={t.id} role="tab" aria-selected={tab === t.id} onClick={() => setTab(t.id)}>
-            {t.label}
-          </button>
-        ))}
-      </div>
       <div className="phead">
         {tab === 'riesgo' ? (
           <span className="lbl">Motor de índice de riesgo de colisión</span>

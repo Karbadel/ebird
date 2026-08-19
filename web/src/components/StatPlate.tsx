@@ -1,34 +1,56 @@
+import { useMemo } from 'react';
 import { usePortalStore } from '../store/usePortalStore';
+import { useDataStore } from '../store/useDataStore';
+
+const fmt = (n: number) => n.toLocaleString('es-CL');
 
 export default function StatPlate() {
-  const setTab = usePortalStore((s) => s.setTab);
-  const panelHidden = usePortalStore((s) => s.panelHidden);
-  const togglePanel = usePortalStore((s) => s.togglePanel);
+  const sp = usePortalStore((s) => s.species);
+  const fly = usePortalStore((s) => s.fly);
+  const collapsed = usePortalStore((s) => s.statCollapsed);
+  const toggle = usePortalStore((s) => s.toggleStatCollapsed);
+  const observations = useDataStore((s) => s.observations);
+
+  const stats = useMemo(() => {
+    if (!sp) return null;
+    const rows = observations.filter((o) => o.es === sp.es);
+    return { registros: rows.length, localidades: new Set(rows.map((o) => o.loc)).size };
+  }, [observations, sp]);
+
+  // Panel de cifras: solo aparece al abrir la ficha de una especie.
+  if (!sp || !stats) return null;
+
+  if (collapsed) {
+    return (
+      <button className="side-tab plate dark" id="stat-tab" onClick={toggle} title="Expandir panel">
+        <span className="sw" style={{ background: 'var(--color-accent-400)' }} />
+        <span>{fmt(stats.registros)} registros</span>
+      </button>
+    );
+  }
 
   return (
     <div className="plate dark" id="stat">
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-          <path d="M2 8.5 8 11l4-4 4 4 6-2.5" />
-          <path d="m8 11 4 6 4-6" />
-        </svg>
+      <button className="plate-min" onClick={toggle} title="Minimizar" aria-label="Minimizar">
+        ─
+      </button>
+      <span className="lbl">Registros eBird · {sp.es}</span>
+      <div style={{ display: 'flex', gap: 'var(--space-6)', marginTop: 'var(--space-2)' }}>
         <div>
-          <div className="fig mono">132</div>
-          <span className="lbl">Colisiones registradas en Chile</span>
+          <div className="fig mono">{fmt(stats.registros)}</div>
+          <span className="lbl">Registros</span>
         </div>
-      </div>
-      <div className="lbl mono" style={{ marginTop: 'var(--space-3)' }}>
-        Última actualización · mayo 2026
+        <div>
+          <div className="fig mono">{fmt(stats.localidades)}</div>
+          <span className="lbl">Localidades</span>
+        </div>
       </div>
       <button
         className="btn btn-secondary btn-block"
         style={{ color: 'var(--color-bg)', borderColor: 'var(--color-accent-600)' }}
-        onClick={() => {
-          if (panelHidden) togglePanel();
-          setTab('colisiones');
-        }}
+        onClick={() => fly([sp.lat, sp.lng])}
       >
-        Ver registro completo →
+        Ver en el mapa →
       </button>
     </div>
   );
