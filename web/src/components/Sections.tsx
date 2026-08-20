@@ -1,12 +1,13 @@
 import { CARDS_1, CARDS_2, type IconKey } from '../data/portal';
 import { Icon } from './Icon';
 
-function Cell({ icon, t, b, a }: { icon: IconKey; t: string; b: string | string[]; a: string }) {
+function Cell({ icon, t, b, a, pend }: { icon: IconKey; t: string; b: string | string[]; a: string; pend?: boolean }) {
   return (
     <article className="cell">
       <span className="icon">
         <Icon k={icon} s={20} />
       </span>
+      {pend && <span className="wip">En construcción</span>}
       <h4>{t}</h4>
       {Array.isArray(b) ? (
         <ul>
@@ -30,13 +31,13 @@ export default function Sections() {
         <span className="lbl">Reunión N°1 Comité · identificación de información</span>
       </div>
       <div className="grid">
-        {CARDS_1.map(([i, t, b, a]) => (
-          <Cell key={t} icon={i} t={t} b={b} a={a} />
+        {CARDS_1.map(([i, t, b, a, pend]) => (
+          <Cell key={t} icon={i} t={t} b={b} a={a} pend={!!pend} />
         ))}
       </div>
       <div className="grid" style={{ marginTop: 'var(--space-6)' }}>
-        {CARDS_2.map(([i, t, b, a]) => (
-          <Cell key={t} icon={i} t={t} b={b} a={a} />
+        {CARDS_2.map(([i, t, b, a, pend]) => (
+          <Cell key={t} icon={i} t={t} b={b} a={a} pend={!!pend} />
         ))}
       </div>
     </section>

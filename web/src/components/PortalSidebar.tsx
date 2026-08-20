@@ -110,7 +110,9 @@ export default function PortalSidebar() {
 
       <div className="side-scroll">
         {LAYER_GROUPS.map((g) => {
-          const items = layers.filter((l) => l.group === g.id && passes(l));
+          // Ocultamos las capas placeholder (pend: sin datos aún) para no mostrar
+          // categorías vacías; la entrada permanece en el store para el futuro.
+          const items = layers.filter((l) => l.group === g.id && !l.pend && passes(l));
           if (items.length === 0 && filtering) return null;
           // Al filtrar, expande los grupos con resultados para no ocultarlos.
           const isOpen = open.has(g.id) || (filtering && items.length > 0);

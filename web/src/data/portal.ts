@@ -32,19 +32,21 @@ export const NAV: [IconKey, string, string, boolean?][] = [
   ['info', 'Metodología', 'Cómo se construye la información'],
 ];
 
-export const CARDS_1: [IconKey, string, string, string][] = [
+// Tarjetas de la portada. El 5.º elemento (`pend`) marca las secciones aún no
+// implementadas con la etiqueta "En construcción".
+export const CARDS_1: [IconKey, string, string, string, boolean?][] = [
   ['alert', 'Mapa de riesgo', 'Identifica las zonas con mayor riesgo para el cóndor andino en relación con proyectos eólicos.', 'Explorar mapa →'],
   ['clip', 'Registro de colisiones de cóndores', 'Información histórica y georreferenciada de colisiones de cóndores con aerogeneradores.', 'Ver registro →'],
-  ['book', 'Medidas y buenas prácticas', 'Documentos, guías y recomendaciones para prevenir y minimizar impactos en cóndores.', 'Explorar documentos →'],
-  ['file', 'Estudios', 'Biblioteca de estudios nacionales e internacionales sobre cóndores y energía eólica.', 'Ver estudios →'],
-  ['down', 'Descarga de datos', 'Descarga capas geoespaciales y documentos en distintos formatos.', 'Ir a descargas →'],
+  ['book', 'Medidas y buenas prácticas', 'Documentos, guías y recomendaciones para prevenir y minimizar impactos en cóndores.', 'Explorar documentos →', true],
+  ['file', 'Estudios', 'Biblioteca de estudios nacionales e internacionales sobre cóndores y energía eólica.', 'Ver estudios →', true],
+  ['down', 'Descarga de datos', 'Descarga capas geoespaciales y documentos en distintos formatos.', 'Ir a descargas →', true],
 ];
 
-export const CARDS_2: [IconKey, string, string | string[], string][] = [
-  ['users', 'Comité técnico · Reunión N°1', ['Acta de reunión', 'Presentaciones', 'Acuerdos y compromisos', 'Lista de participantes'], 'Ver todos los documentos →'],
-  ['clip', 'Medidas implementadas en Chile', 'Conoce las medidas ya aplicadas en proyectos eólicos del país.', 'Ver medidas implementadas →'],
-  ['bulb', 'Medidas propuestas', 'Recomendaciones técnicas y operacionales en evaluación por el comité.', 'Ver medidas propuestas →'],
-  ['net', 'Actores relevantes', 'Organismos públicos, desarrolladores, academia, ONG y otros actores involucrados en esta temática.', 'Ver todos los actores →'],
+export const CARDS_2: [IconKey, string, string | string[], string, boolean?][] = [
+  ['users', 'Comité técnico · Reunión N°1', ['Acta de reunión', 'Presentaciones', 'Acuerdos y compromisos', 'Lista de participantes'], 'Ver todos los documentos →', true],
+  ['clip', 'Medidas implementadas en Chile', 'Conoce las medidas ya aplicadas en proyectos eólicos del país.', 'Ver medidas implementadas →', true],
+  ['bulb', 'Medidas propuestas', 'Recomendaciones técnicas y operacionales en evaluación por el comité.', 'Ver medidas propuestas →', true],
+  ['net', 'Actores relevantes', 'Organismos públicos, desarrolladores, academia, ONG y otros actores involucrados en esta temática.', 'Ver todos los actores →', true],
   ['layers', 'Capas geoespaciales disponibles', 'Accede a datos geoespaciales para análisis y planificación territorial.', 'Ver capas disponibles →'],
 ];
 

@@ -1,9 +1,18 @@
 import { useMemo } from 'react';
 import { useDataStore } from '../store/useDataStore';
+import { usePortalStore, type Tab } from '../store/usePortalStore';
 
 const CONDOR_SCI = 'Vultur gryphus';
-// Navegación superior del portal (ancla al visor / secciones).
-const NAV2 = ['Visor', 'Riesgo', 'Colisiones', 'Medidas', 'Estudios', 'Datos'];
+// Navegación superior del portal. `tab` abre la pestaña correspondiente del
+// visor; `pend` marca las secciones aún no implementadas ("En construcción").
+const NAV2: { label: string; tab?: Tab; pend?: boolean }[] = [
+  { label: 'Visor' },
+  { label: 'Riesgo', tab: 'riesgo' },
+  { label: 'Colisiones', tab: 'colisiones' },
+  { label: 'Medidas', pend: true },
+  { label: 'Estudios', pend: true },
+  { label: 'Datos', pend: true },
+];
 
 export default function PortalHeader() {
   const observations = useDataStore((s) => s.observations);
@@ -14,6 +23,7 @@ export default function PortalHeader() {
   );
   // Contador real: casos del registro consolidado de colisiones (colisiones.geojson).
   const collisions = useDataStore((s) => s.collisions.length);
+  const goToTab = usePortalStore((s) => s.goToTab);
 
   return (
     <header className="top">
@@ -31,8 +41,20 @@ export default function PortalHeader() {
       </div>
       <nav className="nav2">
         {NAV2.map((n, i) => (
-          <a key={n} href="#visor" {...(i === 0 ? { 'aria-current': 'page' as const } : {})}>
-            {n}
+          <a
+            key={n.label}
+            href={n.pend ? undefined : '#visor'}
+            {...(i === 0 ? { 'aria-current': 'page' as const } : {})}
+            {...(n.pend ? { 'aria-disabled': true as const } : {})}
+            onClick={(e) => {
+              // Pendientes: no navegan (sin destino real). Riesgo/Colisiones:
+              // abren su pestaña en el visor; el ancla #visor lleva el foco.
+              if (n.pend) e.preventDefault();
+              else if (n.tab) goToTab(n.tab);
+            }}
+          >
+            {n.label}
+            {n.pend && <span className="wip">En construcción</span>}
           </a>
         ))}
       </nav>
