@@ -46,6 +46,7 @@ export default function PortalSidebar() {
   };
 
   const [q, setQ] = useState('');
+  const [helpOpen, setHelpOpen] = useState<string | null>(null);
   const [quick, setQuick] = useState<Set<string>>(new Set());
   const [open, setOpen] = useState<Set<LayerGroupId>>(
     () => new Set<LayerGroupId>(['condor', 'carrona', 'otras', 'eolico', 'contexto']),
@@ -135,12 +136,32 @@ export default function PortalSidebar() {
                         <span className="sw" style={{ background: l.sw }} />
                         <span className="lyr-name">
                           {l.n}
+                          {l.help && (
+                            <button
+                              type="button"
+                              className="lyr-help-btn"
+                              aria-label="Nota metodológica"
+                              aria-expanded={helpOpen === l.id}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                setHelpOpen((cur) => (cur === l.id ? null : l.id));
+                              }}
+                            >
+                              ?
+                            </button>
+                          )}
                           <span className="src">{l.src}</span>
                         </span>
                         <span className={`lyr-tag${l.pend ? ' pend' : ''}`}>
                           {l.pend ? 'kmz' : l.on ? 'activa' : ''}
                         </span>
                       </label>
+                      {l.help && helpOpen === l.id && (
+                        <div className="lyr-help" role="note">
+                          {l.help}
+                        </div>
+                      )}
                       {l.opacity != null && l.on && (
                         <div className="lyr-op" title="Opacidad de la capa">
                           <span className="lyr-op-ic">◐</span>

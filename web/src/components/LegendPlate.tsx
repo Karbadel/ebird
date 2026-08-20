@@ -2,21 +2,51 @@ import { usePortalStore } from '../store/usePortalStore';
 import { RISK_COLORS, RISK_LABELS } from '../data/portal';
 
 const SHORT = ['Muy bajo', 'Bajo', 'Medio', 'Alto', 'Muy alto'];
+// Rampa de la capa de densidad eBird (equivalente a EBIRD_RAMP del mapa).
+const EBIRD_LEGEND = ['#fff7ec', '#fee0b6', '#fdbb84', '#fc8d59', '#e34a33', '#990000'];
 
 export default function LegendPlate() {
   const open = usePortalStore((s) => s.legendOpen);
+  const layers = usePortalStore((s) => s.layers);
   if (!open) return null;
+
+  const isOn = (id: string) => layers.find((l) => l.id === id)?.on ?? false;
+  const habitatOn = isOn('habitat');
+  const densidadOn = isOn('ebird_densidad');
+
   return (
     <div id="legend-plate">
-      <span className="lbl">Idoneidad</span>
-      <div className="lgd-scale">
-        {RISK_COLORS.map((c, i) => (
-          <div key={c}>
-            <i style={{ background: c }} />
-            <span title={RISK_LABELS[i]}>{SHORT[i]}</span>
+      {habitatOn && (
+        <>
+          <span className="lbl">Idoneidad</span>
+          <div className="lgd-scale">
+            {RISK_COLORS.map((c, i) => (
+              <div key={c}>
+                <i style={{ background: c }} />
+                <span title={RISK_LABELS[i]}>{SHORT[i]}</span>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
+
+      {densidadOn && (
+        <>
+          <span className="lbl" style={{ display: 'block', marginTop: habitatOn ? 10 : 0 }}>
+            Densidad de avistamientos
+          </span>
+          <div className="lgd-scale">
+            {EBIRD_LEGEND.map((c, i) => (
+              <div key={c}>
+                <i style={{ background: c }} />
+                <span>{i === 0 ? 'Menos' : i === EBIRD_LEGEND.length - 1 ? 'Más' : ''}</span>
+              </div>
+            ))}
+          </div>
+          <span className="lgd-caption">Localidades distintas con registro · por celda</span>
+        </>
+      )}
+
       <div className="lgd-row bordered">
         <span className="lgd-mk">4</span>
         <span>Registro de cóndor · nº de individuos</span>

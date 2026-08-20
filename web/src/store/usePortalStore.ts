@@ -16,6 +16,8 @@ export interface PortalLayer {
   pend?: boolean;
   /** Si está definido, la capa expone un control de opacidad (0–1). */
   opacity?: number;
+  /** Nota metodológica: muestra un botón (?) con este texto explicativo. */
+  help?: string;
 }
 
 /** Capa cargada por el usuario desde un archivo KML/KMZ. */
@@ -37,7 +39,7 @@ export const LAYER_GROUPS: { id: LayerGroupId; title: string }[] = [
 
 const LAYERS: PortalLayer[] = [
   // Cóndor
-  { id: 'habitat', group: 'condor', n: 'Idoneidad del hábitat', src: 'Estrada Pacheco et al. 2025', sw: 'linear-gradient(90deg,#1c8eb0,#f5f3b6,#da3726)', on: true, opacity: 0.6 },
+  { id: 'habitat', group: 'condor', n: 'Idoneidad del hábitat', src: 'Estrada Pacheco et al. 2025', sw: 'linear-gradient(90deg,#1c8eb0,#f5f3b6,#da3726)', on: true, opacity: 0.6, help: 'Grilla de 30×30 km digitalizada de forma provisional a partir de la figura publicada (Estrada Pacheco et al. 2025); reemplazar por el raster oficial en cuanto esté disponible. No usar para diferenciar riesgo entre aerogeneradores de un mismo parque.' },
   { id: 'obs', group: 'condor', n: 'Registros (eBird)', src: 'API eBird 2.0 · ≤ 30 días', sw: '#2c6a5b', on: true },
   { id: 'nidos', group: 'condor', n: 'Nidos y dormideros (eBird)', src: 'eBird C3/C4 · 81 sitios', sw: '#ff00a5', on: false },
   { id: 'colisiones', group: 'condor', n: 'Colisiones confirmadas', src: 'Parques eólicos 2019–2025 · 29 registros', sw: '#a4441e', on: false },
@@ -48,7 +50,7 @@ const LAYERS: PortalLayer[] = [
   { id: 'ganado_ovino', group: 'carrona', n: 'Ganado ovino', src: 'Ganadería · cabezas por distrito', sw: '#caa472', on: false },
   { id: 'ganado_caprino', group: 'carrona', n: 'Ganado caprino', src: 'Ganadería · cabezas por distrito', sw: '#9c7a3c', on: false },
   // Otras especies
-  { id: 'ebird_densidad', group: 'otras', n: 'Densidad de avistamientos', src: 'eBird · 75.111 registros', sw: 'linear-gradient(90deg,#fff7ec,#fc8d59,#990000)', on: false, opacity: 0.55 },
+  { id: 'ebird_densidad', group: 'otras', n: 'Densidad de avistamientos', src: 'eBird · 75.111 registros', sw: 'linear-gradient(90deg,#fff7ec,#fc8d59,#990000)', on: false, opacity: 0.55, help: '75.111 registros de eBird (Chile+Argentina, filtrado a 36.012 en Chile) agregados por celda como número de localidades distintas con registro — mide esfuerzo/densidad de observación, no necesariamente abundancia real de cóndores (fuerte sesgo hacia sitios con más observadores, ej. Santiago y Torres del Paine). Cita sugerida: eBird. 2026. eBird Basic Dataset. Cornell Lab of Ornithology, Ithaca, New York.' },
   // Infraestructura energética
   { id: 'wind', group: 'eolico', n: 'Parques Eólicos (OPC)', src: 'MINENERGIA', sw: '#c0392b', on: false },
   { id: 'turb', group: 'eolico', n: 'Aerogeneradores', src: 'MINENERGIA · jun 2026', sw: '#8f8168', on: false },
