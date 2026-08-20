@@ -3,7 +3,7 @@ import L from 'leaflet';
 import type { Feature, FeatureCollection } from 'geojson';
 import { useFiltered } from '../lib/useFiltered';
 import { aggregateSites, type Site } from '../lib/derive';
-import { mapInstance, CHILE, FIT } from '../lib/mapInstance';
+import { mapInstance, CHILE, MAX_BOUNDS, FIT } from '../lib/mapInstance';
 import { usePortalStore } from '../store/usePortalStore';
 import { useRiskStore } from '../store/useRiskStore';
 import { useMeasureStore, segmentKm, fmtKm } from '../store/useMeasureStore';
@@ -219,7 +219,17 @@ export default function MapView() {
 
   // Inicializa el mapa y construye las capas una sola vez.
   useEffect(() => {
-    const map = L.map('map', { zoomControl: false, minZoom: 3, preferCanvas: true });
+    const map = L.map('map', {
+      zoomControl: false,
+      minZoom: 3,
+      // zoomSnap: 0 permite zoom fraccionario: sin esto, fitBounds redondea a un
+      // entero y deja Chile diminuto (zoom 3). Con fraccionario, encuadra el país
+      // llenando el alto real del contenedor: mucho menos "zoom out".
+      zoomSnap: 0,
+      preferCanvas: true,
+      maxBounds: MAX_BOUNDS,
+      maxBoundsViscosity: 1.0,
+    });
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors',
       maxZoom: 18,
