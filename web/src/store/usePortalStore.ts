@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import type { FeatureCollection } from 'geojson';
 import type { Observation } from '../types';
 import { GEN_SWATCH } from '../data/portal';
+import { useRiskStore } from './useRiskStore';
 
 export type Tab = 'lista' | 'especies' | 'tabla' | 'sitios' | 'riesgo' | 'tiempo' | 'comite' | 'colisiones' | 'ficha';
 
@@ -149,8 +150,17 @@ export const usePortalStore = create<PortalState>((set) => ({
   toggleLegend: () => set((s) => ({ legendOpen: !s.legendOpen })),
   setTab: (tab) => set({ tab }),
   // Navegación desde el riel lateral: cambia de pestaña, cierra la ficha y
-  // asegura que el panel esté visible.
-  goToTab: (tab) => set({ tab, sheetOpen: false, panelHidden: false }),
+  // asegura que el panel esté visible. Al salir de Riesgo, apaga la consulta y
+  // cierra su ficha de resultado para que la pestaña destino tome el panel (si
+  // no, seguiría el modo clic-consulta y el SiteSheet sobre el mapa).
+  goToTab: (tab) => {
+    if (tab !== 'riesgo') {
+      const risk = useRiskStore.getState();
+      risk.stopQuery();
+      risk.clearResult();
+    }
+    set({ tab, sheetOpen: false, panelHidden: false });
+  },
   setActiveSite: (activeSite) => set({ activeSite }),
   togglePanel: () => set((s) => ({ panelHidden: !s.panelHidden })),
   fly: (flyTarget) => set({ flyTarget }),

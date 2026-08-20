@@ -14,6 +14,7 @@ interface RiskState {
 
   loadData(): Promise<RiskData | null>;
   toggleQuery(): void;
+  stopQuery(): void;
   runQuery(lat: number, lng: number): Promise<void>;
   clearResult(): void;
   setWeight(id: string, weight: number): void;
@@ -60,6 +61,9 @@ export const useRiskStore = create<RiskState>((set, get) => ({
   },
 
   toggleQuery: () => set((s) => ({ queryActive: !s.queryActive })),
+
+  // Apaga la consulta sin alternar (p. ej. al salir de la pestaña Riesgo).
+  stopQuery: () => set((s) => (s.queryActive ? { queryActive: false } : {})),
 
   runQuery: async (lat, lng) => {
     const data = get().data ?? (await get().loadData());
