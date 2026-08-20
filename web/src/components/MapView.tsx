@@ -255,6 +255,13 @@ export default function MapView() {
       return async () => {
         const fc = await fetchJson('data/riesgo/ebird_densidad.geojson');
         const max = maxProp(fc, 'n_localities');
+        // Rango real (mín/máx de localidades por celda) para las etiquetas de la leyenda.
+        let min = Infinity;
+        for (const ft of fc.features) {
+          const v = ft.properties?.['n_localities'];
+          if (typeof v === 'number' && v < min) min = v;
+        }
+        usePortalStore.getState().setDensityDomain([Number.isFinite(min) ? min : 0, max]);
         const op = usePortalStore.getState().layers.find((x) => x.id === 'ebird_densidad')?.opacity ?? 0.55;
         return L.geoJSON(fc, {
           style: (feat) => {

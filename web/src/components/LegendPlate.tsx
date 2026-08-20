@@ -5,11 +5,20 @@ const SHORT = ['Muy bajo', 'Bajo', 'Medio', 'Alto', 'Muy alto'];
 // Rampa de la capa de densidad eBird (equivalente a EBIRD_RAMP del mapa).
 const EBIRD_LEGEND = ['#fff7ec', '#fee0b6', '#fdbb84', '#fc8d59', '#e34a33', '#990000'];
 
+// Formato compacto para las etiquetas del rango de densidad: abrevia miles con
+// "k" (75.000 → 75k, 1.200 → 1,2k) y deja los números pequeños tal cual.
+function compact(n: number): string {
+  if (n < 1000) return n.toLocaleString('es-CL');
+  const k = n / 1000;
+  return `${(k >= 10 ? Math.round(k) : Math.round(k * 10) / 10).toLocaleString('es-CL')}k`;
+}
+
 export default function LegendPlate() {
   const open = usePortalStore((s) => s.legendOpen);
   const layers = usePortalStore((s) => s.layers);
   if (!open) return null;
 
+  const densityDomain = usePortalStore((s) => s.densityDomain);
   const isOn = (id: string) => layers.find((l) => l.id === id)?.on ?? false;
   const habitatOn = isOn('habitat');
   const densidadOn = isOn('ebird_densidad');
@@ -37,12 +46,27 @@ export default function LegendPlate() {
             Densidad de avistamientos
           </span>
           <div className="lgd-scale">
-            {EBIRD_LEGEND.map((c, i) => (
-              <div key={c}>
-                <i style={{ background: c }} />
-                <span>{i === 0 ? 'Menos' : i === EBIRD_LEGEND.length - 1 ? 'Más' : ''}</span>
-              </div>
-            ))}
+            {EBIRD_LEGEND.map((c, i) => {
+              const first = i === 0;
+              const last = i === EBIRD_LEGEND.length - 1;
+              const label = densityDomain
+                ? first
+                  ? compact(densityDomain[0])
+                  : last
+                    ? compact(densityDomain[1])
+                    : ''
+                : first
+                  ? 'Menos'
+                  : last
+                    ? 'Más'
+                    : '';
+              return (
+                <div key={c}>
+                  <i style={{ background: c }} />
+                  <span>{label}</span>
+                </div>
+              );
+            })}
           </div>
           <span className="lgd-caption">Localidades distintas con registro · por celda</span>
         </>

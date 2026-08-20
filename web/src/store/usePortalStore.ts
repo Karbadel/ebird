@@ -84,6 +84,9 @@ interface PortalState {
   flyTarget: [number, number] | null;
   /** Comuna seleccionada en el buscador (para volar y resaltar su límite). */
   activeComuna: Comuna | null;
+  /** Rango [min, max] de localidades/celda de la capa de densidad, para la
+   *  leyenda; null hasta que la capa se carga. */
+  densityDomain: [number, number] | null;
   /** Especie seleccionada (persiste; alimenta los plates), o null. */
   species: Observation | null;
   /** Visibilidad de la ficha de detalle (desacoplada de la selección). */
@@ -107,6 +110,8 @@ interface PortalState {
   consumeFly(): void;
   /** Selecciona (o limpia) la comuna del buscador; al seleccionar, vuela a ella. */
   setComuna(c: Comuna | null): void;
+  /** Fija el rango de la capa de densidad (lo calcula MapView al cargarla). */
+  setDensityDomain(d: [number, number] | null): void;
   openSpecies(o: Observation): void;
   closeSpecies(): void;
   openSheet(): void;
@@ -124,6 +129,7 @@ export const usePortalStore = create<PortalState>((set) => ({
   panelHidden: false,
   flyTarget: null,
   activeComuna: null,
+  densityDomain: null,
   species: null,
   sheetOpen: false,
   titleCollapsed: false,
@@ -168,6 +174,7 @@ export const usePortalStore = create<PortalState>((set) => ({
   // El encuadre lo resuelve MapView (fitBounds al polígono); aquí solo se fija la
   // comuna activa (o se limpia).
   setComuna: (c) => set({ activeComuna: c }),
+  setDensityDomain: (densityDomain) => set({ densityDomain }),
   // Elegir una especie: fija la selección (persiste) y abre la ficha, dejando
   // los plates visibles y expandidos.
   openSpecies: (species) => set({ species, sheetOpen: true, titleCollapsed: false, statCollapsed: false }),
