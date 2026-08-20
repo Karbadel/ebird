@@ -90,6 +90,12 @@ export default function ResultsPanel() {
           </div>
         )}
       </div>
+      {(tab === 'lista' || tab === 'sitios') && (
+        <div className="tabs" role="tablist" aria-label="Vista de registros">
+          <button role="tab" aria-selected={tab === 'lista'} onClick={() => setTab('lista')}>Registros</button>
+          <button role="tab" aria-selected={tab === 'sitios'} onClick={() => setTab('sitios')}>Ranking de sitios</button>
+        </div>
+      )}
       {OBS_TABS.includes(tab) && (
         <GroupTags counts={groupCounts} active={f.group} onToggle={(g) => f.update('group', f.group === g ? '' : g)} />
       )}

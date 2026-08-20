@@ -2,15 +2,14 @@ import { usePortalStore, type Tab } from '../store/usePortalStore';
 import { Icon } from './Icon';
 import type { IconKey } from '../data/portal';
 
-// Riel de iconos de la columna izquierda del visor. Acotado a cóndor:
-// se omiten las vistas multiespecie (catálogo, tabla).
-const RAIL: { id: Tab; label: string; desc: string; icon: IconKey }[] = [
+// Riel de iconos de la columna izquierda del visor. Acotado a 4 accesos:
+// - Registros agrupa lista + ranking de sitios (sub-pestañas dentro del panel).
+// - Gráficos es la vista temporal. Colisiones vive en el menú superior.
+const RAIL: { id: Tab; label: string; desc: string; icon: IconKey; match?: Tab[] }[] = [
   { id: 'ficha', label: 'La especie', desc: 'Ficha del cóndor andino', icon: 'book' },
-  { id: 'lista', label: 'Registros', desc: 'Registros de cóndor filtrados', icon: 'file' },
-  { id: 'sitios', label: 'Sitios', desc: 'Ranking de localidades por registros', icon: 'map' },
+  { id: 'lista', label: 'Registros', desc: 'Registros de cóndor y ranking de sitios', icon: 'file', match: ['lista', 'sitios'] },
   { id: 'riesgo', label: 'Riesgo', desc: 'Motor de índice de riesgo por clic', icon: 'alert' },
-  { id: 'colisiones', label: 'Colisiones', desc: 'Registro consolidado por parque eólico', icon: 'clip' },
-  { id: 'tiempo', label: 'Temporal', desc: 'Colisiones de cóndor por año', icon: 'net' },
+  { id: 'tiempo', label: 'Gráficos', desc: 'Colisiones de cóndor por año', icon: 'net' },
 ];
 
 export default function TabRail() {
@@ -22,7 +21,8 @@ export default function TabRail() {
   return (
     <nav className="rail" aria-label="Navegación del visor">
       {RAIL.map((t) => {
-        const active = tab === t.id && !sheetOpen && !panelHidden;
+        const matches = t.match ? t.match.includes(tab) : tab === t.id;
+        const active = matches && !sheetOpen && !panelHidden;
         return (
           <button
             key={t.id}
