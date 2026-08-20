@@ -8,7 +8,7 @@ export default function LegendPlate() {
   if (!open) return null;
   return (
     <div id="legend-plate">
-      <span className="lbl">Riesgo de colisión para el cóndor</span>
+      <span className="lbl">Idoneidad</span>
       <div className="lgd-scale">
         {RISK_COLORS.map((c, i) => (
           <div key={c}>
