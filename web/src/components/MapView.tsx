@@ -38,6 +38,7 @@ function maxProp(fc: FeatureCollection, key: string): number {
 export default function MapView() {
   const filtered = useFiltered();
   const layers = usePortalStore((s) => s.layers);
+  const userLayers = usePortalStore((s) => s.userLayers);
   const activeSite = usePortalStore((s) => s.activeSite);
   const setActiveSite = usePortalStore((s) => s.setActiveSite);
   const flyTarget = usePortalStore((s) => s.flyTarget);
@@ -49,6 +50,7 @@ export default function MapView() {
   const measurePoints = useMeasureStore((s) => s.points);
 
   const groupsRef = useRef<Record<string, L.Layer>>({});
+  const userRef = useRef<Record<string, L.Layer>>({});
   const pinsRef = useRef<L.LayerGroup | null>(null);
   const canvasRef = useRef<L.Canvas | null>(null);
   const riskMarkerRef = useRef<L.CircleMarker | null>(null);
@@ -183,16 +185,39 @@ export default function MapView() {
       });
     if (id === 'veranadas')
       return loadRisk('veranadas.geojson', { style: () => ({ renderer: canvas, color: '#2e7d32', weight: 1, fillColor: '#2e7d32', fillOpacity: 0.18 }) });
+    // Ganado (atrayente de carroña): un solo archivo con la propiedad `especie`;
+    // cada capa filtra bovino / ovino / caprino. `total` = nº de cabezas.
+    if (id === 'ganado_bovino' || id === 'ganado_ovino' || id === 'ganado_caprino') {
+      const especie = id.slice('ganado_'.length);
+      const color = especie === 'bovino' ? '#b5651d' : especie === 'ovino' ? '#caa472' : '#9c7a3c';
+      const cap = especie.charAt(0).toUpperCase() + especie.slice(1);
+      // Símbolo proporcional al nº de cabezas: los datos son por centroide de
+      // distrito (las 3 especies comparten coordenada) pero con `total` muy
+      // distinto, así que el TAMAÑO es lo que diferencia una capa de otra.
+      // Escala global (misma para las 3) → caprino se ve chico, bovino/ovino
+      // grandes. Raíz para amortiguar la fuerte asimetría de la distribución.
+      const radius = (total: number) => Math.max(2, Math.min(14, Math.sqrt(Math.max(0, total)) * 0.35));
+      return async () => {
+        const fc = await fetchJson('data/riesgo/ganado.geojson');
+        const sub: FeatureCollection = { ...fc, features: fc.features.filter((f) => f.properties?.['especie'] === especie) };
+        return L.geoJSON(sub, {
+          pointToLayer: (f, ll) =>
+            L.circleMarker(ll, { renderer: canvas, radius: radius(Number(f.properties?.['total']) || 0), color, weight: 0.8, fillColor: color, fillOpacity: 0.5 }),
+          onEachFeature: (f, l) => l.bindPopup(`${cap} · ${f.properties?.['total'] ?? 0} cabezas — ${f.properties?.['comuna'] ?? ''}`),
+        });
+      };
+    }
 
     // Capas de riesgo — choropleth (normalizadas)
     if (id === 'habitat')
       return async () => {
         const fc = await fetchJson('data/riesgo/habitat.geojson');
+        const op = usePortalStore.getState().layers.find((x) => x.id === 'habitat')?.opacity ?? 0.6;
         return L.geoJSON(fc, {
           style: (feat) => {
             const hs = feat?.properties?.['hs_mean'];
             const ok = typeof hs === 'number';
-            return { renderer: canvas, stroke: false, fillColor: ok ? rampColor(hs, HABITAT_RAMP) : '#cfd6d2', fillOpacity: ok ? 0.6 : 0.1 };
+            return { renderer: canvas, stroke: false, fillColor: ok ? rampColor(hs, HABITAT_RAMP) : '#cfd6d2', fillOpacity: ok ? op : Math.min(op, 0.1) };
           },
           onEachFeature: (f, l) => {
             const hs = f.properties?.['hs_mean'];
@@ -204,11 +229,12 @@ export default function MapView() {
       return async () => {
         const fc = await fetchJson('data/riesgo/ebird_densidad.geojson');
         const max = maxProp(fc, 'n_localities');
+        const op = usePortalStore.getState().layers.find((x) => x.id === 'ebird_densidad')?.opacity ?? 0.55;
         return L.geoJSON(fc, {
           style: (feat) => {
             const v = feat?.properties?.['n_localities'];
             const n = typeof v === 'number' ? v : 0;
-            return { renderer: canvas, stroke: false, fillColor: rampColor(Math.sqrt(n / max), EBIRD_RAMP), fillOpacity: 0.55 };
+            return { renderer: canvas, stroke: false, fillColor: rampColor(Math.sqrt(n / max), EBIRD_RAMP), fillOpacity: op };
           },
           onEachFeature: (f, l) => l.bindPopup(`Densidad eBird: ${f.properties?.['n_localities'] ?? 0} localidades`),
         });
@@ -310,6 +336,52 @@ export default function MapView() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [layers]);
+
+  // Aplica la opacidad elegida a las capas que la exponen (idoneidad, densidad).
+  useEffect(() => {
+    layers.forEach((l) => {
+      if (l.opacity == null) return;
+      const g = groupsRef.current[l.id] as L.GeoJSON | undefined;
+      if (g && typeof g.setStyle === 'function') g.setStyle({ fillOpacity: l.opacity });
+    });
+  }, [layers]);
+
+  // Sincroniza las capas cargadas por el usuario (KML/KMZ) con el mapa.
+  useEffect(() => {
+    const map = mapInstance.map;
+    if (!map) return;
+    const canvas = canvasRef.current ?? undefined;
+    const color = '#6d3bd1';
+    userLayers.forEach((u) => {
+      const existing = userRef.current[u.id];
+      if (u.on) {
+        if (existing) {
+          if (!map.hasLayer(existing)) existing.addTo(map);
+        } else {
+          const layer = L.geoJSON(u.geojson, {
+            style: () => ({ renderer: canvas, color, weight: 1.5, fillColor: color, fillOpacity: 0.2 }),
+            pointToLayer: (_f, ll) => L.circleMarker(ll, { renderer: canvas, radius: 4, color, weight: 1, fillColor: color, fillOpacity: 0.85 }),
+            onEachFeature: (f, l) => {
+              const n = f.properties?.['name'] ?? f.properties?.['Name'];
+              if (n) l.bindPopup(String(n));
+            },
+          });
+          userRef.current[u.id] = layer;
+          layer.addTo(map);
+        }
+      } else if (existing && map.hasLayer(existing)) {
+        map.removeLayer(existing);
+      }
+    });
+    // Retira del mapa las capas de usuario que ya no existen.
+    Object.keys(userRef.current).forEach((id) => {
+      if (!userLayers.some((u) => u.id === id)) {
+        const l = userRef.current[id];
+        if (l && map.hasLayer(l)) map.removeLayer(l);
+        delete userRef.current[id];
+      }
+    });
+  }, [userLayers]);
 
   // Redibuja las observaciones al cambiar datos filtrados o sitio activo.
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { usePortalStore, LAYER_GROUPS, type LayerGroupId } from '../store/usePortalStore';
 
 const norm = (s: string) =>
@@ -6,22 +6,49 @@ const norm = (s: string) =>
 
 // Filtros rápidos: grupos temáticos + "solo activas".
 const QUICK: { id: LayerGroupId | 'active'; label: string }[] = [
-  { id: 'superf', label: 'Riesgo' },
-  { id: 'colis', label: 'Colisiones' },
-  { id: 'eolico', label: 'Eólico' },
+  { id: 'condor', label: 'Cóndor' },
+  { id: 'carrona', label: 'Carroña' },
+  { id: 'eolico', label: 'Energética' },
   { id: 'active', label: 'Solo activas' },
 ];
 
 export default function PortalSidebar() {
   const layers = usePortalStore((s) => s.layers);
   const toggleLayer = usePortalStore((s) => s.toggleLayer);
+  const setOpacity = usePortalStore((s) => s.setOpacity);
   const clearLayers = usePortalStore((s) => s.clearLayers);
   const toggleLegend = usePortalStore((s) => s.toggleLegend);
+  const userLayers = usePortalStore((s) => s.userLayers);
+  const addUserLayer = usePortalStore((s) => s.addUserLayer);
+  const toggleUserLayer = usePortalStore((s) => s.toggleUserLayer);
+  const removeUserLayer = usePortalStore((s) => s.removeUserLayer);
+
+  const fileInput = useRef<HTMLInputElement>(null);
+  const [importErr, setImportErr] = useState<string | null>(null);
+  const [importing, setImporting] = useState(false);
+
+  const onFiles = async (files: FileList | null) => {
+    if (!files?.length) return;
+    setImporting(true);
+    setImportErr(null);
+    try {
+      const { fileToGeoJSON } = await import('../lib/importGeo');
+      for (const file of Array.from(files)) {
+        const fc = await fileToGeoJSON(file);
+        addUserLayer(file.name.replace(/\.(kml|kmz)$/i, ''), fc);
+      }
+    } catch (e) {
+      setImportErr(e instanceof Error ? e.message : 'No se pudo cargar el archivo');
+    } finally {
+      setImporting(false);
+      if (fileInput.current) fileInput.current.value = '';
+    }
+  };
 
   const [q, setQ] = useState('');
   const [quick, setQuick] = useState<Set<string>>(new Set());
   const [open, setOpen] = useState<Set<LayerGroupId>>(
-    () => new Set<LayerGroupId>(['superf', 'condor', 'colis', 'eolico']),
+    () => new Set<LayerGroupId>(['condor', 'carrona', 'otras', 'eolico', 'contexto']),
   );
 
   const activeCount = useMemo(() => layers.filter((l) => l.on).length, [layers]);
@@ -97,28 +124,87 @@ export default function PortalSidebar() {
               {isOpen && (
                 <div className="lgroup-items">
                   {items.map((l) => (
-                    <label className="lyr" key={l.id} title={l.src}>
-                      <input
-                        type="checkbox"
-                        checked={l.on}
-                        disabled={l.pend}
-                        onChange={() => toggleLayer(l.id)}
-                      />
-                      <span className="sw" style={{ background: l.sw }} />
-                      <span className="lyr-name">
-                        {l.n}
-                        <span className="src">{l.src}</span>
-                      </span>
-                      <span className={`lyr-tag${l.pend ? ' pend' : ''}`}>
-                        {l.pend ? 'kmz' : l.on ? 'activa' : ''}
-                      </span>
-                    </label>
+                    <div className="lyr-wrap" key={l.id}>
+                      <label className="lyr" title={l.src}>
+                        <input
+                          type="checkbox"
+                          checked={l.on}
+                          disabled={l.pend}
+                          onChange={() => toggleLayer(l.id)}
+                        />
+                        <span className="sw" style={{ background: l.sw }} />
+                        <span className="lyr-name">
+                          {l.n}
+                          <span className="src">{l.src}</span>
+                        </span>
+                        <span className={`lyr-tag${l.pend ? ' pend' : ''}`}>
+                          {l.pend ? 'kmz' : l.on ? 'activa' : ''}
+                        </span>
+                      </label>
+                      {l.opacity != null && l.on && (
+                        <div className="lyr-op" title="Opacidad de la capa">
+                          <span className="lyr-op-ic">◐</span>
+                          <input
+                            type="range"
+                            min={0}
+                            max={1}
+                            step={0.05}
+                            value={l.opacity}
+                            onChange={(e) => setOpacity(l.id, Number(e.target.value))}
+                          />
+                          <span className="lyr-op-val">{Math.round(l.opacity * 100)}%</span>
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
               )}
             </div>
           );
         })}
+
+        {/* Cargar Capas KML/KMZ */}
+        <div className="lgroup lgroup-upload">
+          <div className="lgroup-head static">
+            <span className="lgroup-title">Cargar capas KML/KMZ</span>
+            {userLayers.length > 0 && (
+              <span className="lgroup-badge on">{userLayers.filter((u) => u.on).length || '—'}</span>
+            )}
+          </div>
+          <div className="lgroup-items">
+            <input
+              ref={fileInput}
+              type="file"
+              accept=".kml,.kmz"
+              multiple
+              hidden
+              onChange={(e) => onFiles(e.target.files)}
+            />
+            <button
+              className="btn btn-secondary btn-block"
+              disabled={importing}
+              onClick={() => fileInput.current?.click()}
+            >
+              {importing ? 'Cargando…' : '＋ Añadir archivo .kml / .kmz'}
+            </button>
+            {importErr && <p className="upload-err">{importErr}</p>}
+            {userLayers.map((u) => (
+              <div className="lyr-wrap user" key={u.id}>
+                <label className="lyr" title={u.name}>
+                  <input type="checkbox" checked={u.on} onChange={() => toggleUserLayer(u.id)} />
+                  <span className="sw" style={{ background: '#6d3bd1' }} />
+                  <span className="lyr-name">
+                    {u.name}
+                    <span className="src">{u.geojson.features.length} geometrías · KML/KMZ</span>
+                  </span>
+                </label>
+                <button className="lyr-del" title="Quitar capa" onClick={() => removeUserLayer(u.id)}>
+                  ✕
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className="side-foot">

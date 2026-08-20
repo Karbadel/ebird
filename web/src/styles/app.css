@@ -86,6 +86,25 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
 .sw { width: 14px; height: 14px; border: 1px solid var(--color-text); }
 .src { display: block; font-size: 10px; letter-spacing: .05em; text-transform: uppercase;
   color: color-mix(in srgb, var(--color-text) 50%, transparent); }
+
+/* Control de opacidad por capa (idoneidad, densidad) */
+.lyr-wrap { position: relative; }
+.lyr-op { display: flex; align-items: center; gap: 7px; padding: 0 14px 7px 39px; }
+.lyr-op input[type=range] { flex: 1; accent-color: var(--navy); height: 3px; cursor: pointer; }
+.lyr-op-ic { font-size: 11px; color: color-mix(in srgb, var(--color-text) 45%, transparent); }
+.lyr-op-val { font-size: 10.5px; font-variant-numeric: tabular-nums; min-width: 30px; text-align: right;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+
+/* Cargar capas KML/KMZ */
+.lgroup-head.static { cursor: default; }
+.lgroup-head.static:hover { background: var(--color-bg); }
+.lgroup-items .btn-block { margin: 2px 14px 4px; width: calc(100% - 28px); }
+.upload-err { margin: 2px 14px 4px; font-size: 11px; color: var(--rust, #a4441e); }
+.lyr-wrap.user .lyr { padding-right: 32px; }
+.lyr-del { position: absolute; top: 6px; right: 10px; all: unset; cursor: pointer; width: 20px; height: 20px;
+  display: grid; place-items: center; font-size: 11px; color: color-mix(in srgb, var(--color-text) 45%, transparent); }
+.lyr-del:hover { color: var(--rust, #a4441e); }
+
 .side-foot { padding: 10px 14px; border-top: 1px solid var(--color-divider); display: flex; gap: 8px; }
 
 .mapwrap { position: relative; }
