@@ -84,7 +84,8 @@ interface PortalState {
 export const usePortalStore = create<PortalState>((set) => ({
   layers: LAYERS,
   legendOpen: true,
-  tab: 'lista',
+  // Por defecto (home) se muestra la ficha de la especie, no la lista.
+  tab: 'ficha',
   activeSite: null,
   panelHidden: false,
   flyTarget: null,
