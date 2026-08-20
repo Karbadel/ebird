@@ -52,6 +52,23 @@ export const CARDS_2: [IconKey, string, string | string[], string][] = [
 export const RISK_COLORS = ['#5b8a63', '#7f9a58', '#d8b445', '#c9793c', '#a8452f'];
 export const RISK_LABELS = ['Muy bajo', 'Bajo', 'Medio', 'Alto', 'Muy alto'];
 
+// Estados de la capa "Instalaciones y proyectos de generación" (id 'projects'),
+// del más incipiente al operativo (rampa de madurez del proyecto). Se usan en el
+// mapa (color del punto) y en la leyenda. La clave debe coincidir EXACTA con el
+// valor del campo `estado` del GeoJSON (generado por src/build_generacion.py).
+export const GEN_ESTADOS: { key: string; label: string; color: string }[] = [
+  { key: 'En Calificación', label: 'En calificación', color: '#b0a1b8' },
+  { key: 'Aprobado', label: 'Aprobado', color: '#6f9bd1' },
+  { key: 'En Construcción', label: 'En construcción', color: '#e0982e' },
+  { key: 'En Pruebas', label: 'En pruebas', color: '#7fb04a' },
+  { key: 'En Operación', label: 'En operación', color: '#2f7d4f' },
+];
+export const GEN_ESTADO_COLOR: Record<string, string> = Object.fromEntries(
+  GEN_ESTADOS.map((e) => [e.key, e.color]),
+);
+// Gradiente para el swatch del sidebar (representa las 5 categorías de estado).
+export const GEN_SWATCH = `linear-gradient(90deg,${GEN_ESTADOS.map((e) => e.color).join(',')})`;
+
 // Medidas de mitigación aplicables (recomendaciones de dominio, no dato del sitio).
 export const MEASURES: { t: string; tag: string }[] = [
   { t: 'Detención por demanda ante avistamiento', tag: 'Operación' },

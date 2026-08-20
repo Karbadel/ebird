@@ -1,5 +1,5 @@
 import { usePortalStore } from '../store/usePortalStore';
-import { RISK_COLORS, RISK_LABELS } from '../data/portal';
+import { RISK_COLORS, RISK_LABELS, GEN_ESTADOS } from '../data/portal';
 
 const SHORT = ['Muy bajo', 'Bajo', 'Medio', 'Alto', 'Muy alto'];
 // Rampa de la capa de densidad eBird (equivalente a EBIRD_RAMP del mapa).
@@ -13,6 +13,7 @@ export default function LegendPlate() {
   const isOn = (id: string) => layers.find((l) => l.id === id)?.on ?? false;
   const habitatOn = isOn('habitat');
   const densidadOn = isOn('ebird_densidad');
+  const projectsOn = isOn('projects');
 
   return (
     <div id="legend-plate">
@@ -44,6 +45,22 @@ export default function LegendPlate() {
             ))}
           </div>
           <span className="lgd-caption">Localidades distintas con registro · por celda</span>
+        </>
+      )}
+
+      {projectsOn && (
+        <>
+          <span className="lbl" style={{ display: 'block', marginTop: habitatOn || densidadOn ? 10 : 0 }}>
+            Proyectos de generación · estado
+          </span>
+          <div className="lgd-scale">
+            {GEN_ESTADOS.map((e) => (
+              <div key={e.key}>
+                <i style={{ background: e.color }} />
+                <span title={e.label}>{e.label}</span>
+              </div>
+            ))}
+          </div>
         </>
       )}
 

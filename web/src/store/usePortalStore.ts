@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import type { FeatureCollection } from 'geojson';
 import type { Observation } from '../types';
+import { GEN_SWATCH } from '../data/portal';
 
 export type Tab = 'lista' | 'especies' | 'tabla' | 'sitios' | 'riesgo' | 'tiempo' | 'comite' | 'colisiones' | 'ficha';
 
@@ -55,7 +56,7 @@ const LAYERS: PortalLayer[] = [
   { id: 'wind', group: 'eolico', n: 'Parques Eólicos (OPC)', src: 'MINENERGIA', sw: '#c0392b', on: false },
   { id: 'turb', group: 'eolico', n: 'Aerogeneradores', src: 'MINENERGIA · jun 2026', sw: '#8f8168', on: false },
   { id: 'lineas', group: 'eolico', n: 'Líneas de Transmisión', src: 'Coordinador · SIC', sw: '#35617a', on: false },
-  { id: 'projects', group: 'eolico', n: 'Otros proyectos de energía', src: '*.kmz IDE Energía', sw: '#c07a2b', on: false, pend: true },
+  { id: 'projects', group: 'eolico', n: 'Instalaciones y proyectos de generación', src: 'MINENERGIA · jun 2026 · 2.123 · por estado', sw: GEN_SWATCH, on: false, help: 'Catastro nacional de instalaciones y proyectos de generación eléctrica de todas las tecnologías, coloreado por estado del proyecto (de en calificación a en operación). Fuente: MINENERGIA, junio 2026. Composición: Solar FV 1.400, Termoeléctrico 242, Hidro 248, Eólico 180, Bioenergía 46, Solar CSP 5, Geotermia 2. Capa de contexto energético nacional; para el análisis de riesgo del cóndor la infraestructura directamente relevante es la eólica (ver capas de Parques Eólicos y Aerogeneradores).' },
   { id: 'windpot', group: 'eolico', n: 'Potencial Eólico', src: '*.kmz MINENERGIA', sw: '#de9426', on: false, pend: true },
   // Contexto territorial
   { id: 'protected', group: 'contexto', n: 'Áreas Protegidas', src: 'MMA 2024', sw: '#2c6a5b', on: false },

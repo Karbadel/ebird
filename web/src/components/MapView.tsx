@@ -7,6 +7,7 @@ import { mapInstance, CHILE, MAX_BOUNDS, FIT } from '../lib/mapInstance';
 import { usePortalStore } from '../store/usePortalStore';
 import { useRiskStore } from '../store/useRiskStore';
 import { useMeasureStore, segmentKm, fmtKm } from '../store/useMeasureStore';
+import { GEN_ESTADO_COLOR } from '../data/portal';
 
 type RGB = [number, number, number];
 // Rampas de color de los choropleth (idénticas al visor de riesgo fuente).
@@ -163,6 +164,25 @@ export default function MapView() {
         style: () => ({ renderer: canvas, color: '#597ea3', weight: 1, fillColor: '#597ea3', fillOpacity: 0.08 }),
         pointToLayer: pt('#597ea3', 3, 0.6),
         onEachFeature: bindName,
+      });
+
+    // Instalaciones y proyectos de generación (catastro nacional, todas las
+    // tecnologías): punto coloreado por estado del proyecto, popup con la ficha.
+    if (id === 'projects')
+      return loadLayers('generacion.geojson', {
+        pointToLayer: (f, ll) => {
+          const color = GEN_ESTADO_COLOR[String(f.properties?.['estado'] ?? '')] ?? '#8a8a8a';
+          return L.circleMarker(ll, { renderer: canvas, radius: 3, color: '#ffffff', weight: 0.5, fillColor: color, fillOpacity: 0.9 });
+        },
+        onEachFeature: (f, l) => {
+          const p = f.properties ?? {};
+          const pot = p['potencia_mw'] != null ? `${p['potencia_mw']} MW · ` : '';
+          const lugar = [p['comuna'], p['region']].filter(Boolean).join(', ');
+          l.bindPopup(
+            `<b>${p['nombre'] ?? ''}</b><br>${p['tecnologia'] ?? ''} · ${p['estado'] ?? ''}<br>${pot}${lugar}` +
+              (p['titular'] ? `<br><span style="opacity:.7">${p['titular']}</span>` : ''),
+          );
+        },
       });
 
     // Capas de riesgo — puntos / líneas / polígonos
