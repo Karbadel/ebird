@@ -113,6 +113,9 @@ export default function MapView() {
           { direction: 'top', offset: [0, -size / 2] },
         )
         .on('click', () => {
+          // En modo consulta de riesgo / medición, el clic lo maneja el listener
+          // del contenedor (consultar/medir); el pin no debe seleccionar sitio.
+          if (useRiskStore.getState().queryActive || useMeasureStore.getState().active) return;
           if (many) {
             map.flyToBounds(L.latLngBounds(g.items.map((s) => s.ll)).pad(0.35), { duration: 0.7 });
           } else {
@@ -272,20 +275,29 @@ export default function MapView() {
     map.on('zoomend moveend', () => {
       if (map.hasLayer(pins)) drawPins();
     });
-    map.on('click', (e) => {
+    // El clic de selección (consulta de riesgo / medición) se maneja a nivel
+    // DOM: las capas canvas que cubren el mapa (p. ej. idoneidad) interceptan el
+    // evento 'click' de Leaflet y este nunca llega al mapa. El clic del DOM sí se
+    // dispara siempre; convertimos el punto de pantalla a coordenadas.
+    const container = map.getContainer();
+    const onMapClick = (ev: MouseEvent) => {
+      const target = ev.target as HTMLElement;
+      // Ignora clics en controles y popups (no son selección de un punto).
+      if (target.closest('.leaflet-control') || target.closest('.leaflet-popup')) return;
+      const ll = map.mouseEventToLatLng(ev);
       const risk = useRiskStore.getState();
       if (risk.queryActive) {
-        // La consulta manda: cerramos cualquier popup de capa que se haya
-        // abierto por el mismo clic para que solo se vea el resultado del índice.
         map.closePopup();
-        risk.runQuery(e.latlng.lat, e.latlng.lng);
+        risk.runQuery(ll.lat, ll.lng);
         return;
       }
       const measure = useMeasureStore.getState();
-      if (measure.active) measure.addPoint(e.latlng.lat, e.latlng.lng);
-    });
+      if (measure.active) measure.addPoint(ll.lat, ll.lng);
+    };
+    container.addEventListener('click', onMapClick);
 
     return () => {
+      container.removeEventListener('click', onMapClick);
       map.remove();
       mapInstance.map = null;
       pinsRef.current = null;
