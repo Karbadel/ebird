@@ -8,7 +8,7 @@ import type { IconKey } from '../data/portal';
 const RAIL: { id: Tab; label: string; desc: string; icon: IconKey; match?: Tab[] }[] = [
   { id: 'ficha', label: 'La especie', desc: 'Ficha del cóndor andino', icon: 'book' },
   { id: 'lista', label: 'Registros', desc: 'Registros de cóndor y ranking de sitios', icon: 'file', match: ['lista', 'sitios'] },
-  { id: 'riesgo', label: 'Riesgo', desc: 'Motor de índice de riesgo por clic', icon: 'alert' },
+  { id: 'riesgo', label: 'Riesgo', desc: 'Motor de índice de riesgo de colisión', icon: 'alert' },
   { id: 'tiempo', label: 'Gráficos', desc: 'Colisiones de cóndor por año', icon: 'net' },
 ];
 

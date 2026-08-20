@@ -275,6 +275,9 @@ export default function MapView() {
     map.on('click', (e) => {
       const risk = useRiskStore.getState();
       if (risk.queryActive) {
+        // La consulta manda: cerramos cualquier popup de capa que se haya
+        // abierto por el mismo clic para que solo se vea el resultado del índice.
+        map.closePopup();
         risk.runQuery(e.latlng.lat, e.latlng.lng);
         return;
       }
