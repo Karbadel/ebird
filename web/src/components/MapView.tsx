@@ -49,6 +49,7 @@ export default function MapView() {
   const loadRiskData = useRiskStore((s) => s.loadData);
   const measureActive = useMeasureStore((s) => s.active);
   const measurePoints = useMeasureStore((s) => s.points);
+  const activeComuna = usePortalStore((s) => s.activeComuna);
 
   const groupsRef = useRef<Record<string, L.Layer>>({});
   const userRef = useRef<Record<string, L.Layer>>({});
@@ -56,6 +57,8 @@ export default function MapView() {
   const canvasRef = useRef<L.Canvas | null>(null);
   const riskMarkerRef = useRef<L.CircleMarker | null>(null);
   const measureLayerRef = useRef<L.LayerGroup | null>(null);
+  const comunaLayerRef = useRef<L.GeoJSON | null>(null);
+  const comunasCacheRef = useRef<FeatureCollection | null>(null);
   const loadingRef = useRef<Set<string>>(new Set());
   const filteredRef = useRef<Site[]>([]);
   const activeRef = useRef<string | null>(activeSite);
@@ -432,6 +435,59 @@ export default function MapView() {
       consumeFly();
     }
   }, [flyTarget, consumeFly]);
+
+  // Resalta el límite de la comuna elegida en el buscador. El GeoJSON de comunas
+  // se trae de forma diferida y se cachea; el contorno no es interactivo para no
+  // interceptar los clics del mapa (consulta de riesgo / medición).
+  useEffect(() => {
+    const map = mapInstance.map;
+    if (!map) return;
+    let cancelled = false;
+    const clear = () => {
+      if (comunaLayerRef.current) {
+        map.removeLayer(comunaLayerRef.current);
+        comunaLayerRef.current = null;
+      }
+    };
+    if (!activeComuna) {
+      clear();
+      return;
+    }
+    const draw = (fc: FeatureCollection) => {
+      if (cancelled) return;
+      clear();
+      const feat = fc.features.find((f) => f.properties?.['cut'] === activeComuna.cut);
+      if (!feat) return;
+      const layer = L.geoJSON(feat, {
+        interactive: false,
+        style: () => ({ renderer: L.svg(), color: '#de9426', weight: 2.5, fillColor: '#de9426', fillOpacity: 0.06 }),
+      });
+      layer.addTo(map);
+      layer.bringToFront();
+      comunaLayerRef.current = layer;
+      // Encuadre exacto según el tamaño de la comuna (maxZoom evita acercar de más
+      // en comunas diminutas; padding deja margen).
+      map.flyToBounds(layer.getBounds(), { padding: [36, 36], maxZoom: 12, duration: 0.7 });
+    };
+    if (comunasCacheRef.current) {
+      draw(comunasCacheRef.current);
+    } else {
+      // Feedback inmediato la primera vez (mientras baja el GeoJSON de 2,4 MB):
+      // vuela al centroide; al llegar el polígono se ajusta el encuadre.
+      map.flyTo([activeComuna.lat, activeComuna.lon], 9, { duration: 0.5 });
+      fetch(`${import.meta.env.BASE_URL}data/comunas.geojson`)
+        .then((r) => (r.ok ? r.json() : null))
+        .then((fc: FeatureCollection | null) => {
+          if (!fc) return;
+          comunasCacheRef.current = fc;
+          draw(fc);
+        })
+        .catch(() => {});
+    }
+    return () => {
+      cancelled = true;
+    };
+  }, [activeComuna]);
 
   // Modo consulta de riesgo: cursor de mira + precarga de los datos del motor.
   // Al activarlo, desactiva la regla (modos mutuamente excluyentes).

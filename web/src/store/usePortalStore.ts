@@ -29,6 +29,15 @@ export interface UserLayer {
   on: boolean;
 }
 
+/** Comuna del buscador (navegar + resaltar). `cut` cruza con comunas.geojson. */
+export interface Comuna {
+  cut: number;
+  nombre: string;
+  lat: number;
+  lon: number;
+  region?: string;
+}
+
 /** Títulos y orden de los grupos de capas del sidebar (acotado a cóndor). */
 export const LAYER_GROUPS: { id: LayerGroupId; title: string }[] = [
   { id: 'condor', title: 'Cóndor' },
@@ -72,6 +81,8 @@ interface PortalState {
   activeSite: string | null;
   panelHidden: boolean;
   flyTarget: [number, number] | null;
+  /** Comuna seleccionada en el buscador (para volar y resaltar su límite). */
+  activeComuna: Comuna | null;
   /** Especie seleccionada (persiste; alimenta los plates), o null. */
   species: Observation | null;
   /** Visibilidad de la ficha de detalle (desacoplada de la selección). */
@@ -93,6 +104,8 @@ interface PortalState {
   togglePanel(): void;
   fly(ll: [number, number]): void;
   consumeFly(): void;
+  /** Selecciona (o limpia) la comuna del buscador; al seleccionar, vuela a ella. */
+  setComuna(c: Comuna | null): void;
   openSpecies(o: Observation): void;
   closeSpecies(): void;
   openSheet(): void;
@@ -109,6 +122,7 @@ export const usePortalStore = create<PortalState>((set) => ({
   activeSite: null,
   panelHidden: false,
   flyTarget: null,
+  activeComuna: null,
   species: null,
   sheetOpen: false,
   titleCollapsed: false,
@@ -141,6 +155,9 @@ export const usePortalStore = create<PortalState>((set) => ({
   togglePanel: () => set((s) => ({ panelHidden: !s.panelHidden })),
   fly: (flyTarget) => set({ flyTarget }),
   consumeFly: () => set({ flyTarget: null }),
+  // El encuadre lo resuelve MapView (fitBounds al polígono); aquí solo se fija la
+  // comuna activa (o se limpia).
+  setComuna: (c) => set({ activeComuna: c }),
   // Elegir una especie: fija la selección (persiste) y abre la ficha, dejando
   // los plates visibles y expandidos.
   openSpecies: (species) => set({ species, sheetOpen: true, titleCollapsed: false, statCollapsed: false }),
