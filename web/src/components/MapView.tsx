@@ -252,6 +252,9 @@ export default function MapView() {
       pinsRef.current = null;
       measureLayerRef.current = null;
       groupsRef.current = {};
+      // Al recrear el mapa (StrictMode / HMR) descartamos el estado de carga en
+      // curso para que las capas async se vuelvan a pedir contra el mapa nuevo.
+      loadingRef.current.clear();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -265,7 +268,7 @@ export default function MapView() {
       const existing = groupsRef.current[l.id];
       if (l.on) {
         if (existing) {
-          existing.addTo(map);
+          if (!map.hasLayer(existing)) existing.addTo(map);
           if (l.id === 'obs') drawPins();
         } else {
           const loader = loaderFor(l.id);
@@ -273,15 +276,22 @@ export default function MapView() {
             loadingRef.current.add(l.id);
             loader()
               .then((layer) => {
+                // Resolución de un ciclo ya desmontado (StrictMode / recreación
+                // del mapa): ignorar por completo. Así no cacheamos una capa con
+                // un renderer canvas obsoleto ni la añadimos al mapa equivocado;
+                // el montaje vigente ya relanzó su propia carga.
+                if (cancelled) return;
                 loadingRef.current.delete(l.id);
                 groupsRef.current[l.id] = layer;
                 const stillOn = usePortalStore.getState().layers.find((x) => x.id === l.id)?.on;
-                if (!cancelled && mapInstance.map && stillOn) layer.addTo(mapInstance.map);
+                if (mapInstance.map && stillOn) layer.addTo(mapInstance.map);
               })
-              .catch(() => loadingRef.current.delete(l.id));
+              .catch(() => {
+                if (!cancelled) loadingRef.current.delete(l.id);
+              });
           }
         }
-      } else if (existing) {
+      } else if (existing && map.hasLayer(existing)) {
         map.removeLayer(existing);
       }
     });
