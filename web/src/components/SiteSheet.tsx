@@ -5,7 +5,7 @@ import type { FeatureCollection, Point } from 'geojson';
 import { useRiskStore } from '../store/useRiskStore';
 import { useDataStore } from '../store/useDataStore';
 import { usePortalStore } from '../store/usePortalStore';
-import { MEASURES, RISK_COLORS } from '../data/portal';
+import { RISK_COLORS } from '../data/portal';
 import type { Observation } from '../types';
 
 const KM = { units: 'kilometers' as const };
@@ -50,7 +50,15 @@ function exportCsv(rows: Observation[], name: string) {
 export default function SiteSheet() {
   const result = useRiskStore((s) => s.result);
   const clearResult = useRiskStore((s) => s.clearResult);
+  const queryActive = useRiskStore((s) => s.queryActive);
+  const toggleQuery = useRiskStore((s) => s.toggleQuery);
   const data = useRiskStore((s) => s.data);
+
+  // Limpia el resultado y deja el modo consulta activo para elegir otro punto.
+  const pickAnother = () => {
+    clearResult();
+    if (!queryActive) toggleQuery();
+  };
   const observations = useDataStore((s) => s.observations);
   const fly = usePortalStore((s) => s.fly);
 
@@ -76,9 +84,32 @@ export default function SiteSheet() {
     };
   }, [result, observations, data]);
 
+  // Ubicación administrativa del punto: distrito (centroide) más cercano del
+  // dataset de ganado, que trae región y comuna. Aproxima la comuna/región del
+  // clic mejor que la observación de cóndor más cercana (que puede estar lejos).
+  const place = useMemo(() => {
+    if (!result) return null;
+    const g = data?.['ganado'];
+    if (!g) return null;
+    const from = point([result.lng, result.lat]);
+    let best: { region?: string; comuna?: string } | null = null;
+    let bestD = Infinity;
+    for (const f of g.features) {
+      if (f.geometry?.type !== 'Point') continue;
+      const d = distance(from, point((f.geometry as Point).coordinates), KM);
+      if (d < bestD) {
+        bestD = d;
+        best = f.properties as { region?: string; comuna?: string };
+      }
+    }
+    return best;
+  }, [result, data]);
+
   if (!result || !near) return null;
   const { total, category, rows, lat, lng } = result;
-  const zona = near.nearest?.o;
+  const zonaLabel = place?.region
+    ? `${place.region}${place.comuna ? ` · ${place.comuna}` : ''}`
+    : 'Ubicación no determinada';
 
   return (
     <aside id="sitesheet">
@@ -89,9 +120,7 @@ export default function SiteSheet() {
 
       <div className="sheet-body">
         <div style={{ padding: '14px 14px 0' }}>
-          <span className="lbl">
-            {zona ? `${zona.region} · ${zona.loc}` : 'Sin registros de cóndor cercanos'}
-          </span>
+          <span className="lbl">{zonaLabel}</span>
           <h3 style={{ margin: '2px 0 0', textTransform: 'none', fontSize: 25 }}>Punto consultado</h3>
           <div className="mono" style={{ fontSize: 12, color: 'color-mix(in srgb,var(--color-text) 60%,transparent)' }}>
             {lat.toFixed(4)} · {lng.toFixed(4)}
@@ -109,27 +138,31 @@ export default function SiteSheet() {
         </div>
 
         <div className="sheet-sec">
-          <span className="lbl">Factores del índice</span>
-          <div style={{ marginTop: 8, display: 'flex', flexDirection: 'column', gap: 9 }}>
-            {rows.map((r) => {
-              const pct = r.score === null ? 0 : Math.round(r.score * 100);
-              const color = scoreColor(r.score);
-              return (
-                <div key={r.label}>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, fontSize: 13 }}>
-                    <span style={{ flex: 1 }}>{r.label}</span>
-                    <b className="mono" style={{ fontFamily: 'var(--font-heading)', fontSize: 14, color }}>
-                      {r.score === null ? 's/d' : r.rawText}
-                    </b>
-                    <span className="mono" style={{ fontSize: 10.5, color: 'color-mix(in srgb,var(--color-text) 50%,transparent)' }}>
-                      {r.weight}%
-                    </span>
-                  </div>
-                  <div className="fbar"><i style={{ width: `${pct}%`, background: color }} /></div>
-                </div>
-              );
-            })}
-          </div>
+          <span className="lbl">Criterios del índice</span>
+          <table className="crit-table">
+            <thead>
+              <tr>
+                <th>Criterio</th>
+                <th>Valor</th>
+                <th className="num">Puntaje</th>
+                <th className="num">Peso</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((r) => {
+                const pts = r.score === null ? null : Math.round(r.score * 100);
+                const color = scoreColor(r.score);
+                return (
+                  <tr key={r.label}>
+                    <td>{r.label}</td>
+                    <td className="mono crit-val">{r.score === null ? 's/d' : r.rawText}</td>
+                    <td className="num mono crit-pts" style={{ color }}>{pts === null ? '—' : pts}</td>
+                    <td className="num mono crit-peso">{r.weight}%</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
 
         <div className="sheet-sec bordered">
@@ -173,20 +206,12 @@ export default function SiteSheet() {
           )}
         </div>
 
-        <div className="sheet-sec bordered">
-          <span className="lbl">Medidas aplicables</span>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 8 }}>
-            {MEASURES.map((m) => (
-              <div className="measure-item" key={m.t}>
-                <span style={{ flex: 1, fontSize: 12.5 }}>{m.t}</span>
-                <span className="measure-tag">{m.tag}</span>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
 
       <div className="sheet-foot">
+        <button className="btn btn-secondary sheet-foot-wide" onClick={pickAnother}>
+          ↺ Consultar otro punto
+        </button>
         <button className="btn btn-secondary" style={{ flex: 1 }} onClick={() => exportCsv(near.recent, 'condor_punto')}>
           Exportar CSV
         </button>

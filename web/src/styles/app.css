@@ -195,7 +195,8 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
 .sheet-body { flex: 1; min-height: 0; overflow: auto; }
 .sheet-sec { padding: 0 14px; margin-top: 18px; }
 .sheet-sec.bordered { padding-top: 14px; border-top: 1px solid var(--color-divider); margin: 18px 14px 0; }
-.sheet-foot { display: flex; gap: 8px; padding: 10px; border-top: 1px solid var(--color-divider); flex: none; }
+.sheet-foot { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px; border-top: 1px solid var(--color-divider); flex: none; }
+.sheet-foot-wide { flex-basis: 100%; }
 
 .risk-card { margin: 14px; padding: 12px 14px; background: var(--color-bg); border: 1px solid var(--color-divider);
   display: flex; align-items: center; gap: 14px; }
@@ -204,6 +205,39 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
   font-family: var(--font-heading); font-weight: 700; font-size: 15px; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
 .fbar { height: 7px; margin-top: 3px; border: 1px solid var(--color-divider); background: var(--color-bg); }
 .fbar i { display: block; height: 100%; }
+
+/* Tabla de criterios del índice de riesgo (ficha del punto) */
+.crit-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12px; table-layout: fixed; }
+.crit-table th { text-align: left; font-size: 9px; letter-spacing: .05em; text-transform: uppercase; font-weight: 700;
+  color: color-mix(in srgb, var(--color-text) 50%, transparent); padding: 0 0 5px; border-bottom: 1px solid var(--color-text); }
+.crit-table td { padding: 6px 0; border-bottom: 1px solid var(--color-divider); vertical-align: top; word-break: break-word; }
+.crit-table th.num, .crit-table td.num { text-align: right; }
+.crit-table th:not(:first-child), .crit-table td:not(:first-child) { padding-left: 8px; }
+.crit-table th:nth-child(1), .crit-table td:nth-child(1) { width: 38%; }
+.crit-table th:nth-child(2), .crit-table td:nth-child(2) { width: 30%; }
+.crit-table th:nth-child(3), .crit-table td:nth-child(3) { width: 18%; }
+.crit-table th:nth-child(4), .crit-table td:nth-child(4) { width: 14%; }
+.crit-val { color: color-mix(in srgb, var(--color-text) 62%, transparent); }
+.crit-pts { font-family: var(--font-heading); font-weight: 700; }
+.crit-peso { color: color-mix(in srgb, var(--color-text) 50%, transparent); }
+
+/* Filas de peso / distancia de influencia en el panel de configuración */
+.rv-row { display: grid; grid-template-columns: 1fr auto; column-gap: 8px; row-gap: 2px; align-items: center; margin-top: 6px; }
+.rv-lbl { grid-column: 1 / -1; font-size: 10px; letter-spacing: .04em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-text) 50%, transparent); }
+.rv-row input[type=range] { width: 100%; accent-color: var(--color-accent-700); cursor: pointer; }
+.rv-val { font-size: 11px; min-width: 42px; text-align: right; white-space: nowrap;
+  color: color-mix(in srgb, var(--color-text) 62%, transparent); }
+
+/* Justificación de pesos (colapsable, al pie del panel de riesgo) */
+.risk-justif { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--color-divider); }
+.risk-justif summary { cursor: pointer; font-size: 11.5px; font-weight: 700; color: var(--navy); list-style: none; }
+.risk-justif summary::-webkit-details-marker { display: none; }
+.risk-justif summary::before { content: '▸  '; }
+.risk-justif[open] summary::before { content: '▾  '; }
+.risk-justif p { font-size: 11.5px; line-height: 1.55; margin-top: 8px;
+  color: color-mix(in srgb, var(--color-text) 80%, transparent); }
+.risk-justif a { display: inline-block; margin-top: 8px; font-size: 11px; color: var(--color-accent-700); }
 .near-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 8px; }
 .near-v { font-family: var(--font-heading); font-size: 28px; line-height: 1; }
 .measure-item { display: flex; align-items: baseline; gap: 8px; padding: 7px 9px;
