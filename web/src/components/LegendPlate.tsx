@@ -53,11 +53,12 @@ export default function LegendPlate() {
           <span className="lbl" style={{ display: 'block', marginTop: habitatOn || densidadOn ? 10 : 0 }}>
             Proyectos de generación · estado
           </span>
-          <div className="lgd-scale">
+          {/* Categórico (no degradado): lista vertical chip + etiqueta. */}
+          <div className="lgd-cats">
             {GEN_ESTADOS.map((e) => (
-              <div key={e.key}>
+              <div className="lgd-cat" key={e.key}>
                 <i style={{ background: e.color }} />
-                <span title={e.label}>{e.label}</span>
+                <span>{e.label}</span>
               </div>
             ))}
           </div>
