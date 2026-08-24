@@ -7,6 +7,7 @@ import { mapInstance, CHILE, MAX_BOUNDS, FIT } from '../lib/mapInstance';
 import { usePortalStore } from '../store/usePortalStore';
 import { useRiskStore } from '../store/useRiskStore';
 import { useMeasureStore, segmentKm, fmtKm } from '../store/useMeasureStore';
+import { useFieldStore, FIELD_STYLES } from '../store/useFieldStore';
 import { GEN_ESTADO_COLOR } from '../data/portal';
 
 type RGB = [number, number, number];
@@ -56,6 +57,8 @@ export default function MapView() {
   const measureActive = useMeasureStore((s) => s.active);
   const measurePoints = useMeasureStore((s) => s.points);
   const activeComuna = usePortalStore((s) => s.activeComuna);
+  const baseLayer = usePortalStore((s) => s.baseLayer);
+  const fieldCorrections = useFieldStore((s) => s.corrections);
 
   const groupsRef = useRef<Record<string, L.Layer>>({});
   const userRef = useRef<Record<string, L.Layer>>({});
@@ -64,13 +67,17 @@ export default function MapView() {
   const riskMarkerRef = useRef<L.CircleMarker | null>(null);
   const measureLayerRef = useRef<L.LayerGroup | null>(null);
   const comunaLayerRef = useRef<L.GeoJSON | null>(null);
+  const baseTilesRef = useRef<{ osm: L.TileLayer; sat: L.TileLayer } | null>(null);
+  const fieldLayerRef = useRef<L.LayerGroup | null>(null);
   const comunasCacheRef = useRef<FeatureCollection | null>(null);
   const loadingRef = useRef<Set<string>>(new Set());
   const filteredRef = useRef<Site[]>([]);
   const activeRef = useRef<string | null>(activeSite);
   const obsOnRef = useRef<boolean>(true);
+  const baseLayerRef = useRef<'osm' | 'satellite'>(baseLayer);
   activeRef.current = activeSite;
   obsOnRef.current = layers.find((l) => l.id === 'obs')?.on ?? true;
+  baseLayerRef.current = baseLayer;
 
   function cluster() {
     const map = mapInstance.map;
@@ -279,6 +286,19 @@ export default function MapView() {
           onEachFeature: (f, l) => l.bindPopup(`Densidad eBird: ${f.properties?.['n_localities'] ?? 0} localidades`),
         });
       };
+    // Terreno (pendiente/rugosidad, grilla 3 km): raster PRE-RENDERIZADO (Python,
+    // src/build_terreno_png.py) mostrado como una sola imagen. El campo continuo se
+    // ve suave (interpolación del navegador) y el alfa recorta la silueta del dato.
+    // El terreno_3km.json se mantiene aparte para el motor de riesgo (consulta por punto).
+    if (id === 'terreno_3km')
+      return async () => {
+        const base = import.meta.env.BASE_URL;
+        const meta = (await (await fetch(`${base}data/riesgo/terreno_3km_meta.json`)).json()) as {
+          bounds: [[number, number], [number, number]];
+        };
+        const op = usePortalStore.getState().layers.find((x) => x.id === 'terreno_3km')?.opacity ?? 0.65;
+        return L.imageOverlay(`${base}data/riesgo/terreno_3km.png`, meta.bounds, { opacity: op, interactive: false });
+      };
 
     return null;
   }
@@ -296,10 +316,16 @@ export default function MapView() {
       maxBounds: MAX_BOUNDS,
       maxBoundsViscosity: 1.0,
     });
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    const osmLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors',
       maxZoom: 18,
-    }).addTo(map);
+    });
+    const satLayer = L.tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      { attribution: 'Imagen © Esri, Maxar, Earthstar Geographics', maxZoom: 18 },
+    );
+    baseTilesRef.current = { osm: osmLayer, sat: satLayer };
+    (baseLayerRef.current === 'satellite' ? satLayer : osmLayer).addTo(map);
     L.control.scale({ metric: true, imperial: false, position: 'bottomright' }).addTo(map);
     map.fitBounds(CHILE, FIT);
     mapInstance.map = map;
@@ -309,6 +335,7 @@ export default function MapView() {
     pinsRef.current = pins;
     groupsRef.current = { obs: pins };
     measureLayerRef.current = L.layerGroup().addTo(map);
+    fieldLayerRef.current = L.layerGroup().addTo(map);
     map.on('zoomend moveend', () => {
       if (map.hasLayer(pins)) drawPins();
     });
@@ -322,6 +349,13 @@ export default function MapView() {
       // Ignora clics en controles y popups (no son selección de un punto).
       if (target.closest('.leaflet-control') || target.closest('.leaflet-popup')) return;
       const ll = map.mouseEventToLatLng(ev);
+      // Modo de corrección de campo: el clic suelta un punto tipificado que se suma
+      // en vivo al índice de riesgo (MVP: puntos; sin editor de polígonos).
+      const field = useFieldStore.getState();
+      if (field.drawType !== 'ninguno') {
+        field.add(field.drawType, { type: 'Point', coordinates: [ll.lng, ll.lat] });
+        return;
+      }
       const risk = useRiskStore.getState();
       if (risk.queryActive) {
         map.closePopup();
@@ -393,10 +427,48 @@ export default function MapView() {
   useEffect(() => {
     layers.forEach((l) => {
       if (l.opacity == null) return;
-      const g = groupsRef.current[l.id] as L.GeoJSON | undefined;
-      if (g && typeof g.setStyle === 'function') g.setStyle({ fillOpacity: l.opacity });
+      const g = groupsRef.current[l.id] as
+        | { setStyle?: (s: L.PathOptions) => void; setOpacity?: (n: number) => void }
+        | undefined;
+      if (!g) return;
+      if (typeof g.setStyle === 'function') g.setStyle({ fillOpacity: l.opacity }); // choropleth GeoJSON
+      else if (typeof g.setOpacity === 'function') g.setOpacity(l.opacity); // imageOverlay (terreno)
     });
   }, [layers]);
+
+  // Cambio de capa base OSM ↔ satélite. La base va siempre al fondo para no tapar
+  // las capas de riesgo (canvas) que se dibujan encima.
+  useEffect(() => {
+    const map = mapInstance.map;
+    const tiles = baseTilesRef.current;
+    if (!map || !tiles) return;
+    const [show, hide] = baseLayer === 'satellite' ? [tiles.sat, tiles.osm] : [tiles.osm, tiles.sat];
+    if (map.hasLayer(hide)) map.removeLayer(hide);
+    if (!map.hasLayer(show)) show.addTo(map);
+    show.bringToBack();
+  }, [baseLayer]);
+
+  // Dibuja las correcciones de campo (puntos tipificados) y recalcula el riesgo en vivo.
+  useEffect(() => {
+    const group = fieldLayerRef.current;
+    if (!group) return;
+    group.clearLayers();
+    for (const c of fieldCorrections) {
+      if (c.geometry.type !== 'Point') continue;
+      const [lng, lat] = c.geometry.coordinates as [number, number];
+      const style = FIELD_STYLES[c.tipo];
+      L.circleMarker([lat, lng], {
+        radius: 6,
+        color: '#fff',
+        weight: 1.5,
+        fillColor: style.color,
+        fillOpacity: 0.95,
+      })
+        .bindPopup(`<b>${style.label}</b><br/>Sumado al índice de riesgo.`)
+        .addTo(group);
+    }
+    useRiskStore.getState().refresh();
+  }, [fieldCorrections]);
 
   // Sincroniza las capas cargadas por el usuario (KML/KMZ) con el mapa.
   useEffect(() => {

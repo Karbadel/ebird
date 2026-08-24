@@ -1,4 +1,97 @@
 import { useRiskStore } from '../store/useRiskStore';
+import { useFieldStore, FIELD_STYLES, type DrawType } from '../store/useFieldStore';
+
+const DRAW_OPTIONS: { value: DrawType; label: string }[] = [
+  { value: 'ninguno', label: '— Desactivado (clic normal en el mapa)' },
+  { value: 'ganado', label: 'Corral / atrayente de ganado' },
+  { value: 'lineas', label: 'Línea de transmisión (no reflejada)' },
+  { value: 'antenas', label: 'Antena de telecomunicaciones' },
+];
+
+function FieldCorrectionsSection() {
+  const drawType = useFieldStore((s) => s.drawType);
+  const setDrawType = useFieldStore((s) => s.setDrawType);
+  const corrections = useFieldStore((s) => s.corrections);
+  const remove = useFieldStore((s) => s.remove);
+  const clear = useFieldStore((s) => s.clear);
+  const toGeoJSON = useFieldStore((s) => s.toGeoJSON);
+
+  const counts = {
+    ganado: corrections.filter((c) => c.tipo === 'ganado').length,
+    lineas: corrections.filter((c) => c.tipo === 'lineas').length,
+    antenas: corrections.filter((c) => c.tipo === 'antenas').length,
+  };
+
+  const exportar = () => {
+    const blob = new Blob([toGeoJSON()], { type: 'application/geo+json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `correcciones_campo_condores_${new Date().toISOString().slice(0, 10)}.geojson`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  };
+
+  return (
+    <details className="risk-justif" style={{ marginTop: 'var(--space-6)' }}>
+      <summary>Correcciones de campo (esta sesión)</summary>
+      <p style={{ fontSize: 11.5, color: 'color-mix(in srgb,var(--color-text) 60%,transparent)' }}>
+        Marca elementos observados en terreno; se suman en vivo al índice de riesgo. Viven solo en
+        tu navegador durante esta sesión — exporta el GeoJSON para incorporarlos a los datasets
+        oficiales.
+      </p>
+      <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginTop: 6 }}>
+        Tipo de elemento a marcar
+      </label>
+      <select
+        value={drawType}
+        onChange={(e) => {
+          const t = e.target.value as DrawType;
+          // Dibujo y consulta de riesgo reaccionan ambos al clic: excluyentes.
+          if (t !== 'ninguno') useRiskStore.getState().stopQuery();
+          setDrawType(t);
+        }}
+        style={{ width: '100%', padding: '6px 8px', borderRadius: 6, border: '1px solid var(--color-divider)', fontSize: 12.5, margin: '4px 0 8px' }}
+      >
+        {DRAW_OPTIONS.map((o) => (
+          <option key={o.value} value={o.value}>
+            {o.label}
+          </option>
+        ))}
+      </select>
+      {drawType !== 'ninguno' && (
+        <p style={{ fontSize: 11.5, color: 'var(--color-accent-700)', fontWeight: 600 }}>
+          ● Haz clic en el mapa para marcar: {FIELD_STYLES[drawType].label}
+        </p>
+      )}
+      <p style={{ fontSize: 11.5, margin: '4px 0' }}>
+        {corrections.length === 0
+          ? 'Sin correcciones cargadas.'
+          : `${corrections.length} activa(s): ${counts.ganado} corral(es), ${counts.lineas} línea(s), ${counts.antenas} antena(s).`}
+      </p>
+      {corrections.length > 0 && (
+        <ul style={{ listStyle: 'none', padding: 0, margin: '4px 0', maxHeight: 120, overflowY: 'auto' }}>
+          {corrections.map((c, i) => (
+            <li key={c.id} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11.5, padding: '2px 0' }}>
+              <i style={{ width: 10, height: 10, borderRadius: '50%', background: FIELD_STYLES[c.tipo].color, flexShrink: 0 }} />
+              <span style={{ flex: 1 }}>#{i + 1} {c.tipo}</span>
+              <button className="btn btn-secondary" style={{ padding: '1px 7px', fontSize: 11 }} onClick={() => remove(c.id)}>
+                ✕
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+      <div style={{ display: 'flex', gap: 8, marginTop: 6 }}>
+        <button className="btn btn-secondary" disabled={corrections.length === 0} onClick={exportar}>
+          Exportar GeoJSON
+        </button>
+        <button className="btn btn-secondary" disabled={corrections.length === 0} onClick={clear}>
+          Limpiar
+        </button>
+      </div>
+    </details>
+  );
+}
 
 const JUSTIFICACION =
   'La proximidad a parques eólicos y líneas de transmisión concentra el 40% del índice porque son la causa física directa de colisión. La idoneidad de hábitat (20%) indica probabilidad de presencia y vuelo del cóndor. Los nidos (15%, ahora con evidencia de reproducción eBird) marcan actividad reproductiva y corredores de vuelo de adultos. Vertederos, veranadas y ganado (20% combinado) son fuentes de carroña que atraen vuelo hacia zonas con infraestructura. El historial de colisiones confirmadas (5%) aporta validación empírica directa. La densidad de avistamientos eBird (5%) suma evidencia empírica de actividad de vuelo, con peso bajo porque mide esfuerzo de observación además de presencia real del cóndor (sesgo hacia sitios con más observadores). Estos pesos son un punto de partida editable, no una verdad estadística — ajústalos si dispones de datos de calibración.';
@@ -22,7 +115,11 @@ export default function RiskPanel() {
       <button
         className={`btn ${queryActive ? 'btn-primary' : 'btn-secondary'} btn-block`}
         style={{ marginTop: 0 }}
-        onClick={toggleQuery}
+        onClick={() => {
+          // Al activar la consulta, desactiva el modo dibujo (ambos usan el clic).
+          if (!queryActive) useFieldStore.getState().setDrawType('ninguno');
+          toggleQuery();
+        }}
       >
         {queryActive ? '● Consulta activa — clic en el mapa' : 'Activar consulta de riesgo'}
       </button>
@@ -101,6 +198,8 @@ export default function RiskPanel() {
           </span>
         </div>
       </div>
+
+      <FieldCorrectionsSection />
 
       <details className="risk-justif">
         <summary>Justificación de los pesos por defecto</summary>

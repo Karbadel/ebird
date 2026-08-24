@@ -3,6 +3,7 @@ import type { FeatureCollection } from 'geojson';
 import type { Observation } from '../types';
 import { GEN_SWATCH } from '../data/portal';
 import { useRiskStore } from './useRiskStore';
+import { useFieldStore } from './useFieldStore';
 
 export type Tab = 'lista' | 'especies' | 'tabla' | 'sitios' | 'riesgo' | 'tiempo' | 'comite' | 'colisiones' | 'ficha';
 
@@ -53,6 +54,7 @@ const LAYERS: PortalLayer[] = [
   { id: 'habitat', group: 'condor', n: 'Idoneidad del hábitat', src: 'Estrada Pacheco et al. 2025', sw: 'linear-gradient(90deg,#1c8eb0,#f5f3b6,#da3726)', on: true, opacity: 0.6, help: 'Grilla de 30×30 km digitalizada de forma provisional a partir de la figura publicada (Estrada Pacheco et al. 2025); reemplazar por el raster oficial en cuanto esté disponible. No usar para diferenciar riesgo entre aerogeneradores de un mismo parque.' },
   { id: 'obs', group: 'condor', n: 'Registros (eBird)', src: 'API eBird 2.0 · ≤ 30 días', sw: '#2c6a5b', on: true },
   { id: 'nidos', group: 'condor', n: 'Nidos y dormideros (eBird)', src: 'eBird C3/C4 · 81 sitios', sw: '#ff00a5', on: false },
+  { id: 'terreno_3km', group: 'condor', n: 'Pendiente / rugosidad del terreno (3km)', src: 'DEM Copernicus GLO-30 (Google Earth Engine)', sw: 'linear-gradient(90deg,#f7fcf5,#41ab5d,#00441b)', on: false, opacity: 0.65, help: 'Grilla de 3×3 km (24.843 celdas) calculada desde el DEM Copernicus GLO-30 en Google Earth Engine. Cobertura regional: ≈ Atacama a Maule (25,5°–35°S), no todo el país. Score = 65% pendiente media (normalizada 0–35°) + 35% rugosidad, medida como desviación estándar de la altitud dentro de la celda (normalizada 0–350 m). Proxy de complejidad topográfica (turbulencia / riesgo para aves planeadoras); complementa —no reemplaza— la idoneidad de hábitat (30 km). NO incorpora parámetros de vuelo del cóndor.' },
   { id: 'colisiones', group: 'condor', n: 'Colisiones confirmadas', src: 'Parques eólicos 2019–2025 · 29 registros', sw: '#a4441e', on: false },
   // Atrayentes de carroña
   { id: 'vertederos', group: 'carrona', n: 'Vertederos (formales e ilegales)', src: 'MMA', sw: '#8a4b12', on: false },
@@ -87,6 +89,8 @@ interface PortalState {
   /** Rango [min, max] de localidades/celda de la capa de densidad, para la
    *  leyenda; null hasta que la capa se carga. */
   densityDomain: [number, number] | null;
+  /** Capa base del mapa: cartografía OSM o imagen satelital (Esri). */
+  baseLayer: 'osm' | 'satellite';
   /** Especie seleccionada (persiste; alimenta los plates), o null. */
   species: Observation | null;
   /** Visibilidad de la ficha de detalle (desacoplada de la selección). */
@@ -112,6 +116,8 @@ interface PortalState {
   setComuna(c: Comuna | null): void;
   /** Fija el rango de la capa de densidad (lo calcula MapView al cargarla). */
   setDensityDomain(d: [number, number] | null): void;
+  /** Cambia la capa base del mapa (OSM ↔ satélite). */
+  setBaseLayer(b: 'osm' | 'satellite'): void;
   openSpecies(o: Observation): void;
   closeSpecies(): void;
   openSheet(): void;
@@ -130,6 +136,7 @@ export const usePortalStore = create<PortalState>((set) => ({
   flyTarget: null,
   activeComuna: null,
   densityDomain: null,
+  baseLayer: 'osm',
   species: null,
   sheetOpen: false,
   titleCollapsed: false,
@@ -164,6 +171,9 @@ export const usePortalStore = create<PortalState>((set) => ({
       const risk = useRiskStore.getState();
       risk.stopQuery();
       risk.clearResult();
+      // También desactiva el modo de dibujo de correcciones para que los clics en
+      // otras pestañas no suelten puntos por accidente.
+      useFieldStore.getState().setDrawType('ninguno');
     }
     set({ tab, sheetOpen: false, panelHidden: false });
   },
@@ -175,6 +185,7 @@ export const usePortalStore = create<PortalState>((set) => ({
   // comuna activa (o se limpia).
   setComuna: (c) => set({ activeComuna: c }),
   setDensityDomain: (densityDomain) => set({ densityDomain }),
+  setBaseLayer: (baseLayer) => set({ baseLayer }),
   // Elegir una especie: fija la selección (persiste) y abre la ficha, dejando
   // los plates visibles y expandidos.
   openSpecies: (species) => set({ species, sheetOpen: true, titleCollapsed: false, statCollapsed: false }),

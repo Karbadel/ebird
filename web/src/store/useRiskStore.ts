@@ -1,18 +1,27 @@
 import { create } from 'zustand';
 import type { FeatureCollection } from 'geojson';
 import { DEFAULT_RISK_CONFIG, RISK_LAYER_IDS, type RiskVar } from '../data/riskConfig';
-import { riskAtPoint, type RiskData, type RiskResult } from '../lib/riskEngine';
+import { riskAtPoint, type RiskData, type RiskResult, type RiskExtras, type TerrenoCell } from '../lib/riskEngine';
+import { useFieldStore } from './useFieldStore';
 
 const cloneConfig = (): RiskVar[] => DEFAULT_RISK_CONFIG.map((v) => ({ ...v }));
+
+/** Reúne las entradas extra del motor (terreno + correcciones de campo de sesión). */
+function collectExtras(terrenoCells: TerrenoCell[]): RiskExtras {
+  return { terrenoCells, field: useFieldStore.getState().asInput() };
+}
 
 interface RiskState {
   data: RiskData | null;
   loading: boolean;
+  terrenoCells: TerrenoCell[];
   config: RiskVar[];
   queryActive: boolean;
   result: (RiskResult & { lat: number; lng: number }) | null;
 
   loadData(): Promise<RiskData | null>;
+  /** Recalcula el resultado actual (p. ej. tras cambiar correcciones de campo). */
+  refresh(): void;
   toggleQuery(): void;
   stopQuery(): void;
   runQuery(lat: number, lng: number): Promise<void>;
@@ -25,7 +34,7 @@ interface RiskState {
 
 function recompute(state: RiskState): Partial<RiskState> {
   if (state.result && state.data) {
-    const r = riskAtPoint(state.result.lat, state.result.lng, state.config, state.data);
+    const r = riskAtPoint(state.result.lat, state.result.lng, state.config, state.data, collectExtras(state.terrenoCells));
     return { result: { ...r, lat: state.result.lat, lng: state.result.lng } };
   }
   return {};
@@ -34,6 +43,7 @@ function recompute(state: RiskState): Partial<RiskState> {
 export const useRiskStore = create<RiskState>((set, get) => ({
   data: null,
   loading: false,
+  terrenoCells: [],
   config: cloneConfig(),
   queryActive: false,
   result: null,
@@ -53,12 +63,24 @@ export const useRiskStore = create<RiskState>((set, get) => ({
       );
       const data: RiskData = Object.fromEntries(parts);
       set({ data, loading: false });
+      // Grilla de terreno (JSON propio, no GeoJSON): carga aparte y NO bloqueante —
+      // si falla, el criterio de terreno queda en null y el resto del motor opera igual.
+      if (!get().terrenoCells.length) {
+        fetch(`${base}terreno_3km.json`)
+          .then((r) => (r.ok ? r.json() : null))
+          .then((j: { cells?: TerrenoCell[] } | null) => {
+            if (j?.cells?.length) set({ terrenoCells: j.cells, ...recompute(get()) });
+          })
+          .catch(() => {});
+      }
       return data;
     } catch {
       set({ loading: false });
       return null;
     }
   },
+
+  refresh: () => set((s) => recompute(s)),
 
   toggleQuery: () => set((s) => ({ queryActive: !s.queryActive })),
 
@@ -68,7 +90,7 @@ export const useRiskStore = create<RiskState>((set, get) => ({
   runQuery: async (lat, lng) => {
     const data = get().data ?? (await get().loadData());
     if (!data) return;
-    const r = riskAtPoint(lat, lng, get().config, data);
+    const r = riskAtPoint(lat, lng, get().config, data, collectExtras(get().terrenoCells));
     set({ result: { ...r, lat, lng } });
   },
 

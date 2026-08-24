@@ -7,6 +7,8 @@ export default function MapControls() {
   const setActiveSite = usePortalStore((s) => s.setActiveSite);
   const measureActive = useMeasureStore((s) => s.active);
   const toggleMeasure = useMeasureStore((s) => s.toggle);
+  const baseLayer = usePortalStore((s) => s.baseLayer);
+  const setBaseLayer = usePortalStore((s) => s.setBaseLayer);
 
   return (
     <div id="ctl" className="plate">
@@ -35,6 +37,14 @@ export default function MapControls() {
         style={measureActive ? { background: 'var(--color-accent-700)', color: 'var(--color-bg)' } : undefined}
       >
         📏
+      </button>
+      <button
+        title={baseLayer === 'satellite' ? 'Ver mapa (OSM)' : 'Ver imagen satelital (Esri)'}
+        aria-pressed={baseLayer === 'satellite'}
+        onClick={() => setBaseLayer(baseLayer === 'satellite' ? 'osm' : 'satellite')}
+        style={baseLayer === 'satellite' ? { background: 'var(--color-accent-700)', color: 'var(--color-bg)' } : undefined}
+      >
+        🛰
       </button>
     </div>
   );
