@@ -27,13 +27,19 @@ function rampColor(v: number, ramp: RGB[]): string {
   const b = ramp[i1]!;
   return `rgb(${Math.round(a[0] + f * (b[0] - a[0]))},${Math.round(a[1] + f * (b[1] - a[1]))},${Math.round(a[2] + f * (b[2] - a[2]))})`;
 }
-function maxProp(fc: FeatureCollection, key: string): number {
-  let m = 0;
+// Techo de normalización por percentil 95 para la capa de densidad eBird: una sola
+// celda outlier (Farellones, RM) estira la escala y aplana el resto del país en los
+// colores más pálidos. El color satura por sobre el p95 (< 5% de las celdas). Es una
+// decisión SOLO de visualización: el motor de riesgo mantiene el máximo absoluto.
+function p95Prop(fc: FeatureCollection, key: string): number {
+  const vals: number[] = [];
   for (const ft of fc.features) {
     const v = ft.properties?.[key];
-    if (typeof v === 'number') m = Math.max(m, v);
+    if (typeof v === 'number') vals.push(v);
   }
-  return m || 1;
+  if (!vals.length) return 1;
+  vals.sort((a, b) => a - b);
+  return vals[Math.min(vals.length - 1, Math.floor(vals.length * 0.95))] || 1;
 }
 
 export default function MapView() {
@@ -254,20 +260,21 @@ export default function MapView() {
     if (id === 'ebird_densidad')
       return async () => {
         const fc = await fetchJson('data/riesgo/ebird_densidad.geojson');
-        const max = maxProp(fc, 'n_localities');
-        // Rango real (mín/máx de localidades por celda) para las etiquetas de la leyenda.
+        // Techo de color = percentil 95 (los valores por encima saturan en el color
+        // más intenso). La leyenda usa [mín, p95] para no mentir sobre el rango pintado.
+        const p95 = p95Prop(fc, 'n_localities');
         let min = Infinity;
         for (const ft of fc.features) {
           const v = ft.properties?.['n_localities'];
           if (typeof v === 'number' && v < min) min = v;
         }
-        usePortalStore.getState().setDensityDomain([Number.isFinite(min) ? min : 0, max]);
+        usePortalStore.getState().setDensityDomain([Number.isFinite(min) ? min : 0, p95]);
         const op = usePortalStore.getState().layers.find((x) => x.id === 'ebird_densidad')?.opacity ?? 0.55;
         return L.geoJSON(fc, {
           style: (feat) => {
             const v = feat?.properties?.['n_localities'];
             const n = typeof v === 'number' ? v : 0;
-            return { renderer: canvas, stroke: false, fillColor: rampColor(Math.sqrt(n / max), EBIRD_RAMP), fillOpacity: op };
+            return { renderer: canvas, stroke: false, fillColor: rampColor(Math.sqrt(n / p95), EBIRD_RAMP), fillOpacity: op };
           },
           onEachFeature: (f, l) => l.bindPopup(`Densidad eBird: ${f.properties?.['n_localities'] ?? 0} localidades`),
         });

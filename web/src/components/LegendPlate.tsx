@@ -49,11 +49,13 @@ export default function LegendPlate() {
             {EBIRD_LEGEND.map((c, i) => {
               const first = i === 0;
               const last = i === EBIRD_LEGEND.length - 1;
+              // El extremo superior es el percentil 95 (techo de color): los valores
+              // por encima saturan, por eso se marca con "+".
               const label = densityDomain
                 ? first
                   ? compact(densityDomain[0])
                   : last
-                    ? compact(densityDomain[1])
+                    ? `${compact(densityDomain[1])}+`
                     : ''
                 : first
                   ? 'Menos'
@@ -68,7 +70,7 @@ export default function LegendPlate() {
               );
             })}
           </div>
-          <span className="lgd-caption">Localidades distintas con registro · por celda</span>
+          <span className="lgd-caption">Localidades distintas con registro · por celda (top 5% saturado)</span>
         </>
       )}
 
