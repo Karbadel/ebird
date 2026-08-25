@@ -1,3 +1,5 @@
+import { useRef, useState } from 'react';
+import type { Geometry } from 'geojson';
 import { useRiskStore } from '../store/useRiskStore';
 import { useFieldStore, FIELD_STYLES, type DrawType } from '../store/useFieldStore';
 
@@ -8,13 +10,30 @@ const DRAW_OPTIONS: { value: DrawType; label: string }[] = [
   { value: 'antenas', label: 'Antena de telecomunicaciones' },
 ];
 
+// Forma laxa de un Feature leído de un archivo del usuario (aún sin validar).
+type RawFeature = { type?: string; geometry?: Geometry; properties?: { tipo?: string } | null };
+
+// Acepta un FeatureCollection o un Feature suelto y devuelve la lista de features.
+function extractFeatures(parsed: unknown): RawFeature[] {
+  if (parsed && typeof parsed === 'object') {
+    const o = parsed as { type?: unknown; features?: unknown };
+    if (Array.isArray(o.features)) return o.features as RawFeature[];
+    if (o.type === 'Feature') return [parsed as RawFeature];
+  }
+  return [];
+}
+
 function FieldCorrectionsSection() {
   const drawType = useFieldStore((s) => s.drawType);
   const setDrawType = useFieldStore((s) => s.setDrawType);
   const corrections = useFieldStore((s) => s.corrections);
+  const add = useFieldStore((s) => s.add);
   const remove = useFieldStore((s) => s.remove);
   const clear = useFieldStore((s) => s.clear);
   const toGeoJSON = useFieldStore((s) => s.toGeoJSON);
+
+  const fileInput = useRef<HTMLInputElement>(null);
+  const [importMsg, setImportMsg] = useState<string | null>(null);
 
   const counts = {
     ganado: corrections.filter((c) => c.tipo === 'ganado').length,
@@ -31,13 +50,43 @@ function FieldCorrectionsSection() {
     URL.revokeObjectURL(a.href);
   };
 
+  // Importa un GeoJSON de correcciones (el mismo formato que exporta esta sección):
+  // cada Feature debe traer properties.tipo ∈ {ganado, lineas, antenas} y geometría.
+  // Se suman a las existentes (sin deduplicar en esta versión).
+  const importar = async (file: File) => {
+    setImportMsg(null);
+    try {
+      const parsed = JSON.parse(await file.text()) as unknown;
+      const feats = extractFeatures(parsed);
+      let ok = 0;
+      let skip = 0;
+      for (const f of feats) {
+        const tipo = f?.properties?.tipo;
+        const geom = f?.geometry;
+        if ((tipo === 'ganado' || tipo === 'lineas' || tipo === 'antenas') && geom && typeof geom.type === 'string') {
+          add(tipo, geom);
+          ok++;
+        } else {
+          skip++;
+        }
+      }
+      setImportMsg(
+        ok > 0
+          ? `${ok} corrección(es) importada(s)${skip ? `, ${skip} omitida(s)` : ''}.`
+          : 'Ningún elemento válido: revisa que cada Feature tenga properties.tipo (ganado/lineas/antenas) y geometría.',
+      );
+    } catch {
+      setImportMsg('No se pudo leer el archivo (¿es un GeoJSON válido?).');
+    }
+  };
+
   return (
     <details className="risk-justif" style={{ marginTop: 'var(--space-6)' }}>
-      <summary>Correcciones de campo (esta sesión)</summary>
+      <summary>Correcciones de campo</summary>
       <p style={{ fontSize: 11.5, color: 'color-mix(in srgb,var(--color-text) 60%,transparent)' }}>
-        Marca elementos observados en terreno; se suman en vivo al índice de riesgo. Viven solo en
-        tu navegador durante esta sesión — exporta el GeoJSON para incorporarlos a los datasets
-        oficiales.
+        Marca elementos observados en terreno; se suman en vivo al índice de riesgo. Se guardan en
+        este navegador (sobreviven a recargas). Para compartirlas con otro equipo o incorporarlas a
+        los datasets oficiales, expórtalas como GeoJSON; también puedes importar un archivo recibido.
       </p>
       <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginTop: 6 }}>
         Tipo de elemento a marcar
@@ -81,14 +130,33 @@ function FieldCorrectionsSection() {
           ))}
         </ul>
       )}
-      <div style={{ display: 'flex', gap: 8, marginTop: 6 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 6 }}>
         <button className="btn btn-secondary" disabled={corrections.length === 0} onClick={exportar}>
           Exportar GeoJSON
+        </button>
+        <button className="btn btn-secondary" onClick={() => fileInput.current?.click()}>
+          Importar GeoJSON
         </button>
         <button className="btn btn-secondary" disabled={corrections.length === 0} onClick={clear}>
           Limpiar
         </button>
+        <input
+          ref={fileInput}
+          type="file"
+          accept=".geojson,.json,application/geo+json,application/json"
+          hidden
+          onChange={(e) => {
+            const f = e.target.files?.[0];
+            if (f) void importar(f);
+            e.target.value = '';
+          }}
+        />
       </div>
+      {importMsg && (
+        <p style={{ fontSize: 11.5, marginTop: 6, color: 'color-mix(in srgb,var(--color-text) 70%,transparent)' }}>
+          {importMsg}
+        </p>
+      )}
     </details>
   );
 }
