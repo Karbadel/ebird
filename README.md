@@ -41,7 +41,12 @@ npm run build
 ## Despliegue
 
 Copia el contenido de `web/dist/` a cualquier servidor de archivos estáticos
-(nginx, Apache, IIS o un CDN). No requiere Node ni backend en el servidor.
+(nginx, Apache, IIS o un CDN).
+
+**En el servidor no corre nada de este proyecto:** ni Node, ni Python, ni venv,
+ni backend. Son solo archivos estáticos, así que **convive con otros proyectos
+del mismo servidor sin conflicto** de dependencias ni de versiones — basta un
+`location`/vhost que sirva la carpeta.
 
 - Es una sola página (sin rutas de cliente): no hacen falta reglas de reescritura.
 - Sirve todo por **HTTPS**.
@@ -50,9 +55,17 @@ Para revisar el build localmente antes de subirlo: `npm run preview`.
 
 ## Actualizar los datos (opcional)
 
-Los datos son un snapshot manual. Para regenerarlos, corre los scripts de `src/`
-(requieren Python y, para eBird, una API key en `web/.env`, ya en `.gitignore`).
-Esto reescribe `web/public/data/`; luego repite el build.
+Los datos son un snapshot manual. Solo se regeneran en una máquina de desarrollo
+(nunca en el servidor). Con Python, en un entorno virtual aislado:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+Luego corre los scripts de `src/` (para eBird, una API key en `web/.env`, ya en
+`.gitignore`). Esto reescribe `web/public/data/`; después repite el build.
 
 ## Pendiente para producción
 
