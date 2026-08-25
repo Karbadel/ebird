@@ -7,6 +7,7 @@ import { searchSpecies } from '../lib/search';
 import { aggregateSites } from '../lib/derive';
 import { buildCatalog, type CatalogEntry } from '../lib/catalog';
 import RiskPanel from './RiskPanel';
+import BatchPanel from './BatchPanel';
 import SpeciesInfo from './SpeciesInfo';
 import { GROUPS, type Group, type Observation } from '../types';
 
@@ -81,6 +82,8 @@ export default function ResultsPanel() {
       <div className="phead">
         {tab === 'riesgo' ? (
           <span className="lbl">Motor de índice de riesgo de colisión</span>
+        ) : tab === 'comite' ? (
+          <span className="lbl">Comité · ranking de riesgo por parque eólico</span>
         ) : tab === 'ficha' ? (
           <span className="lbl">Cóndor andino · ficha de la especie</span>
         ) : (
@@ -106,6 +109,7 @@ export default function ResultsPanel() {
         {tab === 'sitios' && <Sitios rows={filtered} />}
         {tab === 'ficha' && <SpeciesInfo />}
         {tab === 'riesgo' && <RiskPanel />}
+        {tab === 'comite' && <BatchPanel />}
         {tab === 'tiempo' && <Tiempo />}
         {tab === 'colisiones' && <Colisiones onBack={() => setTab('lista')} />}
       </div>

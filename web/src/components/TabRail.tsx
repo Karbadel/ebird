@@ -2,13 +2,15 @@ import { usePortalStore, type Tab } from '../store/usePortalStore';
 import { Icon } from './Icon';
 import type { IconKey } from '../data/portal';
 
-// Riel de iconos de la columna izquierda del visor. Acotado a 4 accesos:
+// Riel de iconos de la columna izquierda del visor. Accesos:
 // - Registros agrupa lista + ranking de sitios (sub-pestañas dentro del panel).
+// - Riesgo es la consulta puntual; Comité es el ranking en lote de parques.
 // - Gráficos es la vista temporal. Colisiones vive en el menú superior.
 const RAIL: { id: Tab; label: string; desc: string; icon: IconKey; match?: Tab[] }[] = [
   { id: 'ficha', label: 'La especie', desc: 'Ficha del cóndor andino', icon: 'book' },
   { id: 'lista', label: 'Registros', desc: 'Registros de cóndor y ranking de sitios', icon: 'file', match: ['lista', 'sitios'] },
   { id: 'riesgo', label: 'Riesgo', desc: 'Motor de índice de riesgo de colisión', icon: 'alert' },
+  { id: 'comite', label: 'Comité', desc: 'Ranking de riesgo por parque eólico', icon: 'clip' },
   { id: 'tiempo', label: 'Gráficos', desc: 'Colisiones de cóndor por año', icon: 'net' },
 ];
 

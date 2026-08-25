@@ -451,3 +451,28 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
 @media (max-width: 900px) { .hero { grid-template-columns: 64px 1fr; height: auto; }
   .side { display: none; }
   .mapwrap { height: 460px; } }
+
+/* ── Ranking de comité (batch) ─────────────────────────────────────────────── */
+/* table-layout fijo: la tabla respeta el ancho del panel (el auto la desbordaba)
+   y las celdas envuelven en vez de empujar el ancho. */
+.batch-table { table-layout: fixed; }
+.th-sort { cursor: pointer; user-select: none; }
+.batch-table th, .batch-table td { padding: 4px 6px; overflow-wrap: anywhere; vertical-align: top; }
+.batch-row { cursor: pointer; }
+.batch-row:hover td { background: color-mix(in srgb, var(--color-accent-700) 8%, transparent); }
+.batch-cat { display: inline-block; padding: 1px 7px; border-radius: 10px; color: #fff; font-size: 10.5px;
+  font-weight: 600; white-space: nowrap; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.batch-gov { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+/* Impresión del informe: solo .batch-print, anclado al origen de la página. Se
+   neutralizan los ancestros posicionados/ocultos (incl. el hide de #panel en
+   pantallas angostas, que el ancho de papel también dispararía). */
+@media print {
+  body * { visibility: hidden; }
+  .hero, .mapwrap, #panel { position: static !important; display: block !important;
+    overflow: visible !important; max-height: none !important; height: auto !important; }
+  .batch-print, .batch-print * { visibility: visible; }
+  .batch-print { position: absolute; left: 0; top: 0; width: 100%; padding: 12px; }
+  .no-print { display: none !important; }
+  .batch-row { cursor: default; }
+}
