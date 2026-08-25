@@ -8,6 +8,58 @@
 
 ---
 
+## 2026-08-25 — Porte del 5º feature: buffers de proximidad por capa
+
+### Contexto: el "5 features" del encabezado no cuadraba con los 4 commiteados
+- **Síntoma:** el encabezado de la entrada del 24 decía "Porte de 5 features" pero
+  memoria y commits (`360f75e..96bba83`) solo registraban 4 (p95, satélite, terreno,
+  correcciones de campo).
+- **Hallazgo:** el feature faltante eran los **buffers de proximidad por capa**
+  (prototipo líneas 1170–1235): cada capa `bufferable` expone checkbox Buffer + slider
+  km y dibuja un anillo `turf.buffer` ámbar. Coincidía con el pendiente ya anotado
+  "Fase 4 riesgo (buffers/dibujar)".
+- **Dato corregido:** en el prototipo el **ganado NO es bufferable**; las bufferables son
+  6: wind (2 km), lineas (1 km), nidos (5 km), colisiones (5 km), vertederos (10 km),
+  veranadas (15 km) — radios por defecto en `defaultBufferKm`.
+
+### turf: el proyecto usa `@turf/*` modular, no el `turf` monolítico del prototipo
+- El prototipo llama `turf.buffer(...)`; el React tiene solo `@turf/distance`,
+  `@turf/helpers`, etc. (v7.4.0). Hubo que **instalar `@turf/buffer`**, que arrastra
+  **`@turf/jsts`** (~200 KB). El export es `default` (como `@turf/distance`).
+
+### Bundle: import estático de `@turf/buffer` engorda el bundle inicial (+425 KB)
+- **Síntoma:** con `import buffer from '@turf/buffer'` el bundle principal saltó a 713 KB.
+- **Solución:** import **diferido** dentro de `buildBuffer` (`await import('@turf/buffer')`),
+  igual que `importGeo` (jszip/togeojson). El bundle inicial bajó a **288 KB** y jsts quedó
+  en un chunk lazy de 424 KB que solo baja al dibujar el primer buffer.
+- **Lección:** deps pesadas de uso opcional (jsts, jszip, togeojson) → SIEMPRE import
+  diferido; el patrón ya existía en el repo.
+
+### Panes: no se puede replicar el orden del prototipo (choropleth y vectores comparten pane)
+- El prototipo ordena `paneHabitat(300) < paneBuffer(350) < paneFeatures(450)`: el anillo
+  va **sobre** la idoneidad pero **bajo** los puntos.
+- En el React, choropleths (idoneidad/densidad/terreno) y los vectores de las capas usan
+  **el mismo `canvasRef` (overlayPane 400)** → no se pueden intercalar. Se puso el pane
+  `buffers` en **401** (justo encima) para que el anillo no quede oculto bajo la idoneidad
+  (encendida por defecto). Trade-off aceptado: el relleno tenue (0,12) queda sobre los
+  puntos canvas, pero es imperceptible; los marcadores divIcon (colisiones, obs) siguen
+  arriba (markerPane 600).
+- **Lección:** al portar z-order de un prototipo, verificar si las capas destino comparten
+  renderer/pane; si comparten, el orden de 3 niveles no es replicable sin separar renderers.
+
+### Gotchas de datos y estado
+- Las capas bufferables no guardan su GeoJSON crudo (el `loaderFor` lo convierte directo a
+  Leaflet y lo descarta). Para bufferear hay que **volver a traer el GeoJSON y cachearlo**
+  aparte (`bufferDataRef`); el buffer solo se ofrece si la capa está encendida (su dato ya
+  se pidió) — consistente con la fila de opacidad.
+- **Debounce 200 ms** en el slider de km: `lineas` (2,1 MB) y `veranadas` (520 KB) son
+  pesadas de rebufferear en cada tick del arrastre. Primer encendido inmediato; cambios de
+  km debounced.
+- Revalidar `mapInstance.map === map` **después de cada await** (fetch y el import diferido)
+  para no pintar contra un mapa recreado por StrictMode/HMR — mismo patrón que los loaders.
+
+---
+
 ## 2026-08-24 — Porte de 5 features del prototipo (`mapa_riesgo_condores_V20260821.html`) a React
 
 ### Decisión de gobernanza: p95 solo en color, no en el motor de riesgo
