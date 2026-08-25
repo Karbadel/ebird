@@ -1,49 +1,64 @@
-# Proyecto de análisis de datos eBird (Chile)
+# Cóndor andino y energía eólica — Portal de riesgo
 
-Análisis de datos de aves de [eBird](https://ebird.org) para Chile.
+Visor geoespacial de riesgo de colisión de cóndores (*Vultur gryphus*) con
+parques eólicos, para el comité técnico del Ministerio de Energía de Chile.
+
+Aplicación **100 % estática** (sin backend): React + Vite + TypeScript, con los
+datos servidos como snapshots en `web/public/data/`.
 
 ## Estructura
 
-```
-ebird/
-├── src/
-│   ├── ebird_api.py   # Cliente mínimo de la API 2.0 de eBird
-│   └── explorar.py    # Script de exploración inicial (obs. recientes)
-├── data/              # Aquí irá el EBD (no versionado)
-├── .env               # API key (NO se sube a git)
-├── .env.example       # Plantilla para el .env
-├── requirements.txt
-└── README.md
-```
+- `web/` — aplicación web (frontend). **Es lo que se despliega.**
+- `src/` — pipeline Python (`build_*.py`) que genera los datos. Solo se usa para
+  **actualizar** los datasets; no forma parte del despliegue.
 
-## Puesta en marcha
+## Requisitos
+
+- Node.js 18 o superior.
+
+## Build de producción
 
 ```powershell
-# 1. Crear entorno virtual
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-
-# 2. Instalar dependencias
-pip install -r requirements.txt
-
-# 3. Verificar que el .env tiene tu EBIRD_API_KEY (ver .env.example)
-
-# 4. Ejecutar la exploración
-python src/explorar.py
+cd web
+npm install
+npm run build
 ```
 
-## Fuentes de datos
+Genera la carpeta **`web/dist/`** con todo el sitio estático.
 
-1. **API 2.0 de eBird** — datos recientes / tiempo real. Requiere API key
-   ([generar aquí](https://ebird.org/api/keygen)).
-2. **eBird Basic Dataset (EBD)** — base histórica completa. Se solicita en
-   [ebird.org/data/download](https://ebird.org/data/download). Ver el manual
-   `Manual-de-uso-base-de-datos-eBird-Chile-version-agosto-2025.pdf`.
+### Despliegue en subcarpeta
 
-## Notas sobre el EBD (según el manual eBird Chile)
+Si el portal NO va en la raíz del dominio, define la ruta pública antes del build:
 
-- Cada fila = un registro de una especie en un lugar, fecha y hora.
-- Deduplicar listas compartidas usando `GROUP IDENTIFIER`.
-- Para análisis de presencia/ausencia, filtrar `ALL SPECIES REPORTED = 1`.
-- `OBSERVATION COUNT` puede ser `"X"` (presencia sin conteo).
-- En Chile los filtros de revisión son automáticos: posibles errores locales.
+```powershell
+# Ejemplo: https://mi-servidor/condores/
+$env:BASE_PATH = '/condores/'
+npm run build
+```
+
+(En Linux/macOS: `BASE_PATH=/condores/ npm run build`.)
+
+## Despliegue
+
+Copia el contenido de `web/dist/` a cualquier servidor de archivos estáticos
+(nginx, Apache, IIS o un CDN). No requiere Node ni backend en el servidor.
+
+- Es una sola página (sin rutas de cliente): no hacen falta reglas de reescritura.
+- Sirve todo por **HTTPS**.
+
+Para revisar el build localmente antes de subirlo: `npm run preview`.
+
+## Actualizar los datos (opcional)
+
+Los datos son un snapshot manual. Para regenerarlos, corre los scripts de `src/`
+(requieren Python y, para eBird, una API key en `web/.env`, ya en `.gitignore`).
+Esto reescribe `web/public/data/`; luego repite el build.
+
+## Pendiente para producción
+
+- **Tiles del mapa (OSM / Esri):** hoy usan servidores públicos (en fase de
+  prueba). Para tráfico productivo real conviene un proveedor de teselas con API
+  key o un proxy propio, configurable en `web/src/components/MapView.tsx`.
+
+Las fuentes (Barlow / Barlow Condensed) ya están **auto-hospedadas** en
+`web/src/assets/fonts/` (sin CDN externo).

@@ -1,7 +1,8 @@
 /* Industry — design-system tokens and component classes. This file is the source of truth for the system's look; retune it here and see readme.md.
    Paleta "Cóndor": cálida (crema/tierra) con verde bosque como acento primario,
-   ámbar y terracota para datos. Retunear aquí propaga a todo el portal. */
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap');
+   ámbar y terracota para datos. Retunear aquí propaga a todo el portal.
+   Las fuentes (Barlow / Barlow Condensed) se cargan desde index.html (<link> con
+   preconnect), no por @import, para no bloquear el render de esta hoja. */
 
 :root {
   --color-bg: #f3ecdd;       /* paper — fondo de página */
