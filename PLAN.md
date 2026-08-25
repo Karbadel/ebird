@@ -8,7 +8,7 @@ cantidad.
 
 ## Decisiones confirmadas
 - **Alcance de datos:** Todo Chile, observaciones recientes de la API (≤30 días).
-- **Primer paso:** Generar el mockup (Claude Design) antes de codear.
+- **Primer paso:** Generar el mockup (diseño) antes de codear.
 - **Stack:** Vite + React + TypeScript + Tailwind + react-leaflet + Zustand +
   leaflet.markercluster.
 
@@ -43,11 +43,11 @@ Cantidad (slider).
 ebird/
 ├── data-pipeline/   # Python: ebird_api.py, build_dataset.py, .env
 ├── web/             # React: src/{components,store,types,data}
-└── mockup/          # Mockup HTML (Claude Design)
+└── mockup/          # Mockup HTML (diseño)
 ```
 
 ## Fases
-0. Mockup (Claude Design)  ← EN CURSO
+0. Mockup (diseño)  ← EN CURSO
 1. Datos: build_dataset.py genera los 4 JSON (ES/EN)
 2. Esqueleto web: Vite + React + Tailwind + mapa básico con pins
 3. Filtros: sidebar completo

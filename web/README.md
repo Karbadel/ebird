@@ -1,4 +1,4 @@
-# eBird Chile Explorer — handoff a Claude Code
+# eBird Chile Explorer
 
 Dashboard para explorar observaciones de aves de Chile sobre un mapa. Este bundle contiene
 un **esqueleto real y ejecutable** (React 18 + TypeScript estricto + Vite + Tailwind) más el
