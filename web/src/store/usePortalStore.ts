@@ -19,6 +19,10 @@ export interface PortalLayer {
   pend?: boolean;
   /** Si está definido, la capa expone un control de opacidad (0–1). */
   opacity?: number;
+  /** Si está definido, la capa expone un control de buffer de proximidad
+   *  (anillo visual alrededor de cada elemento). `km` es el radio; `on` su
+   *  visibilidad. Es puramente visual: NO altera el índice de riesgo. */
+  buffer?: { on: boolean; km: number };
   /** Nota metodológica: muestra un botón (?) con este texto explicativo. */
   help?: string;
 }
@@ -53,21 +57,21 @@ const LAYERS: PortalLayer[] = [
   // Cóndor
   { id: 'habitat', group: 'condor', n: 'Idoneidad del hábitat', src: 'Estrada Pacheco et al. 2025', sw: 'linear-gradient(90deg,#1c8eb0,#f5f3b6,#da3726)', on: true, opacity: 0.6, help: 'Grilla de 30×30 km digitalizada de forma provisional a partir de la figura publicada (Estrada Pacheco et al. 2025); reemplazar por el raster oficial en cuanto esté disponible. No usar para diferenciar riesgo entre aerogeneradores de un mismo parque.' },
   { id: 'obs', group: 'condor', n: 'Registros (eBird)', src: 'API eBird 2.0 · ≤ 30 días', sw: '#2c6a5b', on: true },
-  { id: 'nidos', group: 'condor', n: 'Nidos y dormideros (eBird)', src: 'eBird C3/C4 · 81 sitios', sw: '#ff00a5', on: false },
+  { id: 'nidos', group: 'condor', n: 'Nidos y dormideros (eBird)', src: 'eBird C3/C4 · 81 sitios', sw: '#ff00a5', on: false, buffer: { on: false, km: 5 } },
   { id: 'terreno_3km', group: 'condor', n: 'Pendiente / rugosidad del terreno (3km)', src: 'DEM Copernicus GLO-30 (Google Earth Engine)', sw: 'linear-gradient(90deg,#f7fcf5,#41ab5d,#00441b)', on: false, opacity: 0.65, help: 'Grilla de 3×3 km (24.843 celdas) calculada desde el DEM Copernicus GLO-30 en Google Earth Engine. Cobertura regional: ≈ Atacama a Maule (25,5°–35°S), no todo el país. Score = 65% pendiente media (normalizada 0–35°) + 35% rugosidad, medida como desviación estándar de la altitud dentro de la celda (normalizada 0–350 m). Proxy de complejidad topográfica (turbulencia / riesgo para aves planeadoras); complementa —no reemplaza— la idoneidad de hábitat (30 km). NO incorpora parámetros de vuelo del cóndor.' },
-  { id: 'colisiones', group: 'condor', n: 'Colisiones confirmadas', src: 'Parques eólicos 2019–2025 · 29 registros', sw: '#a4441e', on: false },
+  { id: 'colisiones', group: 'condor', n: 'Colisiones confirmadas', src: 'Parques eólicos 2019–2025 · 29 registros', sw: '#a4441e', on: false, buffer: { on: false, km: 5 } },
   // Atrayentes de carroña
-  { id: 'vertederos', group: 'carrona', n: 'Vertederos (formales e ilegales)', src: 'MMA', sw: '#8a4b12', on: false },
-  { id: 'veranadas', group: 'carrona', n: 'Veranadas', src: 'Ganadería (trashumancia)', sw: '#6f7a45', on: false },
+  { id: 'vertederos', group: 'carrona', n: 'Vertederos (formales e ilegales)', src: 'MMA', sw: '#8a4b12', on: false, buffer: { on: false, km: 10 } },
+  { id: 'veranadas', group: 'carrona', n: 'Veranadas', src: 'Ganadería (trashumancia)', sw: '#6f7a45', on: false, buffer: { on: false, km: 15 } },
   { id: 'ganado_bovino', group: 'carrona', n: 'Ganado bovino', src: 'Ganadería · cabezas por distrito', sw: '#b5651d', on: false },
   { id: 'ganado_ovino', group: 'carrona', n: 'Ganado ovino', src: 'Ganadería · cabezas por distrito', sw: '#caa472', on: false },
   { id: 'ganado_caprino', group: 'carrona', n: 'Ganado caprino', src: 'Ganadería · cabezas por distrito', sw: '#9c7a3c', on: false },
   // Otras especies
   { id: 'ebird_densidad', group: 'otras', n: 'Densidad de avistamientos', src: 'eBird · 75.111 registros', sw: 'linear-gradient(90deg,#fff7ec,#fc8d59,#990000)', on: false, opacity: 0.55, help: '75.111 registros de eBird (Chile+Argentina, filtrado a 36.012 en Chile) agregados por celda como número de localidades distintas con registro — mide esfuerzo/densidad de observación, no necesariamente abundancia real de cóndores (fuerte sesgo hacia sitios con más observadores, ej. Santiago y Torres del Paine). Cita sugerida: eBird. 2026. eBird Basic Dataset. Cornell Lab of Ornithology, Ithaca, New York.' },
   // Infraestructura energética
-  { id: 'wind', group: 'eolico', n: 'Parques Eólicos (OPC)', src: 'MINENERGIA', sw: '#c0392b', on: false },
+  { id: 'wind', group: 'eolico', n: 'Parques Eólicos (OPC)', src: 'MINENERGIA', sw: '#c0392b', on: false, buffer: { on: false, km: 2 } },
   { id: 'turb', group: 'eolico', n: 'Aerogeneradores', src: 'MINENERGIA · jun 2026', sw: '#8f8168', on: false },
-  { id: 'lineas', group: 'eolico', n: 'Líneas de Transmisión', src: 'Coordinador · SIC', sw: '#35617a', on: false },
+  { id: 'lineas', group: 'eolico', n: 'Líneas de Transmisión', src: 'Coordinador · SIC', sw: '#35617a', on: false, buffer: { on: false, km: 1 } },
   { id: 'projects', group: 'eolico', n: 'Instalaciones y proyectos de generación', src: 'MINENERGIA · jun 2026 · 2.123 · por estado', sw: GEN_SWATCH, on: false, help: 'Catastro nacional de instalaciones y proyectos de generación eléctrica de todas las tecnologías, coloreado por estado del proyecto (de en calificación a en operación). Fuente: MINENERGIA, junio 2026. Composición: Solar FV 1.400, Termoeléctrico 242, Hidro 248, Eólico 180, Bioenergía 46, Solar CSP 5, Geotermia 2. Capa de contexto energético nacional; para el análisis de riesgo del cóndor la infraestructura directamente relevante es la eólica (ver capas de Parques Eólicos y Aerogeneradores).' },
   { id: 'windpot', group: 'eolico', n: 'Potencial Eólico', src: '*.kmz MINENERGIA', sw: '#de9426', on: false, pend: true },
   // Contexto territorial
@@ -101,6 +105,10 @@ interface PortalState {
 
   toggleLayer(id: string): void;
   setOpacity(id: string, value: number): void;
+  /** Enciende/apaga el buffer de proximidad de una capa (solo visual). */
+  toggleBuffer(id: string): void;
+  /** Fija el radio (km) del buffer de proximidad de una capa. */
+  setBufferKm(id: string, km: number): void;
   clearLayers(): void;
   addUserLayer(name: string, geojson: FeatureCollection): void;
   toggleUserLayer(id: string): void;
@@ -146,11 +154,25 @@ export const usePortalStore = create<PortalState>((set) => ({
     set((s) => ({ layers: s.layers.map((l) => (l.id === id ? { ...l, on: !l.on } : l)) })),
   setOpacity: (id, value) =>
     set((s) => ({ layers: s.layers.map((l) => (l.id === id ? { ...l, opacity: value } : l)) })),
+  toggleBuffer: (id) =>
+    set((s) => ({
+      layers: s.layers.map((l) =>
+        l.id === id && l.buffer ? { ...l, buffer: { ...l.buffer, on: !l.buffer.on } } : l,
+      ),
+    })),
+  setBufferKm: (id, km) =>
+    set((s) => ({
+      layers: s.layers.map((l) =>
+        l.id === id && l.buffer ? { ...l, buffer: { ...l.buffer, km } } : l,
+      ),
+    })),
   // Apaga todas las capas conmutables (deja las pendientes/por-cargar como están)
-  // y las capas de usuario cargadas.
+  // y las capas de usuario cargadas. También apaga los buffers de proximidad.
   clearLayers: () =>
     set((s) => ({
-      layers: s.layers.map((l) => (l.pend ? l : { ...l, on: false })),
+      layers: s.layers.map((l) =>
+        l.pend ? l : { ...l, on: false, ...(l.buffer ? { buffer: { ...l.buffer, on: false } } : {}) },
+      ),
       userLayers: s.userLayers.map((u) => ({ ...u, on: false })),
     })),
   addUserLayer: (name, geojson) =>

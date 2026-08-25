@@ -19,6 +19,18 @@ const HABITAT_RAMP: RGB[] = [
 const EBIRD_RAMP: RGB[] = [
   [255, 247, 236], [254, 224, 182], [253, 187, 132], [252, 141, 89], [227, 74, 51], [153, 0, 0],
 ];
+// Buffers de proximidad (anillo visual por capa): archivo GeoJSON de cada capa
+// bufferable y color del anillo. Es SOLO visual (no altera el índice de riesgo).
+const BUFFER_FILES: Record<string, string> = {
+  wind: 'wind.geojson',
+  lineas: 'lineas.geojson',
+  nidos: 'nidos.geojson',
+  colisiones: 'colisiones.geojson',
+  vertederos: 'vertederos.geojson',
+  veranadas: 'veranadas.geojson',
+};
+const BUFFER_COLOR = '#e6a23c';
+
 function rampColor(v: number, ramp: RGB[]): string {
   const t = Math.max(0, Math.min(1, v)) * (ramp.length - 1);
   const i0 = Math.floor(t);
@@ -69,6 +81,13 @@ export default function MapView() {
   const comunaLayerRef = useRef<L.GeoJSON | null>(null);
   const baseTilesRef = useRef<{ osm: L.TileLayer; sat: L.TileLayer } | null>(null);
   const fieldLayerRef = useRef<L.LayerGroup | null>(null);
+  // Buffers de proximidad por capa: grupo dibujado, cache del GeoJSON crudo,
+  // renderer en pane propio, último km pintado y temporizador de debounce.
+  const bufferGroupsRef = useRef<Record<string, L.GeoJSON>>({});
+  const bufferDataRef = useRef<Record<string, FeatureCollection>>({});
+  const bufferRendererRef = useRef<L.Canvas | null>(null);
+  const bufferKmRef = useRef<Record<string, number>>({});
+  const bufferTimerRef = useRef<Record<string, number>>({});
   const comunasCacheRef = useRef<FeatureCollection | null>(null);
   const loadingRef = useRef<Set<string>>(new Set());
   const filteredRef = useRef<Site[]>([]);
@@ -303,6 +322,56 @@ export default function MapView() {
     return null;
   }
 
+  // Construye (o reconstruye) el anillo de buffer de una capa: trae su GeoJSON
+  // crudo (cacheado), calcula un buffer geodésico por elemento con turf y lo pinta
+  // en ámbar translúcido, en un pane que queda por DEBAJO de los elementos de la
+  // capa. Es puramente visual; el motor de riesgo no lo usa.
+  async function buildBuffer(id: string, km: number) {
+    const map = mapInstance.map;
+    const renderer = bufferRendererRef.current;
+    if (!map || !renderer || !BUFFER_FILES[id]) return;
+    let fc = bufferDataRef.current[id];
+    if (!fc) {
+      try {
+        const res = await fetch(`${import.meta.env.BASE_URL}data/riesgo/${BUFFER_FILES[id]}`);
+        if (!res.ok) return;
+        fc = (await res.json()) as FeatureCollection;
+        bufferDataRef.current[id] = fc;
+      } catch {
+        return;
+      }
+    }
+    // El mapa pudo recrearse (StrictMode/HMR) o el usuario pudo cambiar km/apagar
+    // mientras se resolvía el fetch: revalida antes de pintar.
+    if (mapInstance.map !== map) return;
+    const l = usePortalStore.getState().layers.find((x) => x.id === id);
+    if (!l || !l.buffer?.on || !l.on || l.buffer.km !== km) return;
+
+    // Import diferido: @turf/buffer arrastra @turf/jsts (~200 KB); se trae en un
+    // chunk aparte solo cuando el usuario dibuja el primer buffer.
+    const { default: buffer } = await import('@turf/buffer');
+    if (mapInstance.map !== map) return;
+
+    const rings: Feature[] = [];
+    for (const f of fc.features) {
+      try {
+        const b = buffer(f, km, { units: 'kilometers', steps: 24 });
+        if (b) rings.push(b);
+      } catch {
+        /* geometría degenerada: se omite */
+      }
+    }
+    const old = bufferGroupsRef.current[id];
+    if (old && map.hasLayer(old)) map.removeLayer(old);
+    const group = L.geoJSON({ type: 'FeatureCollection', features: rings } as FeatureCollection, {
+      interactive: false,
+      style: () => ({ renderer, pane: 'buffers', color: BUFFER_COLOR, weight: 1, fillColor: BUFFER_COLOR, fillOpacity: 0.12 }),
+    });
+    bufferGroupsRef.current[id] = group;
+    bufferKmRef.current[id] = km;
+    group.addTo(map);
+  }
+
   // Inicializa el mapa y construye las capas una sola vez.
   useEffect(() => {
     const map = L.map('map', {
@@ -330,6 +399,15 @@ export default function MapView() {
     map.fitBounds(CHILE, FIT);
     mapInstance.map = map;
     canvasRef.current = L.canvas({ padding: 0.5 });
+    // Pane propio para los buffers. En el prototipo el anillo va entre el
+    // choropleth de idoneidad y los elementos vectoriales; aquí ambos comparten
+    // el overlayPane (400), así que no se pueden intercalar. Lo dejamos justo por
+    // encima (401) para que el anillo no quede oculto bajo la idoneidad (que está
+    // encendida por defecto); el relleno es muy tenue (0,12) y no tapa los puntos.
+    map.createPane('buffers');
+    const bufPane = map.getPane('buffers');
+    if (bufPane) bufPane.style.zIndex = '401';
+    bufferRendererRef.current = L.canvas({ pane: 'buffers', padding: 0.5 });
 
     const pins = L.layerGroup();
     pinsRef.current = pins;
@@ -374,6 +452,13 @@ export default function MapView() {
       pinsRef.current = null;
       measureLayerRef.current = null;
       groupsRef.current = {};
+      // Los grupos de buffer quedan atados al mapa/renderer viejos: se descartan
+      // (el cache del GeoJSON crudo sí persiste, así que rehacerlos es barato).
+      bufferGroupsRef.current = {};
+      bufferKmRef.current = {};
+      bufferRendererRef.current = null;
+      Object.values(bufferTimerRef.current).forEach((t) => window.clearTimeout(t));
+      bufferTimerRef.current = {};
       // Al recrear el mapa (StrictMode / HMR) descartamos el estado de carga en
       // curso para que las capas async se vuelvan a pedir contra el mapa nuevo.
       loadingRef.current.clear();
@@ -434,6 +519,37 @@ export default function MapView() {
       if (typeof g.setStyle === 'function') g.setStyle({ fillOpacity: l.opacity }); // choropleth GeoJSON
       else if (typeof g.setOpacity === 'function') g.setOpacity(l.opacity); // imageOverlay (terreno)
     });
+  }, [layers]);
+
+  // Buffers de proximidad por capa. El anillo se muestra solo si la capa está
+  // encendida y su buffer activo. Primer dibujo inmediato; cambios de radio (km)
+  // con debounce, porque recalcular turf.buffer sobre capas pesadas (líneas,
+  // veranadas) en cada tick del slider trabaría el arrastre.
+  useEffect(() => {
+    const map = mapInstance.map;
+    if (!map) return;
+    layers.forEach((l) => {
+      if (!l.buffer) return;
+      const group = bufferGroupsRef.current[l.id];
+      const show = l.buffer.on && l.on;
+      if (!show) {
+        if (group && map.hasLayer(group)) map.removeLayer(group);
+        return;
+      }
+      const needBuild = !group || bufferKmRef.current[l.id] !== l.buffer.km;
+      if (!needBuild) {
+        if (!map.hasLayer(group!)) group!.addTo(map);
+        return;
+      }
+      window.clearTimeout(bufferTimerRef.current[l.id]);
+      const km = l.buffer.km;
+      if (!group) {
+        void buildBuffer(l.id, km); // primer encendido: sin espera
+      } else {
+        bufferTimerRef.current[l.id] = window.setTimeout(() => void buildBuffer(l.id, km), 200);
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [layers]);
 
   // Cambio de capa base OSM ↔ satélite. La base va siempre al fondo para no tapar

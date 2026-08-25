@@ -16,6 +16,8 @@ export default function PortalSidebar() {
   const layers = usePortalStore((s) => s.layers);
   const toggleLayer = usePortalStore((s) => s.toggleLayer);
   const setOpacity = usePortalStore((s) => s.setOpacity);
+  const toggleBuffer = usePortalStore((s) => s.toggleBuffer);
+  const setBufferKm = usePortalStore((s) => s.setBufferKm);
   const clearLayers = usePortalStore((s) => s.clearLayers);
   const toggleLegend = usePortalStore((s) => s.toggleLegend);
   const userLayers = usePortalStore((s) => s.userLayers);
@@ -176,6 +178,46 @@ export default function PortalSidebar() {
                             onChange={(e) => setOpacity(l.id, Number(e.target.value))}
                           />
                           <span className="lyr-op-val">{Math.round(l.opacity * 100)}%</span>
+                        </div>
+                      )}
+                      {l.buffer && l.on && (
+                        <div className="lyr-buf">
+                          <label
+                            className="lyr-buf-chk"
+                            title="Anillo de proximidad (solo visual, no altera el índice de riesgo)"
+                          >
+                            <input
+                              type="checkbox"
+                              checked={l.buffer.on}
+                              onChange={() => toggleBuffer(l.id)}
+                            />
+                            Buffer
+                          </label>
+                          {l.buffer.on && (
+                            <>
+                              <input
+                                type="range"
+                                min={0.5}
+                                max={40}
+                                step={0.5}
+                                value={l.buffer.km}
+                                onChange={(e) => setBufferKm(l.id, Number(e.target.value))}
+                              />
+                              <input
+                                type="number"
+                                className="lyr-buf-num"
+                                min={0.5}
+                                max={100}
+                                step={0.5}
+                                value={l.buffer.km}
+                                onChange={(e) => {
+                                  const v = Number(e.target.value);
+                                  if (Number.isFinite(v) && v > 0) setBufferKm(l.id, v);
+                                }}
+                              />
+                              <span className="lyr-buf-unit">km</span>
+                            </>
+                          )}
                         </div>
                       )}
                     </div>
