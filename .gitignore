@@ -29,3 +29,6 @@ logs/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Capturas de pruebas automatizadas del navegador (Playwright)
+.playwright-mcp/
