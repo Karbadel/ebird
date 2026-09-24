@@ -8,6 +8,55 @@
 
 ---
 
+## 2026-09-24 — Potencial eólico bruto (capa) + cruce potencial × riesgo (Comité)
+
+### KMZ de potencial: tildes rotas en origen
+- **Síntoma:** regiones "Biob�o", "�uble", "Los R�os" (U+FFFD) ya dentro del `doc.kml`;
+  no es un problema de decodificación nuestra (el archivo es UTF-8 válido).
+- **Solución:** tabla fija `REGION_FIX` en `src/build_potencial_eolico.py` + el script
+  aborta si queda alguna región con U+FFFD (no falla en silencio).
+
+### Borde escalonado: simplificar por tolerancia no ahorra hasta destruir el borde
+- Polígonos derivados de raster ~100 m (escalón ≈ 0,0009°). Medido: tolerancia
+  0,0003–0,0004° apenas ahorra (7,4 MB); recién 0,001° baja a 2,6 MB pero borra el
+  escalón. José pidió **no perder resolución de borde** → solo redondeo a 4 decimales
+  + quitar vértices duplicados/colineales: 7,6 MB (1,4 MB gzip), carga diferida.
+- **Lección:** en polígonos de origen raster, la simplificación Douglas-Peucker es
+  "todo o nada" alrededor del tamaño de píxel; medir antes de prometer ahorro.
+
+### Motor de riesgo: ~275 ms/punto → 2.277 polígonos = ~10 min en el navegador
+- **Síntoma (medido en navegador):** `riskAtPoint` ≈ 275 ms por punto, casi todo en
+  `nearestFeatureDistanceKm` contra `lineas.geojson` (pointToLineDistance por feature).
+  El ranking de 30 parques ya necesitaba trocear; 2.277 polígonos es inviable en vivo.
+- **Solución:** separar el motor en `measureAtPoint` (pesado, independiente de pesos y
+  decay) + `scoreMeasures` (aplica config y correcciones de campo, instantáneo);
+  `riskAtPoint` = composición. Mediciones precalculadas con **el mismo TypeScript**
+  (`web/scripts/precompute_potencial.ts`, bundle esbuild → node; `npm run
+  precompute:potencial`) → `data/riesgo/potencial_medidas.json`.
+- **Por qué NO en Python** (lo proponía el plan de Sonnet): duplicaría fórmulas del
+  motor y derivaría con el tiempo. Con el mismo código no hay deriva posible.
+- **Verificación:** paridad motor viejo vs nuevo = 225 comparaciones, 0 diferencias
+  (JSON completo incl. textos; 3 configs, con/sin correcciones de campo). El script de
+  precálculo re-chequea paridad tras la ida y vuelta por JSON.
+- **Re-ejecutar el precálculo** cuando cambien las capas de `data/riesgo/` o el
+  potencial; NO al cambiar pesos.
+- **Limitación documentada en la UI:** un punto interior por polígono (centroide o, si
+  cae fuera, centro del tramo interior más ancho de su horizontal); áreas de hasta
+  ~28.000 ha pueden variar por dentro.
+
+### Paleta de categorías de riesgo: dos verdes casi iguales
+- "Muy bajo" `#1f6b4a` y "Bajo" `#2e7d32` son difíciles de distinguir (visión normal
+  y daltonismo). Se mantuvo por coherencia con el resto del portal, compensando con
+  segmentos separados, tooltip, tabla y CSV. **Pendiente decidir** si se re-escalona.
+
+### Hooks condicionales en `LegendPlate` (bug preexistente)
+- `usePortalStore(densityDomain)` se llamaba DESPUÉS de `if (!open) return null` →
+  viola las reglas de hooks (puede provocar error de React al ocultar/mostrar la
+  leyenda; no se reprodujo, se corrigió preventivamente). Se movieron
+  todos los hooks antes del return.
+
+---
+
 ## 2026-08-25 — Porte del 5º feature: buffers de proximidad por capa
 
 ### Contexto: el "5 features" del encabezado no cuadraba con los 4 commiteados

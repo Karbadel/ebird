@@ -1,5 +1,6 @@
 import { usePortalStore } from '../store/usePortalStore';
 import { RISK_COLORS, RISK_LABELS, GEN_ESTADOS } from '../data/portal';
+import { RISK_CAT_COLORS } from '../data/riskConfig';
 
 const SHORT = ['Muy bajo', 'Bajo', 'Medio', 'Alto', 'Muy alto'];
 // Rampa de la capa de densidad eBird (equivalente a EBIRD_RAMP del mapa).
@@ -16,13 +17,16 @@ function compact(n: number): string {
 export default function LegendPlate() {
   const open = usePortalStore((s) => s.legendOpen);
   const layers = usePortalStore((s) => s.layers);
+  // Todos los hooks antes del return condicional (reglas de hooks de React).
+  const densityDomain = usePortalStore((s) => s.densityDomain);
+  const windpotByRisk = usePortalStore((s) => s.windpotByRisk);
   if (!open) return null;
 
-  const densityDomain = usePortalStore((s) => s.densityDomain);
   const isOn = (id: string) => layers.find((l) => l.id === id)?.on ?? false;
   const habitatOn = isOn('habitat');
   const densidadOn = isOn('ebird_densidad');
   const projectsOn = isOn('projects');
+  const windpotOn = isOn('windpot');
 
   return (
     <div id="legend-plate">
@@ -87,6 +91,29 @@ export default function LegendPlate() {
                 <span>{e.label}</span>
               </div>
             ))}
+          </div>
+        </>
+      )}
+
+      {windpotOn && (
+        <>
+          <span className="lbl" style={{ display: 'block', marginTop: habitatOn || densidadOn || projectsOn ? 10 : 0 }}>
+            {windpotByRisk ? 'Potencial eólico · índice de riesgo' : 'Potencial eólico bruto'}
+          </span>
+          <div className="lgd-cats">
+            {windpotByRisk ? (
+              RISK_LABELS.map((lab, k) => (
+                <div className="lgd-cat" key={lab}>
+                  <i style={{ background: RISK_CAT_COLORS[k] }} />
+                  <span>{lab}</span>
+                </div>
+              ))
+            ) : (
+              <div className="lgd-cat">
+                <i style={{ background: '#7a5aa6' }} />
+                <span>Área con potencial (20 ha/MW)</span>
+              </div>
+            )}
           </div>
         </>
       )}

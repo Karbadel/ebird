@@ -73,7 +73,7 @@ const LAYERS: PortalLayer[] = [
   { id: 'turb', group: 'eolico', n: 'Aerogeneradores', src: 'MINENERGIA · jun 2026', sw: '#8f8168', on: false },
   { id: 'lineas', group: 'eolico', n: 'Líneas de Transmisión', src: 'Coordinador · SIC', sw: '#35617a', on: false, buffer: { on: false, km: 1 } },
   { id: 'projects', group: 'eolico', n: 'Instalaciones y proyectos de generación', src: 'MINENERGIA · jun 2026 · 2.123 · por estado', sw: GEN_SWATCH, on: false, help: 'Catastro nacional de instalaciones y proyectos de generación eléctrica de todas las tecnologías, coloreado por estado del proyecto (de en calificación a en operación). Fuente: MINENERGIA, junio 2026. Composición: Solar FV 1.400, Termoeléctrico 242, Hidro 248, Eólico 180, Bioenergía 46, Solar CSP 5, Geotermia 2. Capa de contexto energético nacional; para el análisis de riesgo del cóndor la infraestructura directamente relevante es la eólica (ver capas de Parques Eólicos y Aerogeneradores).' },
-  { id: 'windpot', group: 'eolico', n: 'Potencial Eólico', src: '*.kmz MINENERGIA', sw: '#de9426', on: false, pend: true },
+  { id: 'windpot', group: 'eolico', n: 'Potencial eólico bruto', src: 'MINENERGIA · SEN 2026 · 2.277 áreas', sw: '#7a5aa6', on: false, opacity: 0.45, help: 'Áreas con potencial eólico bruto del Sistema Eléctrico Nacional (MINENERGIA, 2026): 2.277 polígonos en 13 regiones (Tarapacá a Los Lagos), 2,43 millones de ha y ≈ 121,7 GW. La potencia se estima con una densidad fija de 20 ha/MW, por lo que es proporcional a la superficie. Es potencial BRUTO: no descuenta restricciones territoriales, ambientales ni de conexión, y no representa proyectos. Capa de contexto (peso 0): no altera el índice de riesgo.' },
   // Contexto territorial
   { id: 'protected', group: 'contexto', n: 'Áreas Protegidas', src: 'MMA 2024', sw: '#2c6a5b', on: false },
   { id: 'airports', group: 'contexto', n: 'Aeropuertos y conos de aproximación', src: 'DGAC', sw: '#98989b', on: false },
@@ -95,6 +95,8 @@ interface PortalState {
   densityDomain: [number, number] | null;
   /** Capa base del mapa: cartografía OSM o imagen satelital (Esri). */
   baseLayer: 'osm' | 'satellite';
+  /** Colorea la capa de potencial eólico por categoría del índice de riesgo. */
+  windpotByRisk: boolean;
   /** Especie seleccionada (persiste; alimenta los plates), o null. */
   species: Observation | null;
   /** Visibilidad de la ficha de detalle (desacoplada de la selección). */
@@ -126,6 +128,9 @@ interface PortalState {
   setDensityDomain(d: [number, number] | null): void;
   /** Cambia la capa base del mapa (OSM ↔ satélite). */
   setBaseLayer(b: 'osm' | 'satellite'): void;
+  /** Activa/desactiva el coloreado por riesgo del potencial eólico (al activar,
+   *  enciende la capa). */
+  setWindpotByRisk(on: boolean): void;
   openSpecies(o: Observation): void;
   closeSpecies(): void;
   openSheet(): void;
@@ -145,6 +150,7 @@ export const usePortalStore = create<PortalState>((set) => ({
   activeComuna: null,
   densityDomain: null,
   baseLayer: 'osm',
+  windpotByRisk: false,
   species: null,
   sheetOpen: false,
   titleCollapsed: false,
@@ -208,6 +214,11 @@ export const usePortalStore = create<PortalState>((set) => ({
   setComuna: (c) => set({ activeComuna: c }),
   setDensityDomain: (densityDomain) => set({ densityDomain }),
   setBaseLayer: (baseLayer) => set({ baseLayer }),
+  setWindpotByRisk: (on) =>
+    set((s) => ({
+      windpotByRisk: on,
+      layers: on ? s.layers.map((l) => (l.id === 'windpot' ? { ...l, on: true } : l)) : s.layers,
+    })),
   // Elegir una especie: fija la selección (persiste) y abre la ficha, dejando
   // los plates visibles y expandidos.
   openSpecies: (species) => set({ species, sheetOpen: true, titleCollapsed: false, statCollapsed: false }),

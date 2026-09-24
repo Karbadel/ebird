@@ -8,6 +8,7 @@ import { usePortalStore } from '../store/usePortalStore';
 import { useRiskStore } from '../store/useRiskStore';
 import { useMeasureStore, segmentKm, fmtKm } from '../store/useMeasureStore';
 import { useFieldStore, FIELD_STYLES } from '../store/useFieldStore';
+import { useWindpotRiskStore } from '../store/useWindpotRiskStore';
 import { GEN_ESTADO_COLOR } from '../data/portal';
 
 type RGB = [number, number, number];
@@ -44,6 +45,18 @@ function rampColor(v: number, ramp: RGB[]): string {
 // celda outlier (Farellones, RM) estira la escala y aplana el resto del país en los
 // colores más pálidos. El color satura por sobre el p95 (< 5% de las celdas). Es una
 // decisión SOLO de visualización: el motor de riesgo mantiene el máximo absoluto.
+// Estilo de un polígono de potencial eólico: violeta plano, o el color de su
+// categoría de riesgo si está activo «colorear por índice» (tab Comité). Lee los
+// stores al momento de llamarse → sirve para la carga y para el re-estilo en vivo.
+function windpotStyle(f?: Feature): L.PathOptions {
+  const st = usePortalStore.getState();
+  const fillOpacity = st.layers.find((x) => x.id === 'windpot')?.opacity ?? 0.45;
+  const sc = st.windpotByRisk ? useWindpotRiskStore.getState().scores?.get(Number(f?.properties?.['id'])) : undefined;
+  return sc
+    ? { color: sc.category.color, weight: 0.6, fillColor: sc.category.color, fillOpacity }
+    : { color: '#5b3f86', weight: 0.6, fillColor: '#7a5aa6', fillOpacity };
+}
+
 function p95Prop(fc: FeatureCollection, key: string): number {
   const vals: number[] = [];
   for (const ft of fc.features) {
@@ -219,6 +232,28 @@ export default function MapView() {
           );
         },
       });
+
+    // Potencial eólico bruto (MINENERGIA): polígonos derivados de raster ~100 m,
+    // borde escalonado conservado. Relleno plano (la potencia es ∝ superficie,
+    // colorear por MW no agrega información); popup con región / ha / MW.
+    if (id === 'windpot') {
+      const fmt = (n: unknown) => (typeof n === 'number' ? n.toLocaleString('es-CL', { maximumFractionDigits: 1 }) : '—');
+      return loadLayers('potencial_eolico.geojson', {
+        style: (f) => ({ renderer: canvas, ...windpotStyle(f) }),
+        onEachFeature: (f, l) => {
+          const p = f.properties ?? {};
+          // Popup dinámico: el índice depende de los pesos vigentes.
+          l.bindPopup(() => {
+            const sc = useWindpotRiskStore.getState().scores?.get(Number(p['id']));
+            const idx = sc ? `<br>Índice de riesgo (punto interior): <b>${sc.total}</b> · ${sc.category.label}` : '';
+            return (
+              `<b>Potencial eólico bruto</b><br>${p['region'] ?? ''}<br>${fmt(p['ha'])} ha · ${fmt(p['mw'])} MW${idx}` +
+              `<br><span style="opacity:.7">20 ha/MW · MINENERGIA 2026</span>`
+            );
+          });
+        },
+      });
+    }
 
     // Capas de riesgo — puntos / líneas / polígonos
     if (id === 'wind')
@@ -507,6 +542,16 @@ export default function MapView() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [layers]);
+
+  // Potencial eólico coloreado por índice: carga las mediciones al activarlo y
+  // re-estiliza al cambiar la bandera o los índices (pesos / correcciones de campo).
+  const windpotByRisk = usePortalStore((s) => s.windpotByRisk);
+  const windpotScores = useWindpotRiskStore((s) => s.scores);
+  useEffect(() => {
+    if (windpotByRisk && !windpotScores) void useWindpotRiskStore.getState().load();
+    const g = groupsRef.current['windpot'] as L.GeoJSON | undefined;
+    g?.setStyle((f) => windpotStyle(f));
+  }, [windpotByRisk, windpotScores]);
 
   // Aplica la opacidad elegida a las capas que la exponen (idoneidad, densidad).
   useEffect(() => {

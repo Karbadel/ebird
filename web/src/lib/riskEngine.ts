@@ -103,24 +103,27 @@ function ebirdDensityScoreAt(pt: Feature<Point>, fc: FeatureCollection | undefin
   return 0;
 }
 
-function ganadoScoreAt(
-  pt: Feature<Point>,
-  decayKm: number,
-  fc: FeatureCollection | undefined,
-  fieldGanado: Geometry[] = [],
-): { score: number; detail: string[] } {
-  if (!fc && !fieldGanado.length) return { score: 0, detail: [] };
-  const species = ['bovino', 'ovino', 'caprino'];
-  const features = fc?.features ?? [];
+// Distrito ganadero más cercano por especie (independiente de la distancia de
+// influencia: la ponderación por `decayKm` se aplica después, en ganadoScore).
+// `intensity` = cabezas del distrito / máximo nacional de esa especie.
+export interface GanadoNearest {
+  sp: string;
+  d: number;
+  intensity: number;
+  distrito: string;
+}
+
+const GANADO_SPECIES = ['bovino', 'ovino', 'caprino'];
+
+function ganadoNearestAt(pt: Feature<Point>, fc: FeatureCollection): GanadoNearest[] {
+  const features = fc.features;
   const maxBy: Record<string, number> = {};
   for (const f of features) {
     const esp = String(f.properties?.['especie'] ?? '');
     maxBy[esp] = Math.max(maxBy[esp] ?? 0, num(f.properties, 'total') ?? 0);
   }
-  let sum = 0;
-  let n = 0;
-  const detail: string[] = [];
-  for (const sp of species) {
+  const out: GanadoNearest[] = [];
+  for (const sp of GANADO_SPECIES) {
     let bestD = Infinity;
     let best: Feature | null = null;
     for (const f of features) {
@@ -131,12 +134,34 @@ function ganadoScoreAt(
         best = f;
       }
     }
-    if (best && bestD <= decayKm) {
-      const prox = 1 - bestD / decayKm;
-      const intensity = (num(best.properties, 'total') ?? 0) / (maxBy[sp] || 1);
-      sum += prox * intensity;
+    if (best) {
+      out.push({
+        sp,
+        d: bestD,
+        intensity: (num(best.properties, 'total') ?? 0) / (maxBy[sp] || 1),
+        distrito: String(best.properties?.['distrito']),
+      });
+    }
+  }
+  return out;
+}
+
+function ganadoScore(
+  pt: () => Feature<Point>,
+  decayKm: number,
+  nearest: GanadoNearest[] | null,
+  fieldGanado: Geometry[] = [],
+): { score: number; detail: string[] } {
+  if (!nearest && !fieldGanado.length) return { score: 0, detail: [] };
+  let sum = 0;
+  let n = 0;
+  const detail: string[] = [];
+  for (const sp of GANADO_SPECIES) {
+    const best = nearest?.find((g) => g.sp === sp);
+    if (best && best.d <= decayKm) {
+      sum += (1 - best.d / decayKm) * best.intensity;
       n += 1;
-      detail.push(`${sp}: distrito "${best.properties?.['distrito']}" a ${bestD.toFixed(1)} km`);
+      detail.push(`${sp}: distrito "${best.distrito}" a ${best.d.toFixed(1)} km`);
     } else {
       detail.push(`${sp}: sin distritos dentro de ${decayKm} km`);
     }
@@ -145,7 +170,7 @@ function ganadoScoreAt(
   // concentración de carroña confirmado en terreno, no una estimación regional.
   if (fieldGanado.length) {
     let bestD = Infinity;
-    for (const geom of fieldGanado) bestD = Math.min(bestD, geometryMinDistanceKm(pt, geom));
+    for (const geom of fieldGanado) bestD = Math.min(bestD, geometryMinDistanceKm(pt(), geom));
     if (bestD <= decayKm) {
       sum += 1 - bestD / decayKm;
       n += 1;
@@ -197,6 +222,13 @@ function antenasScoreAt(
 }
 
 // ── índice combinado ─────────────────────────────────────────────────────────
+// El cálculo se separa en dos pasos para poder puntuar miles de puntos:
+//   1. measureAtPoint — mediciones PESADAS e independientes de pesos y distancias
+//      de influencia (distancias a capas, celdas de hábitat/eBird/terreno, distrito
+//      ganadero más cercano). Se pueden precalcular y guardar (JSON).
+//   2. scoreMeasures — aplica la configuración editable (pesos, decay, activación)
+//      y las correcciones de campo de la sesión. Barato: recalcula en vivo.
+// riskAtPoint = scoreMeasures(measureAtPoint(...)) → mismo resultado que antes.
 export interface RiskRow {
   label: string;
   weight: number;
@@ -210,17 +242,68 @@ export interface RiskResult {
   rows: RiskRow[];
 }
 
-export function riskAtPoint(
+export interface TerrenoAt {
+  score: number;
+  slope: number;
+  demSd: number;
+  demMean: number;
+}
+
+/** Mediciones de un punto. Un campo ausente = criterio no medido. */
+export interface PointMeasures {
+  /** Distancia (km) al elemento más cercano por capa de proximidad. Clave ausente
+   *  = capa sin cargar; `null` = capa sin elementos (distancia infinita). */
+  prox: Record<string, number | null>;
+  habitat?: number | null;
+  ebird?: { score: number; max: number };
+  /** null = capa de ganado sin cargar. */
+  ganado?: GanadoNearest[] | null;
+  /** null = fuera de la cobertura de la grilla de terreno (o grilla sin cargar). */
+  terreno?: TerrenoAt | null;
+}
+
+/** Mide el punto para las variables dadas (activación, pesos y decay se ignoran). */
+export function measureAtPoint(
   lat: number,
   lng: number,
-  config: RiskVar[],
+  vars: RiskVar[],
   data: RiskData,
-  extras: RiskExtras = {},
-): RiskResult {
+  terrenoCells: TerrenoCell[] = [],
+): PointMeasures {
   const pt = point([lng, lat]);
-  const maxEbird = maxProp(data['ebird_densidad'], 'n_localities');
-  const terrenoCells = extras.terrenoCells ?? [];
-  const field = extras.field;
+  const m: PointMeasures = { prox: {} };
+  for (const c of vars) {
+    if (c.kind === 'proximity' && c.layerId) {
+      const fc = data[c.layerId];
+      if (fc && !(c.layerId in m.prox)) {
+        const d = nearestFeatureDistanceKm(pt, fc);
+        m.prox[c.layerId] = isFinite(d) ? d : null;
+      }
+    } else if (c.kind === 'habitat') {
+      m.habitat = habitatScoreAt(pt, data['habitat']);
+    } else if (c.kind === 'ebird_density') {
+      const max = maxProp(data['ebird_densidad'], 'n_localities');
+      m.ebird = { score: ebirdDensityScoreAt(pt, data['ebird_densidad'], max), max };
+    } else if (c.kind === 'ganado') {
+      m.ganado = data['ganado'] ? ganadoNearestAt(pt, data['ganado']) : null;
+    } else if (c.kind === 'terreno_3km') {
+      m.terreno = terrenoScoreAt(pt, terrenoCells);
+    }
+  }
+  return m;
+}
+
+/** Aplica la configuración (pesos/decay/activación) y las correcciones de campo. */
+export function scoreMeasures(
+  lat: number,
+  lng: number,
+  m: PointMeasures,
+  config: RiskVar[],
+  field?: FieldCorrectionsInput,
+): RiskResult {
+  // Punto turf perezoso: solo lo necesitan las correcciones de campo.
+  let ptCache: Feature<Point> | null = null;
+  const pt = () => (ptCache ??= point([lng, lat]));
   const rows: RiskRow[] = [];
   let weightedSum = 0;
   let weightTotal = 0;
@@ -230,36 +313,37 @@ export function riskAtPoint(
     let score: number | null = null;
     let rawText = '';
     if (c.kind === 'proximity' && c.layerId) {
-      const fc = data[c.layerId];
+      const measured = c.layerId in m.prox;
       // Correcciones de campo de la misma capa (líneas de transmisión no reflejadas
       // en la capa oficial) se combinan con el dato oficial.
       const fieldGeoms = field && c.layerId === 'lineas' ? field.lineas : [];
-      if (fc || fieldGeoms.length) {
-        let d = fc ? nearestFeatureDistanceKm(pt, fc) : Infinity;
-        for (const geom of fieldGeoms) d = Math.min(d, geometryMinDistanceKm(pt, geom));
+      if (measured || fieldGeoms.length) {
+        let d = measured ? (m.prox[c.layerId] ?? Infinity) : Infinity;
+        for (const geom of fieldGeoms) d = Math.min(d, geometryMinDistanceKm(pt(), geom));
         score = proximityScore(d, c.decayKm ?? 0);
         const marca = fieldGeoms.length ? ' (incl. campo)' : '';
         rawText = isFinite(d) ? `${d.toFixed(2)} km${marca}` : 's/d';
       }
     } else if (c.kind === 'habitat') {
-      score = habitatScoreAt(pt, data['habitat']);
+      score = m.habitat ?? null;
       rawText = score === null ? 'sin dato' : score.toFixed(2);
     } else if (c.kind === 'ganado') {
-      const g = ganadoScoreAt(pt, c.decayKm ?? 30, data['ganado'], field?.ganado ?? []);
+      const g = ganadoScore(pt, c.decayKm ?? 30, m.ganado ?? null, field?.ganado ?? []);
       score = g.score;
       rawText = g.detail.join(' · ');
     } else if (c.kind === 'ebird_density') {
-      score = ebirdDensityScoreAt(pt, data['ebird_densidad'], maxEbird);
-      rawText = `~${Math.round(score * score * maxEbird)} localidades eBird (máx ${maxEbird})`;
+      const e = m.ebird ?? { score: 0, max: 1 };
+      score = e.score;
+      rawText = `~${Math.round(score * score * e.max)} localidades eBird (máx ${e.max})`;
     } else if (c.kind === 'terreno_3km') {
-      const t = terrenoScoreAt(pt, terrenoCells);
+      const t = m.terreno ?? null;
       score = t === null ? null : t.score;
       rawText =
         t === null
           ? 'sin dato (fuera de cobertura)'
           : `pendiente ${t.slope.toFixed(1)}°, rugosidad ${t.demSd.toFixed(0)} m, altitud ${t.demMean.toFixed(0)} m`;
     } else if (c.kind === 'user_antenas') {
-      const a = antenasScoreAt(pt, field?.antenas ?? [], c.decayKm ?? 5);
+      const a = antenasScoreAt(pt(), field?.antenas ?? [], c.decayKm ?? 5);
       score = a.score;
       rawText = a.rawText;
     }
@@ -272,4 +356,16 @@ export function riskAtPoint(
 
   const total = weightTotal > 0 ? Math.round((weightedSum / weightTotal) * 100) : 0;
   return { total, category: riskCategory(total), rows };
+}
+
+export function riskAtPoint(
+  lat: number,
+  lng: number,
+  config: RiskVar[],
+  data: RiskData,
+  extras: RiskExtras = {},
+): RiskResult {
+  // Solo se miden las variables activas (mismo coste que el cálculo directo).
+  const m = measureAtPoint(lat, lng, config.filter((c) => c.enabled), data, extras.terrenoCells ?? []);
+  return scoreMeasures(lat, lng, m, config, extras.field);
 }

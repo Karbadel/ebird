@@ -464,6 +464,18 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
   font-weight: 600; white-space: nowrap; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 .batch-gov { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
+/* Potencial eólico × riesgo: barra apilada 100% (segmentos con 2px de separación
+   y extremos redondeados) + muestra de color en la tabla. */
+.wp-bar { display: flex; gap: 2px; height: 12px; margin-top: 3px; }
+.wp-bar i { flex-basis: 0; min-width: 2px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.wp-bar i:first-child { border-radius: 4px 0 0 4px; }
+.wp-bar i:last-child { border-radius: 0 4px 4px 0; }
+.wp-bar i:only-child { border-radius: 4px; }
+.wp-reg { margin-top: 7px; break-inside: avoid; }
+.wp-reg-h { display: flex; justify-content: space-between; font-size: 11.5px; }
+.wp-sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; vertical-align: -1px;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
 /* Impresión del informe: solo .batch-print, anclado al origen de la página. Se
    neutralizan los ancestros posicionados/ocultos (incl. el hide de #panel en
    pantallas angostas, que el ancho de papel también dispararía). */

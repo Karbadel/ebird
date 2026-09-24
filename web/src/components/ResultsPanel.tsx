@@ -8,6 +8,7 @@ import { aggregateSites } from '../lib/derive';
 import { buildCatalog, type CatalogEntry } from '../lib/catalog';
 import RiskPanel from './RiskPanel';
 import BatchPanel from './BatchPanel';
+import WindpotRiskPanel from './WindpotRiskPanel';
 import SpeciesInfo from './SpeciesInfo';
 import { GROUPS, type Group, type Observation } from '../types';
 
@@ -44,6 +45,8 @@ export default function ResultsPanel() {
   const observations = useDataStore((s) => s.observations);
   const collisions = useDataStore((s) => s.collisions);
   const f = useFilterStore();
+  // Vista del tab Comité: ranking de parques operativos o potencial eólico × riesgo.
+  const [comiteView, setComiteView] = useState<'parques' | 'potencial'>('parques');
 
   const rows = useMemo(
     () => (activeSite ? filtered.filter((o) => o.loc === activeSite) : filtered),
@@ -83,7 +86,9 @@ export default function ResultsPanel() {
         {tab === 'riesgo' ? (
           <span className="lbl">Motor de índice de riesgo de colisión</span>
         ) : tab === 'comite' ? (
-          <span className="lbl">Comité · ranking de riesgo por parque eólico</span>
+          <span className="lbl">
+            {comiteView === 'parques' ? 'Comité · ranking de riesgo por parque eólico' : 'Comité · potencial eólico según riesgo'}
+          </span>
         ) : tab === 'ficha' ? (
           <span className="lbl">Cóndor andino · ficha de la especie</span>
         ) : (
@@ -99,6 +104,12 @@ export default function ResultsPanel() {
           <button role="tab" aria-selected={tab === 'sitios'} onClick={() => setTab('sitios')}>Ranking de sitios</button>
         </div>
       )}
+      {tab === 'comite' && (
+        <div className="tabs no-print" role="tablist" aria-label="Vista del comité">
+          <button role="tab" aria-selected={comiteView === 'parques'} onClick={() => setComiteView('parques')}>Parques operativos</button>
+          <button role="tab" aria-selected={comiteView === 'potencial'} onClick={() => setComiteView('potencial')}>Potencial eólico</button>
+        </div>
+      )}
       {OBS_TABS.includes(tab) && (
         <GroupTags counts={groupCounts} active={f.group} onToggle={(g) => f.update('group', f.group === g ? '' : g)} />
       )}
@@ -109,7 +120,7 @@ export default function ResultsPanel() {
         {tab === 'sitios' && <Sitios rows={filtered} />}
         {tab === 'ficha' && <SpeciesInfo />}
         {tab === 'riesgo' && <RiskPanel />}
-        {tab === 'comite' && <BatchPanel />}
+        {tab === 'comite' && (comiteView === 'parques' ? <BatchPanel /> : <WindpotRiskPanel />)}
         {tab === 'tiempo' && <Tiempo />}
         {tab === 'colisiones' && <Colisiones onBack={() => setTab('lista')} />}
       </div>

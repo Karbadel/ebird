@@ -42,6 +42,9 @@ export function riskCategory(score: number): RiskCategory {
   return { label: 'Muy bajo', color: '#1f6b4a' };
 }
 
+/** Color de cada categoría en orden muy bajo → muy alto (alineado con RISK_LABELS). */
+export const RISK_CAT_COLORS = [0, 12, 30, 50, 70].map((v) => riskCategory(v).color);
+
 /** IDs de las capas GeoJSON que alimentan el motor (web/public/data/riesgo/). */
 export const RISK_LAYER_IDS = [
   'wind', 'lineas', 'nidos', 'colisiones', 'vertederos',
