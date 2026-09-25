@@ -13,12 +13,15 @@ import Sections from './components/Sections';
 import Footer from './components/Footer';
 import Loader from './components/Loader';
 import { useDataStore } from './store/useDataStore';
+import { initUrlSync } from './lib/urlState';
 
 export default function App() {
   const load = useDataStore((s) => s.load);
   useEffect(() => {
     load();
   }, [load]);
+  // Enlaces compartibles: vista del visor ↔ hash de la URL (Atrás/Adelante).
+  useEffect(() => initUrlSync(), []);
 
   return (
     <>

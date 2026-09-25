@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useDataStore } from '../store/useDataStore';
 import { usePortalStore, type Tab } from '../store/usePortalStore';
 import { goToVisor } from '../lib/nav';
+import { hrefFor } from '../lib/urlState';
 
 const CONDOR_SCI = 'Vultur gryphus';
 // Navegación superior del portal, alineada con el riel del visor: cada entrada
@@ -47,7 +48,7 @@ export default function PortalHeader() {
         {NAV2.filter((n) => !n.pend && n.tab).map((n) => (
           <a
             key={n.label}
-            href="#visor"
+            href={hrefFor(n.tab!)}
             {...(n.match?.includes(tab) ? { 'aria-current': 'page' as const } : {})}
             onClick={(e) => {
               e.preventDefault();

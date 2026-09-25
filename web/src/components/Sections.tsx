@@ -1,5 +1,6 @@
 import { CARDS, type PortalCard } from '../data/portal';
 import { goToVisor } from '../lib/nav';
+import { hrefFor } from '../lib/urlState';
 import { Icon } from './Icon';
 
 function Cell({ c }: { c: PortalCard }) {
@@ -19,7 +20,7 @@ function Cell({ c }: { c: PortalCard }) {
         <p>{c.b}</p>
       )}
       <a
-        href="#visor"
+        href={c.go && c.go !== 'visor' ? hrefFor(c.go) : '#visor'}
         onClick={(e) => {
           e.preventDefault();
           goToVisor(c.go === 'visor' ? undefined : c.go);

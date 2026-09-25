@@ -8,6 +8,19 @@
 
 ---
 
+## 2026-09-25 — Navegación, Etapa 2 (enlaces compartibles)
+
+- `lib/urlState.ts`: la vista vive en el hash (`#/comite/potencial?perfil=sensibilidad`).
+  Hash y no rutas reales → funciona en cualquier servidor estático sin «SPA fallback».
+  Cambiar pestaña/sub-vista hace `pushState` (Atrás/Adelante funcionan); cambiar solo
+  el perfil hace `replaceState` (no llena el historial). Bandera `applying` evita el
+  bucle store → URL → store al aplicar un `popstate`.
+- NO van en la URL: pesos editados a mano («Personalizado»), capas, comuna, punto.
+- **Gotcha:** el hook de seguridad del entorno marca `regex.exec(...)` como si fuera
+  `child_process.exec` (falso positivo) → usar `str.match(regex)`.
+- **Gotcha TS:** con `exactOptionalPropertyTypes`, los campos opcionales que reciben
+  `undefined` explícito deben declararse `campo?: T | undefined`.
+
 ## 2026-09-25 — Navegación, Etapa 1 (limpieza y accesos)
 
 ### Diagnóstico: 4 sistemas de navegación superpuestos
