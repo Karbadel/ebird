@@ -72,6 +72,10 @@
 - Se implementó el mecanismo de perfiles (`RISK_PROFILES`, `applyProfile`,
   `ProfileSelect`) con "Nuevos desarrollos" marcado como PROPUESTA pendiente del
   comité (solo pesos; distancias sin cambio). Medio pasa de 1,4 a 15,1 GW.
+- **Renombrado (2026-09-25, pedido de José):** "Nuevos desarrollos" → **"Sensibilidad del
+  sitio"** (id `sensibilidad`): el nombre anterior sugería proyectos concretos. Las notas
+  del selector explican en lenguaje simple la pregunta que responde cada perfil y el
+  punto abierto del efecto acumulado (cercanía a parques en 0%).
 
 ### Ayuda contextual (InfoTip): textos centralizados en `data/ayuda.ts`
 - Botón (?) reutilizable `InfoTip` con nota de posición FIJA (calculada desde el botón):

@@ -46,18 +46,24 @@ export const RISK_PROFILES: RiskProfile[] = [
     id: 'vigente',
     label: 'Vigente',
     estado: 'Pesos por defecto del motor',
-    nota: 'Riesgo de colisión asociado a la infraestructura existente: 40% del peso es cercanía a parques eólicos y líneas de transmisión.',
+    nota:
+      'Responde: «¿qué tan riesgoso es este punto por la infraestructura que YA existe?». Por eso el 40% del peso es ' +
+      'cercanía a parques eólicos y líneas de transmisión actuales. Úsalo para evaluar parques en operación. Ojo: en ' +
+      'zonas sin parques cerca (como el potencial eólico) el índice sale bajo porque hoy no hay turbinas, no porque el ' +
+      'sitio sea seguro para el cóndor.',
     weights: {},
   },
   {
-    id: 'nuevos',
-    label: 'Nuevos desarrollos',
+    id: 'sensibilidad',
+    label: 'Sensibilidad del sitio',
     estado: 'PROPUESTA técnica — pendiente de validación del comité',
     nota:
-      'Para evaluar sitios sin infraestructura (p. ej. el potencial eólico bruto): la cercanía a parques existentes no aplica (0%) y ' +
-      'las líneas bajan a 5%; el peso pasa a la sensibilidad del sitio para el cóndor: hábitat 30%, nidos 25%, terreno 10% ' +
-      '(solo Atacama–Maule; fuera de cobertura el motor lo excluye y renormaliza), vertederos 10% y el resto 5%. ' +
-      'Las distancias de influencia NO se modifican.',
+      'Responde: «si se construyera un parque aquí, ¿qué tan sensible es este lugar para el cóndor?». Útil para zonas ' +
+      'donde aún no hay parques, como el potencial eólico bruto. No evalúa proyectos concretos: el potencial es recurso ' +
+      'de viento, no proyectos. Deja fuera la cercanía a parques existentes (0%), baja las líneas a 5% y da el peso a ' +
+      'las condiciones del lugar: hábitat 30%, nidos 25%, terreno 10%, vertederos 10% y el resto 5%. ' +
+      'Punto a discutir: con 0% no considera el efecto acumulado de sumar un parque junto a otros ya existentes; el ' +
+      'comité podría preferir un peso bajo (5–10%).',
     weights: { wind: 0, lineas: 5, habitat: 30, nidos: 25, vertederos: 10, veranadas: 5, ganado: 5, colisiones: 5, ebird_densidad: 5, terreno_3km: 10 },
   },
 ];

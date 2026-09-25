@@ -34,7 +34,7 @@ export const AYUDA = {
   variables:
     'Peso: importancia relativa de cada criterio (se normaliza sobre la suma de los activos, no necesita sumar 100). Distancia de influencia: hasta dónde «llega» un elemento; el puntaje de cercanía baja linealmente de 1 (encima) a 0 (a esa distancia). Desmarca una variable para excluirla. Un criterio sin dato en el punto (p. ej. terreno fuera de Atacama–Maule) se excluye y el resto se renormaliza.',
   perfil:
-    'Un perfil es un conjunto nombrado de pesos. «Vigente» son los pesos por defecto del motor (orientados a riesgo cerca de infraestructura existente). «Nuevos desarrollos» es una propuesta técnica para evaluar sitios sin infraestructura; está pendiente de validación del comité. Si editas un peso a mano el perfil pasa a «Personalizado». El perfil activo queda registrado en los informes.',
+    'Un perfil es un conjunto de pesos pensado para una pregunta. «Vigente»: ¿qué tan riesgoso es un punto por la infraestructura que ya existe? (para parques en operación). «Sensibilidad del sitio»: si se construyera un parque aquí, ¿qué tan sensible es el lugar para el cóndor? (para zonas sin parques, como el potencial eólico). Este segundo es una propuesta pendiente de validación del comité. Si editas un peso a mano el perfil pasa a «Personalizado». El perfil activo queda registrado en los informes.',
   correcciones:
     'Agrega en el mapa elementos observados en terreno que no están en las capas oficiales: corrales o atrayentes de ganado, líneas eléctricas y antenas (percha o dormidero). Entran al cálculo del índice en vivo (las antenas con peso 0 salvo que se lo asignes). Se guardan en este navegador y se pueden exportar e importar como GeoJSON para compartirlas.',
 
