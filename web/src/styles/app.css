@@ -124,6 +124,13 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
   border-left: 2px solid var(--navy); font-size: 11.5px; line-height: 1.5;
   color: color-mix(in srgb, var(--color-text) 82%, transparent); }
 
+/* Nota flotante del botón (?) (InfoTip): posición fija, sobre el mapa y paneles. */
+.infotip { position: fixed; z-index: 3000; padding: 9px 11px; background: var(--color-surface);
+  border: 1px solid color-mix(in srgb, var(--navy) 35%, transparent); border-left: 3px solid var(--navy);
+  box-shadow: 0 6px 18px rgba(0,0,0,.18); font-family: var(--font-body); font-size: 11.5px; line-height: 1.5; font-weight: 400;
+  letter-spacing: normal; text-transform: none; color: var(--color-text); }
+.lbl .lyr-help-btn, h4 .lyr-help-btn { margin-left: 5px; vertical-align: 1px; }
+
 /* Cargar capas KML/KMZ */
 .lgroup-head.static { cursor: default; }
 .lgroup-head.static:hover { background: var(--color-bg); }

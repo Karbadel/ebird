@@ -105,6 +105,7 @@ export default function ChipBar() {
           onFocus={() => q && setOpen(true)}
           onKeyDown={onKey}
           placeholder="Buscar comuna…"
+          title="Escribe una comuna (tolera tildes y errores de tipeo): el mapa vuela a ella y resalta su límite. No filtra los datos."
           autoComplete="off"
           role="combobox"
           aria-expanded={open}

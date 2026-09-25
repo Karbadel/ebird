@@ -3,6 +3,8 @@ import type { Geometry } from 'geojson';
 import { useRiskStore } from '../store/useRiskStore';
 import { useFieldStore, FIELD_STYLES, type DrawType } from '../store/useFieldStore';
 import ProfileSelect from './ProfileSelect';
+import InfoTip from './InfoTip';
+import { AYUDA } from '../data/ayuda';
 
 const DRAW_OPTIONS: { value: DrawType; label: string }[] = [
   { value: 'ninguno', label: '— Desactivado (clic normal en el mapa)' },
@@ -83,7 +85,9 @@ function FieldCorrectionsSection() {
 
   return (
     <details className="risk-justif" style={{ marginTop: 'var(--space-6)' }}>
-      <summary>Correcciones de campo</summary>
+      <summary>
+        Correcciones de campo <InfoTip k="correcciones" label="Correcciones de campo" />
+      </summary>
       <p style={{ fontSize: 11.5, color: 'color-mix(in srgb,var(--color-text) 60%,transparent)' }}>
         Marca elementos observados en terreno; se suman en vivo al índice de riesgo. Se guardan en
         este navegador (sobreviven a recargas). Para compartirlas con otro equipo o incorporarlas a
@@ -184,6 +188,7 @@ export default function RiskPanel() {
       <button
         className={`btn ${queryActive ? 'btn-primary' : 'btn-secondary'} btn-block`}
         style={{ marginTop: 0 }}
+        title={AYUDA.consulta}
         onClick={() => {
           // Al activar la consulta, desactiva el modo dibujo (ambos usan el clic).
           if (!queryActive) useFieldStore.getState().setDrawType('ninguno');
@@ -208,7 +213,9 @@ export default function RiskPanel() {
         estimado y el desglose de criterios.
       </p>
 
-      <h4 style={{ marginTop: 'var(--space-6)', fontSize: 13 }}>Variables del índice de riesgo</h4>
+      <h4 style={{ marginTop: 'var(--space-6)', fontSize: 13 }}>
+        Variables del índice de riesgo <InfoTip k="variables" label="Variables del índice" />
+      </h4>
       <ProfileSelect />
       <p style={{ fontSize: 11, color: 'color-mix(in srgb,var(--color-text) 55%,transparent)', marginBottom: 6 }}>
         {locked

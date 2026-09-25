@@ -10,7 +10,7 @@ const RAIL: { id: Tab; label: string; desc: string; icon: IconKey; match?: Tab[]
   { id: 'ficha', label: 'La especie', desc: 'Ficha del cóndor andino', icon: 'book' },
   { id: 'lista', label: 'Registros', desc: 'Registros de cóndor y ranking de sitios', icon: 'file', match: ['lista', 'sitios'] },
   { id: 'riesgo', label: 'Riesgo', desc: 'Motor de índice de riesgo de colisión', icon: 'alert' },
-  { id: 'comite', label: 'Comité', desc: 'Ranking de riesgo por parque eólico', icon: 'clip' },
+  { id: 'comite', label: 'Comité', desc: 'Ranking de parques operativos y potencial eólico según riesgo', icon: 'clip' },
   { id: 'tiempo', label: 'Gráficos', desc: 'Colisiones de cóndor por año', icon: 'net' },
 ];
 

@@ -58,19 +58,22 @@ export default function WindpotRiskPanel() {
     <div className="batch" style={{ padding: 'var(--space-4)' }}>
       <ProfileSelect />
       <div className="no-print" style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
-        <label style={{ display: 'flex', gap: 6, alignItems: 'center', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
+        <label
+          style={{ display: 'flex', gap: 6, alignItems: 'center', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}
+          title="Pinta cada área de potencial en el mapa con el color de su categoría de riesgo (enciende la capa si está apagada)"
+        >
           <input type="checkbox" checked={byRisk} onChange={(e) => setByRisk(e.target.checked)} />
           Colorear la capa en el mapa por índice
         </label>
         {national && items && (
           <>
-            <button className="btn btn-secondary" onClick={() => exportWindpotSummaryCsv(byRegion, national)}>
+            <button className="btn btn-secondary" onClick={() => exportWindpotSummaryCsv(byRegion, national)} title="MW, ha y número de áreas por región y categoría de riesgo">
               CSV por región
             </button>
-            <button className="btn btn-secondary" onClick={() => exportWindpotAreasCsv(items)}>
+            <button className="btn btn-secondary" onClick={() => exportWindpotAreasCsv(items)} title="Una fila por área de potencial: punto evaluado, índice y categoría">
               CSV por área
             </button>
-            <button className="btn btn-secondary" onClick={() => window.print()}>
+            <button className="btn btn-secondary" onClick={() => window.print()} title="Abre el diálogo de impresión: elige «Guardar como PDF» para obtener el informe">
               Imprimir / PDF
             </button>
           </>

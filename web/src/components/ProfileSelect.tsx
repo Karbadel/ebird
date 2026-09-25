@@ -1,5 +1,6 @@
 import { useRiskStore } from '../store/useRiskStore';
 import { RISK_PROFILES } from '../data/riskConfig';
+import InfoTip from './InfoTip';
 
 /** Nombre del perfil activo, para metadatos de tablas e informes. */
 export function useProfileLabel(): string {
@@ -18,7 +19,9 @@ export default function ProfileSelect() {
   return (
     <div className="no-print prof">
       <label className="prof-row">
-        <span className="rv-lbl">Perfil de pesos</span>
+        <span className="rv-lbl">
+          Perfil de pesos <InfoTip k="perfil" label="Perfil de pesos" />
+        </span>
         <select value={profileId ?? ''} onChange={(e) => applyProfile(e.target.value)}>
           {profileId == null && <option value="">Personalizado</option>}
           {RISK_PROFILES.map((x) => (

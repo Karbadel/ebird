@@ -12,7 +12,7 @@ export default function MapControls() {
 
   return (
     <div id="ctl" className="plate">
-      <button title="Panel de resultados" onClick={togglePanel}>
+      <button title="Mostrar u ocultar el panel de resultados" onClick={togglePanel}>
         ☰
       </button>
       <button title="Acercar" onClick={() => mapInstance.map?.zoomIn()}>
@@ -22,7 +22,7 @@ export default function MapControls() {
         −
       </button>
       <button
-        title="Vista inicial"
+        title="Volver a la vista inicial de Chile"
         onClick={() => {
           setActiveSite(null);
           mapInstance.map?.flyToBounds(CHILE, FIT);
@@ -31,7 +31,7 @@ export default function MapControls() {
         ⌂
       </button>
       <button
-        title="Medir distancia"
+        title="Medir distancia: clic en el mapa para agregar puntos"
         aria-pressed={measureActive}
         onClick={toggleMeasure}
         style={measureActive ? { background: 'var(--color-accent-700)', color: 'var(--color-bg)' } : undefined}

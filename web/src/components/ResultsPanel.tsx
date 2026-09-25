@@ -11,6 +11,7 @@ import BatchPanel from './BatchPanel';
 import WindpotRiskPanel from './WindpotRiskPanel';
 import SpeciesInfo from './SpeciesInfo';
 import { GROUPS, type Group, type Observation } from '../types';
+import InfoTip from './InfoTip';
 
 const fmt = (n: number) => n.toLocaleString('es-CL');
 const uniqSorted = (v: string[]) => [...new Set(v)].filter(Boolean).sort((a, b) => a.localeCompare(b, 'es'));
@@ -33,6 +34,9 @@ function speciesCountBy(obs: Observation[], keyFn: (o: Observation) => string): 
   return out;
 }
 const OBS_TABS: Tab[] = ['lista', 'tabla', 'sitios', 'especies'];
+// Nota de ayuda de las pestañas de registros y colisiones (encabezado genérico).
+const tipFor = (t: Tab): 'lista' | 'sitios' | 'tiempo' | 'colisiones' | null =>
+  t === 'lista' || t === 'sitios' || t === 'tiempo' || t === 'colisiones' ? t : null;
 
 export default function ResultsPanel() {
   const filtered = useFiltered();
@@ -84,17 +88,21 @@ export default function ResultsPanel() {
     <aside id="panel" className="plate">
       <div className="phead">
         {tab === 'riesgo' ? (
-          <span className="lbl">Motor de índice de riesgo de colisión</span>
+          <span className="lbl">Motor de índice de riesgo de colisión <InfoTip k="riesgo" label="Motor de riesgo" /></span>
         ) : tab === 'comite' ? (
           <span className="lbl">
             {comiteView === 'parques' ? 'Comité · ranking de riesgo por parque eólico' : 'Comité · potencial eólico según riesgo'}
+            <InfoTip k={comiteView === 'parques' ? 'comiteParques' : 'comitePotencial'} label="Comité" />
           </span>
         ) : tab === 'ficha' ? (
-          <span className="lbl">Cóndor andino · ficha de la especie</span>
+          <span className="lbl">Cóndor andino · ficha de la especie <InfoTip k="ficha" label="Ficha de la especie" /></span>
         ) : (
           <div style={{ flex: 1 }}>
             <div className="fig mono">{fmt(total)}</div>
-            <span className="lbl">{scope}</span>
+            <span className="lbl">
+              {scope}
+              {tipFor(tab) && <InfoTip k={tipFor(tab)!} label={scope} />}
+            </span>
           </div>
         )}
       </div>

@@ -63,10 +63,10 @@ export default function BatchPanel() {
         </button>
         {rows && rows.length > 0 && (
           <>
-            <button className="btn btn-secondary" onClick={() => exportBatchCsv(sorted)}>
+            <button className="btn btn-secondary" onClick={() => exportBatchCsv(sorted)} title="Descarga la tabla con el puntaje de cada criterio por parque">
               Exportar CSV
             </button>
-            <button className="btn btn-secondary" onClick={() => window.print()}>
+            <button className="btn btn-secondary" onClick={() => window.print()} title="Abre el diálogo de impresión: elige «Guardar como PDF» para obtener el informe">
               Imprimir / PDF
             </button>
           </>

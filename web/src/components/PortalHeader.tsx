@@ -59,11 +59,11 @@ export default function PortalHeader() {
         ))}
       </nav>
       <div className="hstats">
-        <div>
+        <div title="Registros de cóndor andino de la API eBird (últimos 30 días a la fecha de la última actualización de datos)">
           <div className="fig mono">{condorCount}</div>
           <span className="lbl">Registros de cóndor</span>
         </div>
-        <div>
+        <div title="Colisiones confirmadas de cóndor con aerogeneradores, 2019–2025 (ver Gráficos y la capa Colisiones confirmadas)">
           <div className="fig mono" style={{ color: 'var(--amber)' }}>{collisions}</div>
           <span className="lbl">Colisiones</span>
         </div>

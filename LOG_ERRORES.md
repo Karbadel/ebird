@@ -44,10 +44,44 @@
   cae fuera, centro del tramo interior más ancho de su horizontal); áreas de hasta
   ~28.000 ha pueden variar por dentro.
 
-### Paleta de categorías de riesgo: dos verdes casi iguales
-- "Muy bajo" `#1f6b4a` y "Bajo" `#2e7d32` son difíciles de distinguir (visión normal
-  y daltonismo). Se mantuvo por coherencia con el resto del portal, compensando con
-  segmentos separados, tooltip, tabla y CSV. **Pendiente decidir** si se re-escalona.
+### Paleta de categorías de riesgo: dos verdes casi iguales → escala ordinal
+- "Muy bajo" `#1f6b4a` y "Bajo" `#2e7d32` eran casi indistinguibles, y el semáforo
+  rojo/verde falla con protanopía/deuteranopía. Además había DOS escalas para las
+  mismas etiquetas (`riskCategory` y `RISK_COLORS`).
+- **Solución:** una sola escala ORDINAL (`RISK_CAT_COLORS` en `riskConfig.ts`): tono
+  terracota único, luminosidad monótona, validada con el validador de dataviz
+  (`--ordinal`, pasa sobre papel y superficie). `RiskCategory.text` da el color de
+  texto legible sobre cada relleno (tinta en los 2 claros, blanco en los 3 oscuros).
+  El número grande de la ficha pasó a tinta (el color de serie no se usa para texto).
+- **Gotcha del validador:** `validate_palette.js` es ESM sin `"type": "module"` →
+  correr con `node --experimental-default-type=module`.
+
+### Leyenda de Idoneidad no coincidía con el mapa (bug preexistente)
+- La leyenda usaba la escala de riesgo (verde→óxido) pero el mapa pinta la idoneidad
+  con `HABITAT_RAMP` (azul→amarillo→rojo). Ahora usa `HABITAT_LEGEND` (muestras de la
+  rampa real).
+
+### Perfil "nuevos desarrollos": reponderar NO produce riesgo Alto (hallazgo de datos)
+- Simulado sobre las 2.277 áreas: sin cercanía a infraestructura el índice máximo es
+  44 (Alto empieza en 50). El índice es un promedio ponderado y casi todos los
+  criterios de proximidad valen 0 en casi todas las áreas: están a 133 km de mediana
+  del nido conocido más cercano (p10 66 km; nidos decae a 8 km → solo 6 áreas > 0).
+- Estirar la influencia de nidos/colisiones a 30–50 km apenas da 0,1–0,5 GW en Alto:
+  forzarlo sería manipular el índice. El límite es el inventario de nidos (81 sitios
+  eBird), no los pesos.
+- Se implementó el mecanismo de perfiles (`RISK_PROFILES`, `applyProfile`,
+  `ProfileSelect`) con "Nuevos desarrollos" marcado como PROPUESTA pendiente del
+  comité (solo pesos; distancias sin cambio). Medio pasa de 1,4 a 15,1 GW.
+
+### Ayuda contextual (InfoTip): textos centralizados en `data/ayuda.ts`
+- Botón (?) reutilizable `InfoTip` con nota de posición FIJA (calculada desde el botón):
+  una nota absoluta la recortaban los paneles con `overflow`. Se cierra con clic fuera,
+  Escape o scroll. Las notas metodológicas por capa siguen en `help` de `LAYERS`.
+- El riel ya tenía tooltip propio (`.rail-tip`); no duplicar con `title` largo.
+- **Tropiezo de proceso:** `rm -rf web/src` para restaurar un respaldo falló a medias
+  ("Device or resource busy": Vite tiene tomada la carpeta) y dejó archivos borrados.
+  Se restauró con `cp -r respaldo/. web/src/` y `diff -r`. **Lección:** con el dev
+  server corriendo, restaurar copiando ENCIMA, nunca borrar la carpeta.
 
 ### Hooks condicionales en `LegendPlate` (bug preexistente)
 - `usePortalStore(densityDomain)` se llamaba DESPUÉS de `if (!open) return null` →

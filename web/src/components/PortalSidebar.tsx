@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 import { usePortalStore, LAYER_GROUPS, type LayerGroupId } from '../store/usePortalStore';
+import InfoTip from './InfoTip';
 
 const norm = (s: string) =>
   s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
@@ -85,7 +86,7 @@ export default function PortalSidebar() {
   return (
     <aside className="side">
       <div className="side-head">
-        <span className="side-title">Capas</span>
+        <span className="side-title">Capas <InfoTip k="capas" label="Panel de capas" /></span>
         <span className="side-badge">{activeCount} activas</span>
       </div>
 
@@ -231,7 +232,7 @@ export default function PortalSidebar() {
         {/* Cargar Capas KML/KMZ */}
         <div className="lgroup lgroup-upload">
           <div className="lgroup-head static">
-            <span className="lgroup-title">Cargar capas KML/KMZ</span>
+            <span className="lgroup-title">Cargar capas KML/KMZ <InfoTip k="capasCargar" label="Cargar KML/KMZ" /></span>
             {userLayers.length > 0 && (
               <span className="lgroup-badge on">{userLayers.filter((u) => u.on).length || '—'}</span>
             )}

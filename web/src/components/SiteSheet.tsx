@@ -7,6 +7,7 @@ import { useDataStore } from '../store/useDataStore';
 import { usePortalStore } from '../store/usePortalStore';
 import { RISK_COLORS } from '../data/portal';
 import type { Observation } from '../types';
+import InfoTip from './InfoTip';
 
 const KM = { units: 'kilometers' as const };
 const RADIUS = 25;
@@ -132,13 +133,13 @@ export default function SiteSheet() {
             <div className="risk-num">
               {total}<span style={{ fontSize: 18, opacity: 0.55 }}>/100</span>
             </div>
-            <span className="lbl">Índice de riesgo</span>
+            <span className="lbl">Índice de riesgo <InfoTip k="indice" label="Índice de riesgo" /></span>
           </div>
           <span className="risk-badge" style={{ background: category.color, color: category.text }}>{category.label}</span>
         </div>
 
         <div className="sheet-sec">
-          <span className="lbl">Criterios del índice</span>
+          <span className="lbl">Criterios del índice <InfoTip k="criterios" label="Criterios del índice" /></span>
           <table className="crit-table">
             <thead>
               <tr>
@@ -166,7 +167,7 @@ export default function SiteSheet() {
         </div>
 
         <div className="sheet-sec bordered">
-          <span className="lbl">Cóndor en {RADIUS} km</span>
+          <span className="lbl">Cóndor en {RADIUS} km <InfoTip k="cercania" label="Cóndor en 25 km" /></span>
           <div className="near-grid">
             <div>
               <div className="near-v mono">{fmt(near.registros)}</div>
@@ -186,7 +187,7 @@ export default function SiteSheet() {
         </div>
 
         <div className="sheet-sec bordered">
-          <span className="lbl">Registros de cóndor recientes</span>
+          <span className="lbl">Registros de cóndor recientes <InfoTip k="recientes" label="Registros recientes" /></span>
           {near.recent.length ? (
             <table className="table" style={{ fontSize: 12, marginTop: 7 }}>
               <tbody>

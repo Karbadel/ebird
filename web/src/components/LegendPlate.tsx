@@ -1,6 +1,7 @@
 import { usePortalStore } from '../store/usePortalStore';
 import { HABITAT_LEGEND, RISK_LABELS, GEN_ESTADOS } from '../data/portal';
 import { RISK_CAT_COLORS } from '../data/riskConfig';
+import { AYUDA } from '../data/ayuda';
 
 const SHORT = ['Muy bajo', 'Bajo', 'Medio', 'Alto', 'Muy alto'];
 // Rampa de la capa de densidad eBird (equivalente a EBIRD_RAMP del mapa).
@@ -29,7 +30,7 @@ export default function LegendPlate() {
   const windpotOn = isOn('windpot');
 
   return (
-    <div id="legend-plate">
+    <div id="legend-plate" title={AYUDA.leyenda}>
       {habitatOn && (
         <>
           <span className="lbl">Idoneidad</span>
