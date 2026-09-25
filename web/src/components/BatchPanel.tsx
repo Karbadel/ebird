@@ -3,6 +3,7 @@ import { useBatchStore, type BatchCol, configSignature } from '../store/useBatch
 import { useRiskStore } from '../store/useRiskStore';
 import { usePortalStore } from '../store/usePortalStore';
 import { exportBatchCsv } from '../lib/exportBatch';
+import ProfileSelect, { useProfileLabel } from './ProfileSelect';
 
 const fmtMw = (n: number | null) => (n == null ? '—' : n.toLocaleString('es-CL'));
 
@@ -46,6 +47,7 @@ export default function BatchPanel() {
   };
 
   const arrow = (col: BatchCol) => (sortCol === col ? (sortDir === 'asc' ? ' ▲' : ' ▼') : '');
+  const perfil = useProfileLabel();
   const pesos = config
     .filter((c) => c.enabled && c.weight > 0)
     .map((c) => `${c.label} ${c.weight}%`)
@@ -54,6 +56,7 @@ export default function BatchPanel() {
 
   return (
     <div className="batch" style={{ padding: 'var(--space-4)' }}>
+      <ProfileSelect />
       <div className="no-print" style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
         <button className="btn btn-primary" disabled={running} onClick={() => void run()}>
           {running ? 'Calculando…' : rows ? 'Recalcular' : 'Calcular ranking de riesgo'}
@@ -105,6 +108,8 @@ export default function BatchPanel() {
           </h3>
           <p className="batch-meta" style={{ fontSize: 11, color: 'color-mix(in srgb,var(--color-text) 60%,transparent)', margin: '0 0 6px' }}>
             {rows.length} parques · calculado {fecha}
+            <br />
+            Perfil: {perfil}
             <br />
             Pesos activos: {pesos || '—'}
           </p>

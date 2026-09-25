@@ -29,6 +29,45 @@ export const DEFAULT_RISK_CONFIG: RiskVar[] = [
   { id: 'antenas', label: 'Antenas de telecomunicaciones (percha/dormidero, campo)', kind: 'user_antenas', weight: 0, decayKm: 5, enabled: true },
 ];
 
+/** Perfil de pesos: conjunto nombrado de pesos sobre DEFAULT_RISK_CONFIG (las
+ *  distancias de influencia y la activación quedan en sus valores por defecto). */
+export interface RiskProfile {
+  id: string;
+  label: string;
+  /** Estado de validación (se muestra junto al selector y en los informes). */
+  estado: string;
+  nota: string;
+  /** Pesos que cambian respecto de DEFAULT_RISK_CONFIG (id de variable → %). */
+  weights: Record<string, number>;
+}
+
+export const RISK_PROFILES: RiskProfile[] = [
+  {
+    id: 'vigente',
+    label: 'Vigente',
+    estado: 'Pesos por defecto del motor',
+    nota: 'Riesgo de colisión asociado a la infraestructura existente: 40% del peso es cercanía a parques eólicos y líneas de transmisión.',
+    weights: {},
+  },
+  {
+    id: 'nuevos',
+    label: 'Nuevos desarrollos',
+    estado: 'PROPUESTA técnica — pendiente de validación del comité',
+    nota:
+      'Para evaluar sitios sin infraestructura (p. ej. el potencial eólico bruto): la cercanía a parques existentes no aplica (0%) y ' +
+      'las líneas bajan a 5%; el peso pasa a la sensibilidad del sitio para el cóndor: hábitat 30%, nidos 25%, terreno 10% ' +
+      '(solo Atacama–Maule; fuera de cobertura el motor lo excluye y renormaliza), vertederos 10% y el resto 5%. ' +
+      'Las distancias de influencia NO se modifican.',
+    weights: { wind: 0, lineas: 5, habitat: 30, nidos: 25, vertederos: 10, veranadas: 5, ganado: 5, colisiones: 5, ebird_densidad: 5, terreno_3km: 10 },
+  },
+];
+
+/** Configuración de un perfil: la por defecto con sus pesos sustituidos. */
+export function configForProfile(id: string): RiskVar[] {
+  const p = RISK_PROFILES.find((x) => x.id === id);
+  return DEFAULT_RISK_CONFIG.map((v) => ({ ...v, weight: p?.weights[v.id] ?? v.weight }));
+}
+
 export interface RiskCategory {
   label: string;
   /** Relleno de la categoría (chip, polígono, barra). */

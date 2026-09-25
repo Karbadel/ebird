@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import type { FeatureCollection } from 'geojson';
-import { DEFAULT_RISK_CONFIG, RISK_LAYER_IDS, type RiskVar } from '../data/riskConfig';
+import { DEFAULT_RISK_CONFIG, RISK_LAYER_IDS, configForProfile, type RiskVar } from '../data/riskConfig';
 import { riskAtPoint, type RiskData, type RiskResult, type RiskExtras, type TerrenoCell } from '../lib/riskEngine';
 import { useFieldStore } from './useFieldStore';
 
@@ -16,6 +16,8 @@ interface RiskState {
   loading: boolean;
   terrenoCells: TerrenoCell[];
   config: RiskVar[];
+  /** Perfil de pesos aplicado (RISK_PROFILES), o null si se editó a mano. */
+  profileId: string | null;
   queryActive: boolean;
   result: (RiskResult & { lat: number; lng: number }) | null;
 
@@ -30,6 +32,8 @@ interface RiskState {
   setEnabled(id: string, enabled: boolean): void;
   setDecay(id: string, decayKm: number): void;
   resetConfig(): void;
+  /** Aplica un perfil de pesos (reemplaza pesos, distancias y activación). */
+  applyProfile(id: string): void;
 }
 
 function recompute(state: RiskState): Partial<RiskState> {
@@ -45,6 +49,7 @@ export const useRiskStore = create<RiskState>((set, get) => ({
   loading: false,
   terrenoCells: [],
   config: cloneConfig(),
+  profileId: 'vigente',
   queryActive: false,
   result: null,
 
@@ -99,21 +104,26 @@ export const useRiskStore = create<RiskState>((set, get) => ({
   setWeight: (id, weight) =>
     set((s) => {
       const config = s.config.map((v) => (v.id === id ? { ...v, weight } : v));
-      return { config, ...recompute({ ...s, config }) };
+      return { config, profileId: null, ...recompute({ ...s, config }) };
     }),
   setEnabled: (id, enabled) =>
     set((s) => {
       const config = s.config.map((v) => (v.id === id ? { ...v, enabled } : v));
-      return { config, ...recompute({ ...s, config }) };
+      return { config, profileId: null, ...recompute({ ...s, config }) };
     }),
   setDecay: (id, decayKm) =>
     set((s) => {
       const config = s.config.map((v) => (v.id === id ? { ...v, decayKm } : v));
-      return { config, ...recompute({ ...s, config }) };
+      return { config, profileId: null, ...recompute({ ...s, config }) };
     }),
   resetConfig: () =>
     set((s) => {
       const config = cloneConfig();
-      return { config, ...recompute({ ...s, config }) };
+      return { config, profileId: 'vigente', ...recompute({ ...s, config }) };
+    }),
+  applyProfile: (id) =>
+    set((s) => {
+      const config = configForProfile(id);
+      return { config, profileId: id, ...recompute({ ...s, config }) };
     }),
 }));

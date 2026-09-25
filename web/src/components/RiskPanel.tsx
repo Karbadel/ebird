@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import type { Geometry } from 'geojson';
 import { useRiskStore } from '../store/useRiskStore';
 import { useFieldStore, FIELD_STYLES, type DrawType } from '../store/useFieldStore';
+import ProfileSelect from './ProfileSelect';
 
 const DRAW_OPTIONS: { value: DrawType; label: string }[] = [
   { value: 'ninguno', label: '— Desactivado (clic normal en el mapa)' },
@@ -208,6 +209,7 @@ export default function RiskPanel() {
       </p>
 
       <h4 style={{ marginTop: 'var(--space-6)', fontSize: 13 }}>Variables del índice de riesgo</h4>
+      <ProfileSelect />
       <p style={{ fontSize: 11, color: 'color-mix(in srgb,var(--color-text) 55%,transparent)', marginBottom: 6 }}>
         {locked
           ? 'Activa la consulta de riesgo para ajustar el peso (%) y la distancia de influencia de cada variable.'

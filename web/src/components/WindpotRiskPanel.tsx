@@ -5,6 +5,7 @@ import { usePortalStore } from '../store/usePortalStore';
 import { RISK_LABELS } from '../data/portal';
 import { RISK_CAT_COLORS } from '../data/riskConfig';
 import { exportWindpotAreasCsv, exportWindpotSummaryCsv } from '../lib/exportWindpot';
+import ProfileSelect, { useProfileLabel } from './ProfileSelect';
 
 const fmt = (n: number) => Math.round(n).toLocaleString('es-CL');
 const sum = (a: number[]) => a.reduce((x, y) => x + y, 0);
@@ -46,6 +47,7 @@ export default function WindpotRiskPanel() {
     void useWindpotRiskStore.getState().load();
   }, []);
 
+  const perfil = useProfileLabel();
   const pesos = config
     .filter((c) => c.enabled && c.weight > 0)
     .map((c) => `${c.label} ${c.weight}%`)
@@ -54,6 +56,7 @@ export default function WindpotRiskPanel() {
 
   return (
     <div className="batch" style={{ padding: 'var(--space-4)' }}>
+      <ProfileSelect />
       <div className="no-print" style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
         <label style={{ display: 'flex', gap: 6, alignItems: 'center', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
           <input type="checkbox" checked={byRisk} onChange={(e) => setByRisk(e.target.checked)} />
@@ -95,6 +98,8 @@ export default function WindpotRiskPanel() {
           <p className="batch-meta" style={{ fontSize: 11, color: muted, margin: '0 0 6px' }}>
             {fmt(sum(national.n))} áreas · {fmt(totalMw)} MW · {fmt(sum(national.ha))} ha · calculado{' '}
             {computedAt ? new Date(computedAt).toLocaleString('es-CL') : ''}
+            <br />
+            Perfil: {perfil}
             <br />
             Pesos activos: {pesos || '—'}
           </p>
