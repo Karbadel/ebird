@@ -1,3 +1,4 @@
+import type { Tab } from '../store/usePortalStore';
 // Contenido demostrativo del portal Cóndores y Energía Eólica.
 // Las observaciones de aves vienen de datos reales (eBird); las capas
 // geoespaciales de riesgo/colisiones/parques son datos de demostración.
@@ -34,20 +35,30 @@ export const NAV: [IconKey, string, string, boolean?][] = [
 
 // Tarjetas de la portada. El 5.º elemento (`pend`) marca las secciones aún no
 // implementadas con la etiqueta "En construcción".
-export const CARDS_1: [IconKey, string, string, string, boolean?][] = [
-  ['alert', 'Mapa de riesgo', 'Identifica las zonas con mayor riesgo para el cóndor andino en relación con proyectos eólicos.', 'Explorar mapa →'],
-  ['clip', 'Registro de colisiones de cóndores', 'Información histórica y georreferenciada de colisiones de cóndores con aerogeneradores.', 'Ver registro →'],
-  ['book', 'Medidas y buenas prácticas', 'Documentos, guías y recomendaciones para prevenir y minimizar impactos en cóndores.', 'Explorar documentos →', true],
-  ['file', 'Estudios', 'Biblioteca de estudios nacionales e internacionales sobre cóndores y energía eólica.', 'Ver estudios →', true],
-  ['down', 'Descarga de datos', 'Descarga capas geoespaciales y documentos en distintos formatos.', 'Ir a descargas →', true],
-];
+/** Tarjeta de «Explorar el portal». `go`: pestaña del visor a la que lleva
+ *  ('visor' = solo desplaza al visor). `pend`: sección sin contenido aún → NO se
+ *  muestra (decisión: ocultar hasta que exista). */
+export interface PortalCard {
+  icon: IconKey;
+  t: string;
+  b: string | string[];
+  a: string;
+  go?: Tab | 'visor';
+  pend?: boolean;
+}
 
-export const CARDS_2: [IconKey, string, string | string[], string, boolean?][] = [
-  ['users', 'Comité técnico · Reunión N°1', ['Acta de reunión', 'Presentaciones', 'Acuerdos y compromisos', 'Lista de participantes'], 'Ver todos los documentos →', true],
-  ['clip', 'Medidas implementadas en Chile', 'Conoce las medidas ya aplicadas en proyectos eólicos del país.', 'Ver medidas implementadas →', true],
-  ['bulb', 'Medidas propuestas', 'Recomendaciones técnicas y operacionales en evaluación por el comité.', 'Ver medidas propuestas →', true],
-  ['net', 'Actores relevantes', 'Organismos públicos, desarrolladores, academia, ONG y otros actores involucrados en esta temática.', 'Ver todos los actores →', true],
-  ['layers', 'Capas geoespaciales disponibles', 'Accede a datos geoespaciales para análisis y planificación territorial.', 'Ver capas disponibles →'],
+export const CARDS: PortalCard[] = [
+  { icon: 'alert', t: 'Mapa de riesgo', b: 'Consulta el índice de riesgo de colisión del cóndor andino en cualquier punto del mapa y su desglose por criterio.', a: 'Consultar riesgo →', go: 'riesgo' },
+  { icon: 'clip', t: 'Registro de colisiones de cóndores', b: 'Colisiones confirmadas de cóndores con aerogeneradores (2019–2025), por año y por parque eólico.', a: 'Ver registro →', go: 'colisiones' },
+  { icon: 'users', t: 'Comité técnico', b: 'Ranking de riesgo de los parques eólicos en operación y cruce del potencial eólico con la sensibilidad del sitio.', a: 'Ir al Comité →', go: 'comite' },
+  { icon: 'layers', t: 'Capas geoespaciales disponibles', b: 'Capas del cóndor, atrayentes de carroña, infraestructura energética y contexto territorial, con nota metodológica de cada una.', a: 'Ver capas en el visor →', go: 'visor' },
+  { icon: 'book', t: 'Medidas y buenas prácticas', b: 'Documentos, guías y recomendaciones para prevenir y minimizar impactos en cóndores.', a: 'Explorar documentos →', pend: true },
+  { icon: 'file', t: 'Estudios', b: 'Biblioteca de estudios nacionales e internacionales sobre cóndores y energía eólica.', a: 'Ver estudios →', pend: true },
+  { icon: 'down', t: 'Descarga de datos', b: 'Descarga capas geoespaciales y documentos en distintos formatos.', a: 'Ir a descargas →', pend: true },
+  { icon: 'users', t: 'Comité técnico · Reunión N°1', b: ['Acta de reunión', 'Presentaciones', 'Acuerdos y compromisos', 'Lista de participantes'], a: 'Ver todos los documentos →', pend: true },
+  { icon: 'clip', t: 'Medidas implementadas en Chile', b: 'Conoce las medidas ya aplicadas en proyectos eólicos del país.', a: 'Ver medidas implementadas →', pend: true },
+  { icon: 'bulb', t: 'Medidas propuestas', b: 'Recomendaciones técnicas y operacionales en evaluación por el comité.', a: 'Ver medidas propuestas →', pend: true },
+  { icon: 'net', t: 'Actores relevantes', b: 'Organismos públicos, desarrolladores, academia, ONG y otros actores involucrados en esta temática.', a: 'Ver todos los actores →', pend: true },
 ];
 
 // Escala de categorías del índice de riesgo (leyenda y barras).

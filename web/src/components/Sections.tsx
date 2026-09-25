@@ -1,43 +1,48 @@
-import { CARDS_1, CARDS_2, type IconKey } from '../data/portal';
+import { CARDS, type PortalCard } from '../data/portal';
+import { goToVisor } from '../lib/nav';
 import { Icon } from './Icon';
 
-function Cell({ icon, t, b, a, pend }: { icon: IconKey; t: string; b: string | string[]; a: string; pend?: boolean }) {
+function Cell({ c }: { c: PortalCard }) {
   return (
     <article className="cell">
       <span className="icon">
-        <Icon k={icon} s={20} />
+        <Icon k={c.icon} s={20} />
       </span>
-      {pend && <span className="wip">En construcción</span>}
-      <h4>{t}</h4>
-      {Array.isArray(b) ? (
+      <h4>{c.t}</h4>
+      {Array.isArray(c.b) ? (
         <ul>
-          {b.map((x) => (
+          {c.b.map((x) => (
             <li key={x}>{x}</li>
           ))}
         </ul>
       ) : (
-        <p>{b}</p>
+        <p>{c.b}</p>
       )}
-      <a href="#secciones">{a}</a>
+      <a
+        href="#visor"
+        onClick={(e) => {
+          e.preventDefault();
+          goToVisor(c.go === 'visor' ? undefined : c.go);
+        }}
+      >
+        {c.a}
+      </a>
     </article>
   );
 }
 
+// Solo se muestran las secciones con contenido real (las `pend` quedan ocultas
+// hasta que existan).
 export default function Sections() {
   return (
     <section className="wrap" id="secciones">
       <div className="shead">
         <h2>Explorar el portal</h2>
-        <span className="lbl">Reunión N°1 Comité · identificación de información</span>
+        <span className="lbl">Accesos directos a las herramientas del visor</span>
       </div>
       <div className="grid">
-        {CARDS_1.map(([i, t, b, a, pend]) => (
-          <Cell key={t} icon={i} t={t} b={b} a={a} pend={!!pend} />
-        ))}
-      </div>
-      <div className="grid" style={{ marginTop: 'var(--space-6)' }}>
-        {CARDS_2.map(([i, t, b, a, pend]) => (
-          <Cell key={t} icon={i} t={t} b={b} a={a} pend={!!pend} />
+        {CARDS.filter((c) => !c.pend && c.go).map((c) => (
+          <Cell key={c.t} c={c} />
         ))}
       </div>
     </section>

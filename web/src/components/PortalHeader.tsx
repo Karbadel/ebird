@@ -1,14 +1,18 @@
 import { useMemo } from 'react';
 import { useDataStore } from '../store/useDataStore';
 import { usePortalStore, type Tab } from '../store/usePortalStore';
+import { goToVisor } from '../lib/nav';
 
 const CONDOR_SCI = 'Vultur gryphus';
-// Navegación superior del portal. `tab` abre la pestaña correspondiente del
-// visor; `pend` marca las secciones aún no implementadas ("En construcción").
-const NAV2: { label: string; tab?: Tab; pend?: boolean }[] = [
-  { label: 'Visor' },
-  { label: 'Riesgo', tab: 'riesgo' },
-  { label: 'Colisiones', tab: 'colisiones' },
+// Navegación superior del portal, alineada con el riel del visor: cada entrada
+// abre su pestaña y se marca activa según la pestaña vigente (`match`).
+// `pend`: sección sin contenido aún → NO se muestra (decisión: ocultar hasta que
+// exista). Para publicarla, darle `tab` y quitar `pend`.
+const NAV2: { label: string; tab?: Tab; match?: Tab[]; pend?: boolean }[] = [
+  { label: 'Visor', tab: 'ficha', match: ['ficha', 'lista', 'sitios'] },
+  { label: 'Riesgo', tab: 'riesgo', match: ['riesgo'] },
+  { label: 'Comité', tab: 'comite', match: ['comite'] },
+  { label: 'Colisiones', tab: 'colisiones', match: ['colisiones'] },
   { label: 'Medidas', pend: true },
   { label: 'Estudios', pend: true },
   { label: 'Datos', pend: true },
@@ -23,7 +27,7 @@ export default function PortalHeader() {
   );
   // Contador real: casos del registro consolidado de colisiones (colisiones.geojson).
   const collisions = useDataStore((s) => s.collisions.length);
-  const goToTab = usePortalStore((s) => s.goToTab);
+  const tab = usePortalStore((s) => s.tab);
 
   return (
     <header className="top">
@@ -40,33 +44,37 @@ export default function PortalHeader() {
         </div>
       </div>
       <nav className="nav2">
-        {NAV2.map((n, i) => (
+        {NAV2.filter((n) => !n.pend && n.tab).map((n) => (
           <a
             key={n.label}
-            href={n.pend ? undefined : '#visor'}
-            {...(i === 0 ? { 'aria-current': 'page' as const } : {})}
-            {...(n.pend ? { 'aria-disabled': true as const } : {})}
+            href="#visor"
+            {...(n.match?.includes(tab) ? { 'aria-current': 'page' as const } : {})}
             onClick={(e) => {
-              // Pendientes: no navegan (sin destino real). Riesgo/Colisiones:
-              // abren su pestaña en el visor; el ancla #visor lleva el foco.
-              if (n.pend) e.preventDefault();
-              else if (n.tab) goToTab(n.tab);
+              e.preventDefault();
+              goToVisor(n.tab!);
             }}
           >
             {n.label}
-            {n.pend && <span className="wip">En construcción</span>}
           </a>
         ))}
       </nav>
       <div className="hstats">
-        <div title="Registros de cóndor andino de la API eBird (últimos 30 días a la fecha de la última actualización de datos)">
+        <button
+          type="button"
+          onClick={() => goToVisor('lista')}
+          title="Registros de cóndor andino de la API eBird (últimos 30 días a la fecha de la última actualización de datos). Clic para ver la lista."
+        >
           <div className="fig mono">{condorCount}</div>
           <span className="lbl">Registros de cóndor</span>
-        </div>
-        <div title="Colisiones confirmadas de cóndor con aerogeneradores, 2019–2025 (ver Gráficos y la capa Colisiones confirmadas)">
+        </button>
+        <button
+          type="button"
+          onClick={() => goToVisor('colisiones')}
+          title="Colisiones confirmadas de cóndor con aerogeneradores, 2019–2025. Clic para ver el detalle por año y por parque."
+        >
           <div className="fig mono" style={{ color: 'var(--amber)' }}>{collisions}</div>
           <span className="lbl">Colisiones</span>
-        </div>
+        </button>
       </div>
     </header>
   );

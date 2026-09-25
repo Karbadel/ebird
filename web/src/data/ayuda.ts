@@ -23,9 +23,9 @@ export const AYUDA = {
     'Puntúa los 30 parques eólicos en operación con los pesos actuales del motor y los ordena por índice. Clic en una fila para ir al parque y ver el desglose. Exportable a CSV e imprimible. Como cada parque se evalúa en su propia ubicación, la cercanía a parques es constante y el orden lo dan los demás criterios.',
   comitePotencial:
     'Cruza las 2.277 áreas de potencial eólico bruto (MINENERGIA 2026) con el índice de riesgo: MW y superficie por categoría, a nivel nacional y por región. Se recalcula al instante al cambiar los pesos o el perfil. El índice de cada área se evalúa en un punto interior (ver aviso metodológico del panel).',
-  tiempo:
+  colAnio:
     'Colisiones confirmadas de cóndor con aerogeneradores por año (29 casos, 2019–2025), con total, año pico y años con registro. Es el registro de casos informados: puede no incluir colisiones no detectadas.',
-  colisiones:
+  colParque:
     'Colisiones confirmadas de cóndor con aerogeneradores (29 casos, 2019–2025) agrupadas por parque eólico, con región y años con casos. Cada caso está georreferenciado (capa «Colisiones confirmadas»).',
 
   // ── Motor de riesgo ───────────────────────────────────────────────────────

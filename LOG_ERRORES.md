@@ -8,6 +8,27 @@
 
 ---
 
+## 2026-09-25 — Navegación, Etapa 1 (limpieza y accesos)
+
+### Diagnóstico: 4 sistemas de navegación superpuestos
+- Menú superior, riel, sub-pestañas y tarjetas mostraban subconjuntos distintos
+  (Comité no estaba en el menú; Colisiones no estaba en el riel; colisiones
+  repartidas entre «Gráficos» —por año— y «Colisiones» —por parque—).
+- Las 10 tarjetas de «Explorar el portal» apuntaban a `#secciones` (a sí mismas),
+  incluso las que tenían contenido; el pie tenía 3 enlaces sin destino; «Visor»
+  quedaba siempre marcado como activo (`aria-current` fijo en el índice 0).
+- **Solución:** menú = Visor · Riesgo · Comité · Colisiones con activo según la
+  pestaña (`match`); riel con Colisiones (sub-vistas Por año / Por parque) en vez de
+  Gráficos; contadores de cabecera clicables; tarjetas con destino (`go`) vía
+  `lib/nav.ts` (`goToVisor`); lo «En construcción» queda OCULTO con `pend` (decisión
+  de José) listo para publicarse cuando exista.
+- Sub-vistas del Comité y de Colisiones movidas al store (`comiteView`, `colView`):
+  prerequisito de los enlaces compartibles (Etapa 2).
+- Código muerto eliminado: pestañas `especies` y `tabla` (inalcanzables desde la
+  multiespecie), `lib/catalog.ts`, y estado `species/sheetOpen/*Collapsed`.
+
+---
+
 ## 2026-09-24 — Potencial eólico bruto (capa) + cruce potencial × riesgo (Comité)
 
 ### KMZ de potencial: tildes rotas en origen

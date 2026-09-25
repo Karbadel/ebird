@@ -39,7 +39,9 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
 .nav2 a[aria-disabled]:hover { background: none; color: color-mix(in srgb, var(--color-surface) 72%, transparent); }
 .hstats { display: flex; align-items: center; gap: 18px; padding: 0 16px; flex: none;
   border-left: 1px solid rgba(251,247,238,.18); }
-.hstats > div { text-align: right; }
+.hstats > button { all: unset; cursor: pointer; text-align: right; padding: 4px 6px; margin: 0 -6px; }
+.hstats > button:hover { background: rgba(251,247,238,.12); }
+.hstats > button:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
 .hstats .fig { font-size: 22px; line-height: 1; }
 .hstats .lbl { display: block; font-size: 9px; letter-spacing: .14em; font-weight: 700;
   color: color-mix(in srgb, var(--color-surface) 60%, transparent); }

@@ -1,11 +1,14 @@
 import { create } from 'zustand';
 import type { FeatureCollection } from 'geojson';
-import type { Observation } from '../types';
 import { GEN_SWATCH } from '../data/portal';
 import { useRiskStore } from './useRiskStore';
 import { useFieldStore } from './useFieldStore';
 
-export type Tab = 'lista' | 'especies' | 'tabla' | 'sitios' | 'riesgo' | 'tiempo' | 'comite' | 'colisiones' | 'ficha';
+export type Tab = 'ficha' | 'lista' | 'sitios' | 'riesgo' | 'comite' | 'colisiones';
+/** Sub-vista del tab Comité y del tab Colisiones (en el store para poder
+ *  reflejarlas en la URL y abrirlas desde otros accesos). */
+export type ComiteView = 'parques' | 'potencial';
+export type ColView = 'anio' | 'parque';
 
 export type LayerGroupId = 'condor' | 'carrona' | 'otras' | 'eolico' | 'contexto';
 
@@ -97,13 +100,8 @@ interface PortalState {
   baseLayer: 'osm' | 'satellite';
   /** Colorea la capa de potencial eólico por categoría del índice de riesgo. */
   windpotByRisk: boolean;
-  /** Especie seleccionada (persiste; alimenta los plates), o null. */
-  species: Observation | null;
-  /** Visibilidad de la ficha de detalle (desacoplada de la selección). */
-  sheetOpen: boolean;
-  /** Paneles flotantes contraídos a pestaña lateral. */
-  titleCollapsed: boolean;
-  statCollapsed: boolean;
+  comiteView: ComiteView;
+  colView: ColView;
 
   toggleLayer(id: string): void;
   setOpacity(id: string, value: number): void;
@@ -131,11 +129,8 @@ interface PortalState {
   /** Activa/desactiva el coloreado por riesgo del potencial eólico (al activar,
    *  enciende la capa). */
   setWindpotByRisk(on: boolean): void;
-  openSpecies(o: Observation): void;
-  closeSpecies(): void;
-  openSheet(): void;
-  toggleTitleCollapsed(): void;
-  toggleStatCollapsed(): void;
+  setComiteView(v: ComiteView): void;
+  setColView(v: ColView): void;
 }
 
 export const usePortalStore = create<PortalState>((set) => ({
@@ -151,10 +146,8 @@ export const usePortalStore = create<PortalState>((set) => ({
   densityDomain: null,
   baseLayer: 'osm',
   windpotByRisk: false,
-  species: null,
-  sheetOpen: false,
-  titleCollapsed: false,
-  statCollapsed: false,
+  comiteView: 'parques',
+  colView: 'anio',
 
   toggleLayer: (id) =>
     set((s) => ({ layers: s.layers.map((l) => (l.id === id ? { ...l, on: !l.on } : l)) })),
@@ -190,7 +183,7 @@ export const usePortalStore = create<PortalState>((set) => ({
   removeUserLayer: (id) => set((s) => ({ userLayers: s.userLayers.filter((u) => u.id !== id) })),
   toggleLegend: () => set((s) => ({ legendOpen: !s.legendOpen })),
   setTab: (tab) => set({ tab }),
-  // Navegación desde el riel lateral: cambia de pestaña, cierra la ficha y
+  // Navegación (riel, menú superior, tarjetas, contadores): cambia de pestaña y
   // asegura que el panel esté visible. Al salir de Riesgo, apaga la consulta y
   // cierra su ficha de resultado para que la pestaña destino tome el panel (si
   // no, seguiría el modo clic-consulta y el SiteSheet sobre el mapa).
@@ -203,7 +196,7 @@ export const usePortalStore = create<PortalState>((set) => ({
       // otras pestañas no suelten puntos por accidente.
       useFieldStore.getState().setDrawType('ninguno');
     }
-    set({ tab, sheetOpen: false, panelHidden: false });
+    set({ tab, panelHidden: false });
   },
   setActiveSite: (activeSite) => set({ activeSite }),
   togglePanel: () => set((s) => ({ panelHidden: !s.panelHidden })),
@@ -219,12 +212,6 @@ export const usePortalStore = create<PortalState>((set) => ({
       windpotByRisk: on,
       layers: on ? s.layers.map((l) => (l.id === 'windpot' ? { ...l, on: true } : l)) : s.layers,
     })),
-  // Elegir una especie: fija la selección (persiste) y abre la ficha, dejando
-  // los plates visibles y expandidos.
-  openSpecies: (species) => set({ species, sheetOpen: true, titleCollapsed: false, statCollapsed: false }),
-  // La × solo cierra la ficha; la selección y los plates permanecen.
-  closeSpecies: () => set({ sheetOpen: false }),
-  openSheet: () => set((s) => (s.species ? { sheetOpen: true } : {})),
-  toggleTitleCollapsed: () => set((s) => ({ titleCollapsed: !s.titleCollapsed })),
-  toggleStatCollapsed: () => set((s) => ({ statCollapsed: !s.statCollapsed })),
+  setComiteView: (comiteView) => set({ comiteView }),
+  setColView: (colView) => set({ colView }),
 }));
