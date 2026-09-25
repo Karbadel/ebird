@@ -48,8 +48,15 @@ ni backend. Son solo archivos estáticos, así que **convive con otros proyectos
 del mismo servidor sin conflicto** de dependencias ni de versiones — basta un
 `location`/vhost que sirva la carpeta.
 
-- Es una sola página (sin rutas de cliente): no hacen falta reglas de reescritura.
+- Es una sola página. Los enlaces compartibles usan el `#` de la URL
+  (`…/#/comite/potencial?perfil=sensibilidad`), así que **no hacen falta reglas de
+  reescritura** en el servidor.
 - Sirve todo por **HTTPS**.
+- **Compresión gzip/brotli** para `.json` y `.geojson`: los datos pesan ~24 MB sin
+  comprimir (p. ej. `potencial_eolico.geojson` baja de 7,6 MB a ~1,4 MB).
+- **Caché:** `assets/` lleva hash en el nombre → caché larga (p. ej. 1 año).
+  `index.html` y `data/` **no** llevan hash → `no-cache` (o caché corta), para que
+  al actualizar los usuarios reciban los datos nuevos y no una versión antigua.
 
 Para revisar el build localmente antes de subirlo: `npm run preview`.
 
@@ -66,6 +73,17 @@ pip install -r requirements.txt
 
 Luego corre los scripts de `src/` (para eBird, una API key en `web/.env`, ya en
 `.gitignore`). Esto reescribe `web/public/data/`; después repite el build.
+
+**Si cambian las capas de riesgo (`web/public/data/riesgo/`) o el potencial eólico**,
+recalcula además el cruce potencial × riesgo (tab Comité → Potencial eólico; ~20 min,
+usa el mismo motor TypeScript de la web):
+
+```powershell
+cd web
+npm run precompute:potencial   # → public/data/riesgo/potencial_medidas.json
+```
+
+Cambiar pesos o perfiles NO requiere este paso (se recalcula en el navegador).
 
 ## Pendiente para producción
 
