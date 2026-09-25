@@ -27,6 +27,7 @@ export default function ResultsPanel() {
   const fly = usePortalStore((s) => s.fly);
   const openRecord = (o: Observation) => fly([o.lat, o.lng]);
   const panelHidden = usePortalStore((s) => s.panelHidden);
+  const togglePanel = usePortalStore((s) => s.togglePanel);
   const observations = useDataStore((s) => s.observations);
   const collisions = useDataStore((s) => s.collisions);
   const f = useFilterStore();
@@ -63,6 +64,9 @@ export default function ResultsPanel() {
   return (
     <aside id="panel" className="plate">
       <div className="phead">
+        <button type="button" className="drawer-x drawer-x-panel no-print" aria-label="Cerrar panel" title="Cerrar" onClick={togglePanel}>
+          ✕
+        </button>
         {tab === 'riesgo' ? (
           <span className="lbl">Motor de índice de riesgo de colisión <InfoTip k="riesgo" label="Motor de riesgo" /></span>
         ) : tab === 'comite' ? (

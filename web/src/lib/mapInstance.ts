@@ -18,7 +18,10 @@ export const CHILE = L.latLngBounds([-56.2, -76.5], [-17.2, -66.0]);
  */
 export const MAX_BOUNDS = L.latLngBounds([-57.0, -80.0], [-13.0, -46.0]);
 
-export const FIT: L.FitBoundsOptions = {
-  paddingTopLeft: [30, 60],
-  paddingBottomRight: [380, 30],
-};
+/** Márgenes del encuadre de Chile. En escritorio se reserva a la derecha el ancho
+ *  del panel de resultados; bajo 1180 px el panel es un cajón (parte cerrado), así
+ *  que no se reserva y Chile aprovecha todo el mapa. */
+export function fitOptions(): L.FitBoundsOptions {
+  const drawer = typeof window !== 'undefined' && window.innerWidth <= 1180;
+  return { paddingTopLeft: [30, 60], paddingBottomRight: [drawer ? 30 : 380, 30] };
+}

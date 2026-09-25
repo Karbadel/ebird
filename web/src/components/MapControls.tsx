@@ -1,6 +1,6 @@
 import { usePortalStore } from '../store/usePortalStore';
 import { useMeasureStore } from '../store/useMeasureStore';
-import { mapInstance, CHILE, FIT } from '../lib/mapInstance';
+import { mapInstance, CHILE, fitOptions } from '../lib/mapInstance';
 
 export default function MapControls() {
   const togglePanel = usePortalStore((s) => s.togglePanel);
@@ -9,11 +9,29 @@ export default function MapControls() {
   const toggleMeasure = useMeasureStore((s) => s.toggle);
   const baseLayer = usePortalStore((s) => s.baseLayer);
   const setBaseLayer = usePortalStore((s) => s.setBaseLayer);
+  const legendOpen = usePortalStore((s) => s.legendOpen);
+  const toggleLegend = usePortalStore((s) => s.toggleLegend);
+  const layersOpen = usePortalStore((s) => s.layersOpen);
+  const setLayersOpen = usePortalStore((s) => s.setLayersOpen);
+  const on = { background: 'var(--color-accent-700)', color: 'var(--color-bg)' };
 
   return (
     <div id="ctl" className="plate">
       <button title="Mostrar u ocultar el panel de resultados" onClick={togglePanel}>
         ☰
+      </button>
+      {/* Solo en pantallas angostas (el panel de capas pasa a cajón). */}
+      <button
+        className="ctl-layers"
+        title="Mostrar u ocultar el panel de capas"
+        aria-pressed={layersOpen}
+        onClick={() => setLayersOpen(!layersOpen)}
+        style={layersOpen ? on : undefined}
+      >
+        ◧
+      </button>
+      <button title="Mostrar u ocultar la leyenda" aria-pressed={legendOpen} onClick={toggleLegend} style={legendOpen ? on : undefined}>
+        ▤
       </button>
       <button title="Acercar" onClick={() => mapInstance.map?.zoomIn()}>
         +
@@ -25,7 +43,7 @@ export default function MapControls() {
         title="Volver a la vista inicial de Chile"
         onClick={() => {
           setActiveSite(null);
-          mapInstance.map?.flyToBounds(CHILE, FIT);
+          mapInstance.map?.flyToBounds(CHILE, fitOptions());
         }}
       >
         ⌂

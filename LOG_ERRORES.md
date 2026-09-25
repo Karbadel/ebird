@@ -8,6 +8,25 @@
 
 ---
 
+## 2026-09-25 — Navegación, Etapa 3 (pantallas pequeñas)
+
+- **Problema:** bajo 1180 px el panel de resultados y la leyenda tenían
+  `display:none` (sin alternativa) → Riesgo/Comité/ficha inutilizables con ventana
+  no maximizada o en notebook 1366 px con zoom 125% (≈1093 px CSS). Bajo 900 px
+  desaparecía también el panel de capas. Visor con alto fijo de 660 px.
+- **Solución:** ≤1180 panel y ficha como cajón (botón ✕, parten cerrados, se abren
+  desde el riel o ☰); leyenda con botón propio ▤; ≤900 capas como cajón (botón ◧) y
+  abrir uno cierra el otro si no caben. Alto del visor = ventana − cabecera (mín.
+  540 px). Umbrales en `NARROW_PANEL/NARROW_LAYERS` (store) = `@media` de app.css.
+- **Tropiezo:** en modo cajón el panel tapaba los controles del mapa y el buscador →
+  clase `.mapwrap.panel-open` los corre a la izquierda del cajón.
+- **Encuadre:** `FIT` reservaba 380 px a la derecha para el panel aunque estuviera
+  cerrado → Chile quedaba chico y a la izquierda. Ahora `fitOptions()` solo reserva
+  en escritorio.
+- **Impresión:** el ancho de papel cae bajo 1180 px → los ✕ de cajón llevan `no-print`.
+- **Gotcha de prueba:** `goto` a una URL que solo cambia el hash NO recarga la página
+  (el estado del store persiste): para probar estados iniciales, recargar.
+
 ## 2026-09-25 — Navegación, Etapa 2 (enlaces compartibles)
 
 - `lib/urlState.ts`: la vista vive en el hash (`#/comite/potencial?perfil=sensibilidad`).

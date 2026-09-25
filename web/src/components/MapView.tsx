@@ -3,7 +3,7 @@ import L from 'leaflet';
 import type { Feature, FeatureCollection } from 'geojson';
 import { useFiltered } from '../lib/useFiltered';
 import { aggregateSites, type Site } from '../lib/derive';
-import { mapInstance, CHILE, MAX_BOUNDS, FIT } from '../lib/mapInstance';
+import { mapInstance, CHILE, MAX_BOUNDS, fitOptions } from '../lib/mapInstance';
 import { usePortalStore } from '../store/usePortalStore';
 import { useRiskStore } from '../store/useRiskStore';
 import { useMeasureStore, segmentKm, fmtKm } from '../store/useMeasureStore';
@@ -431,7 +431,7 @@ export default function MapView() {
     baseTilesRef.current = { osm: osmLayer, sat: satLayer };
     (baseLayerRef.current === 'satellite' ? satLayer : osmLayer).addTo(map);
     L.control.scale({ metric: true, imperial: false, position: 'bottomright' }).addTo(map);
-    map.fitBounds(CHILE, FIT);
+    map.fitBounds(CHILE, fitOptions());
     mapInstance.map = map;
     canvasRef.current = L.canvas({ padding: 0.5 });
     // Pane propio para los buffers. En el prototipo el anillo va entre el

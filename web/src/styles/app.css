@@ -47,7 +47,9 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
   color: color-mix(in srgb, var(--color-surface) 60%, transparent); }
 
 /* ── héroe: visor ─────────────────────────────────────────── */
-.hero { display: grid; grid-template-columns: 64px 300px 1fr; height: 660px; border-bottom: 1px solid var(--color-divider); }
+/* Alto del visor según la ventana (menos la cabecera), con mínimo usable. */
+.hero { position: relative; display: grid; grid-template-columns: 64px 300px 1fr;
+  height: max(540px, calc(100vh - 58px)); border-bottom: 1px solid var(--color-divider); }
 .side { border-right: 1px solid var(--color-divider); background: var(--color-surface);
   display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
 
@@ -333,7 +335,7 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--rust) 24%, transparent); }
 .lgd-turb { width: 22px; display: grid; place-items: center; flex: none; }
 .lgd-turb::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #8f8168; }
-@media (max-width: 1180px) { #legend-plate { display: none; } }
+@media (max-width: 1180px) { #legend-plate { width: min(268px, calc(100% - 28px)); max-height: calc(100% - 90px); overflow: auto; } }
 
 .rail-btn { position: relative; all: unset; cursor: pointer; width: 48px; height: 48px;
   display: grid; place-items: center; color: color-mix(in srgb, var(--color-surface) 72%, transparent); }
@@ -455,11 +457,39 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
                     linear-gradient(90deg, var(--color-neutral-300) 1px, transparent 1px);
   background-size: 34px 34px; }
 
-@media (max-width: 1180px) { #panel { display: none; }
-  #chipbar { right: 14px; } #ctl { right: 14px; } }
-@media (max-width: 900px) { .hero { grid-template-columns: 64px 1fr; height: auto; }
-  .side { display: none; }
-  .mapwrap { height: 460px; } }
+/* Botones de cierre de cajón y botón de capas: solo en pantallas angostas. */
+.drawer-x { all: unset; cursor: pointer; display: none; place-items: center; width: 26px; height: 26px;
+  flex: none; font-size: 13px; color: color-mix(in srgb, var(--color-text) 60%, transparent); }
+.drawer-x:hover { background: var(--color-bg); color: var(--color-text); }
+.drawer-x-panel { order: 2; margin-left: auto; }
+#ctl .ctl-layers { display: none; }
+
+/* ≤ 1180 px: panel de resultados y ficha como cajón superpuesto al mapa (antes el
+   panel desaparecía). Parten cerrados (store) y se abren desde el riel o ☰. */
+@media (max-width: 1180px) {
+  #chipbar { right: 14px; } #ctl { right: 14px; }
+  #panel, #sitesheet { width: min(348px, calc(100% - 28px)); }
+  .drawer-x-panel { display: grid; }
+  /* Con el cajón abierto, buscador y controles se corren a su izquierda. */
+  .mapwrap.panel-open #ctl, .mapwrap.panel-open #chipbar { right: calc(min(348px, 100% - 28px) + 28px); }
+}
+/* ≤ 900 px: el panel de capas también pasa a cajón (botón ◧ en los controles). */
+@media (max-width: 1000px) {
+  .nav2 a { padding: 0 10px; font-size: 12.5px; }
+  .brand p { display: none; }
+  .brand h1 { font-size: 16px; }
+  .brand { padding: 10px 12px; }
+  .hstats { gap: 10px; padding: 0 10px; }
+}
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 64px 1fr; }
+  .side { position: absolute; top: 0; bottom: 0; left: 64px; z-index: 700;
+    width: min(300px, calc(100% - 64px)); box-shadow: var(--shadow-lg); display: none; }
+  .side.open { display: flex; }
+  .drawer-x-layers { display: grid; }
+  #ctl .ctl-layers { display: grid; }
+  #chipbar { left: 14px; }
+}
 
 /* ── Ranking de comité (batch) ─────────────────────────────────────────────── */
 /* table-layout fijo: la tabla respeta el ancho del panel (el auto la desbordaba)

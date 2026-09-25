@@ -48,6 +48,12 @@ export interface Comuna {
 }
 
 /** Títulos y orden de los grupos de capas del sidebar (acotado a cóndor). */
+// Anchos bajo los cuales el panel de resultados (1180) y el de capas (900) pasan a
+// ser cajones superpuestos al mapa (deben coincidir con los @media de app.css).
+export const NARROW_PANEL = 1180;
+export const NARROW_LAYERS = 900;
+const below = (px: number) => typeof window !== 'undefined' && window.innerWidth <= px;
+
 export const LAYER_GROUPS: { id: LayerGroupId; title: string }[] = [
   { id: 'condor', title: 'Cóndor' },
   { id: 'carrona', title: 'Atrayentes de carroña' },
@@ -87,6 +93,8 @@ interface PortalState {
   /** Capas cargadas por el usuario (KML/KMZ). */
   userLayers: UserLayer[];
   legendOpen: boolean;
+  /** Cajón de capas abierto (solo tiene efecto bajo NARROW_LAYERS). */
+  layersOpen: boolean;
   tab: Tab;
   activeSite: string | null;
   panelHidden: boolean;
@@ -114,6 +122,7 @@ interface PortalState {
   toggleUserLayer(id: string): void;
   removeUserLayer(id: string): void;
   toggleLegend(): void;
+  setLayersOpen(open: boolean): void;
   setTab(tab: Tab): void;
   goToTab(tab: Tab): void;
   setActiveSite(loc: string | null): void;
@@ -136,11 +145,14 @@ interface PortalState {
 export const usePortalStore = create<PortalState>((set) => ({
   layers: LAYERS,
   userLayers: [],
-  legendOpen: true,
+  // En pantallas angostas el panel y la leyenda parten cerrados para no tapar el
+  // mapa; se abren desde el riel, el botón ☰ o el botón de leyenda.
+  legendOpen: !below(NARROW_PANEL),
+  layersOpen: false,
   // Por defecto (home) se muestra la ficha de la especie, no la lista.
   tab: 'ficha',
   activeSite: null,
-  panelHidden: false,
+  panelHidden: below(NARROW_PANEL),
   flyTarget: null,
   activeComuna: null,
   densityDomain: null,
@@ -196,10 +208,17 @@ export const usePortalStore = create<PortalState>((set) => ({
       // otras pestañas no suelten puntos por accidente.
       useFieldStore.getState().setDrawType('ninguno');
     }
-    set({ tab, panelHidden: false });
+    // Si no caben ambos cajones, abrir el panel cierra el de capas.
+    set((s) => ({ tab, panelHidden: false, layersOpen: below(NARROW_LAYERS) ? false : s.layersOpen }));
   },
   setActiveSite: (activeSite) => set({ activeSite }),
-  togglePanel: () => set((s) => ({ panelHidden: !s.panelHidden })),
+  togglePanel: () =>
+    set((s) => ({
+      panelHidden: !s.panelHidden,
+      layersOpen: s.panelHidden && below(NARROW_LAYERS) ? false : s.layersOpen,
+    })),
+  setLayersOpen: (open) =>
+    set((s) => ({ layersOpen: open, panelHidden: open && below(NARROW_LAYERS) ? true : s.panelHidden })),
   fly: (flyTarget) => set({ flyTarget }),
   consumeFly: () => set({ flyTarget: null }),
   // El encuadre lo resuelve MapView (fitBounds al polígono); aquí solo se fija la

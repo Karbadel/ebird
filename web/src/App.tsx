@@ -14,9 +14,12 @@ import Footer from './components/Footer';
 import Loader from './components/Loader';
 import { useDataStore } from './store/useDataStore';
 import { initUrlSync } from './lib/urlState';
+import { usePortalStore } from './store/usePortalStore';
 
 export default function App() {
   const load = useDataStore((s) => s.load);
+  // En modo cajón (pantallas angostas) los controles se corren si el panel está abierto.
+  const panelOpen = usePortalStore((s) => !s.panelHidden);
   useEffect(() => {
     load();
   }, [load]);
@@ -29,7 +32,7 @@ export default function App() {
       <section className="hero" id="visor">
         <TabRail />
         <PortalSidebar />
-        <div className="mapwrap warm">
+        <div className={`mapwrap warm${panelOpen ? ' panel-open' : ''}`}>
           <MapView />
           <ChipBar />
           <MapControls />

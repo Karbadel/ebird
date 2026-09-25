@@ -21,6 +21,8 @@ export default function PortalSidebar() {
   const setBufferKm = usePortalStore((s) => s.setBufferKm);
   const clearLayers = usePortalStore((s) => s.clearLayers);
   const toggleLegend = usePortalStore((s) => s.toggleLegend);
+  const layersOpen = usePortalStore((s) => s.layersOpen);
+  const setLayersOpen = usePortalStore((s) => s.setLayersOpen);
   const userLayers = usePortalStore((s) => s.userLayers);
   const addUserLayer = usePortalStore((s) => s.addUserLayer);
   const toggleUserLayer = usePortalStore((s) => s.toggleUserLayer);
@@ -84,10 +86,13 @@ export default function PortalSidebar() {
     });
 
   return (
-    <aside className="side">
+    <aside className={`side${layersOpen ? ' open' : ''}`}>
       <div className="side-head">
         <span className="side-title">Capas <InfoTip k="capas" label="Panel de capas" /></span>
         <span className="side-badge">{activeCount} activas</span>
+        <button type="button" className="drawer-x drawer-x-layers no-print" aria-label="Cerrar capas" title="Cerrar" onClick={() => setLayersOpen(false)}>
+          ✕
+        </button>
       </div>
 
       <div className="side-filter">
