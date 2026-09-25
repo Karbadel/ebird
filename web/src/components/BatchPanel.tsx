@@ -157,7 +157,7 @@ export default function BatchPanel() {
                   <td style={{ color: 'color-mix(in srgb,var(--color-text) 62%,transparent)' }}>{r.region}</td>
                   <td className="mono" style={{ textAlign: 'right' }}>{fmtMw(r.potenciaMw)}</td>
                   <td style={{ textAlign: 'right' }}>
-                    <span className="batch-cat mono" style={{ background: r.category.color }} title={r.category.label}>
+                    <span className="batch-cat mono" style={{ background: r.category.color, color: r.category.text }} title={r.category.label}>
                       {r.total}
                     </span>
                   </td>

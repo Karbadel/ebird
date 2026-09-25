@@ -31,19 +31,25 @@ export const DEFAULT_RISK_CONFIG: RiskVar[] = [
 
 export interface RiskCategory {
   label: string;
+  /** Relleno de la categoría (chip, polígono, barra). */
   color: string;
+  /** Color de texto legible SOBRE `color` (tinta en los tonos claros, blanco en los oscuros). */
+  text: string;
 }
+
+/** Escala ORDINAL de las 5 categorías, muy bajo → muy alto: un solo tono
+ *  (terracota, OKLCH h≈45) con luminosidad monótona 0,74 → 0,34. Validada con el
+ *  validador de dataviz (--ordinal): pasos ΔL ≥ 0,06 y extremo claro ≥ 2:1 sobre
+ *  el papel. Reemplaza el semáforo verde→rojo (dos verdes casi iguales y pares
+ *  rojo/verde que se confunden con daltonismo). */
+export const RISK_CAT_COLORS = ['#db997b', '#c7734b', '#ae4e1a', '#8d3000', '#661900'];
+const RISK_CAT_TEXT = ['#21281f', '#21281f', '#ffffff', '#ffffff', '#ffffff'];
+const RISK_CAT_LABELS = ['Muy bajo', 'Bajo', 'Medio', 'Alto', 'Muy alto'];
 
 export function riskCategory(score: number): RiskCategory {
-  if (score >= 70) return { label: 'Muy alto', color: '#7a1414' };
-  if (score >= 50) return { label: 'Alto', color: '#c0392b' };
-  if (score >= 30) return { label: 'Medio', color: '#e6a23c' };
-  if (score >= 12) return { label: 'Bajo', color: '#2e7d32' };
-  return { label: 'Muy bajo', color: '#1f6b4a' };
+  const k = score >= 70 ? 4 : score >= 50 ? 3 : score >= 30 ? 2 : score >= 12 ? 1 : 0;
+  return { label: RISK_CAT_LABELS[k]!, color: RISK_CAT_COLORS[k]!, text: RISK_CAT_TEXT[k]! };
 }
-
-/** Color de cada categoría en orden muy bajo → muy alto (alineado con RISK_LABELS). */
-export const RISK_CAT_COLORS = [0, 12, 30, 50, 70].map((v) => riskCategory(v).color);
 
 /** IDs de las capas GeoJSON que alimentan el motor (web/public/data/riesgo/). */
 export const RISK_LAYER_IDS = [

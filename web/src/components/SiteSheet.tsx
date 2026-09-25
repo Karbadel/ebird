@@ -129,12 +129,12 @@ export default function SiteSheet() {
 
         <div className="risk-card">
           <div>
-            <div className="risk-num" style={{ color: category.color }}>
+            <div className="risk-num">
               {total}<span style={{ fontSize: 18, opacity: 0.55 }}>/100</span>
             </div>
             <span className="lbl">Índice de riesgo</span>
           </div>
-          <span className="risk-badge" style={{ background: category.color }}>{category.label}</span>
+          <span className="risk-badge" style={{ background: category.color, color: category.text }}>{category.label}</span>
         </div>
 
         <div className="sheet-sec">

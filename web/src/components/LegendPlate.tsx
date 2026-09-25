@@ -1,5 +1,5 @@
 import { usePortalStore } from '../store/usePortalStore';
-import { RISK_COLORS, RISK_LABELS, GEN_ESTADOS } from '../data/portal';
+import { HABITAT_LEGEND, RISK_LABELS, GEN_ESTADOS } from '../data/portal';
 import { RISK_CAT_COLORS } from '../data/riskConfig';
 
 const SHORT = ['Muy bajo', 'Bajo', 'Medio', 'Alto', 'Muy alto'];
@@ -34,7 +34,7 @@ export default function LegendPlate() {
         <>
           <span className="lbl">Idoneidad</span>
           <div className="lgd-scale">
-            {RISK_COLORS.map((c, i) => (
+            {HABITAT_LEGEND.map((c, i) => (
               <div key={c}>
                 <i style={{ background: c }} />
                 <span title={RISK_LABELS[i]}>{SHORT[i]}</span>

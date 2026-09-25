@@ -51,7 +51,11 @@ export const CARDS_2: [IconKey, string, string | string[], string, boolean?][] =
 ];
 
 // Escala de categorías del índice de riesgo (leyenda y barras).
-export const RISK_COLORS = ['#5b8a63', '#7f9a58', '#d8b445', '#c9793c', '#a8452f'];
+export { RISK_CAT_COLORS as RISK_COLORS } from './riskConfig';
+// Muestras de la rampa real de la capa de idoneidad (HABITAT_RAMP en MapView,
+// pasos 0/2/4/7/9) para su leyenda: antes la leyenda usaba la escala de riesgo y
+// no coincidía con lo que pinta el mapa.
+export const HABITAT_LEGEND = ['#1c8eb0', '#a9d69f', '#f5f3b6', '#fdb561', '#da3726'];
 export const RISK_LABELS = ['Muy bajo', 'Bajo', 'Medio', 'Alto', 'Muy alto'];
 
 // Estados de la capa "Instalaciones y proyectos de generación" (id 'projects'),
