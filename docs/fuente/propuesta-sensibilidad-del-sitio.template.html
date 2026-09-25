@@ -1,0 +1,330 @@
+<!-- Fuente del PDF docs/propuesta-sensibilidad-del-sitio.pdf.
+     Para regenerarlo: reemplazar /*FONTS*/ por web/src/styles/fonts.css con cada
+     url(../assets/fonts/X.woff2) convertido a data URI base64, abrir en Chromium
+     e imprimir a PDF (A4, con fondos). -->
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Propuesta: perfil «Sensibilidad del sitio» — potencial eólico bruto</title>
+<style>
+/*FONTS*/
+:root {
+  --navy: #1b4436; --navy2: #173c2f; --amber: #de9426; --rust: #a4441e;
+  --paper: #f3ecdd; --surface: #fbf7ee; --ink: #21281f; --muted: #5d6459; --rule: #d9cfbb;
+  --c1: #db997b; --c2: #c7734b; --c3: #ae4e1a; --c4: #8d3000; --c5: #661900;
+}
+@page { size: A4; margin: 16mm 15mm 18mm 15mm; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; font-family: 'Barlow', sans-serif; font-size: 10pt; line-height: 1.45; color: var(--ink); }
+h1, h2, h3, .cond { font-family: 'Barlow Condensed', sans-serif; }
+h2 { font-size: 15pt; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; color: var(--navy);
+  margin: 20px 0 8px; padding-bottom: 4px; border-bottom: 2px solid var(--amber); break-after: avoid; }
+h2 .n { color: var(--amber); margin-right: 6px; }
+h3 { font-size: 11.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: .03em; color: var(--navy);
+  margin: 14px 0 6px; break-after: avoid; }
+p { margin: 0 0 7px; }
+ul, ol { margin: 0 0 8px; padding-left: 18px; }
+li { margin-bottom: 3px; }
+b, strong { font-weight: 600; }
+.muted { color: var(--muted); }
+.small { font-size: 8.8pt; }
+section, .keep { break-inside: avoid; }
+
+/* Portada */
+.cover { background: var(--navy); color: var(--surface); padding: 18px 20px 16px; border-bottom: 4px solid var(--amber); }
+.cover .kicker { font-family: 'Barlow Condensed'; font-weight: 600; font-size: 9.5pt; letter-spacing: .16em; text-transform: uppercase; color: #e9c98f; }
+.cover h1 { font-size: 23pt; line-height: 1.05; font-weight: 700; text-transform: uppercase; margin: 6px 0 4px; letter-spacing: .01em; }
+.cover .sub { font-size: 11pt; color: #d7e0d9; margin: 0; }
+.meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--rule); border-top: 0; background: var(--surface); }
+.meta div { padding: 7px 12px; border-top: 1px solid var(--rule); font-size: 9pt; }
+.meta div:nth-child(odd) { border-right: 1px solid var(--rule); }
+.meta .k { display: block; font-family: 'Barlow Condensed'; font-weight: 600; font-size: 8pt; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.badge { display: inline-block; padding: 1px 8px; background: #f6e3c2; color: #7a4d06; border: 1px solid #e3b766; font-weight: 600; font-size: 8.8pt; }
+
+/* Tarjetas y avisos */
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 6px 0 4px; }
+.card { border: 1px solid var(--rule); background: var(--surface); padding: 10px 12px; }
+.card .t { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 12pt; text-transform: uppercase; color: var(--navy); }
+.card.hl { border-color: var(--amber); border-left: 4px solid var(--amber); }
+.card .q { font-style: italic; margin: 4px 0 6px; }
+.note { border-left: 3px solid var(--amber); background: #faf1e0; padding: 7px 11px; margin: 8px 0; }
+.note.navy { border-left-color: var(--navy); background: #eef2ef; }
+
+/* Tablas */
+table { width: 100%; border-collapse: collapse; margin: 6px 0 8px; font-size: 9.2pt; break-inside: avoid; }
+th { font-family: 'Barlow Condensed'; font-weight: 600; font-size: 8.6pt; letter-spacing: .08em; text-transform: uppercase;
+  text-align: left; color: var(--surface); background: var(--navy); padding: 5px 8px; }
+td { padding: 5px 8px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+tbody tr:nth-child(even) td { background: #f8f3e8; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+tr.chg td { background: #fbeed6 !important; }
+.up { color: var(--rust); font-weight: 700; }
+.down { color: var(--navy); font-weight: 700; }
+
+/* Fórmulas */
+.formula { font-family: 'Barlow Condensed'; font-size: 12pt; font-weight: 600; color: var(--navy); background: var(--surface);
+  border: 1px solid var(--rule); border-left: 4px solid var(--navy); padding: 6px 12px; margin: 5px 0 7px; }
+.crit { display: grid; grid-template-columns: 150px 1fr; gap: 0 14px; padding: 8px 0; border-bottom: 1px solid var(--rule); break-inside: avoid; }
+.crit .name { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 10.5pt; color: var(--navy); text-transform: uppercase; }
+.crit .formula { font-size: 11pt; margin: 3px 0 4px; padding: 4px 10px; }
+
+/* Categorías */
+.cat { display: inline-block; min-width: 64px; padding: 1px 8px; font-weight: 600; font-size: 8.8pt; text-align: center; }
+.k1 { background: var(--c1); color: var(--ink); } .k2 { background: var(--c2); color: var(--ink); }
+.k3 { background: var(--c3); color: #fff; } .k4 { background: var(--c4); color: #fff; } .k5 { background: var(--c5); color: #fff; }
+
+/* Barras apiladas */
+.bars { margin: 8px 0 4px; }
+.barrow { display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 10px; margin: 5px 0; }
+.barrow .lbl { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 10.5pt; text-transform: uppercase; color: var(--navy); }
+.bar { display: flex; gap: 2px; height: 20px; }
+.bar i { display: flex; align-items: center; justify-content: center; font-style: normal; font-size: 8pt; font-weight: 600; overflow: hidden; white-space: nowrap; }
+.bar i:first-child { border-radius: 4px 0 0 4px; } .bar i:last-child { border-radius: 0 4px 4px 0; }
+.legend { display: flex; gap: 14px; font-size: 8.6pt; color: var(--muted); margin: 4px 0 0 160px; }
+.legend span::before { content: ''; display: inline-block; width: 9px; height: 9px; margin-right: 5px; vertical-align: -1px; background: var(--sw); }
+
+/* Cifras clave */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 8px 0; }
+.stat { border: 1px solid var(--rule); background: var(--surface); padding: 9px 12px; }
+.stat .v { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 22pt; line-height: 1; color: var(--rust); }
+.stat .d { font-size: 8.8pt; color: var(--muted); margin-top: 3px; }
+
+/* Decisiones */
+.decs { counter-reset: d; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.dec { border: 1px solid var(--rule); border-top: 3px solid var(--navy); padding: 8px 11px; background: var(--surface); break-inside: avoid; }
+.dec .t { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 11pt; text-transform: uppercase; color: var(--navy); }
+.dec .t::before { counter-increment: d; content: counter(d) '. '; color: var(--amber); }
+.steps { counter-reset: s; list-style: none; padding: 0; }
+.steps li { counter-increment: s; position: relative; padding-left: 26px; margin-bottom: 6px; }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--navy); color: var(--surface); font-family: 'Barlow Condensed'; font-weight: 700; font-size: 9pt; text-align: center; line-height: 18px; }
+a { color: var(--navy); }
+.pb { break-before: page; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="kicker">Comité técnico · Cóndor andino y energía eólica · Ministerio de Energía</div>
+  <h1>Propuesta: perfil «Sensibilidad del sitio»</h1>
+  <p class="sub">Aplicación del índice de riesgo de colisión al potencial eólico bruto del SEN — pesos, cálculos y criterios de evaluación</p>
+</div>
+<div class="meta">
+  <div><span class="k">Estado</span><span class="badge">Propuesta técnica — pendiente de validación del comité</span></div>
+  <div><span class="k">Fecha</span>25 de septiembre de 2026</div>
+  <div><span class="k">Ubicación en el portal</span>Comité → Potencial eólico → Perfil de pesos → «Sensibilidad del sitio»</div>
+  <div><span class="k">Enlace directo</span><a href="https://condores.exploradorenergia.cl/#/comite/potencial?perfil=sensibilidad">condores.exploradorenergia.cl/#/comite/potencial?perfil=sensibilidad</a></div>
+</div>
+
+<section>
+<h2><span class="n">1</span>Qué pregunta responde</h2>
+<p>El índice de riesgo de colisión se puede calcular con distintos conjuntos de pesos («perfiles»). Cada uno responde una pregunta distinta:</p>
+<div class="cards">
+  <div class="card">
+    <div class="t">Vigente</div>
+    <div class="q">¿Qué tan riesgoso es este punto por la infraestructura que <b>ya existe</b>?</div>
+    <div class="small muted">Uso: parques eólicos en operación.</div>
+  </div>
+  <div class="card hl">
+    <div class="t">Sensibilidad del sitio</div>
+    <div class="q">Si se construyera un parque aquí, ¿qué tan <b>sensible</b> es el lugar para el cóndor?</div>
+    <div class="small muted">Uso: zonas sin parques, como el potencial eólico bruto.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<h2><span class="n">2</span>Por qué hacía falta</h2>
+<ul>
+  <li>En el perfil Vigente, el <b>40 % del peso</b> es cercanía a parques eólicos y líneas de transmisión <b>existentes</b>.</li>
+  <li>Las áreas de potencial eólico están, casi por definición, lejos de los parques actuales: esos criterios valen 0 y el índice sale bajo <b>porque no hay turbinas, no porque el sitio sea seguro</b> para el cóndor.</li>
+</ul>
+<div class="note">Con el perfil Vigente, el <b>98 % del potencial</b> quedaba en «Muy bajo» o «Bajo»: una cifra que podía leerse erróneamente como «zona apta para desarrollar».</div>
+</section>
+
+<section>
+<h2><span class="n">3</span>Pesos: comparación entre perfiles</h2>
+<table>
+  <thead><tr><th>Criterio</th><th class="num">Vigente</th><th class="num">Sensibilidad del sitio</th><th class="num">Distancia de influencia</th></tr></thead>
+  <tbody>
+    <tr class="chg"><td>Cercanía a parques eólicos</td><td class="num">20 %</td><td class="num"><span class="down">0 %</span></td><td class="num">3 km</td></tr>
+    <tr class="chg"><td>Cercanía a líneas de transmisión</td><td class="num">20 %</td><td class="num"><span class="down">5 %</span></td><td class="num">2 km</td></tr>
+    <tr class="chg"><td>Idoneidad de hábitat</td><td class="num">20 %</td><td class="num"><span class="up">30 %</span></td><td class="num">valor de la celda</td></tr>
+    <tr class="chg"><td>Cercanía a nidos de cóndor</td><td class="num">15 %</td><td class="num"><span class="up">25 %</span></td><td class="num">8 km</td></tr>
+    <tr class="chg"><td>Pendiente / rugosidad del terreno</td><td class="num">0 %</td><td class="num"><span class="up">10 %</span></td><td class="num">celda más cercana</td></tr>
+    <tr><td>Cercanía a vertederos</td><td class="num">10 %</td><td class="num">10 %</td><td class="num">15 km</td></tr>
+    <tr><td>Cercanía a veranadas</td><td class="num">5 %</td><td class="num">5 %</td><td class="num">30 km</td></tr>
+    <tr><td>Carga ganadera regional</td><td class="num">5 %</td><td class="num">5 %</td><td class="num">30 km</td></tr>
+    <tr><td>Historial de colisiones cercanas</td><td class="num">5 %</td><td class="num">5 %</td><td class="num">10 km</td></tr>
+    <tr><td>Densidad de avistamientos (eBird)</td><td class="num">5 %</td><td class="num">5 %</td><td class="num">valor de la celda</td></tr>
+    <tr><td>Antenas de telecomunicaciones (correcciones de campo)</td><td class="num">0 %</td><td class="num">0 %</td><td class="num">5 km</td></tr>
+  </tbody>
+</table>
+<p class="small muted">Filas destacadas: criterios cuyo peso cambia. <b>No cambian entre perfiles:</b> las distancias de influencia, los datos, las fórmulas de cada criterio ni los umbrales de las categorías.</p>
+</section>
+
+<h2><span class="n">4</span>Cálculos y criterios de evaluación</h2>
+
+<h3>4.1 Fuentes de datos por criterio</h3>
+<table>
+  <thead><tr><th>Criterio</th><th>Fuente</th><th class="num">Elementos</th></tr></thead>
+  <tbody>
+    <tr><td>Parques eólicos</td><td>MINENERGIA (parques en operación)</td><td class="num">30</td></tr>
+    <tr><td>Líneas de transmisión</td><td>Coordinador Eléctrico</td><td class="num">958 tramos</td></tr>
+    <tr><td>Idoneidad de hábitat</td><td>Estrada Pacheco et al. 2025 — grilla de 30 × 30 km digitalizada de la figura publicada (provisional)</td><td class="num">1.149 celdas<br><span class="small muted">148 sin dato</span></td></tr>
+    <tr><td>Nidos y dormideros</td><td>eBird, códigos de nidificación C3 (probable) y C4 (confirmada)</td><td class="num">81 sitios</td></tr>
+    <tr><td>Vertederos</td><td>MMA (formales e ilegales)</td><td class="num">356</td></tr>
+    <tr><td>Veranadas</td><td>Ganadería trashumante</td><td class="num">631 polígonos</td></tr>
+    <tr><td>Ganado</td><td>Cabezas por distrito (bovino, ovino, caprino), en el centroide del distrito</td><td class="num">5.531 puntos</td></tr>
+    <tr><td>Colisiones</td><td>Colisiones confirmadas de cóndor con aerogeneradores, 2019–2025</td><td class="num">29 casos</td></tr>
+    <tr><td>Densidad eBird</td><td>eBird Basic Dataset — localidades distintas con registro por celda</td><td class="num">1.636 celdas</td></tr>
+    <tr><td>Terreno</td><td>DEM Copernicus GLO-30 (Google Earth Engine), grilla de 3 km; cobertura ≈ Atacama a Maule (25,5°–35° S)</td><td class="num">24.843 celdas</td></tr>
+    <tr><td>Potencial eólico bruto</td><td>MINENERGIA, Potencial Eólico Bruto SEN 2026</td><td class="num">2.277 áreas<br><span class="small muted">2.434.585 ha · 121.727 MW</span></td></tr>
+  </tbody>
+</table>
+
+<h3>4.2 Puntaje de cada criterio (0 a 1; 1 = máximo aporte al riesgo)</h3>
+<p class="small muted">Todas las distancias son geodésicas (sobre la curvatura de la Tierra), en kilómetros.</p>
+
+<div class="crit">
+  <div class="name">Criterios de cercanía</div>
+  <div>
+    <div class="small muted">Parques, líneas, nidos, vertederos, veranadas, colisiones, antenas</div>
+    <div class="formula">Puntaje = máx( 0 ; 1 − d / distancia de influencia )</div>
+    <div class="small"><i>d</i> = distancia al elemento más cercano. Polígonos: 0 si el punto está dentro, si no la distancia al borde. Líneas: distancia al tramo más cercano. Vale 1 sobre el elemento y baja linealmente hasta 0.
+    <b>Ejemplo:</b> nido a 2 km, influencia 8 km → 1 − 2/8 = <b>0,75</b>.</div>
+  </div>
+</div>
+<div class="crit">
+  <div class="name">Idoneidad de hábitat</div>
+  <div>
+    <div class="formula">Puntaje = hs_mean de la celda que contiene el punto</div>
+    <div class="small">Valor de 0 a 1 de la grilla de 30 km. Celda sin dato → criterio excluido.</div>
+  </div>
+</div>
+<div class="crit">
+  <div class="name">Densidad eBird</div>
+  <div>
+    <div class="formula">Puntaje = √( n / n<sub>máx</sub> )</div>
+    <div class="small"><i>n</i> = localidades con registro en la celda del punto; <i>n<sub>máx</sub></i> = máximo nacional. La raíz amortigua la fuerte concentración de observadores en pocos sitios. Fuera de celdas → 0.</div>
+  </div>
+</div>
+<div class="crit">
+  <div class="name">Carga ganadera regional</div>
+  <div>
+    <div class="formula">Aporte por especie = (1 − d / 30) × (cabezas del distrito / máximo nacional de la especie)</div>
+    <div class="small">Para bovino, ovino y caprino se toma el distrito más cercano; aporta solo si está a menos de 30 km. <b>Puntaje = promedio de los aportes de las especies dentro de 30 km</b> (0 si ninguna).</div>
+  </div>
+</div>
+<div class="crit">
+  <div class="name">Pendiente / rugosidad del terreno</div>
+  <div>
+    <div class="formula">Puntaje = 0,65 × mín(1 ; pendiente / 35°) + 0,35 × mín(1 ; rugosidad / 350 m)</div>
+    <div class="small">Celda de 3 km más cercana (si está a menos de ~5,5 km; si no, criterio excluido). Rugosidad = desviación estándar de la altitud dentro de la celda.</div>
+  </div>
+</div>
+
+<section>
+<h3>4.3 Índice de riesgo (0 a 100)</h3>
+<div class="formula">Índice = redondeo( 100 × Σ ( puntaje<sub>i</sub> × peso<sub>i</sub> ) / Σ peso<sub>i</sub> )</div>
+<ul>
+  <li>La suma recorre solo los criterios <b>activos y con dato</b> en el punto. Un criterio sin dato (hábitat sin valor, terreno fuera de cobertura) <b>se excluye y el resto se renormaliza</b>; no cuenta como 0.</li>
+  <li>Por eso los pesos no necesitan sumar 100: se normalizan sobre los criterios válidos.</li>
+</ul>
+<table style="width: 60%">
+  <thead><tr><th>Categoría</th><th class="num">Índice</th></tr></thead>
+  <tbody>
+    <tr><td><span class="cat k1">Muy bajo</span></td><td class="num">menor que 12</td></tr>
+    <tr><td><span class="cat k2">Bajo</span></td><td class="num">12 – 29</td></tr>
+    <tr><td><span class="cat k3">Medio</span></td><td class="num">30 – 49</td></tr>
+    <tr><td><span class="cat k4">Alto</span></td><td class="num">50 – 69</td></tr>
+    <tr><td><span class="cat k5">Muy alto</span></td><td class="num">70 o más</td></tr>
+  </tbody>
+</table>
+</section>
+
+<section>
+<h3>4.4 Aplicación a las áreas de potencial eólico</h3>
+<ol class="steps">
+  <li><b>Punto evaluado por área.</b> Para cada una de las 2.277 áreas se toma un punto interior del polígono (el mayor, si tiene varias partes): el centroide si cae dentro; si no (formas cóncavas), el centro del tramo interior más ancho de la línea horizontal que pasa por el centroide.</li>
+  <li><b>Índice del área.</b> El índice (4.3) calculado en ese punto, con el perfil de pesos seleccionado.</li>
+  <li><b>Potencia.</b> La fuente asigna una densidad fija de 20 ha/MW: <b>MW = ha / 20</b> (la potencia es proporcional a la superficie).</li>
+  <li><b>Agregación.</b> Se suman los MW, las hectáreas y el número de áreas por categoría de riesgo, a nivel nacional y por región (orden norte → sur).</li>
+  <li><b>Cálculo técnico.</b> Las distancias y valores de celda de cada área se precalculan una vez con el mismo motor de cálculo del portal, y el navegador aplica los pesos en vivo. Se verificó que el resultado es idéntico al cálculo directo punto a punto; por eso cambiar de perfil recalcula todo al instante.</li>
+</ol>
+</section>
+
+<section>
+<h2><span class="n">5</span>Resultados sobre el potencial eólico</h2>
+<p>2.277 áreas · 121,7 GW. Proporción del potencial (MW) por categoría de riesgo en cada perfil:</p>
+<div class="bars">
+  <div class="barrow"><div class="lbl">Vigente</div>
+    <div class="bar"><i class="k1" style="flex:37.6">37,6 %</i><i class="k2" style="flex:61.3">61,3 %</i><i class="k3" style="flex:1.1"></i></div></div>
+  <div class="barrow"><div class="lbl">Sensibilidad del sitio</div>
+    <div class="bar"><i class="k1" style="flex:20.9">20,9 %</i><i class="k2" style="flex:66.6">66,6 %</i><i class="k3" style="flex:12.4">12,4 %</i></div></div>
+  <div class="legend"><span style="--sw: var(--c1)">Muy bajo</span><span style="--sw: var(--c2)">Bajo</span><span style="--sw: var(--c3)">Medio</span><span style="--sw: var(--c4)">Alto (0)</span><span style="--sw: var(--c5)">Muy alto (0)</span></div>
+</div>
+<table>
+  <thead><tr><th>Categoría</th><th class="num">Vigente</th><th class="num">Sensibilidad del sitio</th></tr></thead>
+  <tbody>
+    <tr><td><span class="cat k1">Muy bajo</span></td><td class="num">45,7 GW (37,6 %)</td><td class="num">25,5 GW (20,9 %)</td></tr>
+    <tr><td><span class="cat k2">Bajo</span></td><td class="num">74,6 GW (61,3 %)</td><td class="num">81,1 GW (66,6 %)</td></tr>
+    <tr class="chg"><td><span class="cat k3">Medio</span></td><td class="num"><b>1,4 GW (1,1 %)</b></td><td class="num"><b>15,1 GW (12,4 %)</b></td></tr>
+    <tr><td><span class="cat k4">Alto</span> / <span class="cat k5">Muy alto</span></td><td class="num">0</td><td class="num">0</td></tr>
+  </tbody>
+</table>
+<ul>
+  <li>El perfil hace <b>visible la sensibilidad del lugar</b>: el potencial en «Medio» pasa de 1,4 a 15,1 GW.</li>
+  <li><b>Ninguna área llega a «Alto»</b>: el índice máximo entre todas las áreas es <b>44</b> (Alto comienza en 50).</li>
+</ul>
+</section>
+
+<section>
+<h2><span class="n">6</span>Por qué no aparece riesgo «Alto»</h2>
+<div class="stats">
+  <div class="stat"><div class="v">133 km</div><div class="d">mediana de distancia de las áreas al nido conocido más cercano (el 10 % más cercano, a 66 km)</div></div>
+  <div class="stat"><div class="v">6 de 2.277</div><div class="d">áreas reciben puntaje por nidos, con influencia de 8 km</div></div>
+  <div class="stat"><div class="v">44</div><div class="d">índice máximo entre todas las áreas (Alto comienza en 50)</div></div>
+</div>
+<ul>
+  <li>El índice es un promedio ponderado: con los criterios de cercanía en 0 en casi todas las áreas, el promedio no alcanza 50 aunque se cambien los pesos.</li>
+  <li>Se evaluó alargar la influencia de nidos y colisiones: a 30–50 km solo 0,1–0,5 GW llegarían a «Alto». Hacerlo solo para que «aparezca riesgo» sería forzar el índice.</li>
+</ul>
+<div class="note navy"><b>El límite está en los datos (inventario de 81 nidos de eBird), no en los pesos.</b></div>
+</section>
+
+<section>
+<h2><span class="n">7</span>Cautelas de interpretación</h2>
+<ul>
+  <li><b>Potencial bruto no son proyectos:</b> es recurso de viento, sin descontar restricciones territoriales, ambientales ni de conexión.</li>
+  <li><b>Resultado indicativo y regional:</b> hábitat en grilla de 30 km; terreno solo de Atacama a Maule; la densidad eBird refleja esfuerzo de observación además de presencia.</li>
+  <li><b>Un punto por área:</b> en áreas extensas (hasta ~28.000 ha) el índice puede variar dentro de ellas.</li>
+  <li><b>No califica la aptitud de un sitio ni sustituye la evaluación ambiental</b> de cada proyecto.</li>
+</ul>
+</section>
+
+<section>
+<h2><span class="n">8</span>Decisiones pendientes del comité</h2>
+<div class="decs">
+  <div class="dec"><div class="t">Pesos</div>Validar o ajustar los pesos propuestos.</div>
+  <div class="dec"><div class="t">Efecto acumulado</div>La cercanía a parques existentes vale 0 %. ¿Se prefiere un peso bajo (5–10 %) para considerar el riesgo acumulado de sumar un parque junto a otros?</div>
+  <div class="dec"><div class="t">Inventario de nidos</div>¿La lejanía a los nidos conocidos refleja la realidad o un vacío de información? ¿Hay fuentes adicionales (SAG, ROC, estudios de impacto ambiental)?</div>
+  <div class="dec"><div class="t">Forma de lectura</div>¿Umbrales fijos (Alto ≥ 50) o lectura relativa (p. ej., el 20 % de áreas más sensibles)?</div>
+</div>
+</section>
+
+<section>
+<h2><span class="n">9</span>Uso práctico en el portal</h2>
+<ol class="steps">
+  <li>Abrir el <a href="https://condores.exploradorenergia.cl/#/comite/potencial?perfil=sensibilidad">enlace directo</a>, o ir a Comité → Potencial eólico y elegir el perfil en el selector.</li>
+  <li>Marcar <b>«Colorear la capa en el mapa por índice»</b> para ver las áreas pintadas por categoría.</li>
+  <li><b>CSV por región:</b> MW, ha y número de áreas por región y categoría. <b>CSV por área:</b> punto evaluado, índice y categoría de cada polígono.</li>
+  <li><b>Imprimir / PDF:</b> informe con perfil, pesos activos y aviso metodológico.</li>
+  <li>Cambiar entre perfiles recalcula todo al instante: útil para comparar ambas lecturas.</li>
+</ol>
+</section>
+
+</body>
+</html>
