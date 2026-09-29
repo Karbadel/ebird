@@ -30,6 +30,7 @@ El índice de riesgo de colisión se puede calcular con distintos conjuntos de p
 | Cercanía a parques eólicos | 20 % | **0 %** | 3 km |
 | Cercanía a líneas de transmisión | 20 % | **5 %** | 2 km |
 | Idoneidad de hábitat | 20 % | **30 %** | — (valor de la celda) |
+| Abundancia relativa de cóndor (eBird S&T 2023) | 0 % | 0 % | — (valor de la celda) |
 | Cercanía a nidos de cóndor | 15 % | **25 %** | 8 km |
 | Pendiente / rugosidad del terreno | 0 % | **10 %** | — (celda más cercana) |
 | Cercanía a vertederos | 10 % | 10 % | 15 km |
@@ -49,9 +50,10 @@ El índice de riesgo de colisión se puede calcular con distintos conjuntos de p
 
 | Criterio | Fuente | Elementos |
 |---|---|---|
-| Parques eólicos | MINENERGIA (parques en operación) | 30 puntos |
+| Parques eólicos | MINENERGIA, catastro de generación jun 2026: operativos (OPC), en SEIA y otros (aprobados o en construcción); efecto acumulado | 180 puntos (75 · 18 · 87) |
 | Líneas de transmisión | Coordinador Eléctrico | 958 tramos |
-| Idoneidad de hábitat | Estrada Pacheco et al. 2025 (grilla de 30 × 30 km digitalizada de la figura publicada; provisional) | 1.149 celdas (148 sin dato) |
+| Idoneidad de hábitat | Estrada Pacheco et al. 2025, raster oficial (≈ 830 m) remuestreado a una grilla de 0,01° (≈ 1 km); sin dato al norte de ≈ 20° S | 751.632 celdas en Chile continental |
+| Abundancia relativa (peso 0 %) | eBird Status and Trends 2023, abundancia anual, 3 km; normalizada por el percentil 99 de Chile | 68.066 celdas |
 | Nidos y dormideros | eBird, códigos de nidificación C3 (probable) y C4 (confirmada) | 81 sitios |
 | Vertederos | MMA (formales e ilegales) | 356 |
 | Veranadas | Ganadería trashumante | 631 polígonos |
@@ -69,7 +71,8 @@ Todas las distancias son geodésicas (sobre la curvatura de la Tierra), en km.
   - *d* = distancia al elemento más cercano de la capa. Para polígonos (vertederos, veranadas), *d* = 0 si el punto está dentro; si no, la distancia al borde. Para líneas, la distancia al tramo más cercano.
   - **Puntaje = máx(0, 1 − d / distancia de influencia)**: vale 1 sobre el elemento y baja linealmente hasta 0 a la distancia de influencia.
   - Ejemplo: un nido a 2 km con influencia de 8 km → 1 − 2/8 = **0,75**.
-- **Idoneidad de hábitat:** valor `hs_mean` (0–1) de la celda de 30 km que contiene el punto. Celda sin dato → criterio excluido.
+- **Idoneidad de hábitat:** valor (0–1) del raster de idoneidad en la celda de ≈ 1 km que contiene el punto (el raster ya está en escala 0–1). Punto sin dato (norte de 20° S) → criterio excluido.
+- **Abundancia relativa de cóndor (eBird S&T 2023):** **mín(1, abundancia / P99)**, con P99 el percentil 99 de la abundancia en Chile continental. Peso 0 % por defecto en todos los perfiles: no altera el índice hasta que se le asigne peso. Fuera del área de predicción de eBird → criterio excluido.
 - **Densidad eBird:** **√(n / n_máx)**, donde *n* es el número de localidades con registro en la celda que contiene el punto y *n_máx* el máximo nacional. La raíz amortigua la fuerte concentración de observadores en pocos sitios. Fuera de celdas → 0.
 - **Carga ganadera regional:** para cada especie (bovino, ovino, caprino) se toma el distrito más cercano. Si está dentro de 30 km, aporta **(1 − d/30) × (cabezas del distrito / máximo nacional de esa especie)**. El puntaje es el **promedio de los aportes de las especies que están dentro de 30 km** (0 si ninguna).
 - **Pendiente / rugosidad del terreno:** celda de 3 km más cercana (si está a menos de ~5,5 km; si no, criterio excluido). **Puntaje = 0,65 × mín(1, pendiente / 35°) + 0,35 × mín(1, rugosidad / 350 m)**, donde la rugosidad es la desviación estándar de la altitud dentro de la celda.
@@ -123,7 +126,7 @@ Todas las distancias son geodésicas (sobre la curvatura de la Tierra), en km.
 ## 7. Cautelas de interpretación
 
 - **Potencial bruto no son proyectos:** es recurso de viento, sin descontar restricciones territoriales, ambientales ni de conexión.
-- **Resultado indicativo y regional:** hábitat en grilla de 30 km; terreno solo de Atacama a Maule; densidad eBird refleja esfuerzo de observación además de presencia.
+- **Resultado indicativo y regional:** hábitat sin dato al norte de 20° S; terreno solo de Atacama a Maule; densidad eBird refleja esfuerzo de observación además de presencia.
 - **Un punto por área:** en áreas extensas (hasta ~28.000 ha) el índice puede variar dentro de ellas.
 - **No califica la aptitud de un sitio ni sustituye la evaluación ambiental** de cada proyecto.
 

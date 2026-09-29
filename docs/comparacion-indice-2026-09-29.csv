@@ -1,0 +1,265 @@
+﻿perfil,conjunto,nombre,lat,lng,indice_antes,clase_antes,indice_despues,clase_despues,delta,delta_por_idoneidad,delta_por_parques,delta_otros,criterio_principal,idoneidad_antes,idoneidad_despues
+Vigente,30 parques del catastro 2018,EL TOQUI,-45.024819,-71.967774,34,Medio,34,Medio,0,0.28,-0.0,-0.0,sin cambio relevante,0.741,0.7559055118110236
+Vigente,30 parques del catastro 2018,ALTO BAGUALES,-45.526498,-72.106039,37,Medio,35,Medio,-2,-0.59,-1.59,-0.0,cercanía a parques,0.8225,0.7913385826771654
+Vigente,30 parques del catastro 2018,ALTO BAGUALES 2,-45.525671,-72.103035,37,Medio,37,Medio,0,-0.59,-0.0,0.0,"idoneidad de hábitat (0,82 → 0,79)",0.8225,0.7913385826771654
+Vigente,30 parques del catastro 2018,CABO NEGRO,-52.949422,-70.829126,26,Bajo,28,Bajo,2,1.07,-0.0,0.0,"idoneidad de hábitat (0,34 → 0,40)",0.3415,0.39763779527559057
+Vigente,30 parques del catastro 2018,CANELA,-31.286692,-71.610685,48,Medio,46,Medio,-2,-1.91,-0.0,0.0,"idoneidad de hábitat (0,99 → 0,89)",0.99,0.889763779527559
+Vigente,30 parques del catastro 2018,CANELA II,-31.306378,-71.617825,57,Alto,55,Alto,-2,-2.13,-0.0,-0.0,"idoneidad de hábitat (0,99 → 0,88)",0.99,0.8779527559055118
+Vigente,30 parques del catastro 2018,EOLICA CUEL,-37.514068,-72.478971,38,Medio,30,Medio,-8,-8.1,-0.0,-0.0,"idoneidad de hábitat (0,68 → 0,25)",0.6774,0.25196850393700787
+Vigente,30 parques del catastro 2018,EOLICA EL ARRAYAN,-30.583171,-71.701008,38,Medio,34,Medio,-4,-3.67,-0.0,0.0,"idoneidad de hábitat (0,98 → 0,79)",0.9838,0.7913385826771654
+Vigente,30 parques del catastro 2018,EOLICA LAS PENAS,-37.257159,-73.426328,24,Bajo,24,Bajo,0,-0.09,-0.0,-0.0,sin cambio relevante,0.2726,0.2677165354330709
+Vigente,30 parques del catastro 2018,EOLICA LEBU,-37.686113,-73.649115,29,Bajo,27,Bajo,-2,4.2,-4.49,-0.99,cercanía a parques,,0.2204724409448819
+Vigente,30 parques del catastro 2018,EOLICA LEBU III,-37.682202,-73.644168,27,Bajo,28,Bajo,1,0.3,-0.0,0.0,sin cambio relevante,0.2049,0.2204724409448819
+Vigente,30 parques del catastro 2018,EOLICA LOS BUENOS AIRES,-37.539424,-72.508344,40,Medio,32,Medio,-8,-8.25,-0.0,0.0,"idoneidad de hábitat (0,68 → 0,24)",0.6774,0.2440944881889764
+Vigente,30 parques del catastro 2018,EOLICA LOS CURUROS,-31.029368,-71.632227,46,Medio,44,Medio,-2,-2.22,-0.0,0.0,"idoneidad de hábitat (0,96 → 0,85)",0.9632,0.8464566929133859
+Vigente,30 parques del catastro 2018,EOLICA PUNTA COLORADA,-29.367536,-71.040136,50,Alto,46,Medio,-4,-3.66,-0.0,-0.0,"idoneidad de hábitat (0,94 → 0,75)",0.9404,0.7480314960629921
+Vigente,30 parques del catastro 2018,EOLICA PUNTA PALMERAS,-31.236031,-71.625076,39,Medio,37,Medio,-2,-1.25,-0.0,-0.0,"idoneidad de hábitat (0,96 → 0,90)",0.9632,0.8976377952755905
+Vigente,30 parques del catastro 2018,EOLICA SAN JUAN,-28.881471,-71.468228,41,Medio,36,Medio,-5,-4.14,-0.0,0.0,"idoneidad de hábitat (0,95 → 0,73)",0.9498,0.7322834645669292
+Vigente,30 parques del catastro 2018,EOLICA SAN PEDRO,-42.275408,-73.924112,33,Medio,25,Bajo,-8,-8.05,-0.0,0.0,"idoneidad de hábitat (0,72 → 0,30)",0.7221,0.2992125984251969
+Vigente,30 parques del catastro 2018,EOLICA SAN PEDRO II,-42.281201,-73.918781,33,Medio,25,Bajo,-8,-8.13,-0.0,0.0,"idoneidad de hábitat (0,72 → 0,30)",0.7221,0.2952755905511811
+Vigente,30 parques del catastro 2018,EOLICA TALINAY ORIENTE,-30.84637,-71.569722,43,Medio,38,Medio,-5,-4.68,-0.0,0.0,"idoneidad de hábitat (0,96 → 0,72)",0.962,0.7165354330708661
+Vigente,30 parques del catastro 2018,EOLICA TALINAY PONIENTE,-30.811158,-71.652973,40,Medio,35,Medio,-5,-4.3,-0.0,0.0,"idoneidad de hábitat (0,96 → 0,74)",0.962,0.7362204724409449
+Vigente,30 parques del catastro 2018,EOLICA TALTAL,-25.080052,-69.857212,20,Bajo,20,Bajo,0,0.72,-0.0,0.0,"idoneidad de hábitat (0,03 → 0,06)",0.0252,0.06299212598425197
+Vigente,30 parques del catastro 2018,EOLICA TOTORAL,-31.348495,-71.601863,54,Alto,51,Alto,-3,-2.73,-0.0,0.0,"idoneidad de hábitat (0,99 → 0,85)",0.99,0.8464566929133859
+Vigente,30 parques del catastro 2018,HUAJACHE,-37.746172,-73.568485,23,Bajo,23,Bajo,0,-0.0,-0.0,0.0,sin cambio relevante,0.2049,0.2047244094488189
+Vigente,30 parques del catastro 2018,MONTE REDONDO,-31.072585,-71.637106,41,Medio,40,Medio,-1,-1.4,-0.0,0.0,"idoneidad de hábitat (0,96 → 0,89)",0.9632,0.889763779527559
+Vigente,30 parques del catastro 2018,PARQUE EOLICO LA ESPERANZA,-37.605837,-72.534351,35,Medio,27,Bajo,-8,-8.03,-0.0,-0.0,"idoneidad de hábitat (0,68 → 0,26)",0.6774,0.2559055118110236
+Vigente,30 parques del catastro 2018,PARQUE EOLICO RENAICO,-37.72064,-72.581145,33,Medio,31,Medio,-2,-2.21,-0.0,0.0,"idoneidad de hábitat (0,58 → 0,46)",0.5805,0.4645669291338583
+Vigente,30 parques del catastro 2018,RAKI,-37.742828,-73.573405,23,Bajo,23,Bajo,0,-0.0,-0.0,0.0,sin cambio relevante,0.2049,0.2047244094488189
+Vigente,30 parques del catastro 2018,UCUQUER,-34.044211,-71.609813,43,Medio,36,Medio,-7,-7.07,-0.0,0.0,"idoneidad de hábitat (0,91 → 0,54)",0.9106,0.5393700787401575
+Vigente,30 parques del catastro 2018,UCUQUER 2,-34.045154,-71.621387,38,Medio,31,Medio,-7,-7.07,-0.0,0.0,"idoneidad de hábitat (0,91 → 0,54)",0.9106,0.5393700787401575
+Vigente,30 parques del catastro 2018,VALLE DE LOS VIENTOS,-22.517832,-68.817108,33,Medio,31,Medio,-2,-1.82,-0.0,-0.0,"idoneidad de hábitat (0,38 → 0,29)",0.3828,0.2874015748031496
+Sensibilidad del sitio,30 parques del catastro 2018,EL TOQUI,-45.024819,-71.967774,25,Bajo,26,Bajo,1,0.5,0.0,0.0,sin cambio relevante,0.741,0.7559055118110236
+Sensibilidad del sitio,30 parques del catastro 2018,ALTO BAGUALES,-45.526498,-72.106039,30,Medio,29,Bajo,-1,-1.04,0.0,0.0,"idoneidad de hábitat (0,82 → 0,79)",0.8225,0.7913385826771654
+Sensibilidad del sitio,30 parques del catastro 2018,ALTO BAGUALES 2,-45.525671,-72.103035,31,Medio,30,Medio,-1,-1.04,0.0,0.0,"idoneidad de hábitat (0,82 → 0,79)",0.8225,0.7913385826771654
+Sensibilidad del sitio,30 parques del catastro 2018,CABO NEGRO,-52.949422,-70.829126,12,Bajo,14,Bajo,2,1.87,0.0,0.0,"idoneidad de hábitat (0,34 → 0,40)",0.3415,0.39763779527559057
+Sensibilidad del sitio,30 parques del catastro 2018,CANELA,-31.286692,-71.610685,37,Medio,34,Medio,-3,-3.01,0.0,-0.0,"idoneidad de hábitat (0,99 → 0,89)",0.99,0.889763779527559
+Sensibilidad del sitio,30 parques del catastro 2018,CANELA II,-31.306378,-71.617825,40,Medio,36,Medio,-4,-3.36,0.0,-0.0,"idoneidad de hábitat (0,99 → 0,88)",0.99,0.8779527559055118
+Sensibilidad del sitio,30 parques del catastro 2018,EOLICA CUEL,-37.514068,-72.478971,25,Bajo,10,Muy bajo,-15,-14.18,0.0,-0.0,"idoneidad de hábitat (0,68 → 0,25)",0.6774,0.25196850393700787
+Sensibilidad del sitio,30 parques del catastro 2018,EOLICA EL ARRAYAN,-30.583171,-71.701008,34,Medio,29,Bajo,-5,-5.77,0.0,-0.0,"idoneidad de hábitat (0,98 → 0,79)",0.9838,0.7913385826771654
+Sensibilidad del sitio,30 parques del catastro 2018,EOLICA LAS PENAS,-37.257159,-73.426328,9,Muy bajo,9,Muy bajo,0,-0.16,0.0,0.0,sin cambio relevante,0.2726,0.2677165354330709
+Sensibilidad del sitio,30 parques del catastro 2018,EOLICA LEBU,-37.686113,-73.649115,7,Muy bajo,12,Bajo,5,7.35,0.0,-2.46,"idoneidad de hábitat (sin dato → 0,22)",,0.2204724409448819
+Sensibilidad del sitio,30 parques del catastro 2018,EOLICA LEBU III,-37.682202,-73.644168,12,Bajo,12,Bajo,0,0.52,0.0,0.0,"idoneidad de hábitat (0,20 → 0,22)",0.2049,0.2204724409448819
+Sensibilidad del sitio,30 parques del catastro 2018,EOLICA LOS BUENOS AIRES,-37.539424,-72.508344,25,Bajo,11,Muy bajo,-14,-14.44,0.0,0.0,"idoneidad de hábitat (0,68 → 0,24)",0.6774,0.2440944881889764
+Sensibilidad del sitio,30 parques del catastro 2018,EOLICA LOS CURUROS,-31.029368,-71.632227,38,Medio,35,Medio,-3,-3.5,0.0,0.0,"idoneidad de hábitat (0,96 → 0,85)",0.9632,0.8464566929133859
+Sensibilidad del sitio,30 parques del catastro 2018,EOLICA PUNTA COLORADA,-29.367536,-71.040136,34,Medio,28,Bajo,-6,-5.77,0.0,0.0,"idoneidad de hábitat (0,94 → 0,75)",0.9404,0.7480314960629921
+Sensibilidad del sitio,30 parques del catastro 2018,EOLICA PUNTA PALMERAS,-31.236031,-71.625076,32,Medio,31,Medio,-1,-1.97,0.0,0.0,"idoneidad de hábitat (0,96 → 0,90)",0.9632,0.8976377952755905
+Sensibilidad del sitio,30 parques del catastro 2018,EOLICA SAN JUAN,-28.881471,-71.468228,33,Medio,27,Bajo,-6,-6.53,0.0,0.0,"idoneidad de hábitat (0,95 → 0,73)",0.9498,0.7322834645669292
+Sensibilidad del sitio,30 parques del catastro 2018,EOLICA SAN PEDRO,-42.275408,-73.924112,24,Bajo,10,Muy bajo,-14,-14.1,0.0,0.0,"idoneidad de hábitat (0,72 → 0,30)",0.7221,0.2992125984251969
+Sensibilidad del sitio,30 parques del catastro 2018,EOLICA SAN PEDRO II,-42.281201,-73.918781,24,Bajo,10,Muy bajo,-14,-14.23,0.0,0.0,"idoneidad de hábitat (0,72 → 0,30)",0.7221,0.2952755905511811
+Sensibilidad del sitio,30 parques del catastro 2018,EOLICA TALINAY ORIENTE,-30.84637,-71.569722,37,Medio,30,Medio,-7,-7.36,0.0,0.0,"idoneidad de hábitat (0,96 → 0,72)",0.962,0.7165354330708661
+Sensibilidad del sitio,30 parques del catastro 2018,EOLICA TALINAY PONIENTE,-30.811158,-71.652973,34,Medio,27,Bajo,-7,-6.77,0.0,0.0,"idoneidad de hábitat (0,96 → 0,74)",0.962,0.7362204724409449
+Sensibilidad del sitio,30 parques del catastro 2018,EOLICA TALTAL,-25.080052,-69.857212,1,Muy bajo,2,Muy bajo,1,1.26,0.0,0.0,"idoneidad de hábitat (0,03 → 0,06)",0.0252,0.06299212598425197
+Sensibilidad del sitio,30 parques del catastro 2018,EOLICA TOTORAL,-31.348495,-71.601863,39,Medio,34,Medio,-5,-4.31,0.0,0.0,"idoneidad de hábitat (0,99 → 0,85)",0.99,0.8464566929133859
+Sensibilidad del sitio,30 parques del catastro 2018,HUAJACHE,-37.746172,-73.568485,7,Muy bajo,7,Muy bajo,0,-0.01,0.0,0.0,sin cambio relevante,0.2049,0.2047244094488189
+Sensibilidad del sitio,30 parques del catastro 2018,MONTE REDONDO,-31.072585,-71.637106,36,Medio,34,Medio,-2,-2.2,0.0,0.0,"idoneidad de hábitat (0,96 → 0,89)",0.9632,0.889763779527559
+Sensibilidad del sitio,30 parques del catastro 2018,PARQUE EOLICO LA ESPERANZA,-37.605837,-72.534351,24,Bajo,10,Muy bajo,-14,-14.05,0.0,-0.0,"idoneidad de hábitat (0,68 → 0,26)",0.6774,0.2559055118110236
+Sensibilidad del sitio,30 parques del catastro 2018,PARQUE EOLICO RENAICO,-37.72064,-72.581145,20,Bajo,17,Bajo,-3,-3.86,0.0,0.0,"idoneidad de hábitat (0,58 → 0,46)",0.5805,0.4645669291338583
+Sensibilidad del sitio,30 parques del catastro 2018,RAKI,-37.742828,-73.573405,7,Muy bajo,7,Muy bajo,0,-0.01,0.0,0.0,sin cambio relevante,0.2049,0.2047244094488189
+Sensibilidad del sitio,30 parques del catastro 2018,UCUQUER,-34.044211,-71.609813,33,Medio,22,Bajo,-11,-11.14,0.0,0.0,"idoneidad de hábitat (0,91 → 0,54)",0.9106,0.5393700787401575
+Sensibilidad del sitio,30 parques del catastro 2018,UCUQUER 2,-34.045154,-71.621387,32,Medio,21,Bajo,-11,-11.14,0.0,0.0,"idoneidad de hábitat (0,91 → 0,54)",0.9106,0.5393700787401575
+Sensibilidad del sitio,30 parques del catastro 2018,VALLE DE LOS VIENTOS,-22.517832,-68.817108,21,Bajo,18,Bajo,-3,-3.18,0.0,0.0,"idoneidad de hábitat (0,38 → 0,29)",0.3828,0.2874015748031496
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Pampa Fidelia Etapa 1,-24.93906,-69.64419,,,20,Bajo,,,,,,,0.03937007874015748
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Pampa Fidelia Etapa 2,-24.93906,-69.64419,,,20,Bajo,,,,,,,0.03937007874015748
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Pemuco,-36.96224,-72.14985,,,34,Medio,,,,,,,0.2874015748031496
+Vigente,Ranking: 75 parques operativos (OPC) 2026,San Matías - Etapa 2,-37.41865,-72.57705,,,24,Bajo,,,,,,,0.2559055118110236
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Alena,-37.52422,-72.55878,,,24,Bajo,,,,,,,0.2559055118110236
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Alto Baguales 2,-45.52567,-72.10304,,,37,Medio,,,,,,,0.7913385826771654
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Antofagasta,-24.89625,-69.76805,,,19,Bajo,,,,,,,0.023622047244094488
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Atacama,-28.96297,-71.4921,,,33,Medio,,,,,,,0.6456692913385826
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Aurora,-41.23565,-73.15815,,,21,Bajo,,,,,,,0.0984251968503937
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Cabo Leones,-28.91153,-71.46677,,,36,Medio,,,,,,,0.7204724409448819
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Cabo Leones II,-28.96879,-71.4435,,,36,Medio,,,,,,,0.7440944881889764
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Cabo Leones III,-28.92731,-71.49175,,,34,Medio,,,,,,,0.6535433070866141
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Cabo Negro,-52.94942,-70.82913,,,28,Bajo,,,,,,,0.39763779527559057
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Campo Lindo Etapa 1,-37.41278,-72.49436,,,24,Bajo,,,,,,,0.2440944881889764
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Canela,-31.28669,-71.61069,,,46,Medio,,,,,,,0.889763779527559
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Canela II,-31.30638,-71.61782,,,55,Alto,,,,,,,0.8779527559055118
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Cardonal,-34.07718,-71.66781,,,32,Medio,,,,,,,0.5236220472440944
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Cerro Tigre,-23.76023,-69.92844,,,20,Bajo,,,,,,,0.03543307086614173
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Ckhúri,-22.10902,-68.58115,,,29,Bajo,,,,,,,0.5039370078740157
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Cuel,-37.51407,-72.47897,,,30,Medio,,,,,,,0.25196850393700787
+Vigente,Ranking: 75 parques operativos (OPC) 2026,El Maiten,-37.26997,-72.5514,,,27,Bajo,,,,,,,0.28346456692913385
+Vigente,Ranking: 75 parques operativos (OPC) 2026,El Nogal,-37.58935,-72.4199,,,24,Bajo,,,,,,,0.25196850393700787
+Vigente,Ranking: 75 parques operativos (OPC) 2026,El Toqui,-45.02482,-71.96777,,,34,Medio,,,,,,,0.7559055118110236
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Eólica El Arrayán,-30.58317,-71.70101,,,34,Medio,,,,,,,0.7913385826771654
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Eólica Las Peñas,-37.25716,-73.42633,,,24,Bajo,,,,,,,0.2677165354330709
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Eolica Lebu III,-37.6822,-73.64417,,,28,Bajo,,,,,,,0.2204724409448819
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Eólica Los Buenos Aires,-37.53942,-72.50834,,,32,Medio,,,,,,,0.2440944881889764
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Eólica Los Cururos,-31.02937,-71.63223,,,44,Medio,,,,,,,0.8464566929133859
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Eólica Punta Colorada,-29.36754,-71.04014,,,46,Medio,,,,,,,0.7480314960629921
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Eólica Punta Palmeras,-31.23603,-71.62508,,,37,Medio,,,,,,,0.8976377952755905
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Eólica San Juan,-28.88147,-71.46823,,,36,Medio,,,,,,,0.7322834645669292
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Eólica San Pedro,-42.27541,-73.92411,,,25,Bajo,,,,,,,0.2992125984251969
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Eólica San Pedro II,-42.2812,-73.91878,,,25,Bajo,,,,,,,0.2952755905511811
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Eólica Talinay Oriente,-30.84637,-71.56972,,,38,Medio,,,,,,,0.7165354330708661
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Eólica Talinay Poniente,-30.81116,-71.65297,,,35,Medio,,,,,,,0.7362204724409449
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Eólica Taltal,-25.08005,-69.85721,,,20,Bajo,,,,,,,0.06299212598425197
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Eólica Totoral,-31.34849,-71.60186,,,51,Alto,,,,,,,0.8464566929133859
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Horizonte Norte,-24.96227,-69.869,,,20,Bajo,,,,,,,0.027559055118110236
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Horizonte Sur,-24.96227,-69.869,,,20,Bajo,,,,,,,0.027559055118110236
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Huajache,-37.74617,-73.56849,,,23,Bajo,,,,,,,0.2047244094488189
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Kallpa,-24.91856,-69.98948,,,19,Bajo,,,,,,,0.01968503937007874
+Vigente,Ranking: 75 parques operativos (OPC) 2026,La Cabaña,-37.79203,-72.57693,,,30,Medio,,,,,,,0.41732283464566927
+Vigente,Ranking: 75 parques operativos (OPC) 2026,La Esperanza,-37.60584,-72.53435,,,27,Bajo,,,,,,,0.2559055118110236
+Vigente,Ranking: 75 parques operativos (OPC) 2026,La Estrella,-34.15274,-71.60601,,,35,Medio,,,,,,,0.5393700787401575
+Vigente,Ranking: 75 parques operativos (OPC) 2026,La Flor,-37.66789,-72.5975,,,32,Medio,,,,,,,0.484251968503937
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Lebu,-37.68611,-73.64912,,,27,Bajo,,,,,,,0.2204724409448819
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Llanos del Viento,-23.77166,-69.97066,,,24,Bajo,,,,,,,0.047244094488188976
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Lomas de Duqueco,-37.52592,-72.39094,,,24,Bajo,,,,,,,0.24803149606299213
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Los Cerrillos,-34.12929,-71.62825,,,43,Medio,,,,,,,0.5275590551181102
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Los Olmos,-37.66677,-72.45741,,,25,Bajo,,,,,,,0.28346456692913385
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Malleco Norte,-38.00555,-72.25795,,,24,Bajo,,,,,,,0.2440944881889764
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Malleco Sur,-38.00555,-72.25795,,,24,Bajo,,,,,,,0.2440944881889764
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Manantiales,-34.10127,-71.63294,,,52,Alto,,,,,,,0.5236220472440944
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Mesamávida,-37.51842,-72.46626,,,41,Medio,,,,,,,0.25196850393700787
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Monte Redondo,-31.07259,-71.63711,,,40,Medio,,,,,,,0.889763779527559
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Negrete,-37.59701,-72.54552,,,40,Medio,,,,,,,0.2795275590551181
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Parque Eólico Calama,-22.47352,-68.77024,,,25,Bajo,,,,,,,0.18110236220472442
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Piloto H2V HIF,-52.85062,-70.95497,,,28,Bajo,,,,,,,0.3779527559055118
+Vigente,Ranking: 75 parques operativos (OPC) 2026,PMGD El Arrebol,-37.54045,-73.59225,,,26,Bajo,,,,,,,0.2283464566929134
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Puelche Sur,-41.03077,-72.99971,,,22,Bajo,,,,,,,0.12598425196850394
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Punta de Talca,-30.90455,-71.64504,,,36,Medio,,,,,,,0.7440944881889764
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Punta Sierra,-31.13486,-71.63304,,,42,Medio,,,,,,,0.8937007874015748
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Raki,-37.74283,-73.57341,,,23,Bajo,,,,,,,0.2047244094488189
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Renaico I,-37.72064,-72.58114,,,31,Medio,,,,,,,0.4645669291338583
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Renaico II,-37.7373,-72.56135,,,26,Bajo,,,,,,,0.38188976377952755
+Vigente,Ranking: 75 parques operativos (OPC) 2026,San Gabriel (Modificación),-37.69399,-72.51131,,,38,Medio,,,,,,,0.2874015748031496
+Vigente,Ranking: 75 parques operativos (OPC) 2026,San Matías,-37.41865,-72.57705,,,24,Bajo,,,,,,,0.2559055118110236
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Sarco,-28.86163,-71.42237,,,39,Medio,,,,,,,0.7992125984251969
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Sierra Gorda Este,-22.87768,-68.97469,,,24,Bajo,,,,,,,0.2559055118110236
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Tchamma,-22.49847,-69.08436,,,24,Bajo,,,,,,,0.28346456692913385
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Tolpán Sur,-37.68573,-72.59948,,,36,Medio,,,,,,,0.484251968503937
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Ucuquer,-34.04421,-71.60981,,,36,Medio,,,,,,,0.5393700787401575
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Ucuquer II,-34.04515,-71.62139,,,31,Medio,,,,,,,0.5393700787401575
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Valle de los Vientos,-22.51783,-68.81711,,,31,Medio,,,,,,,0.2874015748031496
+Vigente,Ranking: 75 parques operativos (OPC) 2026,Vientos Patagónicos,-52.93722,-70.83498,,,27,Bajo,,,,,,,0.3937007874015748
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Pampa Fidelia Etapa 1,-24.93906,-69.64419,,,1,Muy bajo,,,,,,,0.03937007874015748
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Pampa Fidelia Etapa 2,-24.93906,-69.64419,,,1,Muy bajo,,,,,,,0.03937007874015748
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Pemuco,-36.96224,-72.14985,,,12,Bajo,,,,,,,0.2874015748031496
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,San Matías - Etapa 2,-37.41865,-72.57705,,,9,Muy bajo,,,,,,,0.2559055118110236
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Alena,-37.52422,-72.55878,,,9,Muy bajo,,,,,,,0.2559055118110236
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Alto Baguales 2,-45.52567,-72.10304,,,30,Medio,,,,,,,0.7913385826771654
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Antofagasta,-24.89625,-69.76805,,,1,Muy bajo,,,,,,,0.023622047244094488
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Atacama,-28.96297,-71.4921,,,22,Bajo,,,,,,,0.6456692913385826
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Aurora,-41.23565,-73.15815,,,4,Muy bajo,,,,,,,0.0984251968503937
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Cabo Leones,-28.91153,-71.46677,,,26,Bajo,,,,,,,0.7204724409448819
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Cabo Leones II,-28.96879,-71.4435,,,25,Bajo,,,,,,,0.7440944881889764
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Cabo Leones III,-28.92731,-71.49175,,,23,Bajo,,,,,,,0.6535433070866141
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Cabo Negro,-52.94942,-70.82913,,,14,Bajo,,,,,,,0.39763779527559057
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Campo Lindo Etapa 1,-37.41278,-72.49436,,,8,Muy bajo,,,,,,,0.2440944881889764
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Canela,-31.28669,-71.61069,,,34,Medio,,,,,,,0.889763779527559
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Canela II,-31.30638,-71.61782,,,36,Medio,,,,,,,0.8779527559055118
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Cardonal,-34.07718,-71.66781,,,20,Bajo,,,,,,,0.5236220472440944
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Cerro Tigre,-23.76023,-69.92844,,,1,Muy bajo,,,,,,,0.03543307086614173
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Ckhúri,-22.10902,-68.58115,,,17,Bajo,,,,,,,0.5039370078740157
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Cuel,-37.51407,-72.47897,,,10,Muy bajo,,,,,,,0.25196850393700787
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,El Maiten,-37.26997,-72.5514,,,10,Muy bajo,,,,,,,0.28346456692913385
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,El Nogal,-37.58935,-72.4199,,,9,Muy bajo,,,,,,,0.25196850393700787
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,El Toqui,-45.02482,-71.96777,,,26,Bajo,,,,,,,0.7559055118110236
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Eólica El Arrayán,-30.58317,-71.70101,,,29,Bajo,,,,,,,0.7913385826771654
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Eólica Las Peñas,-37.25716,-73.42633,,,9,Muy bajo,,,,,,,0.2677165354330709
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Eolica Lebu III,-37.6822,-73.64417,,,12,Bajo,,,,,,,0.2204724409448819
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Eólica Los Buenos Aires,-37.53942,-72.50834,,,11,Muy bajo,,,,,,,0.2440944881889764
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Eólica Los Cururos,-31.02937,-71.63223,,,35,Medio,,,,,,,0.8464566929133859
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Eólica Punta Colorada,-29.36754,-71.04014,,,28,Bajo,,,,,,,0.7480314960629921
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Eólica Punta Palmeras,-31.23603,-71.62508,,,31,Medio,,,,,,,0.8976377952755905
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Eólica San Juan,-28.88147,-71.46823,,,27,Bajo,,,,,,,0.7322834645669292
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Eólica San Pedro,-42.27541,-73.92411,,,10,Muy bajo,,,,,,,0.2992125984251969
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Eólica San Pedro II,-42.2812,-73.91878,,,10,Muy bajo,,,,,,,0.2952755905511811
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Eólica Talinay Oriente,-30.84637,-71.56972,,,30,Medio,,,,,,,0.7165354330708661
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Eólica Talinay Poniente,-30.81116,-71.65297,,,27,Bajo,,,,,,,0.7362204724409449
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Eólica Taltal,-25.08005,-69.85721,,,2,Muy bajo,,,,,,,0.06299212598425197
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Eólica Totoral,-31.34849,-71.60186,,,34,Medio,,,,,,,0.8464566929133859
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Horizonte Norte,-24.96227,-69.869,,,1,Muy bajo,,,,,,,0.027559055118110236
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Horizonte Sur,-24.96227,-69.869,,,1,Muy bajo,,,,,,,0.027559055118110236
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Huajache,-37.74617,-73.56849,,,7,Muy bajo,,,,,,,0.2047244094488189
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Kallpa,-24.91856,-69.98948,,,1,Muy bajo,,,,,,,0.01968503937007874
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,La Cabaña,-37.79203,-72.57693,,,17,Bajo,,,,,,,0.41732283464566927
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,La Esperanza,-37.60584,-72.53435,,,10,Muy bajo,,,,,,,0.2559055118110236
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,La Estrella,-34.15274,-71.60601,,,23,Bajo,,,,,,,0.5393700787401575
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,La Flor,-37.66789,-72.5975,,,17,Bajo,,,,,,,0.484251968503937
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Lebu,-37.68611,-73.64912,,,12,Bajo,,,,,,,0.2204724409448819
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Llanos del Viento,-23.77166,-69.97066,,,3,Muy bajo,,,,,,,0.047244094488188976
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Lomas de Duqueco,-37.52592,-72.39094,,,8,Muy bajo,,,,,,,0.24803149606299213
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Los Cerrillos,-34.12929,-71.62825,,,25,Bajo,,,,,,,0.5275590551181102
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Los Olmos,-37.66677,-72.45741,,,10,Muy bajo,,,,,,,0.28346456692913385
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Malleco Norte,-38.00555,-72.25795,,,9,Muy bajo,,,,,,,0.2440944881889764
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Malleco Sur,-38.00555,-72.25795,,,9,Muy bajo,,,,,,,0.2440944881889764
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Manantiales,-34.10127,-71.63294,,,27,Bajo,,,,,,,0.5236220472440944
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Mesamávida,-37.51842,-72.46626,,,14,Bajo,,,,,,,0.25196850393700787
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Monte Redondo,-31.07259,-71.63711,,,34,Medio,,,,,,,0.889763779527559
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Negrete,-37.59701,-72.54552,,,14,Bajo,,,,,,,0.2795275590551181
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Parque Eólico Calama,-22.47352,-68.77024,,,9,Muy bajo,,,,,,,0.18110236220472442
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Piloto H2V HIF,-52.85062,-70.95497,,,15,Bajo,,,,,,,0.3779527559055118
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,PMGD El Arrebol,-37.54045,-73.59225,,,11,Muy bajo,,,,,,,0.2283464566929134
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Puelche Sur,-41.03077,-72.99971,,,4,Muy bajo,,,,,,,0.12598425196850394
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Punta de Talca,-30.90455,-71.64504,,,27,Bajo,,,,,,,0.7440944881889764
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Punta Sierra,-31.13486,-71.63304,,,36,Medio,,,,,,,0.8937007874015748
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Raki,-37.74283,-73.57341,,,7,Muy bajo,,,,,,,0.2047244094488189
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Renaico I,-37.72064,-72.58114,,,17,Bajo,,,,,,,0.4645669291338583
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Renaico II,-37.7373,-72.56135,,,13,Bajo,,,,,,,0.38188976377952755
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,San Gabriel (Modificación),-37.69399,-72.51131,,,14,Bajo,,,,,,,0.2874015748031496
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,San Matías,-37.41865,-72.57705,,,9,Muy bajo,,,,,,,0.2559055118110236
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Sarco,-28.86163,-71.42237,,,30,Medio,,,,,,,0.7992125984251969
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Sierra Gorda Este,-22.87768,-68.97469,,,9,Muy bajo,,,,,,,0.2559055118110236
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Tchamma,-22.49847,-69.08436,,,9,Muy bajo,,,,,,,0.28346456692913385
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Tolpán Sur,-37.68573,-72.59948,,,18,Bajo,,,,,,,0.484251968503937
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Ucuquer,-34.04421,-71.60981,,,22,Bajo,,,,,,,0.5393700787401575
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Ucuquer II,-34.04515,-71.62139,,,21,Bajo,,,,,,,0.5393700787401575
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Valle de los Vientos,-22.51783,-68.81711,,,18,Bajo,,,,,,,0.2874015748031496
+Sensibilidad del sitio,Ranking: 75 parques operativos (OPC) 2026,Vientos Patagónicos,-52.93722,-70.83498,,,14,Bajo,,,,,,,0.3937007874015748
+Vigente,Puntos de control,"Arica, precordillera",-18.5,-69.6,1,Muy bajo,1,Muy bajo,0,0.0,0.0,0.0,sin cambio relevante,,
+Vigente,Puntos de control,Pozo Almonte,-20.25,-69.79,25,Bajo,24,Bajo,-1,-1.08,0.0,-0.0,"idoneidad de hábitat (0,09 → 0,03)",0.0882,0.031496062992125984
+Vigente,Puntos de control,Valle de los Vientos (parque),-22.52,-68.82,31,Medio,30,Medio,-1,-1.44,0.0,0.0,"idoneidad de hábitat (0,38 → 0,31)",0.3828,0.30708661417322836
+Vigente,Puntos de control,"Calama, desierto alejado",-22.9,-68.2,15,Bajo,10,Muy bajo,-5,-4.88,0.0,0.0,"idoneidad de hábitat (0,54 → 0,28)",0.5399,0.28346456692913385
+Vigente,Puntos de control,Taltal (parque),-25.08,-69.86,18,Bajo,18,Bajo,0,0.72,-0.0,0.0,"idoneidad de hábitat (0,03 → 0,06)",0.0252,0.06299212598425197
+Vigente,Puntos de control,"Taltal, costa alejada",-25.4,-70.5,6,Muy bajo,16,Bajo,10,10.07,0.0,0.0,"idoneidad de hábitat (0,07 → 0,59)",0.0658,0.594488188976378
+Vigente,Puntos de control,Copiapó,-27.37,-70.33,16,Bajo,19,Bajo,3,2.82,0.0,-0.0,"idoneidad de hábitat (0,44 → 0,59)",0.4427,0.5905511811023622
+Vigente,Puntos de control,San Juan (parque),-28.88,-71.47,39,Medio,34,Medio,-5,-4.67,0.0,-0.0,"idoneidad de hábitat (0,95 → 0,70)",0.9498,0.7047244094488189
+Vigente,Puntos de control,Freirina (nido),-28.95,-71.23,31,Medio,30,Medio,-1,-1.39,0.0,0.0,"idoneidad de hábitat (0,86 → 0,79)",0.8604,0.7874015748031497
+Vigente,Puntos de control,Punta Colorada (parque),-29.37,-71.04,47,Medio,44,Medio,-3,-3.66,0.0,-0.0,"idoneidad de hábitat (0,94 → 0,75)",0.9404,0.7480314960629921
+Vigente,Puntos de control,Laguna El Cepo (nido),-30.265,-70.301,32,Medio,35,Medio,3,3.12,0.0,0.0,"idoneidad de hábitat (0,79 → 0,95)",0.785,0.9488188976377953
+Vigente,Puntos de control,Talinay (parque),-30.83,-71.6,36,Medio,32,Medio,-4,-4.15,0.0,0.0,"idoneidad de hábitat (0,96 → 0,74)",0.962,0.7440944881889764
+Vigente,Puntos de control,"Ovalle, interior alejado",-30.6,-70.9,12,Bajo,18,Bajo,6,6.05,0.0,0.0,"idoneidad de hábitat (0,62 → 0,94)",0.6195,0.937007874015748
+Vigente,Puntos de control,Canela (parque),-31.29,-71.61,49,Medio,47,Medio,-2,-2.06,-0.0,0.0,"idoneidad de hábitat (0,99 → 0,88)",0.99,0.8818897637795275
+Vigente,Puntos de control,Farellones (nido),-33.366,-70.307,38,Medio,38,Medio,0,-0.02,0.0,0.0,sin cambio relevante,0.9933,0.9921259842519685
+Vigente,Puntos de control,"Santiago, ciudad",-33.45,-70.66,27,Bajo,20,Bajo,-7,-7.09,0.0,-0.0,"idoneidad de hábitat (0,97 → 0,60)",0.9747,0.6023622047244095
+Vigente,Puntos de control,Ucuquer (parque),-34.04,-71.61,36,Medio,29,Bajo,-7,-7.07,0.0,0.0,"idoneidad de hábitat (0,91 → 0,54)",0.9106,0.5393700787401575
+Vigente,Puntos de control,"Curicó, cordillera",-35,-70.9,19,Bajo,21,Bajo,2,2.22,0.0,-0.0,"idoneidad de hábitat (0,77 → 0,89)",0.7731,0.889763779527559
+Vigente,Puntos de control,"Cuel, Los Ángeles (parque)",-37.51,-72.48,37,Medio,29,Bajo,-8,-8.18,-0.0,-0.0,"idoneidad de hábitat (0,68 → 0,25)",0.6774,0.24803149606299213
+Vigente,Puntos de control,Lebu (parque),-37.68,-73.65,25,Bajo,24,Bajo,-1,4.27,-3.63,-1.09,"idoneidad de hábitat (sin dato → 0,22)",,0.22440944881889763
+Vigente,Puntos de control,Temuco,-38.74,-72.6,18,Bajo,11,Muy bajo,-7,-7.5,0.0,0.0,"idoneidad de hábitat (0,66 → 0,26)",0.6577,0.2637795275590551
+Vigente,Puntos de control,Antillanca (nido),-40.785,-72.191,31,Medio,27,Bajo,-4,-3.88,0.0,0.0,"idoneidad de hábitat (0,85 → 0,64)",0.8456,0.6417322834645669
+Vigente,Puntos de control,"Chiloé, San Pedro (parque)",-42.28,-73.92,32,Medio,24,Bajo,-8,-8.13,0.0,-0.0,"idoneidad de hábitat (0,72 → 0,30)",0.7221,0.2952755905511811
+Vigente,Puntos de control,Cerro Castillo (nido),-46.066,-72.017,28,Bajo,32,Medio,4,4.25,0.0,0.0,"idoneidad de hábitat (0,68 → 0,90)",0.6784,0.9015748031496063
+Vigente,Puntos de control,Laguna Sofía (nido),-51.566,-72.609,29,Bajo,33,Medio,4,4.18,0.0,-0.0,"idoneidad de hábitat (0,62 → 0,84)",0.6229,0.84251968503937
+Vigente,Puntos de control,Cabo Negro (parque),-52.95,-70.83,26,Bajo,27,Bajo,1,1.52,0.0,0.0,"idoneidad de hábitat (0,34 → 0,42)",0.3415,0.421259842519685
+Sensibilidad del sitio,Puntos de control,"Arica, precordillera",-18.5,-69.6,1,Muy bajo,1,Muy bajo,0,0.0,0.0,0.0,sin cambio relevante,,
+Sensibilidad del sitio,Puntos de control,Pozo Almonte,-20.25,-69.79,13,Bajo,11,Muy bajo,-2,-1.89,0.0,-0.0,"idoneidad de hábitat (0,09 → 0,03)",0.0882,0.031496062992125984
+Sensibilidad del sitio,Puntos de control,Valle de los Vientos (parque),-22.52,-68.82,21,Bajo,18,Bajo,-3,-2.52,0.0,-0.0,"idoneidad de hábitat (0,38 → 0,31)",0.3828,0.30708661417322836
+Sensibilidad del sitio,Puntos de control,"Calama, desierto alejado",-22.9,-68.2,23,Bajo,14,Bajo,-9,-8.55,0.0,-0.0,"idoneidad de hábitat (0,54 → 0,28)",0.5399,0.28346456692913385
+Sensibilidad del sitio,Puntos de control,Taltal (parque),-25.08,-69.86,1,Muy bajo,2,Muy bajo,1,1.26,0.0,0.0,"idoneidad de hábitat (0,03 → 0,06)",0.0252,0.06299212598425197
+Sensibilidad del sitio,Puntos de control,"Taltal, costa alejada",-25.4,-70.5,8,Muy bajo,25,Bajo,17,17.62,0.0,0.0,"idoneidad de hábitat (0,07 → 0,59)",0.0658,0.594488188976378
+Sensibilidad del sitio,Puntos de control,Copiapó,-27.37,-70.33,19,Bajo,23,Bajo,4,4.44,0.0,0.0,"idoneidad de hábitat (0,44 → 0,59)",0.4427,0.5905511811023622
+Sensibilidad del sitio,Puntos de control,San Juan (parque),-28.88,-71.47,33,Medio,26,Bajo,-7,-7.35,0.0,0.0,"idoneidad de hábitat (0,95 → 0,70)",0.9498,0.7047244094488189
+Sensibilidad del sitio,Puntos de control,Freirina (nido),-28.95,-71.23,54,Alto,52,Alto,-2,-2.19,0.0,0.0,"idoneidad de hábitat (0,86 → 0,79)",0.8604,0.7874015748031497
+Sensibilidad del sitio,Puntos de control,Punta Colorada (parque),-29.37,-71.04,33,Medio,28,Bajo,-5,-5.77,0.0,0.0,"idoneidad de hábitat (0,94 → 0,75)",0.9404,0.7480314960629921
+Sensibilidad del sitio,Puntos de control,Laguna El Cepo (nido),-30.265,-70.301,60,Alto,64,Alto,4,4.91,0.0,0.0,"idoneidad de hábitat (0,79 → 0,95)",0.785,0.9488188976377953
+Sensibilidad del sitio,Puntos de control,Talinay (parque),-30.83,-71.6,40,Medio,33,Medio,-7,-6.54,0.0,0.0,"idoneidad de hábitat (0,96 → 0,74)",0.962,0.7440944881889764
+Sensibilidad del sitio,Puntos de control,"Ovalle, interior alejado",-30.6,-70.9,23,Bajo,33,Medio,10,9.53,0.0,0.0,"idoneidad de hábitat (0,62 → 0,94)",0.6195,0.937007874015748
+Sensibilidad del sitio,Puntos de control,Canela (parque),-31.29,-71.61,38,Medio,35,Medio,-3,-3.24,0.0,0.0,"idoneidad de hábitat (0,99 → 0,88)",0.99,0.8818897637795275
+Sensibilidad del sitio,Puntos de control,Farellones (nido),-33.366,-70.307,67,Alto,67,Alto,0,-0.04,0.0,0.0,sin cambio relevante,0.9933,0.9921259842519685
+Sensibilidad del sitio,Puntos de control,"Santiago, ciudad",-33.45,-70.66,39,Medio,28,Bajo,-11,-11.17,0.0,0.0,"idoneidad de hábitat (0,97 → 0,60)",0.9747,0.6023622047244095
+Sensibilidad del sitio,Puntos de control,Ucuquer (parque),-34.04,-71.61,32,Medio,21,Bajo,-11,-11.14,0.0,0.0,"idoneidad de hábitat (0,91 → 0,54)",0.9106,0.5393700787401575
+Sensibilidad del sitio,Puntos de control,"Curicó, cordillera",-35,-70.9,33,Medio,36,Medio,3,3.5,0.0,0.0,"idoneidad de hábitat (0,77 → 0,89)",0.7731,0.889763779527559
+Sensibilidad del sitio,Puntos de control,"Cuel, Los Ángeles (parque)",-37.51,-72.48,25,Bajo,11,Muy bajo,-14,-14.31,0.0,0.0,"idoneidad de hábitat (0,68 → 0,25)",0.6774,0.24803149606299213
+Sensibilidad del sitio,Puntos de control,Lebu (parque),-37.68,-73.65,8,Muy bajo,13,Bajo,5,7.48,0.0,-2.71,"idoneidad de hábitat (sin dato → 0,22)",,0.22440944881889763
+Sensibilidad del sitio,Puntos de control,Temuco,-38.74,-72.6,24,Bajo,10,Muy bajo,-14,-13.13,0.0,-0.0,"idoneidad de hábitat (0,66 → 0,26)",0.6577,0.2637795275590551
+Sensibilidad del sitio,Puntos de control,Antillanca (nido),-40.785,-72.191,57,Alto,50,Alto,-7,-6.8,0.0,0.0,"idoneidad de hábitat (0,85 → 0,64)",0.8456,0.6417322834645669
+Sensibilidad del sitio,Puntos de control,"Chiloé, San Pedro (parque)",-42.28,-73.92,24,Bajo,10,Muy bajo,-14,-14.23,0.0,0.0,"idoneidad de hábitat (0,72 → 0,30)",0.7221,0.2952755905511811
+Sensibilidad del sitio,Puntos de control,Cerro Castillo (nido),-46.066,-72.017,51,Alto,58,Alto,7,7.44,0.0,-0.0,"idoneidad de hábitat (0,68 → 0,90)",0.6784,0.9015748031496063
+Sensibilidad del sitio,Puntos de control,Laguna Sofía (nido),-51.566,-72.609,51,Alto,59,Alto,8,7.32,0.0,0.0,"idoneidad de hábitat (0,62 → 0,84)",0.6229,0.84251968503937
+Sensibilidad del sitio,Puntos de control,Cabo Negro (parque),-52.95,-70.83,12,Bajo,15,Bajo,3,2.66,0.0,0.0,"idoneidad de hábitat (0,34 → 0,42)",0.3415,0.421259842519685
+Vigente,Potencial eólico (resumen),2.277 áreas,,,14.42,,9.48,,-4.94,,,,1101 áreas cambian de clase,,
+Sensibilidad del sitio,Potencial eólico (resumen),2.277 áreas,,,22.52,,13.23,,-9.28,,,,1246 áreas cambian de clase,,
