@@ -1,7 +1,12 @@
-import { CARDS, type PortalCard } from '../data/portal';
-import { goToVisor } from '../lib/nav';
-import { hrefFor } from '../lib/urlState';
+import { CARDS, type PortalCard, type PortalGo } from '../data/portal';
+import { goToPage, goToVisor } from '../lib/nav';
+import { hrefFor, hrefForPage } from '../lib/urlState';
 import { Icon } from './Icon';
+
+function hrefForGo(go: PortalGo | undefined): string {
+  if (!go) return '#visor';
+  return 'tab' in go ? hrefFor(go.tab) : hrefForPage(go.page);
+}
 
 function Cell({ c }: { c: PortalCard }) {
   return (
@@ -20,10 +25,12 @@ function Cell({ c }: { c: PortalCard }) {
         <p>{c.b}</p>
       )}
       <a
-        href={c.go && c.go !== 'visor' ? hrefFor(c.go) : '#visor'}
+        href={hrefForGo(c.go)}
         onClick={(e) => {
           e.preventDefault();
-          goToVisor(c.go === 'visor' ? undefined : c.go);
+          if (!c.go) goToVisor();
+          else if ('tab' in c.go) goToVisor(c.go.tab);
+          else goToPage(c.go.page);
         }}
       >
         {c.a}

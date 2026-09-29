@@ -35,6 +35,8 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
   border-right: 1px solid rgba(251,247,238,.14); border-bottom: 3px solid transparent; cursor: pointer; }
 .nav2 a:hover { background: rgba(251,247,238,.12); color: var(--color-surface); }
 .nav2 a[aria-current=page] { color: var(--color-surface); background: rgba(251,247,238,.12); border-bottom-color: var(--amber); }
+section.page h2[tabindex="-1"]:focus { outline: none; }
+.nav2 a:focus-visible { outline: 2px solid var(--amber); outline-offset: -3px; }
 .nav2 a[aria-disabled] { cursor: default; }
 .nav2 a[aria-disabled]:hover { background: none; color: color-mix(in srgb, var(--color-surface) 72%, transparent); }
 .hstats { display: flex; align-items: center; gap: 18px; padding: 0 16px; flex: none;
@@ -42,22 +44,28 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
 .hstats > button { all: unset; cursor: pointer; text-align: right; padding: 4px 6px; margin: 0 -6px; }
 .hstats > button:hover { background: rgba(251,247,238,.12); }
 .hstats > button:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+/* `all: unset` quita el contorno de foco: se restituye para navegar con teclado. */
+.rail-btn2:focus-visible, .rail-collapse:focus-visible, .tabs button:focus-visible {
+  outline: 2px solid var(--amber); outline-offset: -2px; }
 .hstats .fig { font-size: 22px; line-height: 1; }
 .hstats .lbl { display: block; font-size: 9px; letter-spacing: .14em; font-weight: 700;
   color: color-mix(in srgb, var(--color-surface) 60%, transparent); }
 
 /* ── héroe: visor ─────────────────────────────────────────── */
-/* Alto del visor según la ventana (menos la cabecera), con mínimo usable. */
-.hero { position: relative; display: grid; grid-template-columns: 64px 300px 1fr;
+/* Alto del visor según la ventana (menos la cabecera), con mínimo usable.
+   La 1.ª columna (riel) es `auto`: toma el ancho explícito de `.rail`
+   (64px colapsado / 200px expandido) sin que haya que sincronizar estado
+   con este contenedor. */
+.hero { position: relative; display: grid; grid-template-columns: auto 300px 1fr;
   height: max(540px, calc(100vh - 58px)); border-bottom: 1px solid var(--color-divider); }
 .side { border-right: 1px solid var(--color-divider); background: var(--color-surface);
   display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
 
-/* Riel de iconos — columna izquierda fija (64px) */
-.rail { background: var(--navy-2); display: flex; flex-direction: column; align-items: center; padding: 10px 0; gap: 2px; }
-.rail-foot { margin-top: auto; writing-mode: vertical-rl; padding-top: 10px;
-  font: 700 9.5px/1 var(--font-heading); letter-spacing: .16em; text-transform: uppercase;
-  color: color-mix(in srgb, var(--color-surface) 42%, transparent); }
+/* Riel de accesos — columna izquierda, colapsable a solo íconos (64px) o
+   expandida con etiqueta visible (200px; preferencia en localStorage). */
+.rail { background: var(--navy-2); display: flex; flex-direction: column; align-items: stretch;
+  padding: 8px 0 0; gap: 2px; width: 64px; overflow-y: auto; overflow-x: hidden; }
+.rail.expanded { width: 200px; }
 
 /* ── sidebar de capas agrupadas ───────────────────────────── */
 .side-head { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border-bottom: 1px solid var(--color-divider); }
@@ -333,20 +341,35 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
   font-family: var(--font-heading); font-size: 11px; flex: none; }
 .lgd-x { display: grid; place-items: center; width: 22px; height: 22px; background: var(--rust); color: var(--color-surface); font-size: 11px; flex: none;
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--rust) 24%, transparent); }
+.lgd-dummy { width: 22px; height: 14px; flex: none; border: 2px dashed #d98c00;
+  background: repeating-linear-gradient(45deg, #fbf3dc 0 3px, #d98c00 3px 5px); }
 .lgd-turb { width: 22px; display: grid; place-items: center; flex: none; }
 .lgd-turb::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #8f8168; }
 @media (max-width: 1180px) { #legend-plate { width: min(268px, calc(100% - 28px)); max-height: calc(100% - 90px); overflow: auto; } }
 
-.rail-btn { position: relative; all: unset; cursor: pointer; width: 48px; height: 48px;
-  display: grid; place-items: center; color: color-mix(in srgb, var(--color-surface) 72%, transparent); }
-.rail-btn:hover { background: rgba(251,247,238,.14); color: var(--color-surface); }
-.rail-btn.on { background: var(--amber); color: var(--navy-2); }
-.rail-tip { position: absolute; left: calc(100% + 8px); top: 50%; transform: translateY(-50%);
-  display: none; flex-direction: column; gap: 1px; width: max-content; max-width: 220px;
-  padding: 6px 9px; background: var(--navy); color: var(--color-surface); box-shadow: var(--shadow-md); z-index: 660; }
-.rail-tip b { font-size: 12px; font-family: var(--font-heading); }
-.rail-tip em { font-style: normal; font-size: 10.5px; opacity: .72; }
-.rail-btn:hover .rail-tip { display: flex; }
+/* Botones del riel (bloque ícono + etiqueta condensada mayúscula). Con el
+   riel colapsado (por defecto) la etiqueta queda oculta y aparece como
+   tooltip al pasar el mouse (`.rail-tip`, reutiliza el texto del botón). */
+.rail-btn2 { position: relative; all: unset; box-sizing: border-box; cursor: pointer; width: 100%;
+  display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 11px 6px;
+  text-align: center; color: color-mix(in srgb, var(--color-surface) 72%, transparent); }
+.rail-btn2:hover { background: rgba(251,247,238,.14); color: var(--color-surface); }
+.rail-btn2.on { background: var(--amber); color: var(--navy-2); }
+.rail-btn2-ic { display: grid; place-items: center; flex: none; }
+.rail-btn2-label { display: none; font-family: var(--font-heading); font-weight: 700; font-size: 11px;
+  line-height: 1.15; letter-spacing: .02em; text-transform: uppercase; white-space: normal; }
+.rail.expanded .rail-btn2-label { display: block; }
+.rail-tip { display: none; position: absolute; left: calc(100% + 8px); top: 50%; transform: translateY(-50%);
+  width: max-content; max-width: 240px; padding: 6px 9px; background: var(--navy); color: var(--color-surface);
+  font: 700 12px/1.3 var(--font-heading); text-transform: none; letter-spacing: normal; text-align: left;
+  box-shadow: var(--shadow-md); z-index: 660; }
+.rail:not(.expanded) .rail-btn2:hover .rail-tip { display: block; }
+/* Botón colapsar/expandir, al pie del riel. */
+.rail-collapse { all: unset; box-sizing: border-box; cursor: pointer; margin-top: auto; width: 100%;
+  text-align: center; padding: 9px 6px; font-family: var(--font-heading); font-size: 10.5px; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; overflow: hidden;
+  color: color-mix(in srgb, var(--color-surface) 55%, transparent); border-top: 1px solid rgba(251,247,238,.14); }
+.rail-collapse:hover { color: var(--color-surface); background: rgba(251,247,238,.1); }
 
 .sheet-close { all: unset; cursor: pointer; width: 26px; height: 26px; display: grid; place-items: center;
   font-size: 13px; color: var(--color-text); border: 1px solid var(--color-divider); }
@@ -400,7 +423,16 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
 .doc { display: grid; grid-template-columns: 1fr auto; gap: 2px var(--space-3); align-items: baseline;
   padding: var(--space-3) 0; border-bottom: 1px solid var(--color-divider); }
 .doc .t { font-family: var(--font-heading); font-size: 15px; line-height: 1.15; }
-.doc .d { grid-column: 1 / -1; font-size: 12px; color: color-mix(in srgb, var(--color-text) 62%, transparent); }
+.doc .d { grid-column: 1 / -1; font-size: 12px; color: color-mix(in srgb, var(--color-text) 62%, transparent);
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+/* Ficha de capa activa (panel «Capas de Información») */
+.doc .t .sw-mini { display: inline-block; width: 10px; height: 10px; margin-right: 7px; vertical-align: 0;
+  border: 1px solid var(--color-text); }
+.doc-note { grid-column: 1 / -1; font-size: 12px; }
+.doc-note summary { cursor: pointer; font-family: var(--font-heading); font-size: 11px; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--navy); }
+.doc-note p { margin: 4px 0 0; line-height: 1.5; color: color-mix(in srgb, var(--color-text) 78%, transparent); }
 
 /* Marcador de registro de cóndor — cuadro crema con nº de individuos */
 .marker { display: grid; place-items: center; border: 1.5px solid var(--color-text);
@@ -430,8 +462,92 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
 .cell a { font-family: var(--font-heading); font-size: 13px; letter-spacing: .04em; text-transform: uppercase;
   text-decoration: none; color: var(--color-accent-700); cursor: pointer; }
 .cell a:hover { color: var(--color-accent-900); text-decoration: underline; }
-.shead { display: flex; align-items: baseline; gap: var(--space-4); margin-bottom: var(--space-4); }
+.shead { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2) var(--space-4); margin-bottom: var(--space-4); }
 .shead h2 { margin: 0; font-size: 26px; }
+
+/* ── páginas institucionales (Quiénes somos, Capas, Guía, Comité) ────────── */
+.back-link { display: inline-flex; align-items: center; gap: 6px; margin-bottom: var(--space-6);
+  font-family: var(--font-heading); font-weight: 600; font-size: 13px; letter-spacing: .04em;
+  text-transform: uppercase; text-decoration: none; color: var(--color-accent-700); cursor: pointer; }
+.back-link:hover { text-decoration: underline; }
+.page h3 { margin: var(--space-8) 0 var(--space-3); font-size: 17px; }
+.page-text p { margin: 0 0 var(--space-4); max-width: 760px; line-height: 1.65; font-size: 14.5px; }
+.doc-list { margin-top: var(--space-2); }
+
+/* Tabla de descargas (Capas Geoespaciales Disponibles) */
+.cap-nota { max-width: 760px; font-size: 13px; line-height: 1.55; margin: 0 0 var(--space-5); }
+.cap-tabla { border: 1px solid var(--color-divider); background: var(--color-bg); }
+.cap-fila { display: grid; align-items: center; gap: var(--space-3);
+  grid-template-columns: minmax(200px, 2.2fr) minmax(160px, 2fr) minmax(110px, 1fr) 80px 80px minmax(150px, 1.3fr);
+  padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--color-divider); font-size: 13px; }
+.cap-fila > span { min-width: 0; overflow-wrap: anywhere; }
+.cap-cab { font-family: var(--font-heading); font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+  background: var(--color-accent-100); color: var(--navy); }
+.cap-grupo { padding: var(--space-2) var(--space-4); font-family: var(--font-heading); font-size: 13px;
+  letter-spacing: .05em; text-transform: uppercase; color: var(--color-surface); background: var(--navy); }
+.cap-n { font-family: var(--font-heading); font-size: 14px; line-height: 1.2; }
+.cap-n .sw-mini { display: inline-block; width: 10px; height: 10px; margin-right: 7px; border: 1px solid var(--color-text); }
+.cap-f { font-size: 12px; color: color-mix(in srgb, var(--color-text) 68%, transparent); }
+.cap-sin { font-size: 12px; font-style: italic; color: color-mix(in srgb, var(--color-text) 62%, transparent); }
+.cap-dl { display: inline-flex; text-decoration: none; padding: 5px 12px; font-size: 12px; }
+@media (max-width: 600px) {
+  .cap-cab { display: none; }
+  .cap-fila { grid-template-columns: 1fr 1fr; gap: 4px var(--space-3); padding: var(--space-3); }
+  .cap-n, .cap-a { grid-column: 1 / -1; }
+  .cap-f { grid-column: 1 / -1; }
+  .cap-fila > span[data-label]::before { content: attr(data-label) ': '; font-family: var(--font-heading);
+    font-size: 10px; letter-spacing: .05em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+  .cap-a { margin-top: var(--space-1); }
+}
+
+/* Marca «datos dummy» / «texto tipo»: rayado diagonal, contraste alto. */
+.dummy-badge { display: inline-flex; align-items: center; white-space: nowrap; font-family: var(--font-heading);
+  font-weight: 700; font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; padding: 3px 9px;
+  color: var(--navy-2); border: 1px solid var(--amber);
+  background-color: color-mix(in srgb, var(--amber) 22%, var(--color-bg));
+  background-image: repeating-linear-gradient(45deg, transparent 0 6px, color-mix(in srgb, var(--amber) 45%, transparent) 6px 12px); }
+.dummy-badge-corto { padding: 0 5px; font-size: 9px; letter-spacing: .06em; vertical-align: 1px; }
+.lyr-n { font-size: 11px; font-weight: 400; color: color-mix(in srgb, var(--color-text) 60%, transparent); }
+/* Popups de Leaflet: la marca dummy hereda la del panel (fondo ámbar rayado). */
+.leaflet-popup-content .dummy-badge { margin-top: 5px; white-space: normal; }
+/* En las cabeceras de página la marca puede envolver (375 px de ancho). */
+.shead .dummy-badge { white-space: normal; max-width: 100%; }
+/* Guía de Buenas Prácticas (propuesta) y documentos */
+.guia-intro { max-width: 760px; font-size: 14px; line-height: 1.55; margin: 0 0 var(--space-3); }
+.guia-dl { margin: 0 0 var(--space-5); }
+.guia-indice { max-width: 760px; border: 1px solid var(--color-divider); background: var(--color-bg);
+  padding: var(--space-3) var(--space-4); margin-bottom: var(--space-4); }
+.guia-indice-t { font-family: var(--font-heading); font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--navy); margin-bottom: var(--space-2); }
+.guia-indice ol { list-style: none; margin: 0; padding: 0; columns: 2 260px; column-gap: var(--space-6); }
+.guia-indice li { break-inside: avoid; padding: 2px 0; font-size: 13.5px; }
+.guia-indice-g { display: block; margin-top: var(--space-2); font-family: var(--font-heading); font-size: 11px;
+  letter-spacing: .05em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 60%, transparent); }
+.guia-indice a { color: var(--color-accent-700); text-decoration: none; }
+.guia-indice a:hover { text-decoration: underline; }
+.guia-indice a:focus-visible, .guia-sec h3:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+.guia-titulo { font-size: 15px; line-height: 1.3; max-width: 760px; color: color-mix(in srgb, var(--color-text) 75%, transparent); }
+.guia-grupo { font-size: 22px; padding-top: var(--space-4); border-top: 2px solid var(--navy); }
+.guia-sec h3 { scroll-margin-top: var(--space-6); }
+.guia-sec h3.guia-sub { font-size: 16px; }
+.guia-h { margin: var(--space-4) 0 var(--space-2); font-size: 14.5px; font-family: var(--font-heading); }
+.guia-hs { margin: var(--space-3) 0 var(--space-1); font-size: 13.5px; font-family: var(--font-heading);
+  color: var(--color-accent-700); }
+.guia-cuerpo ul, .guia-cuerpo-ul { max-width: 760px; margin: 0 0 var(--space-4); padding-left: 22px; line-height: 1.6; font-size: 14.5px; }
+.guia-nota { max-width: 760px; margin-top: var(--space-8); padding-top: var(--space-3); border-top: 1px solid var(--color-divider);
+  font-size: 12.5px; line-height: 1.5; font-style: italic; }
+.qs-participantes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0 var(--space-6);
+  max-width: 900px; margin-bottom: var(--space-4); }
+.qs-participantes .guia-cuerpo-ul { margin-bottom: var(--space-3); }
+.qs-portal-h { margin-top: var(--space-8); }
+.qs-portal-h h3 { margin: 0; }
+.doc > div { min-width: 0; }
+.doc .d .dummy-badge { white-space: normal; max-width: 100%; }
+.doc-fuente { max-width: 760px; font-size: 13px; line-height: 1.5; margin: var(--space-6) 0 0; }
+.doc-fuente a { color: var(--color-accent-700); }
+.dummy-badge-propuesta, .dummy-badge-tipo { border-color: var(--color-accent-2-700); color: var(--color-accent-2-900);
+  background-color: color-mix(in srgb, var(--color-accent-2) 18%, var(--color-bg));
+  background-image: repeating-linear-gradient(45deg, transparent 0 6px, color-mix(in srgb, var(--color-accent-2) 40%, transparent) 6px 12px); }
 
 .foot { background: var(--navy); color: var(--color-bg); }
 .foot .wrap { display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap; padding-block: var(--space-6); }
@@ -473,7 +589,8 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
   /* Con el cajón abierto, buscador y controles se corren a su izquierda. */
   .mapwrap.panel-open #ctl, .mapwrap.panel-open #chipbar { right: calc(min(348px, 100% - 28px) + 28px); }
 }
-/* ≤ 900 px: el panel de capas también pasa a cajón (botón ◧ en los controles). */
+/* ≤ 900 px: el panel de capas también pasa a cajón (botón ◧ en los controles);
+   el riel se fuerza a solo íconos (no cabe la versión expandida). */
 @media (max-width: 1000px) {
   .nav2 a { padding: 0 10px; font-size: 12.5px; }
   .brand p { display: none; }
@@ -482,13 +599,30 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
   .hstats { gap: 10px; padding: 0 10px; }
 }
 @media (max-width: 900px) {
-  .hero { grid-template-columns: 64px 1fr; }
+  .hero { grid-template-columns: auto 1fr; }
+  .rail, .rail.expanded { width: 64px; }
+  /* Especificidad igual a `.rail.expanded .rail-btn2-label` (la regla que la
+     muestra): sin este selector adicional, esa regla más específica gana pese
+     al breakpoint. */
+  .rail-btn2-label, .rail.expanded .rail-btn2-label, .rail-collapse { display: none; }
   .side { position: absolute; top: 0; bottom: 0; left: 64px; z-index: 700;
     width: min(300px, calc(100% - 64px)); box-shadow: var(--shadow-lg); display: none; }
   .side.open { display: flex; }
   .drawer-x-layers { display: grid; }
   #ctl .ctl-layers { display: grid; }
   #chipbar { left: 14px; }
+}
+/* ≤ 600 px: la marca y los contadores no dejan espacio al menú → el menú baja a
+   una segunda fila de ancho completo (con scroll horizontal propio si no cabe). */
+@media (max-width: 600px) {
+  .top { flex-wrap: wrap; }
+  .nav2 { order: 3; flex: 1 1 100%; border-top: 1px solid rgba(251,247,238,.12); overflow-x: visible; }
+  /* Los tres ítems se reparten el ancho y envuelven el texto: ninguno queda cortado. */
+  .nav2 a { flex: 1 1 auto; justify-content: center; text-align: center; white-space: normal;
+    min-height: 44px; padding: 6px 8px; font-size: 12px; letter-spacing: .05em; line-height: 1.15; }
+  .nav2 a:last-child { border-right: 0; }
+  .brand { flex: 1 1 auto; min-width: 0; }
+  .hstats .lbl { display: none; }
 }
 
 /* ── Ranking de comité (batch) ─────────────────────────────────────────────── */
@@ -503,7 +637,7 @@ h2, h3, h4 { text-transform: uppercase; letter-spacing: 0.01em; }
   font-weight: 600; white-space: nowrap; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 .batch-gov { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
-/* Selector de perfil de pesos (tab Riesgo y Comité). */
+/* Selector de perfil de pesos (tab Riesgo y Motor de índice). */
 .prof { margin-bottom: 10px; }
 .prof-row { display: flex; align-items: center; gap: 8px; }
 .prof-row select { flex: 1; font: inherit; font-size: 12px; padding: 3px 4px; }

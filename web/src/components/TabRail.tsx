@@ -1,46 +1,77 @@
+import { useState } from 'react';
 import { usePortalStore, type Tab } from '../store/usePortalStore';
 import { Icon } from './Icon';
 import type { IconKey } from '../data/portal';
 
-// Riel de iconos de la columna izquierda del visor. Accesos:
-// - Registros agrupa lista + ranking de sitios (sub-pestañas dentro del panel).
-// - Riesgo es la consulta puntual; Comité, el ranking de parques y el potencial eólico.
-// - Colisiones reúne la serie por año y el ranking por parque (sub-pestañas).
-const RAIL: { id: Tab; label: string; desc: string; icon: IconKey; match?: Tab[] }[] = [
-  { id: 'ficha', label: 'La especie', desc: 'Ficha del cóndor andino', icon: 'book' },
-  { id: 'lista', label: 'Registros', desc: 'Registros de cóndor y ranking de sitios', icon: 'file', match: ['lista', 'sitios'] },
-  { id: 'riesgo', label: 'Riesgo', desc: 'Motor de índice de riesgo de colisión', icon: 'alert' },
-  { id: 'comite', label: 'Comité', desc: 'Ranking de parques operativos y potencial eólico según riesgo', icon: 'clip' },
-  { id: 'colisiones', label: 'Colisiones', desc: 'Colisiones confirmadas: por año y por parque', icon: 'net' },
+const RAIL_KEY = 'ebird-rail-collapsed';
+function readCollapsed(): boolean {
+  try {
+    return localStorage.getItem(RAIL_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+function writeCollapsed(v: boolean): void {
+  try {
+    localStorage.setItem(RAIL_KEY, v ? '1' : '0');
+  } catch {
+    // Almacenamiento no disponible (privado/bloqueado): se pierde la preferencia.
+  }
+}
+
+// Los 5 accesos del visor, con nombre visible (estilo «bloque de ícono +
+// etiqueta»). El riel puede colapsarse a solo íconos (preferencia recordada en
+// localStorage); bajo NARROW_LAYERS (900px) se fuerza siempre a solo íconos.
+const RAIL: { id: Tab; label: string; icon: IconKey }[] = [
+  { id: 'especie', label: 'La Especie', icon: 'condor' },
+  { id: 'riesgo', label: 'Mapa de Riesgo de Colisión de Cóndores con Infraestructura Eléctrica', icon: 'mapaRiesgo' },
+  { id: 'motor', label: 'Motor de Índice de Riesgo de Colisión', icon: 'motorIcon' },
+  { id: 'capas', label: 'Capas de Información', icon: 'capasInfo' },
+  { id: 'graficos', label: 'Gráficos', icon: 'graficosBar' },
 ];
 
 export default function TabRail() {
   const tab = usePortalStore((s) => s.tab);
   const panelHidden = usePortalStore((s) => s.panelHidden);
   const goToTab = usePortalStore((s) => s.goToTab);
+  const [collapsed, setCollapsed] = useState(readCollapsed);
+
+  const toggleCollapsed = () =>
+    setCollapsed((c) => {
+      writeCollapsed(!c);
+      return !c;
+    });
 
   return (
-    <nav className="rail" aria-label="Navegación del visor">
+    <nav className={`rail${collapsed ? '' : ' expanded'}`} aria-label="Navegación del visor">
       {RAIL.map((t) => {
-        const matches = t.match ? t.match.includes(tab) : tab === t.id;
-        const active = matches && !panelHidden;
+        const active = tab === t.id && !panelHidden;
         return (
           <button
             key={t.id}
-            className={`rail-btn${active ? ' on' : ''}`}
+            className={`rail-btn2${active ? ' on' : ''}`}
             aria-pressed={active}
             title={t.label}
             onClick={() => goToTab(t.id)}
           >
-            <Icon k={t.icon} s={21} />
-            <span className="rail-tip">
-              <b>{t.label}</b>
-              <em>{t.desc}</em>
+            <span className="rail-btn2-ic">
+              <Icon k={t.icon} s={22} />
             </span>
+            <span className="rail-btn2-label">{t.label}</span>
+            <span className="rail-tip">{t.label}</span>
           </button>
         );
       })}
-      <span className="rail-foot">Visor</span>
+      <button
+        type="button"
+        className="rail-collapse no-print"
+        onClick={toggleCollapsed}
+        aria-pressed={!collapsed}
+        aria-label={collapsed ? 'Expandir el riel de navegación' : 'Colapsar el riel a solo íconos'}
+        title={collapsed ? 'Expandir riel' : 'Colapsar riel'}
+      >
+        {collapsed ? '»' : '« Colapsar'}
+      </button>
     </nav>
   );
 }

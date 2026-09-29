@@ -1,11 +1,12 @@
-import type { Tab } from '../store/usePortalStore';
+import type { Page, Tab } from '../store/usePortalStore';
 // Contenido demostrativo del portal Cóndores y Energía Eólica.
 // Las observaciones de aves vienen de datos reales (eBird); las capas
 // geoespaciales de riesgo/colisiones/parques son datos de demostración.
 
 export type IconKey =
   | 'home' | 'users' | 'map' | 'book' | 'file' | 'down'
-  | 'net' | 'info' | 'alert' | 'bulb' | 'layers' | 'clip';
+  | 'net' | 'info' | 'alert' | 'bulb' | 'layers' | 'clip'
+  | 'condor' | 'mapaRiesgo' | 'motorIcon' | 'capasInfo' | 'graficosBar';
 
 export const ICON: Record<IconKey, string> = {
   home: '<path d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z"/>',
@@ -20,6 +21,16 @@ export const ICON: Record<IconKey, string> = {
   bulb: '<path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9V18h7v-4.1A6 6 0 0 0 12 3Z"/>',
   layers: '<path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/>',
   clip: '<path d="M9 3h6v3H9z"/><path d="M6 5h12v16H6z"/><path d="M9 12h6M9 16h4"/>',
+  // Cóndor en vuelo, alas extendidas (riel: «La Especie»).
+  condor: '<path d="M1 12.5c2.6-3.3 4.8-3.9 6-1.8.9-2.9 2.4-4.4 5-4.4s4.1 1.5 5 4.4c1.2-2.1 3.4-1.5 6 1.8"/><path d="M12 6.3v7.2"/><path d="m9.3 17 2.7-3.5L14.7 17"/>',
+  // Mapa plegado con pin (riel: «Mapa de Riesgo»).
+  mapaRiesgo: '<path d="m3 5 6-2.5 6 2.5 6-2.5v13.5l-6 2.5-6-2.5-6 2.5z"/><path d="M9 2.5V16M15 5v5.3"/><path d="M18 12.2a2.8 2.8 0 0 1 2.8 2.8c0 2-2.8 5-2.8 5s-2.8-3-2.8-5a2.8 2.8 0 0 1 2.8-2.8Z"/>',
+  // Plano/hoja con puntos y cruces (riel: «Motor de índice»).
+  motorIcon: '<path d="M5 3h11l3 3v15H5z"/><path d="M16 3v3h3"/><circle cx="9.5" cy="11" r="1"/><circle cx="14.5" cy="16.5" r="1"/><path d="m7 16.5 2.2 2.2m0-2.2-2.2 2.2"/><path d="m13 9 2.2 2.2m0-2.2L13 11.2"/>',
+  // Carpeta con lupa (riel: «Capas de Información»).
+  capasInfo: '<path d="M3 6.5h6l2 2h10v11H3z"/><circle cx="14.5" cy="15.5" r="3"/><path d="m17 18 3 3"/>',
+  // Gráfico de barras (riel: «Gráficos»).
+  graficosBar: '<path d="M4 20V11M10 20V4M16 20v-6M3 20h18"/>',
 };
 
 export const NAV: [IconKey, string, string, boolean?][] = [
@@ -33,26 +44,28 @@ export const NAV: [IconKey, string, string, boolean?][] = [
   ['info', 'Metodología', 'Cómo se construye la información'],
 ];
 
-// Tarjetas de la portada. El 5.º elemento (`pend`) marca las secciones aún no
-// implementadas con la etiqueta "En construcción".
-/** Tarjeta de «Explorar el portal». `go`: pestaña del visor a la que lleva
- *  ('visor' = solo desplaza al visor). `pend`: sección sin contenido aún → NO se
+// Destino de una tarjeta de «Explorar el portal»: una pestaña del visor o una
+// página institucional. Sin `go`, la tarjeta solo desplaza al visor.
+export type PortalGo = { tab: Tab } | { page: Exclude<Page, 'visor'> };
+
+/** Tarjeta de «Explorar el portal». `pend`: sección sin contenido aún → NO se
  *  muestra (decisión: ocultar hasta que exista). */
 export interface PortalCard {
   icon: IconKey;
   t: string;
   b: string | string[];
   a: string;
-  go?: Tab | 'visor';
+  go?: PortalGo;
   pend?: boolean;
 }
 
 export const CARDS: PortalCard[] = [
-  { icon: 'alert', t: 'Mapa de riesgo', b: 'Consulta el índice de riesgo de colisión del cóndor andino en cualquier punto del mapa y su desglose por criterio.', a: 'Consultar riesgo →', go: 'riesgo' },
-  { icon: 'clip', t: 'Registro de colisiones de cóndores', b: 'Colisiones confirmadas de cóndores con aerogeneradores (2019–2025), por año y por parque eólico.', a: 'Ver registro →', go: 'colisiones' },
-  { icon: 'users', t: 'Comité técnico', b: 'Ranking de riesgo de los parques eólicos en operación y cruce del potencial eólico con la sensibilidad del sitio.', a: 'Ir al Comité →', go: 'comite' },
-  { icon: 'layers', t: 'Capas geoespaciales disponibles', b: 'Capas del cóndor, atrayentes de carroña, infraestructura energética y contexto territorial, con nota metodológica de cada una.', a: 'Ver capas en el visor →', go: 'visor' },
-  { icon: 'book', t: 'Medidas y buenas prácticas', b: 'Documentos, guías y recomendaciones para prevenir y minimizar impactos en cóndores.', a: 'Explorar documentos →', pend: true },
+  { icon: 'mapaRiesgo', t: 'Mapa de riesgo', b: 'Consulta el índice de riesgo de colisión del cóndor andino en cualquier punto del mapa y su desglose por criterio.', a: 'Consultar riesgo →', go: { tab: 'riesgo' } },
+  { icon: 'book', t: 'Guía de buenas prácticas', b: 'Propuesta de guía técnica para prevenir y minimizar impactos en cóndores (pendiente de validación por la Mesa de Cóndores).', a: 'Ver propuesta →', go: { page: 'guia' } },
+  { icon: 'users', t: 'Comité técnico', b: 'Acuerdos Generales de la Mesa de Cóndores (diciembre de 2025), sesiones de trabajo y actividades 2026.', a: 'Ir al Comité →', go: { page: 'comite' } },
+  { icon: 'capasInfo', t: 'Capas geoespaciales disponibles', b: 'Capas del cóndor, infraestructura energética, recurso eólico y contexto territorial, con nota metodológica de cada una.', a: 'Ver capas disponibles →', go: { page: 'capas' } },
+  // En construcción (ocultas hasta tener contenido real).
+  { icon: 'clip', t: 'Registro de colisiones de cóndores', b: 'Colisiones confirmadas de cóndores con aerogeneradores (2019–2025), por año y por parque eólico.', a: 'Ver registro →', pend: true },
   { icon: 'file', t: 'Estudios', b: 'Biblioteca de estudios nacionales e internacionales sobre cóndores y energía eólica.', a: 'Ver estudios →', pend: true },
   { icon: 'down', t: 'Descarga de datos', b: 'Descarga capas geoespaciales y documentos en distintos formatos.', a: 'Ir a descargas →', pend: true },
   { icon: 'users', t: 'Comité técnico · Reunión N°1', b: ['Acta de reunión', 'Presentaciones', 'Acuerdos y compromisos', 'Lista de participantes'], a: 'Ver todos los documentos →', pend: true },
@@ -85,6 +98,22 @@ export const GEN_ESTADO_COLOR: Record<string, string> = Object.fromEntries(
 );
 // Gradiente para el swatch del sidebar (representa las 5 categorías de estado).
 export const GEN_SWATCH = `linear-gradient(90deg,${GEN_ESTADOS.map((e) => e.color).join(',')})`;
+
+// Categorías de la capa «Parques eólicos (OPC · En SEIA · Otros)» (id
+// 'parques_eolicos'). La clave debe coincidir con la propiedad `categoria` del
+// GeoJSON (src/build_capas_derivadas.py, a partir del `estado`).
+export const PARQUES_CATEGORIAS: { key: string; label: string; color: string }[] = [
+  { key: 'OPC', label: 'OPC · en operación o en pruebas', color: '#2f7d4f' },
+  { key: 'En SEIA', label: 'En SEIA · en calificación', color: '#8e5fbf' },
+  { key: 'Otros', label: 'Otros · aprobado o en construcción', color: '#3f7fc4' },
+];
+export const PARQUE_CAT_COLOR: Record<string, string> = Object.fromEntries(
+  PARQUES_CATEGORIAS.map((c) => [c.key, c.color]),
+);
+export const PARQUES_SWATCH = `linear-gradient(90deg,${PARQUES_CATEGORIAS.map((c) => c.color).join(',')})`;
+
+// Color del trazo/relleno de las capas dummy en el mapa y la leyenda (ámbar).
+export const DUMMY_COLOR = '#d98c00';
 
 // Medidas de mitigación aplicables (recomendaciones de dominio, no dato del sitio).
 export const MEASURES: { t: string; tag: string }[] = [
