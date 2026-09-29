@@ -3,13 +3,75 @@ import distance from '@turf/distance';
 import pointToLineDistance from '@turf/point-to-line-distance';
 import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
 import type { Feature, FeatureCollection, Geometry, Point, Position } from 'geojson';
-import { riskCategory, type RiskCategory, type RiskVar } from '../data/riskConfig';
+import { PARQUES_CATEGORIAS_INDICE, riskCategory, type RiskCategory, type RiskVar } from '../data/riskConfig';
 
 export type RiskData = Record<string, FeatureCollection>;
+
+/** Aplica al GeoJSON de una capa del motor el filtro documentado en riskConfig
+ *  (hoy solo `parques_eolicos`, por categoría). Único punto de entrada: lo usan la
+ *  carga del navegador y los scripts de precálculo/comparación. */
+export function prepareLayer(id: string, fc: FeatureCollection): FeatureCollection {
+  if (id === 'parques_eolicos' && PARQUES_CATEGORIAS_INDICE) {
+    const ok = new Set(PARQUES_CATEGORIAS_INDICE);
+    return { ...fc, features: fc.features.filter((f) => ok.has(String(f.properties?.['categoria']))) };
+  }
+  return fc;
+}
 
 // Celda de la grilla de terreno (3 km): [lon, lat, score, slope_deg, demSd_m, demMean_m].
 // El `score` viene PRECALCULADO desde Python (src/build_terreno.py).
 export type TerrenoCell = [number, number, number, number, number, number];
+
+// Grilla raster lon/lat regular (idoneidad de hábitat, abundancia eBird S&T): JSON
+// de src/build_idoneidad.py / src/build_abundancia.py, 1 byte por celda
+// (valor = byte/254; 255 = sin dato). Consulta O(1) por celda.
+export interface RasterGridJson {
+  lon0: number;
+  lat0: number;
+  step: number;
+  ncols: number;
+  nrows: number;
+  rows: [number, string][][];
+  p99?: number;
+}
+export interface RasterGrid {
+  lon0: number;
+  lat0: number;
+  step: number;
+  ncols: number;
+  nrows: number;
+  data: Uint8Array;
+  /** Solo abundancia: percentil 99 (individuos/h·2 km) con que se normalizó a 0–1. */
+  p99?: number | undefined;
+}
+export interface RiskGrids {
+  habitat?: RasterGrid | undefined;
+  abundancia?: RasterGrid | undefined;
+}
+
+const NODATA = 255;
+
+export function decodeRasterGrid(j: RasterGridJson): RasterGrid {
+  const data = new Uint8Array(j.ncols * j.nrows).fill(NODATA);
+  j.rows.forEach((segs, r) => {
+    for (const [c0, b64] of segs) {
+      const bin = atob(b64);
+      const base = r * j.ncols + c0;
+      for (let i = 0; i < bin.length; i++) data[base + i] = bin.charCodeAt(i);
+    }
+  });
+  return { lon0: j.lon0, lat0: j.lat0, step: j.step, ncols: j.ncols, nrows: j.nrows, data, p99: j.p99 };
+}
+
+/** Valor 0–1 de la celda que contiene el punto; null si cae fuera de la grilla o en
+ *  una celda sin dato. */
+export function gridValueAt(g: RasterGrid, lat: number, lng: number): number | null {
+  const col = Math.floor((lng - g.lon0) / g.step);
+  const row = Math.floor((g.lat0 - lat) / g.step);
+  if (col < 0 || col >= g.ncols || row < 0 || row >= g.nrows) return null;
+  const b = g.data[row * g.ncols + col]!;
+  return b === NODATA ? null : b / 254;
+}
 
 // Geometrías de correcciones de campo cargadas por el usuario en la sesión (Part 4).
 export interface FieldCorrectionsInput {
@@ -20,6 +82,7 @@ export interface FieldCorrectionsInput {
 
 export interface RiskExtras {
   terrenoCells?: TerrenoCell[];
+  grids?: RiskGrids;
   field?: FieldCorrectionsInput;
 }
 
@@ -73,17 +136,6 @@ function proximityScore(distKm: number, decayKm: number): number | null {
   if (!isFinite(distKm)) return null;
   if (decayKm <= 0) return distKm <= 0 ? 1 : 0;
   return Math.max(0, Math.min(1, 1 - distKm / decayKm));
-}
-
-function habitatScoreAt(pt: Feature<Point>, fc?: FeatureCollection): number | null {
-  if (!fc) return null;
-  for (const f of fc.features) {
-    const g = f.geometry;
-    if (g && (g.type === 'Polygon' || g.type === 'MultiPolygon') && booleanPointInPolygon(pt, g)) {
-      return num(f.properties, 'hs_mean');
-    }
-  }
-  return null;
 }
 
 function maxProp(fc: FeatureCollection | undefined, key: string): number {
@@ -254,7 +306,10 @@ export interface PointMeasures {
   /** Distancia (km) al elemento más cercano por capa de proximidad. Clave ausente
    *  = capa sin cargar; `null` = capa sin elementos (distancia infinita). */
   prox: Record<string, number | null>;
+  /** Idoneidad 0–1 (raster de Estrada Pacheco et al. 2025); null = sin dato en el punto. */
   habitat?: number | null;
+  /** Abundancia eBird S&T normalizada 0–1 (v/P99) y su P99; null = sin dato. */
+  abundancia?: { score: number; p99: number } | null;
   ebird?: { score: number; max: number };
   /** null = capa de ganado sin cargar. */
   ganado?: GanadoNearest[] | null;
@@ -269,6 +324,7 @@ export function measureAtPoint(
   vars: RiskVar[],
   data: RiskData,
   terrenoCells: TerrenoCell[] = [],
+  grids: RiskGrids = {},
 ): PointMeasures {
   const pt = point([lng, lat]);
   const m: PointMeasures = { prox: {} };
@@ -280,7 +336,10 @@ export function measureAtPoint(
         m.prox[c.layerId] = isFinite(d) ? d : null;
       }
     } else if (c.kind === 'habitat') {
-      m.habitat = habitatScoreAt(pt, data['habitat']);
+      m.habitat = grids.habitat ? gridValueAt(grids.habitat, lat, lng) : null;
+    } else if (c.kind === 'abundancia') {
+      const v = grids.abundancia ? gridValueAt(grids.abundancia, lat, lng) : null;
+      m.abundancia = v === null ? null : { score: v, p99: grids.abundancia?.p99 ?? 1 };
     } else if (c.kind === 'ebird_density') {
       const max = maxProp(data['ebird_densidad'], 'n_localities');
       m.ebird = { score: ebirdDensityScoreAt(pt, data['ebird_densidad'], max), max };
@@ -326,7 +385,16 @@ export function scoreMeasures(
       }
     } else if (c.kind === 'habitat') {
       score = m.habitat ?? null;
-      rawText = score === null ? 'sin dato' : score.toFixed(2);
+      rawText = score === null ? 'sin dato (fuera de la cobertura del raster)' : score.toFixed(2);
+    } else if (c.kind === 'abundancia') {
+      const a = m.abundancia ?? null;
+      score = a === null ? null : a.score;
+      rawText =
+        a === null
+          ? 'sin dato (fuera del área de predicción de eBird)'
+          : a.score >= 1
+            ? `≥ ${a.p99.toFixed(1)} ind./h·2 km (tope P99)`
+            : `~${(a.score * a.p99).toFixed(2)} ind./h·2 km (P99 = ${a.p99.toFixed(1)})`;
     } else if (c.kind === 'ganado') {
       const g = ganadoScore(pt, c.decayKm ?? 30, m.ganado ?? null, field?.ganado ?? []);
       score = g.score;
@@ -366,6 +434,6 @@ export function riskAtPoint(
   extras: RiskExtras = {},
 ): RiskResult {
   // Solo se miden las variables activas (mismo coste que el cálculo directo).
-  const m = measureAtPoint(lat, lng, config.filter((c) => c.enabled), data, extras.terrenoCells ?? []);
+  const m = measureAtPoint(lat, lng, config.filter((c) => c.enabled), data, extras.terrenoCells ?? [], extras.grids ?? {});
   return scoreMeasures(lat, lng, m, config, extras.field);
 }

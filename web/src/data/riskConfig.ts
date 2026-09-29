@@ -1,7 +1,7 @@
 // Modelo de índice de riesgo de colisión de cóndores, portado de
 // mapa_riesgo_condores.html. Pesos y distancias de influencia editables.
 
-export type RiskKind = 'proximity' | 'habitat' | 'ganado' | 'ebird_density' | 'terreno_3km' | 'user_antenas';
+export type RiskKind = 'proximity' | 'habitat' | 'ganado' | 'ebird_density' | 'abundancia' | 'terreno_3km' | 'user_antenas';
 
 export interface RiskVar {
   id: string;
@@ -14,7 +14,10 @@ export interface RiskVar {
 }
 
 export const DEFAULT_RISK_CONFIG: RiskVar[] = [
-  { id: 'wind', label: 'Cercanía a parques eólicos', kind: 'proximity', layerId: 'wind', weight: 20, decayKm: 3, enabled: true },
+  // Parques eólicos: los 180 del catastro MINENERGIA (jun 2026) — OPC, En SEIA y Otros —,
+  // no solo los operativos: mide el efecto acumulado de parques en evaluación y aprobados.
+  // El id de la variable sigue siendo `wind` (los perfiles y los enlaces lo referencian).
+  { id: 'wind', label: 'Cercanía a parques eólicos', kind: 'proximity', layerId: 'parques_eolicos', weight: 20, decayKm: 3, enabled: true },
   { id: 'lineas', label: 'Cercanía a líneas de transmisión', kind: 'proximity', layerId: 'lineas', weight: 20, decayKm: 2, enabled: true },
   { id: 'habitat', label: 'Idoneidad de hábitat', kind: 'habitat', weight: 20, enabled: true },
   { id: 'nidos', label: 'Cercanía a nidos de cóndor', kind: 'proximity', layerId: 'nidos', weight: 15, decayKm: 8, enabled: true },
@@ -23,8 +26,9 @@ export const DEFAULT_RISK_CONFIG: RiskVar[] = [
   { id: 'ganado', label: 'Carga ganadera regional (carroña doméstica)', kind: 'ganado', weight: 5, decayKm: 30, enabled: true },
   { id: 'colisiones', label: 'Historial de colisiones cercanas', kind: 'proximity', layerId: 'colisiones', weight: 5, decayKm: 10, enabled: true },
   { id: 'ebird_densidad', label: 'Densidad de avistamientos (eBird)', kind: 'ebird_density', weight: 5, enabled: true },
-  // Terreno y antenas de campo entran con peso 0 (informativos): están disponibles
-  // en el motor pero NO alteran el índice publicado hasta que se les asigne peso.
+  // Abundancia, terreno y antenas de campo entran con peso 0 (informativos): están
+  // disponibles en el motor pero NO alteran el índice hasta que se les asigne peso.
+  { id: 'abundancia', label: 'Abundancia relativa de cóndor (eBird S&T 2023)', kind: 'abundancia', weight: 0, enabled: true },
   { id: 'terreno_3km', label: 'Pendiente / rugosidad del terreno (3km)', kind: 'terreno_3km', weight: 0, enabled: true },
   { id: 'antenas', label: 'Antenas de telecomunicaciones (percha/dormidero, campo)', kind: 'user_antenas', weight: 0, decayKm: 5, enabled: true },
 ];
@@ -48,7 +52,7 @@ export const RISK_PROFILES: RiskProfile[] = [
     estado: 'Pesos por defecto del motor',
     nota:
       'Responde: «¿qué tan riesgoso es este punto por la infraestructura que YA existe?». Por eso el 40% del peso es ' +
-      'cercanía a parques eólicos y líneas de transmisión actuales. Úsalo para evaluar parques en operación. Ojo: en ' +
+      'cercanía a parques eólicos (operativos, en evaluación y aprobados) y líneas de transmisión actuales. Úsalo para evaluar parques en operación. Ojo: en ' +
       'zonas sin parques cerca (como el potencial eólico) el índice sale bajo porque hoy no hay turbinas, no porque el ' +
       'sitio sea seguro para el cóndor.',
     weights: {},
@@ -64,7 +68,7 @@ export const RISK_PROFILES: RiskProfile[] = [
       'las condiciones del lugar: hábitat 30%, nidos 25%, terreno 10%, vertederos 10% y el resto 5%. ' +
       'Punto a discutir: con 0% no considera el efecto acumulado de sumar un parque junto a otros ya existentes; el ' +
       'comité podría preferir un peso bajo (5–10%).',
-    weights: { wind: 0, lineas: 5, habitat: 30, nidos: 25, vertederos: 10, veranadas: 5, ganado: 5, colisiones: 5, ebird_densidad: 5, terreno_3km: 10 },
+    weights: { wind: 0, lineas: 5, habitat: 30, nidos: 25, vertederos: 10, veranadas: 5, ganado: 5, colisiones: 5, ebird_densidad: 5, abundancia: 0, terreno_3km: 10 },
   },
 ];
 
@@ -96,8 +100,32 @@ export function riskCategory(score: number): RiskCategory {
   return { label: RISK_CAT_LABELS[k]!, color: RISK_CAT_COLORS[k]!, text: RISK_CAT_TEXT[k]! };
 }
 
-/** IDs de las capas GeoJSON que alimentan el motor (web/public/data/riesgo/). */
-export const RISK_LAYER_IDS = [
-  'wind', 'lineas', 'nidos', 'colisiones', 'vertederos',
-  'veranadas', 'ganado', 'habitat', 'ebird_densidad',
-] as const;
+/** Capas GeoJSON que alimentan el motor: id → ruta bajo web/public/data/. El id de
+ *  `parques_eolicos` es el que usa la variable `wind` (layerId). */
+export const RISK_LAYER_FILES: Record<string, string> = {
+  parques_eolicos: 'layers/parques_eolicos.geojson',
+  lineas: 'riesgo/lineas.geojson',
+  nidos: 'riesgo/nidos.geojson',
+  colisiones: 'riesgo/colisiones.geojson',
+  vertederos: 'riesgo/vertederos.geojson',
+  veranadas: 'riesgo/veranadas.geojson',
+  ganado: 'riesgo/ganado.geojson',
+  ebird_densidad: 'riesgo/ebird_densidad.geojson',
+};
+export const RISK_LAYER_IDS = Object.keys(RISK_LAYER_FILES);
+
+/** Grillas raster del motor (JSON de src/build_idoneidad.py y src/build_abundancia.py). */
+export const RISK_GRID_FILES = {
+  habitat: 'riesgo/idoneidad_grid.json',
+  abundancia: 'riesgo/abundancia_grid.json',
+} as const;
+
+/** Categorías de `parques_eolicos.geojson` que cuentan en el criterio «Cercanía a
+ *  parques eólicos»: OPC (operación o pruebas), En SEIA (en calificación) y Otros
+ *  (aprobado o en construcción). Acotar a p. ej. ['OPC'] deja solo los operativos;
+ *  `null` = las tres (decisión del cliente: efecto acumulado con proyectos en
+ *  evaluación y aprobados). */
+export const PARQUES_CATEGORIAS_INDICE: readonly string[] | null = null;
+
+/** Categoría de `parques_eolicos.geojson` que se puntúa en el ranking del Motor. */
+export const PARQUES_CATEGORIA_RANKING = 'OPC';

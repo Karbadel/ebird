@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { riskAtPoint, type RiskRow } from '../lib/riskEngine';
-import type { RiskCategory, RiskVar } from '../data/riskConfig';
+import { PARQUES_CATEGORIA_RANKING, type RiskCategory, type RiskVar } from '../data/riskConfig';
 import { useRiskStore } from './useRiskStore';
 import { useFieldStore } from './useFieldStore';
 
@@ -33,8 +33,10 @@ interface BatchState {
   clear(): void;
 }
 
-// `potencia_mw` viene como string ("1.400000000000000") en wind.geojson.
+// `potencia_mw` es número en parques_eolicos.geojson (en el catastro 2018 venía como
+// texto); se acepta ambos y se redondea a 1 decimal.
 function numFrom(v: unknown): number | null {
+  if (v == null || v === '') return null;
   const n = Number(v);
   return Number.isFinite(n) ? Math.round(n * 10) / 10 : null;
 }
@@ -48,9 +50,9 @@ export function configSignature(config: RiskVar[]): string {
 // antes de bloquear con el cómputo, y evita congelar la pestaña entre lotes.
 const nextFrame = (): Promise<void> => new Promise((res) => requestAnimationFrame(() => res()));
 
-// Puntúa en lote los parques eólicos en operación (data['wind'], ya cargado por el
-// motor) con los MISMOS pesos/config que la consulta puntual. Reutiliza riskAtPoint;
-// no duplica lógica ni toca los números publicados. ~30 puntos → sub-segundo.
+// Puntúa en lote los parques eólicos operativos (categoría OPC de
+// data['parques_eolicos'], ya cargado por el motor: 75 parques) con los MISMOS
+// pesos/config que la consulta puntual. Reutiliza riskAtPoint; no duplica lógica.
 export const useBatchStore = create<BatchState>((set) => ({
   rows: null,
   running: false,
@@ -65,23 +67,24 @@ export const useBatchStore = create<BatchState>((set) => ({
     await nextFrame();
     const risk = useRiskStore.getState();
     const data = risk.data ?? (await risk.loadData());
-    const wind = data?.['wind'];
-    if (!data || !wind) {
+    const parques = data?.['parques_eolicos'];
+    if (!data || !parques) {
       set({ running: false, rows: [] });
       return;
     }
-    // Estado más reciente tras el await (config/terreno pudieron cambiar).
-    const { config, terrenoCells } = useRiskStore.getState();
-    const extras = { terrenoCells, field: useFieldStore.getState().asInput() };
+    // Estado más reciente tras el await (config/terreno/grillas pudieron cambiar).
+    const { config, terrenoCells, grids } = useRiskStore.getState();
+    const extras = { terrenoCells, grids, field: useFieldStore.getState().asInput() };
     const rows: BatchRow[] = [];
     // El cómputo es síncrono y `lineas` (2,1 MB) lo hace pesado; se trocea cediendo
     // el hilo cada pocos parques para que la barra de progreso anime y la pestaña
-    // no se congele. Son ~30 parques → coste acotado.
+    // no se congele. Son 75 parques → unos segundos en total.
     const CHUNK = 6;
     let done = 0;
-    for (const f of wind.features) {
+    for (const f of parques.features) {
       const g = f.geometry;
       if (!g || g.type !== 'Point') continue;
+      if (f.properties?.['categoria'] !== PARQUES_CATEGORIA_RANKING) continue;
       const lng = g.coordinates[0]!;
       const lat = g.coordinates[1]!;
       const r = riskAtPoint(lat, lng, config, data, extras);

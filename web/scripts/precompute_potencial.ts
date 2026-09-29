@@ -18,8 +18,9 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import type { FeatureCollection, Position } from 'geojson';
 import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
 import { point, polygon } from '@turf/helpers';
-import { measureAtPoint, riskAtPoint, scoreMeasures, type RiskData, type PointMeasures } from '../src/lib/riskEngine';
-import { DEFAULT_RISK_CONFIG, RISK_LAYER_IDS } from '../src/data/riskConfig';
+import { measureAtPoint, riskAtPoint, scoreMeasures, type PointMeasures } from '../src/lib/riskEngine';
+import { DEFAULT_RISK_CONFIG } from '../src/data/riskConfig';
+import { cargarMotor } from './cargarMotor';
 
 const RIESGO = 'public/data/riesgo/';
 const SRC = 'public/data/layers/potencial_eolico.geojson';
@@ -74,8 +75,7 @@ function interiorPoint(rings: Position[][]): Position {
   return best ?? rings[0]![0]!;
 }
 
-const data: RiskData = Object.fromEntries(RISK_LAYER_IDS.map((id) => [id, readJson<FeatureCollection>(`${RIESGO}${id}.geojson`)]));
-const terrenoCells = readJson<{ cells: [number, number, number, number, number, number][] }>(`${RIESGO}terreno_3km.json`).cells;
+const { data, grids, terrenoCells } = cargarMotor();
 const fc = readJson<FeatureCollection>(SRC);
 
 interface Item {
@@ -96,7 +96,7 @@ for (const f of fc.features) {
   const polys = g.type === 'Polygon' ? [g.coordinates] : g.coordinates;
   const main = polys.reduce((a, b) => (Math.abs(ringArea(b[0]!)) > Math.abs(ringArea(a[0]!)) ? b : a));
   const [lng, lat] = interiorPoint(main) as [number, number];
-  const m = measureAtPoint(lat, lng, DEFAULT_RISK_CONFIG, data, terrenoCells);
+  const m = measureAtPoint(lat, lng, DEFAULT_RISK_CONFIG, data, terrenoCells, grids);
   const p = f.properties ?? {};
   // región/ha/mw viajan con las mediciones: el resumen del comité no necesita
   // descargar la geometría (7,6 MB), solo este archivo.
@@ -125,7 +125,7 @@ let bad = 0;
 for (let i = 0; i < back.length; i += Math.ceil(back.length / 25)) {
   const it = back[i]!;
   const a = JSON.stringify(scoreMeasures(it.lat, it.lng, it.m, DEFAULT_RISK_CONFIG));
-  const b = JSON.stringify(riskAtPoint(it.lat, it.lng, DEFAULT_RISK_CONFIG, data, { terrenoCells }));
+  const b = JSON.stringify(riskAtPoint(it.lat, it.lng, DEFAULT_RISK_CONFIG, data, { terrenoCells, grids }));
   if (a !== b) bad++;
 }
 console.log(`OK ${items.length} polígonos -> ${OUT} (${(json.length / 1e6).toFixed(2)} MB) en ${((Date.now() - t0) / 60000).toFixed(1)} min`);
