@@ -8,6 +8,32 @@
 
 ---
 
+## 2026-09-29 (ronda 2) — El motor lee las capas nuevas (idoneidad oficial, parques 2026, abundancia)
+
+- **Decisión:** se levantó la regla «no tocar el motor» solo para: idoneidad con el raster oficial, cercanía a
+  parques con los 180 de `parques_eolicos.geojson`, ranking con los 75 OPC y criterio nuevo de abundancia
+  (peso 0 %). Comparación medida en `docs/comparacion-indice-2026-09-29.md` (+ CSV).
+- **Línea base ANTES de cambiar:** `web/scripts/indice_snapshot.ts` (esbuild → node, mismo TS del motor). Para
+  el «antes» del potencial se copió el motor de `git show HEAD:...` a `web/node_modules/.tmp/old/` (así resuelve
+  `@turf/*`); un script del scratchpad fuera de `web/` no resuelve dependencias.
+- **rasterio se instala en el `.venv`** (wheel para Windows) y se agregó a `requirements.txt` junto con numpy,
+  pyproj y shapely. GOTCHA: no llamar `inspect.py` a un script propio (choca con el módulo estándar y rompe
+  numpy/click con «partially initialized module»).
+- **Raster ≠ vector para el motor también:** las grillas raster van como JSON lon/lat regular, 1 byte por celda
+  en base64 por tramos con dato (`src/raster_utils.py`; lookup O(1) en `riskEngine.gridValueAt`). Idoneidad
+  0,01° = 1,2 MB (error medio 0,004 frente al raster; 0,03° = 0,16 MB, error 0,009). No ir a un vector por celda.
+- **El raster de idoneidad empieza en ≈ 20° S** (bounds UTM 19S): Arica y norte de Tarapacá quedan «sin dato».
+  Los ceros de eBird S&T son abundancia 0; los NaN son fuera del área de predicción (sin dato, no 0).
+- **Los datos del motor ya no son solo `riesgo/*.geojson`:** `RISK_LAYER_FILES` (id → ruta bajo `data/`) y
+  `RISK_GRID_FILES` en `riskConfig.ts`; `prepareLayer` aplica el filtro por categoría de parques. La variable
+  sigue llamándose `wind` (perfiles y enlaces la referencian) pero lee `layerId: 'parques_eolicos'`.
+- **`potencial_medidas.json` hay que regenerar** (`npm run precompute:potencial`, ~17 min) cuando cambia
+  cualquier fuente del motor: guarda `prox['parques_eolicos']`, `habitat`, `abundancia`. Con el JSON viejo
+  el criterio de parques da «sin dato» porque la clave cambió.
+- **Rasters en pane propio:** `imageOverlay` comparte `overlayPane` con el canvas de vectores; un raster
+  encendido después quedaba sobre los puntos. Pane `rasters` (z 390) bajo los vectores.
+- Playwright y `vite preview`: ver entradas anteriores (reiniciar el preview tras cada build).
+
 ## 2026-09-29 — Comentarios del cliente, Fase 1 (menú, riel con nombres, La Especie, páginas)
 
 - **Nueva navegación:** `Tab = especie | riesgo | motor | capas | graficos` (ex ficha/lista/sitios/
