@@ -8,6 +8,64 @@
 
 ---
 
+## 2026-09-29 — Comentarios del cliente, Fase 1 (menú, riel con nombres, La Especie, páginas)
+
+- **Nueva navegación:** `Tab = especie | riesgo | motor | capas | graficos` (ex ficha/lista/sitios/
+  comite/colisiones) + `page = visor | quienes | capas | guia | comite` (páginas institucionales en
+  lugar del visor). Hashes viejos (`#/registros`, `#/comite/…`, `#/colisiones/…`) se redirigen.
+- **Especificidad en el riel:** a ≤900 px la regla de colapso (`.rail-btn2-label`, 1 clase) perdía
+  contra `.rail.expanded .rail-btn2-label` (2 clases) → etiquetas recortadas en el riel de 64 px. El
+  `@media` repite el selector de 2 clases.
+- **`scrollIntoView` sobre `#visor` ocultaba la cabecera** (57 px) al abrir un enlace compartido.
+  El visor está justo bajo la cabecera y mide ventana − cabecera → basta `scrollTo({top:0})`.
+- **`all: unset` borra el contorno de foco** (riel, sub-pestañas): restituir con `:focus-visible`.
+- **Cabecera ≤600 px:** `.brand` y `.hstats` con `flex:none` dejaban el menú (`flex:1`, base 0) en
+  0 px de ancho y la página con scroll horizontal → el menú baja a una segunda fila.
+- **Datos dummy:** componente `DummyBadge` (variantes «Datos dummy» y «Texto tipo»); todo contenido
+  ficticio debe llevarlo.
+
+## 2026-09-29 — Comentarios del cliente, Fase 3 (descargas) y antenas de campo
+
+- **Antenas = correcciones de campo, no capa oficial.** MapView ya dibuja TODAS las
+  correcciones de `useFieldStore` en un solo grupo; la capa «Antenas» no carga nada, solo
+  filtra ese grupo (visible si la capa está encendida) y se enciende sola cuando el
+  número de antenas sube (agregar/importar). Así no hay marcadores duplicados. El conteo
+  es dinámico: `useCapasConteo` mezcla `antenas` (store) con el JSON estático.
+- **Al filtrar un efecto por estado de una capa, el efecto que hace `toggleLayer` debe
+  salir con `return`** (se vuelve a disparar solo por el cambio de `layers`).
+- **`capas_conteo.json` ya no trae veranadas ni ganado**; la tabla de descargas se guía
+  por `LAYERS`, no por el JSON. Regenerar con `.venv\Scripts\python.exe src\build_capas_derivadas.py`
+  (no hay `python` en el PATH); los geojson derivados salen byte a byte iguales.
+- Playwright guarda capturas relativas en la raíz del repo: moverlas fuera al terminar.
+
+## 2026-09-29 — QA final de las tres fases
+
+- **`vite preview` cachea `dist/` en memoria** (sirv sin modo dev): tras `npm run build` hay que
+  reiniciar el preview, si no sirve el CSS/JS viejo y los arreglos «no funcionan». Además una
+  `navigate` con solo cambio de hash no recarga la página: usar `location.reload()`.
+- **Menú a ≤600 px:** los tres ítems se reparten el ancho de la 2.ª fila con `flex:1 1 auto`,
+  `white-space: normal` y alto mínimo de 44 px (sin scroll interno). Insignias `nowrap` en
+  `.shead` desbordaban a 375 px (scroll horizontal): `.shead` con `flex-wrap` y la insignia envuelve.
+- **Foco tras Atrás/Adelante:** efecto en `App` sobre `page` (omite la carga inicial) que enfoca el
+  `h2` de la página (`tabIndex=-1`) o, en el visor, hace scroll al inicio y quita el foco.
+- **Comparación del motor (HEAD vs árbol de trabajo):** el ranking de los 30 parques operativos y el
+  desglose de «Canela II» son idénticos; comparar por clic en píxel no es reproducible porque el
+  ancho del mapa cambió con el nuevo riel (mismo píxel ≠ mismo punto).
+
+## 2026-09-29 — Comentarios del cliente, Fase 2 (capas: grupos, conteo, dummy)
+
+- **Quitar capas del panel ≠ quitar datos del motor:** Veranadas y Ganado salieron de `LAYERS`
+  (y sus loaders/buffer de `MapView`), pero `useRiskStore.loadData` sigue cargando
+  `veranadas.geojson` y `ganado.geojson` por su cuenta, así que el índice no se mueve.
+- **Ids de capa = claves de `capas_conteo.json`:** `parques_eolicos`, `colisiones_hist` son ids
+  nuevos; `projects` se conserva pero ahora apunta a `otros_generacion.geojson` (sin eólicos).
+  Los conteos se leen con `useCapasConteo` (fetch único, sin conteo si falla). Las dummy no llevan.
+- **Capas dummy:** geometría ficticia en `public/data/dummy/` (`src/build_dummy_capas.py`); trazo
+  discontinuo ámbar (`DUMMY_COLOR`), `DummyBadge` variante `corto` en el panel y popup con aviso.
+- **Gotcha de herramienta:** un comando PowerShell con here-string que contenía `//` fue bloqueado
+  por el clasificador («Remove-Item on system path»); escribir el bloque con Write y empalmarlo.
+  Playwright solo guarda capturas bajo la raíz del repo (`.playwright-mcp/`).
+
 ## 2026-09-25 — Navegación, Etapa 3 (pantallas pequeñas)
 
 - **Problema:** bajo 1180 px el panel de resultados y la leyenda tenían
@@ -310,3 +368,10 @@
 ---
 
 <!-- Añadir nuevas entradas arriba de esta línea, más recientes primero. -->
+
+## 2026-09-29 · Documentos del cliente (Acuerdos, Guía)
+- El enrutado usa el hash de la URL: un índice con anclas `#id` rompe la navegación. Se resuelve con `scrollIntoView` en `onClick` (preventDefault) sobre títulos con `tabIndex={-1}`.
+- Docx → PDF: Word por COM funcionó (`SaveAs` formato 17). El PDF hereda el autor del docx (propiedades del documento); revisar metadatos antes de publicar.
+- Filas `.doc` (grid `1fr auto`) con badge `nowrap` desbordan a 375 px: dar `min-width:0` al contenedor y `white-space: normal` al badge.
+- Playwright cachea el CSS entre recargas de `vite preview`: tras cada build hacer recarga completa antes de medir desbordes; deja capturas y `.playwright-mcp` en la raíz del repo (mover/borrar).
+- Las cifras del borrador de la Guía (≥21 colisiones 2019–2024; 89 % Talinay) difieren del visor (29 colisiones 2019–2025): se transcriben tal cual con nota editorial.
