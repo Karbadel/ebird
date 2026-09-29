@@ -1,7 +1,6 @@
-// Texto de la propuesta «Guía Técnica de Buenas Prácticas para el Desarrollo de Proyectos
-// Eólicos y Líneas de Transmisión Compatibles con la Conservación del Cóndor Andino».
-// Es un BORRADOR entregado por el cliente, sin autor, fecha ni validación de la Mesa de
-// Cóndores: se transcribe tal cual (cifras incluidas) y se presenta como propuesta.
+// Texto de la «Guía Técnica de Buenas Prácticas para el Desarrollo de Proyectos Eólicos y
+// Líneas de Transmisión Compatibles con la Conservación del Cóndor Andino», entregada por el
+// cliente sin autor ni fecha: se transcribe tal cual (cifras incluidas).
 // En los textos, *así* marca cursiva (nombres científicos).
 
 export type GuiaBloque =

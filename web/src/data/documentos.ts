@@ -6,7 +6,6 @@ export interface DocumentoPortal {
   fecha: string;
   archivo: string;
   bytes: number;
-  propuesta?: boolean;
 }
 
 export const DOCUMENTOS: DocumentoPortal[] = [
@@ -19,11 +18,10 @@ export const DOCUMENTOS: DocumentoPortal[] = [
   },
   {
     id: 'guia',
-    nombre: 'Guía Técnica de Buenas Prácticas (propuesta)',
-    fecha: 'Sin fecha (borrador)',
-    archivo: 'docs/guia_buenas_practicas_propuesta.pdf',
-    bytes: 108491,
-    propuesta: true,
+    nombre: 'Guía Técnica de Buenas Prácticas',
+    fecha: 'Sin fecha',
+    archivo: 'docs/guia_buenas_practicas.pdf',
+    bytes: 108373,
   },
 ];
 

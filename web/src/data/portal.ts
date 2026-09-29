@@ -61,7 +61,7 @@ export interface PortalCard {
 
 export const CARDS: PortalCard[] = [
   { icon: 'mapaRiesgo', t: 'Mapa de riesgo', b: 'Consulta el índice de riesgo de colisión del cóndor andino en cualquier punto del mapa y su desglose por criterio.', a: 'Consultar riesgo →', go: { tab: 'riesgo' } },
-  { icon: 'book', t: 'Guía de buenas prácticas', b: 'Propuesta de guía técnica para prevenir y minimizar impactos en cóndores (pendiente de validación por la Mesa de Cóndores).', a: 'Ver propuesta →', go: { page: 'guia' } },
+  { icon: 'book', t: 'Guía de buenas prácticas', b: 'Guía técnica para prevenir y minimizar impactos de proyectos eólicos y líneas de transmisión en el cóndor andino.', a: 'Ver guía →', go: { page: 'guia' } },
   { icon: 'users', t: 'Comité técnico', b: 'Acuerdos Generales de la Mesa de Cóndores (diciembre de 2025), sesiones de trabajo y actividades 2026.', a: 'Ir al Comité →', go: { page: 'comite' } },
   { icon: 'capasInfo', t: 'Capas geoespaciales disponibles', b: 'Capas del cóndor, infraestructura energética, recurso eólico y contexto territorial, con nota metodológica de cada una.', a: 'Ver capas disponibles →', go: { page: 'capas' } },
   // En construcción (ocultas hasta tener contenido real).

@@ -2,7 +2,6 @@ import { Fragment, type ReactNode } from 'react';
 import { goToVisor } from '../../lib/nav';
 import { GUIA, GUIA_TITULO, type GuiaBloque } from '../../data/guia';
 import { docUrl } from '../../data/documentos';
-import DummyBadge from '../DummyBadge';
 
 // *texto* → cursiva (nombres científicos).
 function conCursiva(x: string): ReactNode {
@@ -39,10 +38,10 @@ function irA(id: string) {
 }
 
 const NOTA_CIFRAS =
-  'Las cifras de este borrador provienen del documento original y pueden diferir de los datos del visor (p. ej. el visor registra 29 colisiones confirmadas 2019–2025).';
+  'Las cifras de esta guía provienen del documento original y pueden diferir de los datos del visor (p. ej. el visor registra 29 colisiones confirmadas 2019–2025).';
 
-// Contenido: propuesta entregada por el cliente (borrador sin autor ni fecha).
-// Se transcribe en data/guia.ts.
+// Contenido: guía entregada por el cliente (sin autor ni fecha). Se transcribe en
+// data/guia.ts.
 export default function GuiaPage() {
   const primeraBp = GUIA.find((s) => s.grupo === 'bp')?.id;
   return (
@@ -50,15 +49,10 @@ export default function GuiaPage() {
       <a className="back-link" href="#visor" onClick={(e) => { e.preventDefault(); goToVisor(); }}>← Volver al visor</a>
       <div className="shead">
         <h2>Guía de Buenas Prácticas</h2>
-        <DummyBadge variant="propuesta" />
       </div>
-      <p className="text-muted guia-intro">
-        Propuesta de guía técnica presentada a la Mesa de Cóndores. Es un borrador sin autor ni
-        fecha, que aún no ha sido validado ni aprobado por la Mesa: no constituye una guía oficial.
-      </p>
       <p className="guia-dl">
         <a className="btn btn-secondary cap-dl" href={docUrl('guia')} download>
-          Descargar propuesta (PDF)
+          Descargar guía (PDF)
         </a>
       </p>
 

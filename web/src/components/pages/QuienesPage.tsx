@@ -1,9 +1,8 @@
 import { goToVisor } from '../../lib/nav';
 import { docUrl } from '../../data/documentos';
-import DummyBadge from '../DummyBadge';
 
 // Presentación y objetivos: textuales de «Mesa de Cóndores · Acuerdos Generales»
-// (diciembre de 2025). La sección «Sobre este portal» sigue siendo texto tipo.
+// (diciembre de 2025).
 const EMPRESAS = [
   'Acciona', 'AES Andes', 'Colbún', 'EDF', 'EDP Renewables Chile', 'Enel', 'Engie',
   'Ibereólica Cabo Leones II S.A.', 'Ibereólica', 'Innergex', 'OPDE', 'Pacific Hydro', 'Sonnedix', 'Statkraft',
@@ -85,36 +84,6 @@ export default function QuienesPage() {
           Fuente: Mesa de Cóndores, Acuerdos Generales, diciembre de 2025 (Ministerio de Energía,
           Unidad de Proyectos y Medio Ambiente, División de Desarrollo de Proyectos).{' '}
           <a href={docUrl('acuerdos')} target="_blank" rel="noopener">Ver el documento (PDF)</a>.
-        </p>
-      </div>
-
-      <div className="shead qs-portal-h">
-        <h3>Sobre este portal</h3>
-        <DummyBadge variant="tipo" />
-      </div>
-      <div className="page-text">
-        <p>
-          Este portal existe para poner información al alcance de quienes planifican, evalúan y
-          operan proyectos eólicos, y de quienes fiscalizan y estudian al cóndor. El Ministerio de
-          Energía es responsable del portal.
-        </p>
-        <p>
-          El portal ofrece un visor geoespacial con las capas relevantes para el cóndor y la
-          infraestructura energética; un índice de riesgo de colisión que se puede consultar en
-          cualquier punto del territorio; capas geoespaciales descargables con su nota
-          metodológica (sección «Capas Geoespaciales Disponibles»); y un registro de colisiones
-          confirmadas de cóndor con aerogeneradores, que documenta los casos informados y su
-          ubicación.
-        </p>
-        <p>
-          El índice de riesgo es una herramienta indicativa y de apoyo a la planificación
-          temprana. No reemplaza la evaluación de impacto ambiental de un proyecto específico, que
-          exige estudios de línea de base, trabajo en terreno y los demás instrumentos que la
-          normativa ambiental establece.
-        </p>
-        <p>
-          Si tienes observaciones sobre la metodología o encontraste un error en los datos, puedes
-          contactar al Ministerio de Energía a través de sus canales oficiales.
         </p>
       </div>
     </section>

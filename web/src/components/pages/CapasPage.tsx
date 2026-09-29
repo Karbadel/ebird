@@ -117,10 +117,7 @@ export default function CapasPage() {
           <div className="doc" key={d.id}>
             <div>
               <div className="t">{d.nombre}</div>
-              <div className="d">
-                PDF · {d.fecha} · {fmtTam(d.bytes)}
-                {d.propuesta && <DummyBadge variant="propuesta" />}
-              </div>
+              <div className="d">PDF · {d.fecha} · {fmtTam(d.bytes)}</div>
             </div>
             <a className="btn btn-secondary cap-dl" href={`${import.meta.env.BASE_URL}${d.archivo}`} download>
               Descargar
