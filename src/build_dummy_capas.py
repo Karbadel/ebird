@@ -1,10 +1,11 @@
 """
-Genera la geometría FICTICIA de las capas dummy del portal (abundancia y
-dormideros de cóndor y viento). No proviene de ninguna
-fuente: es ilustrativa, se reemplaza cuando exista el dato real. Uso:
+Genera la geometría FICTICIA de las capas dummy del portal (dormideros de cóndor
+y viento). No proviene de ninguna fuente: es ilustrativa, se reemplaza cuando
+exista el dato real. (La abundancia de cóndor dejó de ser dummy: ahora viene de
+eBird Status and Trends, ver build_abundancia.py.) Uso:
     python src/build_dummy_capas.py
 """
-import json, math
+import json
 from pathlib import Path
 
 OUT = Path(__file__).resolve().parent.parent / "web" / "public" / "data" / "dummy"
@@ -19,25 +20,6 @@ def punto(lon, lat, **props):
     return {"type": "Feature", "geometry": {"type": "Point", "coordinates": [lon, lat]},
             "properties": {"dummy": True, **props}}
 
-
-def hexagono(lon, lat, r_km, **props):
-    ring = []
-    for i in range(6):
-        a = math.radians(60 * i + 30)
-        ring.append([round(lon + (r_km * math.cos(a)) / (111.32 * math.cos(math.radians(lat))), 4),
-                     round(lat + (r_km * math.sin(a)) / 110.57, 4)])
-    ring.append(ring[0])
-    return {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [ring]},
-            "properties": {"dummy": True, **props}}
-
-
-# Abundancia: hexágonos de ~25 km sobre la cordillera (valor relativo ficticio 1-5)
-abund = [(-70.25, -33.35, 5), (-70.45, -34.2, 4), (-70.55, -35.1, 3), (-71.0, -36.3, 2),
-         (-70.9, -31.6, 2), (-70.4, -30.2, 1), (-71.4, -37.5, 3), (-71.6, -38.6, 2),
-         (-73.0, -51.0, 4), (-72.3, -46.5, 2)]
-(OUT / "abundancia_condor.geojson").write_text(json.dumps(fc(
-    [hexagono(x, y, 25, nombre="Zona de abundancia (ilustrativa)", abundancia_relativa=v)
-     for x, y, v in abund]), ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 dorm = [(-70.6, -29.8), (-70.9, -31.2), (-70.3, -33.1), (-70.5, -33.9), (-70.6, -34.8), (-70.8, -35.6),
         (-71.1, -36.4), (-71.5, -37.4), (-71.7, -38.5), (-72.0, -46.0), (-73.05, -50.9), (-72.9, -51.2)]

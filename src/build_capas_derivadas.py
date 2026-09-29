@@ -20,6 +20,7 @@ Puro stdlib. Uso:
 
 from __future__ import annotations
 
+import base64
 import json
 import math
 from collections import Counter
@@ -188,6 +189,23 @@ def contar_array_json(path: Path) -> int:
     return len(d)
 
 
+def contar_grilla(path: Path) -> int:
+    """Celdas con dato de una grilla raster del motor (build_idoneidad/abundancia):
+    suma los bytes de todos los tramos base64."""
+    with path.open(encoding="utf-8") as f:
+        g = json.load(f)
+    return sum(len(base64.b64decode(b64)) for fila in g["rows"] for _c0, b64 in fila)
+
+
+def contar_poligonos(path: Path) -> int:
+    """Polígonos (partes) de una capa GeoJSON de MultiPolygon/Polygon."""
+    n = 0
+    for feat in cargar_geojson(path)["features"]:
+        g = feat["geometry"]
+        n += len(g["coordinates"]) if g["type"] == "MultiPolygon" else 1
+    return n
+
+
 def build_conteo() -> dict:
     def ruta_rel(p: Path) -> str:
         return p.relative_to(DATA.parent).as_posix()
@@ -202,7 +220,17 @@ def build_conteo() -> dict:
             "unidad": unidad,
         }
 
-    registrar("habitat", RIESGO / "habitat.geojson", contar_features_geojson(RIESGO / "habitat.geojson"), "celdas")
+    # Idoneidad y abundancia son rasters (PNG para el mapa + grilla para el motor): se
+    # cuenta la grilla. No tienen descarga en el portal (ver `sinDescarga` en usePortalStore).
+    registrar("habitat", RIESGO / "idoneidad_grid.json", contar_grilla(RIESGO / "idoneidad_grid.json"), "celdas")
+    registrar("abundancia", RIESGO / "abundancia_grid.json", contar_grilla(RIESGO / "abundancia_grid.json"), "celdas")
+    registrar("rango_condor", LAYERS / "rango_condor.geojson", contar_poligonos(LAYERS / "rango_condor.geojson"), "polígonos")
+    registrar(
+        "area_predictiva",
+        LAYERS / "area_predictiva_condor.geojson",
+        contar_poligonos(LAYERS / "area_predictiva_condor.geojson"),
+        "polígonos",
+    )
     registrar("obs", DATA / "observaciones.json", contar_array_json(DATA / "observaciones.json"), "registros")
     registrar("nidos", RIESGO / "nidos.geojson", contar_features_geojson(RIESGO / "nidos.geojson"), "sitios")
     registrar("colisiones", COLISIONES, contar_features_geojson(COLISIONES), "colisiones")
@@ -213,7 +241,8 @@ def build_conteo() -> dict:
         "zonas",
     )
     registrar("parques_eolicos", OUT_PARQUES, contar_features_geojson(OUT_PARQUES), "parques")
-    registrar("wind", RIESGO / "wind.geojson", contar_features_geojson(RIESGO / "wind.geojson"), "parques")
+    # `wind.geojson` (30 parques, 2018) ya no lo usa el motor ni figura en el panel:
+    # se conserva en disco solo para la comparación antes/después del índice.
     registrar(
         "turb",
         LAYERS / "aerogeneradores.geojson",
