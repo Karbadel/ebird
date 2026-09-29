@@ -76,11 +76,14 @@ export const CARDS: PortalCard[] = [
 
 // Escala de categorías del índice de riesgo (leyenda y barras).
 export { RISK_CAT_COLORS as RISK_COLORS } from './riskConfig';
-// Muestras de la rampa real de la capa de idoneidad (HABITAT_RAMP en MapView,
-// pasos 0/2/4/7/9) para su leyenda: antes la leyenda usaba la escala de riesgo y
-// no coincidía con lo que pinta el mapa.
+// Muestras de la rampa real de la capa de idoneidad (HABITAT_RAMP de
+// src/build_idoneidad.py, que pinta el PNG; pasos 0/2/4/7/9) para su leyenda: antes la
+// leyenda usaba la escala de riesgo y no coincidía con lo que pinta el mapa.
 export const HABITAT_LEGEND = ['#1c8eb0', '#a9d69f', '#f5f3b6', '#fdb561', '#da3726'];
 export const RISK_LABELS = ['Muy bajo', 'Bajo', 'Medio', 'Alto', 'Muy alto'];
+// Rampa de la capa de abundancia eBird S&T: idéntica a ABUND_RAMP de
+// src/build_abundancia.py (que pinta el PNG), para el swatch y la leyenda.
+export const ABUNDANCIA_RAMP = ['#f4f7b4', '#c5e58a', '#79d37f', '#2fb59b', '#2a8bab', '#3a5aa8', '#3f2f86', '#2a0f5a'];
 
 // Estados de la capa "Instalaciones y proyectos de generación" (id 'projects'),
 // del más incipiente al operativo (rampa de madurez del proyecto). Se usan en el

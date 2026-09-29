@@ -3,6 +3,7 @@ import { useBatchStore, type BatchCol, configSignature } from '../store/useBatch
 import { useRiskStore } from '../store/useRiskStore';
 import { usePortalStore } from '../store/usePortalStore';
 import { exportBatchCsv } from '../lib/exportBatch';
+import { PARQUES_CATEGORIA_RANKING } from '../data/riskConfig';
 import ProfileSelect, { useProfileLabel } from './ProfileSelect';
 
 const fmtMw = (n: number | null) => (n == null ? '—' : n.toLocaleString('es-CL'));
@@ -17,6 +18,10 @@ export default function BatchPanel() {
   const run = useBatchStore((s) => s.run);
   const setSort = useBatchStore((s) => s.setSort);
   const config = useRiskStore((s) => s.config);
+  // Nº de parques operativos (OPC) que se puntuarán: sale de los datos del motor, no de un texto fijo.
+  const nOperativos = useRiskStore(
+    (s) => s.data?.['parques_eolicos']?.features.filter((f) => f.properties?.['categoria'] === PARQUES_CATEGORIA_RANKING).length ?? null,
+  );
   const fly = usePortalStore((s) => s.fly);
 
   // Precalienta la caché del motor al abrir el tab: la descarga de capas (lineas
@@ -92,8 +97,9 @@ export default function BatchPanel() {
 
       {!rows && !running && (
         <p style={{ fontSize: 12, marginTop: 10, color: 'color-mix(in srgb,var(--color-text) 60%,transparent)' }}>
-          Puntúa los parques eólicos en operación con los pesos actuales del motor y ordénalos por índice de
-          riesgo de colisión. El clic en una fila vuela al parque y abre su ficha de riesgo.
+          Puntúa {nOperativos != null ? `los ${nOperativos} parques eólicos operativos` : 'los parques eólicos operativos'}{' '}
+          (en operación o en pruebas, catastro MINENERGIA junio 2026) con los pesos actuales del motor y
+          ordénalos por índice de riesgo de colisión. El clic en una fila vuela al parque y abre su ficha de riesgo.
         </p>
       )}
 
@@ -104,7 +110,7 @@ export default function BatchPanel() {
       {rows && rows.length > 0 && (
         <div className="batch-print" style={{ marginTop: 10 }}>
           <h3 style={{ margin: '0 0 2px', fontSize: 15 }}>
-            Ranking de riesgo de colisión — Parques eólicos en operación
+            Ranking de riesgo de colisión — Parques eólicos operativos
           </h3>
           <p className="batch-meta" style={{ fontSize: 11, color: 'color-mix(in srgb,var(--color-text) 60%,transparent)', margin: '0 0 6px' }}>
             {rows.length} parques · calculado {fecha}
@@ -125,9 +131,10 @@ export default function BatchPanel() {
             }}
           >
             Índice calculado con los pesos actuales del motor y datos regionales (idoneidad de hábitat, carga
-            ganadera, veranadas), no una evaluación en terreno parque por parque. La cercanía a parques eólicos es
-            constante (cada parque se evalúa en su propia ubicación), por lo que el orden lo determinan los demás
-            criterios. No sustituye la evaluación ambiental de cada proyecto.
+            ganadera, veranadas), no una evaluación en terreno parque por parque. La cercanía a parques eólicos
+            considera los 180 parques del catastro (operativos, en evaluación y aprobados: efecto acumulado) y es
+            constante en este ranking (cada parque se evalúa en su propia ubicación), por lo que el orden lo
+            determinan los demás criterios. No sustituye la evaluación ambiental de cada proyecto.
           </p>
           <table className="table batch-table" style={{ fontSize: 12, width: '100%' }}>
             <colgroup>

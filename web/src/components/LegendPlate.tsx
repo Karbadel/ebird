@@ -1,5 +1,5 @@
 import { usePortalStore } from '../store/usePortalStore';
-import { HABITAT_LEGEND, RISK_LABELS, GEN_ESTADOS, PARQUES_CATEGORIAS } from '../data/portal';
+import { ABUNDANCIA_RAMP, HABITAT_LEGEND, RISK_LABELS, GEN_ESTADOS, PARQUES_CATEGORIAS } from '../data/portal';
 import { RISK_CAT_COLORS } from '../data/riskConfig';
 import { AYUDA } from '../data/ayuda';
 
@@ -21,10 +21,15 @@ export default function LegendPlate() {
   // Todos los hooks antes del return condicional (reglas de hooks de React).
   const densityDomain = usePortalStore((s) => s.densityDomain);
   const windpotByRisk = usePortalStore((s) => s.windpotByRisk);
+  const abundanciaP99 = usePortalStore((s) => s.abundanciaP99);
   if (!open) return null;
 
   const isOn = (id: string) => layers.find((l) => l.id === id)?.on ?? false;
   const habitatOn = isOn('habitat');
+  const abundOn = isOn('abundancia');
+  const rangoOn = isOn('rango_condor');
+  const areaOn = isOn('area_predictiva');
+  const lead = habitatOn || abundOn || rangoOn || areaOn;
   const densidadOn = isOn('ebird_densidad');
   const projectsOn = isOn('projects');
   const windpotOn = isOn('windpot');
@@ -47,9 +52,53 @@ export default function LegendPlate() {
         </>
       )}
 
-      {densidadOn && (
+      {abundOn && (
         <>
           <span className="lbl" style={{ display: 'block', marginTop: habitatOn ? 10 : 0 }}>
+            Abundancia relativa de cóndor
+          </span>
+          <div className="lgd-scale">
+            {ABUNDANCIA_RAMP.map((c, i) => {
+              const first = i === 0;
+              const last = i === ABUNDANCIA_RAMP.length - 1;
+              const p99 = abundanciaP99 == null ? null : abundanciaP99.toLocaleString('es-CL', { maximumFractionDigits: 1 });
+              return (
+                <div key={c}>
+                  <i style={{ background: c }} />
+                  <span>{first ? '0+' : last ? (p99 ? `${p99}+` : 'Más') : ''}</span>
+                </div>
+              );
+            })}
+          </div>
+          <span className="lgd-caption">Individuos por hora y 2 km (eBird S&amp;T 2023) · tope = percentil 99</span>
+        </>
+      )}
+
+      {(rangoOn || areaOn) && (
+        <>
+          <span className="lbl" style={{ display: 'block', marginTop: habitatOn || abundOn ? 10 : 0 }}>
+            eBird S&amp;T 2023
+          </span>
+          <div className="lgd-cats">
+            {rangoOn && (
+              <div className="lgd-cat">
+                <i style={{ background: 'rgba(31,122,109,.35)', border: '1.5px solid #1f7a6d' }} />
+                <span>Rango estimado</span>
+              </div>
+            )}
+            {areaOn && (
+              <div className="lgd-cat">
+                <i style={{ background: 'rgba(90,90,110,.15)', border: '1.5px dashed #5a5a6e' }} />
+                <span>Área predictiva</span>
+              </div>
+            )}
+          </div>
+        </>
+      )}
+
+      {densidadOn && (
+        <>
+          <span className="lbl" style={{ display: 'block', marginTop: lead ? 10 : 0 }}>
             Densidad de avistamientos
           </span>
           <div className="lgd-scale">
@@ -83,7 +132,7 @@ export default function LegendPlate() {
 
       {projectsOn && (
         <>
-          <span className="lbl" style={{ display: 'block', marginTop: habitatOn || densidadOn ? 10 : 0 }}>
+          <span className="lbl" style={{ display: 'block', marginTop: lead || densidadOn ? 10 : 0 }}>
             Otros proyectos de generación · estado
           </span>
           {/* Categórico (no degradado): lista vertical chip + etiqueta. */}
@@ -100,7 +149,7 @@ export default function LegendPlate() {
 
       {parquesOn && (
         <>
-          <span className="lbl" style={{ display: 'block', marginTop: habitatOn || densidadOn || projectsOn ? 10 : 0 }}>
+          <span className="lbl" style={{ display: 'block', marginTop: lead || densidadOn || projectsOn ? 10 : 0 }}>
             Parques eólicos · categoría
           </span>
           <div className="lgd-cats">
@@ -116,7 +165,7 @@ export default function LegendPlate() {
 
       {windpotOn && (
         <>
-          <span className="lbl" style={{ display: 'block', marginTop: habitatOn || densidadOn || projectsOn || parquesOn ? 10 : 0 }}>
+          <span className="lbl" style={{ display: 'block', marginTop: lead || densidadOn || projectsOn || parquesOn ? 10 : 0 }}>
             {windpotByRisk ? 'Potencial eólico · índice de riesgo' : 'Potencial eólico bruto'}
           </span>
           <div className="lgd-cats">

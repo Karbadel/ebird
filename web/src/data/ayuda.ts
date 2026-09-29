@@ -22,7 +22,7 @@ export const AYUDA = {
   riesgo:
     'Motor del índice de riesgo de colisión (0–100). Activa la consulta y haz clic en el mapa: el índice combina, con los pesos indicados, la cercanía a infraestructura (parques, líneas), la sensibilidad del sitio (hábitat, nidos, terreno) y los atrayentes de carroña. Es un modelo indicativo, no una medición en terreno.',
   motorParques:
-    'Puntúa los 30 parques eólicos en operación con los pesos actuales del motor y los ordena por índice. Clic en una fila para ir al parque y ver el desglose. Exportable a CSV e imprimible. Como cada parque se evalúa en su propia ubicación, la cercanía a parques es constante y el orden lo dan los demás criterios.',
+    'Puntúa los parques eólicos operativos (categoría OPC del catastro MINENERGIA, junio 2026: en operación o en pruebas) con los pesos actuales del motor y los ordena por índice. Clic en una fila para ir al parque y ver el desglose. Exportable a CSV e imprimible. Como cada parque se evalúa en su propia ubicación, la cercanía a parques es constante y el orden lo dan los demás criterios.',
   motorPotencial:
     'Cruza las 2.277 áreas de potencial eólico bruto (MINENERGIA 2026) con el índice de riesgo: MW y superficie por categoría, a nivel nacional y por región. Se recalcula al instante al cambiar los pesos o el perfil. El índice de cada área se evalúa en un punto interior (ver aviso metodológico del panel).',
   colAnio:
@@ -34,7 +34,13 @@ export const AYUDA = {
   consulta:
     'Activa el modo consulta: cada clic en el mapa calcula el índice en ese punto y abre la ficha con el desglose. Mientras está activa, el clic no sirve para medir ni dibujar correcciones de campo.',
   variables:
-    'Peso: importancia relativa de cada criterio (se normaliza sobre la suma de los activos, no necesita sumar 100). Distancia de influencia: hasta dónde «llega» un elemento; el puntaje de cercanía baja linealmente de 1 (encima) a 0 (a esa distancia). Desmarca una variable para excluirla. Un criterio sin dato en el punto (p. ej. terreno fuera de Atacama–Maule) se excluye y el resto se renormaliza.',
+    'Peso: importancia relativa de cada criterio (se normaliza sobre la suma de los activos, no necesita sumar 100). Distancia de influencia: hasta dónde «llega» un elemento; el puntaje de cercanía baja linealmente de 1 (encima) a 0 (a esa distancia). Desmarca una variable para excluirla. Un criterio sin dato en el punto (p. ej. terreno fuera de Atacama–Maule, idoneidad al norte de 20°S o abundancia fuera del área de predicción de eBird) se excluye y el resto se renormaliza.',
+  criterioParques:
+    'Distancia al parque eólico más cercano entre los 180 del catastro MINENERGIA (junio 2026). Incluye los operativos (75) y también los proyectos en evaluación ambiental (18) y los aprobados o en construcción (87): mide el efecto acumulado de parques existentes y proyectados, no solo los que hoy tienen turbinas.',
+  criterioHabitat:
+    'Idoneidad ambiental para el cóndor (0–1) del raster oficial de Estrada Pacheco et al. (2025), resolución ≈ 830 m: el valor del raster en el punto es el puntaje. Sin dato al norte de ≈ 20°S (fuera de la cobertura del raster).',
+  criterioAbundancia:
+    'Abundancia relativa anual de cóndor de eBird Status and Trends 2023 (individuos detectados por hora y 2 km, resolución 3 km), llevada a 0–1 dividiendo por el percentil 99 de Chile continental (tope 1). Peso 0 % por defecto: informativo hasta que se le asigne peso. Sin dato fuera del área de predicción de eBird.',
   perfil:
     'Un perfil es un conjunto de pesos pensado para una pregunta. «Vigente»: ¿qué tan riesgoso es un punto por la infraestructura que ya existe? (para parques en operación). «Sensibilidad del sitio»: si se construyera un parque aquí, ¿qué tan sensible es el lugar para el cóndor? (para zonas sin parques, como el potencial eólico). Este segundo es una propuesta pendiente de validación del comité. Si editas un peso a mano el perfil pasa a «Personalizado». El perfil activo queda registrado en los informes.',
   correcciones:

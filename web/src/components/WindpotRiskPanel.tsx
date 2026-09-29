@@ -120,7 +120,7 @@ export default function WindpotRiskPanel() {
             Describe cuánto potencial eólico <b>bruto</b> (MINENERGIA 2026; no son proyectos ni descuenta restricciones
             territoriales) se superpone con zonas de mayor o menor índice de riesgo actual, con los pesos vigentes del
             motor. El índice se evalúa en un punto interior de cada área: en áreas extensas (hasta ~28.000 ha) puede
-            variar dentro de ella. Criterios regionales (hábitat en grilla de 30 km; terreno solo Atacama–Maule).
+            variar dentro de ella. Criterios regionales (hábitat con el raster de idoneidad de ≈ 830 m, sin dato al norte de 20°S; terreno solo Atacama–Maule).
             Resultado indicativo: no califica la aptitud de un sitio ni sustituye la evaluación ambiental.
           </p>
 

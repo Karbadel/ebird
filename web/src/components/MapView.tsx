@@ -12,22 +12,19 @@ import { useWindpotRiskStore } from '../store/useWindpotRiskStore';
 import { GEN_ESTADO_COLOR, PARQUE_CAT_COLOR, DUMMY_COLOR } from '../data/portal';
 
 type RGB = [number, number, number];
-// Rampas de color de los choropleth (idénticas al visor de riesgo fuente).
-const HABITAT_RAMP: RGB[] = [
-  [28, 142, 176], [110, 181, 167], [169, 214, 159], [207, 227, 174], [245, 243, 182],
-  [254, 235, 169], [254, 210, 135], [253, 181, 97], [249, 120, 65], [218, 55, 38],
-];
+// Rampa de color del choropleth de densidad eBird (idéntica al visor de riesgo fuente).
+// La idoneidad ya no es un choropleth: su rampa vive en src/build_idoneidad.py (PNG).
 const EBIRD_RAMP: RGB[] = [
   [255, 247, 236], [254, 224, 182], [253, 187, 132], [252, 141, 89], [227, 74, 51], [153, 0, 0],
 ];
 // Buffers de proximidad (anillo visual por capa): archivo GeoJSON de cada capa
 // bufferable y color del anillo. Es SOLO visual (no altera el índice de riesgo).
 const BUFFER_FILES: Record<string, string> = {
-  wind: 'wind.geojson',
-  lineas: 'lineas.geojson',
-  nidos: 'nidos.geojson',
-  colisiones: 'colisiones.geojson',
-  vertederos: 'vertederos.geojson',
+  parques_eolicos: 'layers/parques_eolicos.geojson',
+  lineas: 'riesgo/lineas.geojson',
+  nidos: 'riesgo/nidos.geojson',
+  colisiones: 'riesgo/colisiones.geojson',
+  vertederos: 'riesgo/vertederos.geojson',
 };
 const BUFFER_COLOR = '#e6a23c';
 
@@ -255,8 +252,6 @@ export default function MapView() {
     }
 
     // Capas de riesgo — puntos / líneas / polígonos
-    if (id === 'wind')
-      return loadRisk('wind.geojson', { pointToLayer: pt('#c0392b', 4), onEachFeature: bindPopup('Parque eólico') });
     if (id === 'lineas')
       return loadRisk('lineas.geojson', { style: () => ({ renderer: canvas, color: '#2c6ea6', weight: 1.4 }) });
     if (id === 'nidos')
@@ -319,7 +314,6 @@ export default function MapView() {
           '<span class="dummy-badge">Datos dummy · hasta nueva implementación</span>',
       );
     };
-    const dummyPoly = { renderer: canvas, color: DUMMY_COLOR, weight: 2, dashArray: '6 4', fillColor: DUMMY_COLOR, fillOpacity: 0.14 };
     const dummyPt = (radius: (p: Props) => number) => (f: Feature, ll: L.LatLng) =>
       L.circleMarker(ll, {
         renderer: canvas,
@@ -332,11 +326,6 @@ export default function MapView() {
       });
     const loadDummy = (file: string, options: L.GeoJSONOptions) => async () =>
       L.geoJSON(await fetchJson(`data/dummy/${file}`), options);
-    if (id === 'abundancia')
-      return loadDummy('abundancia_condor.geojson', {
-        style: () => dummyPoly,
-        onEachFeature: dummyPopup((p) => `Abundancia relativa ficticia: ${String(p['abundancia_relativa'] ?? '—')} de 5`),
-      });
     if (id === 'dormideros')
       return loadDummy('dormideros_condor.geojson', {
         pointToLayer: dummyPt(() => 6),
@@ -348,23 +337,35 @@ export default function MapView() {
         onEachFeature: dummyPopup((p) => `Velocidad media ficticia: ${String(p['velocidad_ms'] ?? '—')} m/s`),
       });
 
-    // Capas de riesgo — choropleth (normalizadas)
-    if (id === 'habitat')
-      return async () => {
-        const fc = await fetchJson('data/riesgo/habitat.geojson');
-        const op = usePortalStore.getState().layers.find((x) => x.id === 'habitat')?.opacity ?? 0.6;
-        return L.geoJSON(fc, {
-          style: (feat) => {
-            const hs = feat?.properties?.['hs_mean'];
-            const ok = typeof hs === 'number';
-            return { renderer: canvas, stroke: false, fillColor: ok ? rampColor(hs, HABITAT_RAMP) : '#cfd6d2', fillOpacity: ok ? op : Math.min(op, 0.1) };
-          },
-          onEachFeature: (f, l) => {
-            const hs = f.properties?.['hs_mean'];
-            l.bindPopup(typeof hs === 'number' ? `Idoneidad de hábitat: ${hs.toFixed(2)}` : 'Sin dato');
-          },
-        });
+    // Rasters PNG en Web Mercator (idoneidad de hábitat, abundancia eBird S&T,
+    // terreno): una sola imagen por capa, en el pane 'rasters' (bajo los vectores).
+    // `<nombre>_meta.json` trae los bounds; el PNG lo genera un script de src/.
+    const loadRaster = (id: string, png: string, meta: string, defOpacity: number) => async () => {
+      const base = import.meta.env.BASE_URL;
+      const m = (await (await fetch(`${base}data/riesgo/${meta}`)).json()) as {
+        bounds: [[number, number], [number, number]];
+        p99?: number;
       };
+      if (id === 'abundancia' && typeof m.p99 === 'number') usePortalStore.getState().setAbundanciaP99(m.p99);
+      const op = usePortalStore.getState().layers.find((x) => x.id === id)?.opacity ?? defOpacity;
+      return L.imageOverlay(`${base}data/riesgo/${png}`, m.bounds, { opacity: op, interactive: false, pane: 'rasters' });
+    };
+    if (id === 'habitat') return loadRaster('habitat', 'idoneidad.png', 'idoneidad_meta.json', 0.6);
+    if (id === 'abundancia') return loadRaster('abundancia', 'abundancia.png', 'abundancia_meta.json', 0.75);
+
+    // Rango estimado y área predictiva de eBird S&T 2023 (solo visuales).
+    if (id === 'rango_condor')
+      return loadLayers('rango_condor.geojson', {
+        style: () => ({ renderer: canvas, color: '#1f7a6d', weight: 1.4, fillColor: '#1f7a6d', fillOpacity: 0.14 }),
+        onEachFeature: bindPopup('Rango estimado del cóndor andino · eBird Status and Trends 2023'),
+      });
+    if (id === 'area_predictiva')
+      return loadLayers('area_predictiva_condor.geojson', {
+        style: () => ({ renderer: canvas, color: '#5a5a6e', weight: 1.2, dashArray: '6 4', fillColor: '#5a5a6e', fillOpacity: 0.07 }),
+        onEachFeature: bindPopup('Área predictiva · eBird Status and Trends 2023: fuera de ella no se estima abundancia'),
+      });
+
+    // Capas de riesgo — choropleth (normalizadas)
     if (id === 'ebird_densidad')
       return async () => {
         const fc = await fetchJson('data/riesgo/ebird_densidad.geojson');
@@ -391,15 +392,7 @@ export default function MapView() {
     // src/build_terreno_png.py) mostrado como una sola imagen. El campo continuo se
     // ve suave (interpolación del navegador) y el alfa recorta la silueta del dato.
     // El terreno_3km.json se mantiene aparte para el motor de riesgo (consulta por punto).
-    if (id === 'terreno_3km')
-      return async () => {
-        const base = import.meta.env.BASE_URL;
-        const meta = (await (await fetch(`${base}data/riesgo/terreno_3km_meta.json`)).json()) as {
-          bounds: [[number, number], [number, number]];
-        };
-        const op = usePortalStore.getState().layers.find((x) => x.id === 'terreno_3km')?.opacity ?? 0.65;
-        return L.imageOverlay(`${base}data/riesgo/terreno_3km.png`, meta.bounds, { opacity: op, interactive: false });
-      };
+    if (id === 'terreno_3km') return loadRaster('terreno_3km', 'terreno_3km.png', 'terreno_3km_meta.json', 0.65);
 
     return null;
   }
@@ -415,7 +408,7 @@ export default function MapView() {
     let fc = bufferDataRef.current[id];
     if (!fc) {
       try {
-        const res = await fetch(`${import.meta.env.BASE_URL}data/riesgo/${BUFFER_FILES[id]}`);
+        const res = await fetch(`${import.meta.env.BASE_URL}data/${BUFFER_FILES[id]}`);
         if (!res.ok) return;
         fc = (await res.json()) as FeatureCollection;
         bufferDataRef.current[id] = fc;
@@ -486,6 +479,12 @@ export default function MapView() {
     // el overlayPane (400), así que no se pueden intercalar. Lo dejamos justo por
     // encima (401) para que el anillo no quede oculto bajo la idoneidad (que está
     // encendida por defecto); el relleno es muy tenue (0,12) y no tapa los puntos.
+    // Pane para los rasters PNG (idoneidad, abundancia, terreno): entre las teselas
+    // (200) y los vectores (overlayPane 400), para que un raster encendido después
+    // nunca tape los puntos y polígonos ya dibujados.
+    map.createPane('rasters');
+    const rasterPane = map.getPane('rasters');
+    if (rasterPane) rasterPane.style.zIndex = '390';
     map.createPane('buffers');
     const bufPane = map.getPane('buffers');
     if (bufPane) bufPane.style.zIndex = '401';

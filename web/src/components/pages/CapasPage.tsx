@@ -29,6 +29,20 @@ export default function CapasPage() {
       );
     }
     if (l.id === 'antenas') return <span className="cap-sin">sin archivo (correcciones de campo locales)</span>;
+    if (l.sinDescarga) {
+      const s = l.sinDescarga;
+      return (
+        <span className="cap-sin">
+          {s.texto}
+          {s.enlace && (
+            <>
+              {' · '}
+              <a href={s.enlace} target="_blank" rel="noopener noreferrer">{s.enlaceTexto ?? 'fuente oficial'}</a>
+            </>
+          )}
+        </span>
+      );
+    }
     const c = conteos[l.id];
     if (!c?.file) return <span className="cap-sin">sin archivo descargable</span>;
     return (
@@ -47,8 +61,10 @@ export default function CapasPage() {
       <p className="text-muted cap-nota">
         Cada capa conserva la licencia y las condiciones de uso de su fuente original (columna «Fuente»,
         con su fecha cuando corresponde). Los archivos se entregan tal como los usa el visor, sin
-        procesamiento adicional: las capas dummy y las correcciones de campo no tienen archivo. Las
-        capas de mayor tamaño pueden tardar en descargarse.
+        procesamiento adicional: las capas dummy y las correcciones de campo no tienen archivo. La
+        idoneidad de hábitat (facilitada por sus autores) y los productos de eBird Status and Trends
+        (abundancia, rango y área predictiva) no se redistribuyen desde este portal: se indica dónde
+        obtenerlos. Las capas de mayor tamaño pueden tardar en descargarse.
       </p>
       <div className="cap-tabla" role="table" aria-label="Capas geoespaciales disponibles para descarga">
         <div className="cap-fila cap-cab" role="row">
@@ -75,13 +91,16 @@ export default function CapasPage() {
                       <span className="sw-mini" style={{ background: l.sw }} />
                       {l.n}
                     </span>
-                    <span className="cap-f" role="cell" data-label="Fuente">{l.src}</span>
+                    <span className="cap-f" role="cell" data-label="Fuente">
+                      {l.src}
+                      {l.cita && <span className="cap-cita">Cita: {l.cita}</span>}
+                    </span>
                     <span className="mono" role="cell" data-label="Elementos">
                       {l.dummy || !c ? '—' : `${fmtN(c.n)} ${c.unidad}`}
                     </span>
-                    <span role="cell" data-label="Formato">{c?.file && !l.dummy ? formatoDe(c.file) : '—'}</span>
+                    <span role="cell" data-label="Formato">{c?.file && !l.dummy && !l.sinDescarga ? formatoDe(c.file) : '—'}</span>
                     <span className="mono" role="cell" data-label="Tamaño">
-                      {c?.bytes != null && !l.dummy ? fmtTam(c.bytes) : '—'}
+                      {c?.bytes != null && !l.dummy && !l.sinDescarga ? fmtTam(c.bytes) : '—'}
                     </span>
                     <span className="cap-a" role="cell">{archivo(l)}</span>
                   </div>

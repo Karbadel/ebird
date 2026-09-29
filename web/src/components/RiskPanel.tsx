@@ -4,7 +4,14 @@ import { useRiskStore } from '../store/useRiskStore';
 import { useFieldStore, FIELD_STYLES, type DrawType } from '../store/useFieldStore';
 import ProfileSelect from './ProfileSelect';
 import InfoTip from './InfoTip';
-import { AYUDA } from '../data/ayuda';
+import { AYUDA, type AyudaKey } from '../data/ayuda';
+
+// Criterios con nota de ayuda propia (id de la variable → clave de AYUDA).
+const CRITERIO_AYUDA: Record<string, AyudaKey> = {
+  wind: 'criterioParques',
+  habitat: 'criterioHabitat',
+  abundancia: 'criterioAbundancia',
+};
 
 const DRAW_OPTIONS: { value: DrawType; label: string }[] = [
   { value: 'ninguno', label: '— Desactivado (clic normal en el mapa)' },
@@ -167,7 +174,7 @@ function FieldCorrectionsSection() {
 }
 
 const JUSTIFICACION =
-  'La proximidad a parques eólicos y líneas de transmisión concentra el 40% del índice porque son la causa física directa de colisión. La idoneidad de hábitat (20%) indica probabilidad de presencia y vuelo del cóndor. Los nidos (15%, ahora con evidencia de reproducción eBird) marcan actividad reproductiva y corredores de vuelo de adultos. Vertederos, veranadas y ganado (20% combinado) son fuentes de carroña que atraen vuelo hacia zonas con infraestructura. El historial de colisiones confirmadas (5%) aporta validación empírica directa. La densidad de avistamientos eBird (5%) suma evidencia empírica de actividad de vuelo, con peso bajo porque mide esfuerzo de observación además de presencia real del cóndor (sesgo hacia sitios con más observadores). Estos pesos son un punto de partida editable, no una verdad estadística — ajústalos si dispones de datos de calibración.';
+  'La proximidad a parques eólicos y líneas de transmisión concentra el 40% del índice porque son la causa física directa de colisión. La idoneidad de hábitat (20%) indica probabilidad de presencia y vuelo del cóndor. Los nidos (15%, ahora con evidencia de reproducción eBird) marcan actividad reproductiva y corredores de vuelo de adultos. Vertederos, veranadas y ganado (20% combinado) son fuentes de carroña que atraen vuelo hacia zonas con infraestructura. El historial de colisiones confirmadas (5%) aporta validación empírica directa. La densidad de avistamientos eBird (5%) suma evidencia empírica de actividad de vuelo, con peso bajo porque mide esfuerzo de observación además de presencia real del cóndor (sesgo hacia sitios con más observadores). La abundancia relativa de cóndor de eBird Status and Trends 2023 está disponible como criterio informativo con peso 0 %: no altera el índice hasta que se le asigne un peso. Estos pesos son un punto de partida editable, no una verdad estadística — ajústalos si dispones de datos de calibración.';
 
 export default function RiskPanel() {
   const queryActive = useRiskStore((s) => s.queryActive);
@@ -233,7 +240,10 @@ export default function RiskPanel() {
                 onChange={(e) => setEnabled(c.id, e.target.checked)}
                 style={{ accentColor: 'var(--color-accent-700)', width: 14, height: 14 }}
               />
-              <span style={{ flex: 1 }}>{c.label}</span>
+              <span className="crit-help" style={{ flex: 1 }}>
+                {c.label}
+                {CRITERIO_AYUDA[c.id] && <InfoTip k={CRITERIO_AYUDA[c.id]!} label={c.label} />}
+              </span>
               <b className="mono" style={{ color: 'var(--color-accent-700)' }}>{c.weight}%</b>
             </label>
 
