@@ -6,11 +6,13 @@
 export const AYUDA = {
   // ── Panel de capas ─────────────────────────────────────────────────────────
   capas:
-    'Enciende o apaga capas del mapa con su casilla. Están agrupadas por tema; el filtro de texto busca por nombre o fuente, y los chips CÓNDOR / CARROÑA / ENERGÉTICA / SOLO ACTIVAS acotan la lista. El (?) de cada capa explica su origen y limitaciones. Algunas capas tienen control de opacidad y de buffer (anillo de proximidad, solo visual). «Limpiar» apaga todas; «Ver leyenda» muestra la escala de las capas encendidas.',
+    'Enciende o apaga capas del mapa con su casilla. Están agrupadas por tema; el filtro de texto busca por nombre o fuente, y los chips CÓNDOR / ENERGÉTICA / RECURSO EÓLICO / CONTEXTO / SOLO ACTIVAS acotan la lista. Las capas marcadas DUMMY tienen geometría ficticia (sin fuente) hasta nueva implementación. Junto al nombre de cada capa se indica su número de elementos. El (?) de cada capa explica su origen y limitaciones. Algunas capas tienen control de opacidad y de buffer (anillo de proximidad, solo visual). «Limpiar» apaga todas; «Ver leyenda» muestra la escala de las capas encendidas.',
   capasCargar:
     'Superpone tus propios archivos KML o KMZ (p. ej. el trazado de un proyecto) para compararlos con las capas del portal. Se procesan en tu navegador: no se suben a ningún servidor y no alteran el índice de riesgo. Se pierden al recargar la página.',
+  capasActivas:
+    'Ficha de las capas actualmente encendidas: nombre, grupo, fuente, número de elementos y nota metodológica (las capas dummy llevan su marca). Enciéndelas o apágalas desde el panel de capas de la izquierda.',
 
-  // ── Pestañas del panel de resultados ──────────────────────────────────────
+  // ── Pestañas del panel de resultados / registros ──────────────────────────
   ficha:
     'Ficha del cóndor andino (Vultur gryphus): estado de conservación, biología y amenazas según la ficha RCE del MMA (15° proceso, 2018) y UICN. Las cifras de registros eBird se calculan en vivo con los datos cargados en el portal.',
   lista:
@@ -19,9 +21,9 @@ export const AYUDA = {
     'Localidades de eBird ordenadas por número de registros de cóndor en la ventana de datos. Sirve para identificar sitios con observaciones recurrentes; depende del esfuerzo de observación (más observadores, más registros).',
   riesgo:
     'Motor del índice de riesgo de colisión (0–100). Activa la consulta y haz clic en el mapa: el índice combina, con los pesos indicados, la cercanía a infraestructura (parques, líneas), la sensibilidad del sitio (hábitat, nidos, terreno) y los atrayentes de carroña. Es un modelo indicativo, no una medición en terreno.',
-  comiteParques:
+  motorParques:
     'Puntúa los 30 parques eólicos en operación con los pesos actuales del motor y los ordena por índice. Clic en una fila para ir al parque y ver el desglose. Exportable a CSV e imprimible. Como cada parque se evalúa en su propia ubicación, la cercanía a parques es constante y el orden lo dan los demás criterios.',
-  comitePotencial:
+  motorPotencial:
     'Cruza las 2.277 áreas de potencial eólico bruto (MINENERGIA 2026) con el índice de riesgo: MW y superficie por categoría, a nivel nacional y por región. Se recalcula al instante al cambiar los pesos o el perfil. El índice de cada área se evalúa en un punto interior (ver aviso metodológico del panel).',
   colAnio:
     'Colisiones confirmadas de cóndor con aerogeneradores por año (29 casos, 2019–2025), con total, año pico y años con registro. Es el registro de casos informados: puede no incluir colisiones no detectadas.',
@@ -36,7 +38,7 @@ export const AYUDA = {
   perfil:
     'Un perfil es un conjunto de pesos pensado para una pregunta. «Vigente»: ¿qué tan riesgoso es un punto por la infraestructura que ya existe? (para parques en operación). «Sensibilidad del sitio»: si se construyera un parque aquí, ¿qué tan sensible es el lugar para el cóndor? (para zonas sin parques, como el potencial eólico). Este segundo es una propuesta pendiente de validación del comité. Si editas un peso a mano el perfil pasa a «Personalizado». El perfil activo queda registrado en los informes.',
   correcciones:
-    'Agrega en el mapa elementos observados en terreno que no están en las capas oficiales: corrales o atrayentes de ganado, líneas eléctricas y antenas (percha o dormidero). Entran al cálculo del índice en vivo (las antenas con peso 0 salvo que se lo asignes). Se guardan en este navegador y se pueden exportar e importar como GeoJSON para compartirlas.',
+    'Agrega en el mapa elementos observados en terreno que no están en las capas oficiales: corrales o atrayentes de ganado, líneas eléctricas y antenas (percha o dormidero). Entran al cálculo del índice en vivo (las antenas con peso 0 salvo que se lo asignes). Las antenas se ven también en la capa «Antenas de telecomunicaciones» (Contexto territorial), que se enciende sola al agregar una. Se guardan en este navegador y se pueden exportar e importar como GeoJSON para compartirlas.',
 
   // ── Ficha de resultado (punto consultado) ─────────────────────────────────
   indice:

@@ -1,5 +1,5 @@
 import { usePortalStore } from '../store/usePortalStore';
-import { HABITAT_LEGEND, RISK_LABELS, GEN_ESTADOS } from '../data/portal';
+import { HABITAT_LEGEND, RISK_LABELS, GEN_ESTADOS, PARQUES_CATEGORIAS } from '../data/portal';
 import { RISK_CAT_COLORS } from '../data/riskConfig';
 import { AYUDA } from '../data/ayuda';
 
@@ -28,6 +28,8 @@ export default function LegendPlate() {
   const densidadOn = isOn('ebird_densidad');
   const projectsOn = isOn('projects');
   const windpotOn = isOn('windpot');
+  const parquesOn = isOn('parques_eolicos');
+  const dummyOn = layers.some((l) => l.dummy && l.on);
 
   return (
     <div id="legend-plate" title={AYUDA.leyenda}>
@@ -82,7 +84,7 @@ export default function LegendPlate() {
       {projectsOn && (
         <>
           <span className="lbl" style={{ display: 'block', marginTop: habitatOn || densidadOn ? 10 : 0 }}>
-            Proyectos de generación · estado
+            Otros proyectos de generación · estado
           </span>
           {/* Categórico (no degradado): lista vertical chip + etiqueta. */}
           <div className="lgd-cats">
@@ -96,9 +98,25 @@ export default function LegendPlate() {
         </>
       )}
 
-      {windpotOn && (
+      {parquesOn && (
         <>
           <span className="lbl" style={{ display: 'block', marginTop: habitatOn || densidadOn || projectsOn ? 10 : 0 }}>
+            Parques eólicos · categoría
+          </span>
+          <div className="lgd-cats">
+            {PARQUES_CATEGORIAS.map((c) => (
+              <div className="lgd-cat" key={c.key}>
+                <i style={{ background: c.color, borderRadius: '50%' }} />
+                <span>{c.label}</span>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {windpotOn && (
+        <>
+          <span className="lbl" style={{ display: 'block', marginTop: habitatOn || densidadOn || projectsOn || parquesOn ? 10 : 0 }}>
             {windpotByRisk ? 'Potencial eólico · índice de riesgo' : 'Potencial eólico bruto'}
           </span>
           <div className="lgd-cats">
@@ -119,7 +137,13 @@ export default function LegendPlate() {
         </>
       )}
 
-      <div className="lgd-row bordered">
+      {dummyOn && (
+        <div className="lgd-row bordered">
+          <span className="lgd-dummy" />
+          <span>Capa dummy · geometría ficticia (hasta nueva implementación)</span>
+        </div>
+      )}
+      <div className={`lgd-row${dummyOn ? '' : ' bordered'}`}>
         <span className="lgd-mk">4</span>
         <span>Registro de cóndor · nº de individuos</span>
       </div>

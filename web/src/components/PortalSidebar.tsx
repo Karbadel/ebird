@@ -1,19 +1,195 @@
 import { useMemo, useRef, useState } from 'react';
 import { usePortalStore, LAYER_GROUPS, type LayerGroupId } from '../store/usePortalStore';
+import { useDataStore } from '../store/useDataStore';
+import { applyFilters, useFilterStore } from '../store/useFilterStore';
+import { useFiltered } from '../lib/useFiltered';
+import { searchSpecies } from '../lib/search';
+import { aggregateSites } from '../lib/derive';
+import { GROUPS, type Group, type Observation } from '../types';
 import InfoTip from './InfoTip';
+import DummyBadge from './DummyBadge';
+import { useCapasConteo, fmtN } from '../lib/capasConteo';
 
 const norm = (s: string) =>
   s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+const fmt = (n: number) => n.toLocaleString('es-CL');
 
 // Filtros rápidos: grupos temáticos + "solo activas".
 const QUICK: { id: LayerGroupId | 'active'; label: string }[] = [
   { id: 'condor', label: 'Cóndor' },
-  { id: 'carrona', label: 'Carroña' },
   { id: 'eolico', label: 'Energética' },
+  { id: 'recurso', label: 'Recurso eólico' },
+  { id: 'contexto', label: 'Contexto' },
   { id: 'active', label: 'Solo activas' },
 ];
 
+// Columna izquierda del visor: en el acceso «La Especie» muestra Registros ·
+// Ranking de sitios; en el resto de accesos, el panel de capas.
 export default function PortalSidebar() {
+  const tab = usePortalStore((s) => s.tab);
+  return tab === 'especie' ? <EspecieSidebar /> : <CapasSidebar />;
+}
+
+// ── «La Especie»: Registros · Ranking de sitios ───────────────────────────
+function EspecieSidebar() {
+  const layersOpen = usePortalStore((s) => s.layersOpen);
+  const setLayersOpen = usePortalStore((s) => s.setLayersOpen);
+  const especieView = usePortalStore((s) => s.especieView);
+  const setEspecieView = usePortalStore((s) => s.setEspecieView);
+  const activeSite = usePortalStore((s) => s.activeSite);
+  const fly = usePortalStore((s) => s.fly);
+  const observations = useDataStore((s) => s.observations);
+  const filtered = useFiltered();
+  const f = useFilterStore();
+
+  const rows = useMemo(
+    () => (activeSite ? filtered.filter((o) => o.loc === activeSite) : filtered),
+    [filtered, activeSite],
+  );
+
+  // Conteo por grupo ignorando el propio filtro de grupo (para poder cambiar entre grupos).
+  const groupCounts = useMemo(() => {
+    let base = applyFilters(observations, { ...f, group: '' });
+    if (f.query.trim()) {
+      const m = searchSpecies(observations, f.query);
+      base = base.filter((o) => m.has(o.es));
+    }
+    const c: Partial<Record<Group, number>> = {};
+    for (const o of base) c[o.grp] = (c[o.grp] ?? 0) + 1;
+    return c;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [observations, f.species, f.query, f.order, f.family, f.region, f.hotspot, f.from, f.to, f.onlyValid, f.onlyReviewed, f.includeExotic, f.onlyNotable, f.minCount]);
+
+  const openRecord = (o: Observation) => fly([o.lat, o.lng]);
+  const total = rows.length;
+  const scope = activeSite ? `Observaciones · ${activeSite}` : 'Observaciones · todo Chile';
+  const tip = especieView === 'sitios' ? 'sitios' : 'lista';
+
+  return (
+    <aside className={`side${layersOpen ? ' open' : ''}`}>
+      <div className="side-head">
+        <div style={{ flex: 1 }}>
+          <div className="fig mono">{fmt(total)}</div>
+          <span className="lbl">
+            {scope}
+            <InfoTip k={tip} label={scope} />
+          </span>
+        </div>
+        <button type="button" className="drawer-x drawer-x-layers no-print" aria-label="Cerrar registros" title="Cerrar" onClick={() => setLayersOpen(false)}>
+          ✕
+        </button>
+      </div>
+      <div className="tabs" role="tablist" aria-label="Vista de registros">
+        <button role="tab" aria-selected={especieView === 'registros'} onClick={() => setEspecieView('registros')}>Registros</button>
+        <button role="tab" aria-selected={especieView === 'sitios'} onClick={() => setEspecieView('sitios')}>Ranking de sitios</button>
+      </div>
+      <GroupTags counts={groupCounts} active={f.group} onToggle={(g) => f.update('group', f.group === g ? '' : g)} />
+      <div className="side-scroll">
+        {especieView === 'registros' ? <Lista rows={rows} onOpen={openRecord} /> : <Sitios rows={filtered} />}
+      </div>
+    </aside>
+  );
+}
+
+function GroupTags({
+  counts,
+  active,
+  onToggle,
+}: {
+  counts: Partial<Record<Group, number>>;
+  active: string;
+  onToggle: (g: Group) => void;
+}) {
+  const entries = (Object.keys(GROUPS) as Group[]).filter((g) => counts[g]);
+  if (entries.length === 0) return null;
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: 5,
+        padding: '8px var(--space-4)',
+        borderBottom: '1px solid var(--color-divider)',
+      }}
+    >
+      {entries.map((g) => {
+        const on = active === g;
+        const color = GROUPS[g].color;
+        return (
+          <button
+            key={g}
+            onClick={() => onToggle(g)}
+            title={`Filtrar: ${GROUPS[g].label}`}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
+              cursor: 'pointer',
+              fontSize: 11,
+              padding: '3px 8px',
+              border: `1px solid ${color}`,
+              background: on ? color : 'transparent',
+              color: on ? 'var(--color-bg)' : 'var(--color-text)',
+            }}
+          >
+            <span style={{ width: 8, height: 8, display: 'inline-block', background: on ? 'var(--color-bg)' : color }} />
+            {GROUPS[g].label}
+            <b className="mono">{counts[g]}</b>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function Lista({ rows, onOpen }: { rows: Observation[]; onOpen: (o: Observation) => void }) {
+  return (
+    <>
+      {rows.slice(0, 200).map((o, i) => (
+        <button className="obs" key={`${o.sub}-${o.es}-${i}`} onClick={() => onOpen(o)}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
+            <h4 style={{ flex: 1 }}>{o.es}</h4>
+            {o.notable && <span className="tag tag-accent">Notable</span>}
+            <span className="mono" style={{ fontFamily: 'var(--font-heading)', fontSize: 18 }}>{o.count}</span>
+          </div>
+          <div className="sci">{o.sci}</div>
+          <div className="meta">
+            <span>{o.loc}</span>
+            <span className="mono">{o.date}</span>
+            <span>{o.valid ? 'validado' : 'sin revisar'}</span>
+          </div>
+        </button>
+      ))}
+      {rows.length > 200 && (
+        <div className="lbl" style={{ padding: 'var(--space-4)' }}>
+          Mostrando 200 de {fmt(rows.length)} · afina los filtros
+        </div>
+      )}
+    </>
+  );
+}
+
+function Sitios({ rows }: { rows: Observation[] }) {
+  const sites = useMemo(() => aggregateSites(rows).sort((a, b) => b.obsCount - a.obsCount), [rows]);
+  const max = Math.max(1, ...sites.map((s) => s.obsCount));
+  return (
+    <div style={{ padding: 'var(--space-3) var(--space-4)' }}>
+      {sites.slice(0, 40).map((s) => (
+        <div className="rank" key={s.loc}>
+          <div>
+            <div style={{ fontFamily: 'var(--font-heading)', fontSize: 15 }}>{s.loc}</div>
+            <span className="lbl">{s.region} · {s.spCount} especies</span>
+          </div>
+          <div className="mono" style={{ textAlign: 'right', fontFamily: 'var(--font-heading)', fontSize: 17 }}>{s.obsCount}</div>
+          <div className="bar"><i style={{ width: `${Math.round((s.obsCount / max) * 100)}%` }} /></div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── Resto de accesos: panel de capas (sin cambios de contenido) ──────────
+function CapasSidebar() {
   const layers = usePortalStore((s) => s.layers);
   const toggleLayer = usePortalStore((s) => s.toggleLayer);
   const setOpacity = usePortalStore((s) => s.setOpacity);
@@ -54,8 +230,9 @@ export default function PortalSidebar() {
   const [helpOpen, setHelpOpen] = useState<string | null>(null);
   const [quick, setQuick] = useState<Set<string>>(new Set());
   const [open, setOpen] = useState<Set<LayerGroupId>>(
-    () => new Set<LayerGroupId>(['condor', 'carrona', 'otras', 'eolico', 'contexto']),
+    () => new Set<LayerGroupId>(['condor', 'eolico', 'recurso', 'contexto']),
   );
+  const conteos = useCapasConteo();
 
   const activeCount = useMemo(() => layers.filter((l) => l.on).length, [layers]);
 
@@ -146,6 +323,13 @@ export default function PortalSidebar() {
                         <span className="sw" style={{ background: l.sw }} />
                         <span className="lyr-name">
                           {l.n}
+                          {l.dummy ? (
+                            <> <DummyBadge variant="corto" /></>
+                          ) : (
+                            conteos[l.id] && (
+                              <span className="lyr-n mono" title={conteos[l.id]!.unidad}> · {fmtN(conteos[l.id]!.n)}</span>
+                            )
+                          )}
                           {l.help && (
                             <button
                               type="button"

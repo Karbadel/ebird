@@ -9,7 +9,7 @@ import { useRiskStore } from '../store/useRiskStore';
 import { useMeasureStore, segmentKm, fmtKm } from '../store/useMeasureStore';
 import { useFieldStore, FIELD_STYLES } from '../store/useFieldStore';
 import { useWindpotRiskStore } from '../store/useWindpotRiskStore';
-import { GEN_ESTADO_COLOR } from '../data/portal';
+import { GEN_ESTADO_COLOR, PARQUE_CAT_COLOR, DUMMY_COLOR } from '../data/portal';
 
 type RGB = [number, number, number];
 // Rampas de color de los choropleth (idénticas al visor de riesgo fuente).
@@ -28,7 +28,6 @@ const BUFFER_FILES: Record<string, string> = {
   nidos: 'nidos.geojson',
   colisiones: 'colisiones.geojson',
   vertederos: 'vertederos.geojson',
-  veranadas: 'veranadas.geojson',
 };
 const BUFFER_COLOR = '#e6a23c';
 
@@ -214,10 +213,10 @@ export default function MapView() {
         onEachFeature: bindName,
       });
 
-    // Instalaciones y proyectos de generación (catastro nacional, todas las
-    // tecnologías): punto coloreado por estado del proyecto, popup con la ficha.
+    // Otros proyectos de generación (catastro nacional SIN los eólicos, que tienen
+    // su propia capa): punto coloreado por estado del proyecto, popup con la ficha.
     if (id === 'projects')
-      return loadLayers('generacion.geojson', {
+      return loadLayers('otros_generacion.geojson', {
         pointToLayer: (f, ll) => {
           const color = GEN_ESTADO_COLOR[String(f.properties?.['estado'] ?? '')] ?? '#8a8a8a';
           return L.circleMarker(ll, { renderer: canvas, radius: 3, color: '#ffffff', weight: 0.5, fillColor: color, fillOpacity: 0.9 });
@@ -276,30 +275,78 @@ export default function MapView() {
         style: () => ({ renderer: canvas, color: '#8a4b12', weight: 1, fillColor: '#8a4b12', fillOpacity: 0.25 }),
         pointToLayer: pt('#8a4b12', 3, 0.7),
       });
-    if (id === 'veranadas')
-      return loadRisk('veranadas.geojson', { style: () => ({ renderer: canvas, color: '#2e7d32', weight: 1, fillColor: '#2e7d32', fillOpacity: 0.18 }) });
-    // Ganado (atrayente de carroña): un solo archivo con la propiedad `especie`;
-    // cada capa filtra bovino / ovino / caprino. `total` = nº de cabezas.
-    if (id === 'ganado_bovino' || id === 'ganado_ovino' || id === 'ganado_caprino') {
-      const especie = id.slice('ganado_'.length);
-      const color = especie === 'bovino' ? '#b5651d' : especie === 'ovino' ? '#caa472' : '#9c7a3c';
-      const cap = especie.charAt(0).toUpperCase() + especie.slice(1);
-      // Símbolo proporcional al nº de cabezas: los datos son por centroide de
-      // distrito (las 3 especies comparten coordenada) pero con `total` muy
-      // distinto, así que el TAMAÑO es lo que diferencia una capa de otra.
-      // Escala global (misma para las 3) → caprino se ve chico, bovino/ovino
-      // grandes. Raíz para amortiguar la fuerte asimetría de la distribución.
-      const radius = (total: number) => Math.max(2, Math.min(14, Math.sqrt(Math.max(0, total)) * 0.35));
-      return async () => {
-        const fc = await fetchJson('data/riesgo/ganado.geojson');
-        const sub: FeatureCollection = { ...fc, features: fc.features.filter((f) => f.properties?.['especie'] === especie) };
-        return L.geoJSON(sub, {
-          pointToLayer: (f, ll) =>
-            L.circleMarker(ll, { renderer: canvas, radius: radius(Number(f.properties?.['total']) || 0), color, weight: 0.8, fillColor: color, fillOpacity: 0.5 }),
-          onEachFeature: (f, l) => l.bindPopup(`${cap} · ${f.properties?.['total'] ?? 0} cabezas — ${f.properties?.['comuna'] ?? ''}`),
-        });
-      };
-    }
+    // Colisiones — zona de influencia de 10 km (círculo por colisión, derivado de
+    // colisiones.geojson por src/build_capas_derivadas.py). Solo visual.
+    if (id === 'colisiones_hist')
+      return loadRisk('colisiones_influencia.geojson', {
+        style: () => ({ renderer: canvas, color: '#a4441e', weight: 1, fillColor: '#a4441e', fillOpacity: 0.1 }),
+        onEachFeature: (f, l) => {
+          const p = f.properties ?? {};
+          l.bindPopup(
+            `<b>Zona de influencia de ${p['radio_km'] ?? 10} km</b><br>Colisión ${p['fecha'] ?? ''} ${p['anio'] ?? ''} · ${p['proyecto'] ?? ''}` +
+              (p['region'] ? `<br>${p['region']}` : ''),
+          );
+        },
+      });
+
+    // Parques eólicos por categoría (OPC · En SEIA · Otros): 180 del catastro de
+    // generación; el color sale de la propiedad `categoria`.
+    if (id === 'parques_eolicos')
+      return loadLayers('parques_eolicos.geojson', {
+        pointToLayer: (f, ll) => {
+          const color = PARQUE_CAT_COLOR[String(f.properties?.['categoria'] ?? '')] ?? '#8a8a8a';
+          return L.circleMarker(ll, { renderer: canvas, radius: 5, color: '#ffffff', weight: 1, fillColor: color, fillOpacity: 0.95 });
+        },
+        onEachFeature: (f, l) => {
+          const p = f.properties ?? {};
+          const pot = p['potencia_mw'] != null ? `${p['potencia_mw']} MW · ` : '';
+          const lugar = [p['comuna'], p['region']].filter(Boolean).join(', ');
+          l.bindPopup(
+            `<b>${p['nombre'] ?? ''}</b><br>${p['categoria'] ?? ''} · ${p['estado'] ?? ''}<br>${pot}${lugar}` +
+              (p['titular'] ? `<br><span style="opacity:.7">${p['titular']}</span>` : ''),
+          );
+        },
+      });
+
+    // Capas DUMMY: geometría ficticia (public/data/dummy, src/build_dummy_capas.py).
+    // Trazo discontinuo ámbar y popup con la advertencia, para que no se confundan
+    // con datos reales.
+    type Props = Record<string, unknown>;
+    const dummyPopup = (detalle: (p: Props) => string) => (f: Feature, l: L.Layer) => {
+      const p = (f.properties ?? {}) as Props;
+      l.bindPopup(
+        `<b>${String(p['nombre'] ?? 'Capa dummy')}</b><br>${detalle(p)}<br>` +
+          '<span class="dummy-badge">Datos dummy · hasta nueva implementación</span>',
+      );
+    };
+    const dummyPoly = { renderer: canvas, color: DUMMY_COLOR, weight: 2, dashArray: '6 4', fillColor: DUMMY_COLOR, fillOpacity: 0.14 };
+    const dummyPt = (radius: (p: Props) => number) => (f: Feature, ll: L.LatLng) =>
+      L.circleMarker(ll, {
+        renderer: canvas,
+        radius: radius((f.properties ?? {}) as Props),
+        color: DUMMY_COLOR,
+        weight: 2,
+        dashArray: '3 2',
+        fillColor: '#fbf3dc',
+        fillOpacity: 0.75,
+      });
+    const loadDummy = (file: string, options: L.GeoJSONOptions) => async () =>
+      L.geoJSON(await fetchJson(`data/dummy/${file}`), options);
+    if (id === 'abundancia')
+      return loadDummy('abundancia_condor.geojson', {
+        style: () => dummyPoly,
+        onEachFeature: dummyPopup((p) => `Abundancia relativa ficticia: ${String(p['abundancia_relativa'] ?? '—')} de 5`),
+      });
+    if (id === 'dormideros')
+      return loadDummy('dormideros_condor.geojson', {
+        pointToLayer: dummyPt(() => 6),
+        onEachFeature: dummyPopup(() => 'Ubicación ilustrativa de un dormidero'),
+      });
+    if (id === 'viento')
+      return loadDummy('viento.geojson', {
+        pointToLayer: dummyPt((p) => Math.max(5, Number(p['velocidad_ms']) * 1.4 || 6)),
+        onEachFeature: dummyPopup((p) => `Velocidad media ficticia: ${String(p['velocidad_ms'] ?? '—')} m/s`),
+      });
 
     // Capas de riesgo — choropleth (normalizadas)
     if (id === 'habitat')
@@ -610,11 +657,24 @@ export default function MapView() {
   }, [baseLayer]);
 
   // Dibuja las correcciones de campo (puntos tipificados) y recalcula el riesgo en vivo.
+  // Las antenas se dibujan aquí mismo (no hay otra fuente): la capa «Antenas de
+  // telecomunicaciones» es solo el interruptor de visibilidad de ese subconjunto, y
+  // se enciende sola cuando el usuario agrega o importa una antena nueva.
+  const antenasOn = layers.find((l) => l.id === 'antenas')?.on ?? false;
+  const antenasN = fieldCorrections.filter((c) => c.tipo === 'antenas').length;
+  const antenasPrevRef = useRef<number | null>(null);
   useEffect(() => {
     const group = fieldLayerRef.current;
     if (!group) return;
+    const prev = antenasPrevRef.current;
+    antenasPrevRef.current = antenasN;
+    if (prev !== null && antenasN > prev && !antenasOn) {
+      usePortalStore.getState().toggleLayer('antenas');
+      return; // el cambio de la capa vuelve a disparar este efecto
+    }
     group.clearLayers();
     for (const c of fieldCorrections) {
+      if (c.tipo === 'antenas' && !antenasOn) continue;
       if (c.geometry.type !== 'Point') continue;
       const [lng, lat] = c.geometry.coordinates as [number, number];
       const style = FIELD_STYLES[c.tipo];
@@ -629,7 +689,7 @@ export default function MapView() {
         .addTo(group);
     }
     useRiskStore.getState().refresh();
-  }, [fieldCorrections]);
+  }, [fieldCorrections, antenasOn, antenasN]);
 
   // Sincroniza las capas cargadas por el usuario (KML/KMZ) con el mapa.
   useEffect(() => {

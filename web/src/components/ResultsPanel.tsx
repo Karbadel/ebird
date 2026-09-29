@@ -1,65 +1,29 @@
 import { useMemo } from 'react';
-import { usePortalStore, type Tab } from '../store/usePortalStore';
+import { usePortalStore, LAYER_GROUPS } from '../store/usePortalStore';
 import { useDataStore } from '../store/useDataStore';
-import { applyFilters, useFilterStore } from '../store/useFilterStore';
-import { useFiltered } from '../lib/useFiltered';
-import { searchSpecies } from '../lib/search';
-import { aggregateSites } from '../lib/derive';
 import RiskPanel from './RiskPanel';
 import BatchPanel from './BatchPanel';
 import WindpotRiskPanel from './WindpotRiskPanel';
 import SpeciesInfo from './SpeciesInfo';
-import { GROUPS, type Group, type Observation } from '../types';
 import InfoTip from './InfoTip';
+import DummyBadge from './DummyBadge';
+import { useCapasConteo, fmtN } from '../lib/capasConteo';
 
 const fmt = (n: number) => n.toLocaleString('es-CL');
-const OBS_TABS: Tab[] = ['lista', 'sitios'];
 
 export default function ResultsPanel() {
-  const filtered = useFiltered();
   const tab = usePortalStore((s) => s.tab);
-  const setTab = usePortalStore((s) => s.setTab);
-  const comiteView = usePortalStore((s) => s.comiteView);
-  const setComiteView = usePortalStore((s) => s.setComiteView);
-  const colView = usePortalStore((s) => s.colView);
-  const setColView = usePortalStore((s) => s.setColView);
-  const activeSite = usePortalStore((s) => s.activeSite);
-  const fly = usePortalStore((s) => s.fly);
-  const openRecord = (o: Observation) => fly([o.lat, o.lng]);
+  const motorView = usePortalStore((s) => s.motorView);
+  const setMotorView = usePortalStore((s) => s.setMotorView);
+  const graficosView = usePortalStore((s) => s.graficosView);
+  const setGraficosView = usePortalStore((s) => s.setGraficosView);
   const panelHidden = usePortalStore((s) => s.panelHidden);
   const togglePanel = usePortalStore((s) => s.togglePanel);
-  const observations = useDataStore((s) => s.observations);
   const collisions = useDataStore((s) => s.collisions);
-  const f = useFilterStore();
-
-  const rows = useMemo(
-    () => (activeSite ? filtered.filter((o) => o.loc === activeSite) : filtered),
-    [filtered, activeSite],
-  );
-
-  // Conteo por grupo ignorando el propio filtro de grupo (para poder cambiar entre grupos).
-  const groupCounts = useMemo(() => {
-    let base = applyFilters(observations, { ...f, group: '' });
-    if (f.query.trim()) {
-      const m = searchSpecies(observations, f.query);
-      base = base.filter((o) => m.has(o.es));
-    }
-    const c: Partial<Record<Group, number>> = {};
-    for (const o of base) c[o.grp] = (c[o.grp] ?? 0) + 1;
-    return c;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [observations, f.species, f.query, f.order, f.family, f.region, f.hotspot, f.from, f.to, f.onlyValid, f.onlyReviewed, f.includeExotic, f.onlyNotable, f.minCount]);
 
   if (panelHidden) return null;
 
-  const isCol = tab === 'colisiones';
-  const total = isCol ? collisions.length : rows.length;
-  const scope = isCol
-    ? 'Colisiones confirmadas · Chile'
-    : activeSite
-      ? `Observaciones · ${activeSite}`
-      : 'Observaciones · todo Chile';
-  const tip = isCol ? (colView === 'anio' ? 'colAnio' : 'colParque') : tab === 'sitios' ? 'sitios' : 'lista';
+  const isGraf = tab === 'graficos';
 
   return (
     <aside id="panel" className="plate">
@@ -67,149 +31,121 @@ export default function ResultsPanel() {
         <button type="button" className="drawer-x drawer-x-panel no-print" aria-label="Cerrar panel" title="Cerrar" onClick={togglePanel}>
           ✕
         </button>
-        {tab === 'riesgo' ? (
+        {tab === 'riesgo' && (
           <span className="lbl">Motor de índice de riesgo de colisión <InfoTip k="riesgo" label="Motor de riesgo" /></span>
-        ) : tab === 'comite' ? (
+        )}
+        {tab === 'motor' && (
           <span className="lbl">
-            {comiteView === 'parques' ? 'Comité · ranking de riesgo por parque eólico' : 'Comité · potencial eólico según riesgo'}
-            <InfoTip k={comiteView === 'parques' ? 'comiteParques' : 'comitePotencial'} label="Comité" />
+            Motor de índice · {motorView === 'parques' ? 'ranking de riesgo por parque eólico' : 'potencial eólico según riesgo'}
+            <InfoTip k={motorView === 'parques' ? 'motorParques' : 'motorPotencial'} label="Motor de índice" />
           </span>
-        ) : tab === 'ficha' ? (
+        )}
+        {tab === 'especie' && (
           <span className="lbl">Cóndor andino · ficha de la especie <InfoTip k="ficha" label="Ficha de la especie" /></span>
-        ) : (
+        )}
+        {tab === 'capas' && (
+          <span className="lbl">Capas activas <InfoTip k="capasActivas" label="Capas activas" /></span>
+        )}
+        {isGraf && (
           <div style={{ flex: 1 }}>
-            <div className="fig mono">{fmt(total)}</div>
+            <div className="fig mono">{fmt(collisions.length)}</div>
             <span className="lbl">
-              {scope}
-              <InfoTip k={tip} label={scope} />
+              Colisiones confirmadas · Chile
+              <InfoTip k={graficosView === 'anio' ? 'colAnio' : 'colParque'} label="Colisiones" />
             </span>
           </div>
         )}
       </div>
-      {(tab === 'lista' || tab === 'sitios') && (
-        <div className="tabs" role="tablist" aria-label="Vista de registros">
-          <button role="tab" aria-selected={tab === 'lista'} onClick={() => setTab('lista')}>Registros</button>
-          <button role="tab" aria-selected={tab === 'sitios'} onClick={() => setTab('sitios')}>Ranking de sitios</button>
+      {tab === 'motor' && (
+        <div className="tabs no-print" role="tablist" aria-label="Vista del motor de índice">
+          <button role="tab" aria-selected={motorView === 'parques'} onClick={() => setMotorView('parques')}>Parques operativos</button>
+          <button role="tab" aria-selected={motorView === 'potencial'} onClick={() => setMotorView('potencial')}>Potencial eólico</button>
         </div>
       )}
-      {tab === 'comite' && (
-        <div className="tabs no-print" role="tablist" aria-label="Vista del comité">
-          <button role="tab" aria-selected={comiteView === 'parques'} onClick={() => setComiteView('parques')}>Parques operativos</button>
-          <button role="tab" aria-selected={comiteView === 'potencial'} onClick={() => setComiteView('potencial')}>Potencial eólico</button>
+      {isGraf && (
+        <div className="tabs" role="tablist" aria-label="Vista de gráficos">
+          <button role="tab" aria-selected={graficosView === 'anio'} onClick={() => setGraficosView('anio')}>Por año</button>
+          <button role="tab" aria-selected={graficosView === 'parque'} onClick={() => setGraficosView('parque')}>Por parque</button>
         </div>
-      )}
-      {isCol && (
-        <div className="tabs" role="tablist" aria-label="Vista de colisiones">
-          <button role="tab" aria-selected={colView === 'anio'} onClick={() => setColView('anio')}>Por año</button>
-          <button role="tab" aria-selected={colView === 'parque'} onClick={() => setColView('parque')}>Por parque</button>
-        </div>
-      )}
-      {OBS_TABS.includes(tab) && (
-        <GroupTags counts={groupCounts} active={f.group} onToggle={(g) => f.update('group', f.group === g ? '' : g)} />
       )}
       <div className="pbody">
-        {tab === 'lista' && <Lista rows={rows} onOpen={openRecord} />}
-        {tab === 'sitios' && <Sitios rows={filtered} />}
-        {tab === 'ficha' && <SpeciesInfo />}
+        {tab === 'especie' && <SpeciesInfo />}
         {tab === 'riesgo' && <RiskPanel />}
-        {tab === 'comite' && (comiteView === 'parques' ? <BatchPanel /> : <WindpotRiskPanel />)}
-        {isCol && (colView === 'anio' ? <PorAnio /> : <PorParque />)}
+        {tab === 'motor' && (motorView === 'parques' ? <BatchPanel /> : <WindpotRiskPanel />)}
+        {tab === 'capas' && <ActiveLayersPanel />}
+        {isGraf && (graficosView === 'anio' ? <PorAnio /> : <PorParque />)}
       </div>
     </aside>
   );
 }
 
-function GroupTags({
-  counts,
-  active,
-  onToggle,
-}: {
-  counts: Partial<Record<Group, number>>;
-  active: string;
-  onToggle: (g: Group) => void;
-}) {
-  const entries = (Object.keys(GROUPS) as Group[]).filter((g) => counts[g]);
-  if (entries.length === 0) return null;
-  return (
-    <div
-      style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: 5,
-        padding: '8px var(--space-4)',
-        borderBottom: '1px solid var(--color-divider)',
-      }}
-    >
-      {entries.map((g) => {
-        const on = active === g;
-        const color = GROUPS[g].color;
-        return (
-          <button
-            key={g}
-            onClick={() => onToggle(g)}
-            title={`Filtrar: ${GROUPS[g].label}`}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 6,
-              cursor: 'pointer',
-              fontSize: 11,
-              padding: '3px 8px',
-              border: `1px solid ${color}`,
-              background: on ? color : 'transparent',
-              color: on ? 'var(--color-bg)' : 'var(--color-text)',
-            }}
-          >
-            <span style={{ width: 8, height: 8, display: 'inline-block', background: on ? 'var(--color-bg)' : color }} />
-            {GROUPS[g].label}
-            <b className="mono">{counts[g]}</b>
-          </button>
-        );
-      })}
-    </div>
-  );
-}
+// Panel del acceso «Capas de Información»: ficha de cada capa encendida (nombre,
+// grupo, fuente, nº de elementos, nota metodológica y marca dummy si aplica) y de
+// las capas KML/KMZ cargadas por el usuario.
+function ActiveLayersPanel() {
+  const layers = usePortalStore((s) => s.layers);
+  const userLayers = usePortalStore((s) => s.userLayers);
+  const conteos = useCapasConteo();
+  const active = useMemo(() => layers.filter((l) => l.on), [layers]);
+  const activeUser = useMemo(() => userLayers.filter((u) => u.on), [userLayers]);
 
-function Lista({ rows, onOpen }: { rows: Observation[]; onOpen: (o: Observation) => void }) {
-  return (
-    <>
-      {rows.slice(0, 200).map((o, i) => (
-        <button className="obs" key={`${o.sub}-${o.es}-${i}`} onClick={() => onOpen(o)}>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
-            <h4 style={{ flex: 1 }}>{o.es}</h4>
-            {o.notable && <span className="tag tag-accent">Notable</span>}
-            <span className="mono" style={{ fontFamily: 'var(--font-heading)', fontSize: 18 }}>{o.count}</span>
-          </div>
-          <div className="sci">{o.sci}</div>
-          <div className="meta">
-            <span>{o.loc}</span>
-            <span className="mono">{o.date}</span>
-            <span>{o.valid ? 'validado' : 'sin revisar'}</span>
-          </div>
-        </button>
-      ))}
-      {rows.length > 200 && (
-        <div className="lbl" style={{ padding: 'var(--space-4)' }}>
-          Mostrando 200 de {fmt(rows.length)} · afina los filtros
-        </div>
-      )}
-    </>
-  );
-}
+  if (active.length === 0 && activeUser.length === 0) {
+    return (
+      <div className="lbl" style={{ padding: 'var(--space-4)' }}>
+        No hay capas encendidas. Actívalas desde el panel de capas, a la izquierda.
+      </div>
+    );
+  }
 
-function Sitios({ rows }: { rows: Observation[] }) {
-  const sites = useMemo(() => aggregateSites(rows).sort((a, b) => b.obsCount - a.obsCount), [rows]);
-  const max = Math.max(1, ...sites.map((s) => s.obsCount));
+  const groupTitle = (id: string) => LAYER_GROUPS.find((g) => g.id === id)?.title ?? '';
+  const total = active.length + activeUser.length;
+
   return (
     <div style={{ padding: 'var(--space-3) var(--space-4)' }}>
-      {sites.slice(0, 40).map((s) => (
-        <div className="rank" key={s.loc}>
-          <div>
-            <div style={{ fontFamily: 'var(--font-heading)', fontSize: 15 }}>{s.loc}</div>
-            <span className="lbl">{s.region} · {s.spCount} especies</span>
+      <p style={{ fontSize: 12, color: 'color-mix(in srgb, var(--color-text) 58%, transparent)' }}>
+        {total} {total === 1 ? 'capa encendida' : 'capas encendidas'}. Cada ficha indica su fuente, el número de
+        elementos y su nota metodológica.
+      </p>
+      {active.map((l) => {
+        const c = conteos[l.id];
+        return (
+          <div className="doc" key={l.id}>
+            <div>
+              <div className="t">
+                <span className="sw-mini" style={{ background: l.sw }} />
+                {l.n}
+              </div>
+            </div>
+            {l.dummy ? (
+              <DummyBadge />
+            ) : (
+              c && <span className="mono" title={c.unidad}>{fmtN(c.n)} {c.unidad}</span>
+            )}
+            <div className="d">
+              <span>{groupTitle(l.group)}</span>
+              <span>·</span>
+              <span>Fuente: {l.src}</span>
+            </div>
+            {l.help && (
+              <details className="doc-note">
+                <summary>Nota</summary>
+                <p>{l.help}</p>
+              </details>
+            )}
           </div>
-          <div className="mono" style={{ textAlign: 'right', fontFamily: 'var(--font-heading)', fontSize: 17 }}>{s.obsCount}</div>
-          <div className="bar"><i style={{ width: `${Math.round((s.obsCount / max) * 100)}%` }} /></div>
+        );
+      })}
+      {activeUser.map((u) => (
+        <div className="doc" key={u.id}>
+          <div>
+            <div className="t">{u.name}</div>
+          </div>
+          <span className="mono">{fmtN(u.geojson.features.length)} geometrías</span>
+          <div className="d">
+            <span>Capa cargada por el usuario</span>
+            <span>·</span>
+            <span>Fuente: archivo KML/KMZ local (no se sube a ningún servidor)</span>
+          </div>
         </div>
       ))}
     </div>
