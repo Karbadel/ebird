@@ -240,15 +240,16 @@ def build_conteo() -> dict:
         contar_features_geojson(OUT_COLISIONES_INFLUENCIA),
         "zonas",
     )
-    registrar("parques_eolicos", OUT_PARQUES, contar_features_geojson(OUT_PARQUES), "parques")
-    # `wind.geojson` (30 parques, 2018) ya no lo usa el motor ni figura en el panel:
-    # se conserva en disco solo para la comparación antes/después del índice.
-    registrar(
-        "turb",
-        LAYERS / "aerogeneradores.geojson",
-        contar_features_geojson(LAYERS / "aerogeneradores.geojson"),
-        "aerogeneradores",
-    )
+    # Parques, aerogeneradores y buffers vienen de las capas por estado (build_eolico_estados.py).
+    # Los archivos viejos (`parques_eolicos.geojson`, `aerogeneradores.geojson`, `wind.geojson`)
+    # ya no figuran en el panel: se conservan en disco solo como línea base de la comparación
+    # antes/después del índice.
+    PARQUES_ESTADO = LAYERS / "parques_eolicos_estado.geojson"
+    AE_ESTADO = LAYERS / "aerogeneradores_estado.geojson"
+    BUFFERS_5D = LAYERS / "buffers_5d_rotor.geojson"
+    registrar("parques_eolicos", PARQUES_ESTADO, contar_features_geojson(PARQUES_ESTADO), "parques")
+    registrar("turb", AE_ESTADO, contar_features_geojson(AE_ESTADO), "aerogeneradores")
+    registrar("buffers_5d", BUFFERS_5D, contar_features_geojson(BUFFERS_5D), "áreas")
     registrar("lineas", RIESGO / "lineas.geojson", contar_features_geojson(RIESGO / "lineas.geojson"), "tramos")
     registrar("projects", OUT_OTROS, contar_features_geojson(OUT_OTROS), "proyectos")
     registrar(
