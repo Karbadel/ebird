@@ -8,6 +8,22 @@
 
 ---
 
+## 2026-10-21 — El motor lee la capa de parques por estado (`parques_eolicos_estado.geojson`)
+
+- **Cambio:** `RISK_LAYER_FILES.parques_eolicos` apunta al archivo nuevo; `PARQUES_CATEGORIAS_INDICE` pasó de
+  `null` a `['OPC','En SEIA','Otros']` (excluye «No vigente»); ranking = OPC (71). Comparación en
+  `docs/comparacion-indice-2026-10-21.md` (+ CSV), generada con `src/comparar_indice_estado.py`.
+- **El archivo nuevo NO trae `comuna`, `tecnologia` ni `medio`:** `BatchRow.comuna` pasó a `idParque` (CSV del
+  ranking: columna `Id_parque`). Buscar esas propiedades antes de cambiar una fuente del motor.
+- **Los 30 parques de 2018 bajan ~2 puntos sin cambiar nada de «vigente/no vigente»:** antes cada punto 2018 coincidía
+  con el punto de un parque del catastro (cercanía 1,00); el centroide de aerogeneradores queda a cierta
+  distancia y el decaimiento de 3 km baja el puntaje. Es un efecto de la ubicación del punto, no de datos nuevos.
+- **Perfil «Sensibilidad del sitio» pesa 0 % la cercanía a parques:** no se mueve nada (30 parques, control, potencial).
+- **Nombres:** el catastro viejo separa por etapas; el nuevo agrega sufijos «(Modificación)», «(Sin construir)». Comparar
+  por nombre normalizado (sin tildes, sin «etapa N») deja pares salida/entrada que son el mismo parque.
+- `npm run precompute:potencial` tardó ~14 min; hay que correrlo tras cambiar la fuente (guarda `prox['parques_eolicos']`).
+- Una orden PowerShell con `.Replace` masivo sobre un `.ts` fue bloqueada por el entorno: usar la herramienta de edición.
+
 ## 2026-09-29 (ronda 2) — El motor lee las capas nuevas (idoneidad oficial, parques 2026, abundancia)
 
 - **Decisión:** se levantó la regla «no tocar el motor» solo para: idoneidad con el raster oficial, cercanía a

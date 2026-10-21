@@ -15,6 +15,11 @@
       (consultar un punto, comparar parques, ver potencial eólico, revisar
       colisiones); descartable y recordado en el navegador.
 - [ ] **Favicon.** Falta `favicon.ico` (error 404 en la consola).
+- [ ] **Detalles de la revisión gráfica del 2026-10-21 (anteriores al cambio eólico):**
+      a 375 px la escala de Leaflet tapa «Ver leyenda» y al pulsarlo la página salta ~800 px
+      (marcar capas en la hoja también desplaza ~60 px); al cerrar la ficha «Punto
+      seleccionado» con la × el modo consulta sigue activo; la ficha abierta desde el ranking
+      dice «Punto consultado» en vez del nombre del parque; «Ver en el mapa» queda bajo la escala.
 
 ## Comentarios del cliente «Sitio Cóndor» (2026-09-29)
 
@@ -30,8 +35,16 @@
 - [ ] **Antenas de telecomunicaciones.** El HTML entregado no trae datos: es el
       criterio `user_antenas` (peso 0 %) alimentado solo por correcciones de campo.
       Si se quiere un catastro real, conseguir fuente (p. ej. SUBTEL).
-- [ ] **Aerogeneradores con estado OPC · En SEIA · Otros** e incorporación al motor:
-      capa en preparación por Minenergía.
+- [x] **Aerogeneradores con estado** e incorporación al motor: HECHO 2026-10-21 con los
+      16 KMZ de MINENERGIA (corte 30-06-2026); ver `docs/plan-capas-eolicas-2026-10-21.md` y
+      `docs/comparacion-indice-2026-10-21.md`.
+- [ ] **Confirmar con el proveedor de las capas eólicas** que Eólica Lebu (Ampliación,
+      PE_024) y Campo Lindo (Modificación, PE_079), marcados `Mapear = No`, son duplicados.
+      Hoy se excluyen por completo (también PE_031 Malleco Sur, agregado de PE_031_1 +
+      PE_031_2). Para incluirlos: `INCLUIR_PARQUES_SIN_MAPEAR` en `src/build_eolico_estados.py`.
+- [ ] **Distancia del criterio de parques:** hoy al centroide de los aerogeneradores (bajó
+      −2,1 pts en promedio los 30 parques de referencia frente al punto del catastro viejo).
+      Variantes a evaluar: aerogenerador más cercano o borde del buffer 5 × D.
 - [ ] **Veranadas y ganado** (tachados por el cliente) siguen puntuando en el motor.
 - [ ] **Refrescar registros eBird** (`observaciones.json`): la capa dice «≤ 30 días»
       pero los datos son de agosto de 2026.
