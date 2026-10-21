@@ -1,0 +1,269 @@
+﻿perfil,conjunto,nombre,lat,lng,indice_antes,clase_antes,indice_despues,clase_despues,delta,delta_por_parques,delta_otros,criterio_principal,cercania_antes,cercania_despues
+Vigente,30 parques de referencia (catastro 2018),EL TOQUI,-45.024819,-71.967774,34,Medio,33,Medio,-1,-0.36,0.0,sin cambio relevante,0.9998888477436761,0.9811808330523879
+Vigente,30 parques de referencia (catastro 2018),ALTO BAGUALES,-45.526498,-72.106039,35,Medio,35,Medio,0,-0.38,0.0,sin cambio relevante,0.9162953258802582,0.8963901186747377
+Vigente,30 parques de referencia (catastro 2018),ALTO BAGUALES 2,-45.525671,-72.103035,37,Medio,36,Medio,-1,-0.37,0.0,sin cambio relevante,0.9998649761936712,0.980180672177189
+Vigente,30 parques de referencia (catastro 2018),CABO NEGRO,-52.949422,-70.829126,28,Bajo,27,Bajo,-1,-0.05,0.0,sin cambio relevante,0.99988391791184,0.9970743202680636
+Vigente,30 parques de referencia (catastro 2018),CANELA,-31.286692,-71.610685,46,Medio,43,Medio,-3,-3.34,0.0,cercanía a parques,0.9998251345558249,0.8244869605610126
+Vigente,30 parques de referencia (catastro 2018),CANELA II,-31.306378,-71.617825,55,Alto,51,Alto,-4,-4.22,0.0,cercanía a parques,0.9998251645160756,0.7781678389667848
+Vigente,30 parques de referencia (catastro 2018),EOLICA CUEL,-37.514068,-72.478971,30,Medio,29,Bajo,-1,-0.94,0.0,cercanía a parques,0.9999202526995218,0.9507258104969729
+Vigente,30 parques de referencia (catastro 2018),EOLICA EL ARRAYAN,-30.583171,-71.701008,34,Medio,31,Medio,-3,-3.02,0.0,cercanía a parques,0.9999261992895954,0.8412248515989251
+Vigente,30 parques de referencia (catastro 2018),EOLICA LAS PENAS,-37.257159,-73.426328,24,Bajo,24,Bajo,0,-0.68,0.0,cercanía a parques,0.9999303217415337,0.9640608379576755
+Vigente,30 parques de referencia (catastro 2018),EOLICA LEBU,-37.686113,-73.649115,27,Bajo,26,Bajo,-1,-1.24,0.0,cercanía a parques,0.9998159515917423,0.9346554578709966
+Vigente,30 parques de referencia (catastro 2018),EOLICA LEBU III,-37.682202,-73.644168,28,Bajo,26,Bajo,-2,-1.18,0.0,cercanía a parques,0.9999054635359168,0.9381798253032381
+Vigente,30 parques de referencia (catastro 2018),EOLICA LOS BUENOS AIRES,-37.539424,-72.508344,32,Medio,28,Bajo,-4,-4.42,0.0,cercanía a parques,0.999810787061784,0.7676313768477692
+Vigente,30 parques de referencia (catastro 2018),EOLICA LOS CURUROS,-31.029368,-71.632227,44,Medio,43,Medio,-1,-1.55,-0.0,cercanía a parques,0.9998792763704708,0.918357064533324
+Vigente,30 parques de referencia (catastro 2018),EOLICA PUNTA COLORADA,-29.367536,-71.040136,46,Medio,40,Medio,-6,-6.4,-0.0,cercanía a parques,0.9998033387964604,0.6635792891309011
+Vigente,30 parques de referencia (catastro 2018),EOLICA PUNTA PALMERAS,-31.236031,-71.625076,37,Medio,37,Medio,0,-0.63,0.0,cercanía a parques,0.9998679244127041,0.966602775303207
+Vigente,30 parques de referencia (catastro 2018),EOLICA SAN JUAN,-28.881471,-71.468228,36,Medio,34,Medio,-2,-2.58,0.0,cercanía a parques,0.9999252530915772,0.8647177339619011
+Vigente,30 parques de referencia (catastro 2018),EOLICA SAN PEDRO,-42.275408,-73.924112,25,Bajo,23,Bajo,-2,-1.43,0.0,cercanía a parques,0.9999077838394577,0.9246044437299284
+Vigente,30 parques de referencia (catastro 2018),EOLICA SAN PEDRO II,-42.281201,-73.918781,25,Bajo,21,Bajo,-4,-3.25,0.0,cercanía a parques,0.9999538934187353,0.8290949602986133
+Vigente,30 parques de referencia (catastro 2018),EOLICA TALINAY ORIENTE,-30.84637,-71.569722,38,Medio,33,Medio,-5,-5.1,0.0,cercanía a parques,0.9999363559974732,0.7320099661133532
+Vigente,30 parques de referencia (catastro 2018),EOLICA TALINAY PONIENTE,-30.811158,-71.652973,35,Medio,31,Medio,-4,-3.78,0.0,cercanía a parques,0.9998791045475341,0.8012021498353784
+Vigente,30 parques de referencia (catastro 2018),EOLICA TALTAL,-25.080052,-69.857212,20,Bajo,16,Bajo,-4,-4.63,0.0,cercanía a parques,0.999899984236332,0.756601121455887
+Vigente,30 parques de referencia (catastro 2018),EOLICA TOTORAL,-31.348495,-71.601863,51,Alto,48,Medio,-3,-2.7,0.0,cercanía a parques,0.9997917613916909,0.8579498323771568
+Vigente,30 parques de referencia (catastro 2018),HUAJACHE,-37.746172,-73.568485,23,Bajo,22,Bajo,-1,-1.47,0.0,cercanía a parques,0.9998357748773644,0.9226838043896396
+Vigente,30 parques de referencia (catastro 2018),MONTE REDONDO,-31.072585,-71.637106,40,Medio,39,Medio,-1,-1.2,-0.0,cercanía a parques,0.9997753423236801,0.9369855393054638
+Vigente,30 parques de referencia (catastro 2018),PARQUE EOLICO LA ESPERANZA,-37.605837,-72.534351,27,Bajo,24,Bajo,-3,-2.38,0.0,cercanía a parques,0.9998849931029352,0.8747589409386501
+Vigente,30 parques de referencia (catastro 2018),PARQUE EOLICO RENAICO,-37.72064,-72.581145,31,Medio,30,Medio,-1,-1.47,0.0,cercanía a parques,0.9998534072284356,0.9225647062122965
+Vigente,30 parques de referencia (catastro 2018),RAKI,-37.742828,-73.573405,23,Bajo,23,Bajo,0,-0.05,0.0,sin cambio relevante,0.9998357689728208,0.9969734797559975
+Vigente,30 parques de referencia (catastro 2018),UCUQUER,-34.044211,-71.609813,36,Medio,35,Medio,-1,-0.84,0.0,cercanía a parques,0.9999006872449978,0.9560202305243324
+Vigente,30 parques de referencia (catastro 2018),UCUQUER 2,-34.045154,-71.621387,31,Medio,29,Bajo,-2,-1.86,0.0,cercanía a parques,0.999825443195792,0.9020165190606464
+Vigente,30 parques de referencia (catastro 2018),VALLE DE LOS VIENTOS,-22.517832,-68.817108,31,Medio,29,Bajo,-2,-2.07,0.0,cercanía a parques,0.9998990814334688,0.8912867231711805
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),EL TOQUI,-45.024819,-71.967774,26,Bajo,26,Bajo,0,0.0,0.0,sin cambio relevante,0.9998888477436761,0.9811808330523879
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),ALTO BAGUALES,-45.526498,-72.106039,29,Bajo,29,Bajo,0,0.0,0.0,sin cambio relevante,0.9162953258802582,0.8963901186747377
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),ALTO BAGUALES 2,-45.525671,-72.103035,30,Medio,30,Medio,0,0.0,0.0,sin cambio relevante,0.9998649761936712,0.980180672177189
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),CABO NEGRO,-52.949422,-70.829126,14,Bajo,14,Bajo,0,0.0,0.0,sin cambio relevante,0.99988391791184,0.9970743202680636
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),CANELA,-31.286692,-71.610685,34,Medio,34,Medio,0,0.0,0.0,sin cambio relevante,0.9998251345558249,0.8244869605610126
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),CANELA II,-31.306378,-71.617825,36,Medio,36,Medio,0,0.0,0.0,sin cambio relevante,0.9998251645160756,0.7781678389667848
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),EOLICA CUEL,-37.514068,-72.478971,10,Muy bajo,10,Muy bajo,0,0.0,0.0,sin cambio relevante,0.9999202526995218,0.9507258104969729
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),EOLICA EL ARRAYAN,-30.583171,-71.701008,29,Bajo,29,Bajo,0,0.0,0.0,sin cambio relevante,0.9999261992895954,0.8412248515989251
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),EOLICA LAS PENAS,-37.257159,-73.426328,9,Muy bajo,9,Muy bajo,0,0.0,0.0,sin cambio relevante,0.9999303217415337,0.9640608379576755
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),EOLICA LEBU,-37.686113,-73.649115,12,Bajo,12,Bajo,0,0.0,0.0,sin cambio relevante,0.9998159515917423,0.9346554578709966
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),EOLICA LEBU III,-37.682202,-73.644168,12,Bajo,12,Bajo,0,0.0,0.0,sin cambio relevante,0.9999054635359168,0.9381798253032381
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),EOLICA LOS BUENOS AIRES,-37.539424,-72.508344,11,Muy bajo,11,Muy bajo,0,0.0,0.0,sin cambio relevante,0.999810787061784,0.7676313768477692
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),EOLICA LOS CURUROS,-31.029368,-71.632227,35,Medio,35,Medio,0,0.0,0.0,sin cambio relevante,0.9998792763704708,0.918357064533324
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),EOLICA PUNTA COLORADA,-29.367536,-71.040136,28,Bajo,28,Bajo,0,0.0,0.0,sin cambio relevante,0.9998033387964604,0.6635792891309011
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),EOLICA PUNTA PALMERAS,-31.236031,-71.625076,31,Medio,31,Medio,0,0.0,0.0,sin cambio relevante,0.9998679244127041,0.966602775303207
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),EOLICA SAN JUAN,-28.881471,-71.468228,27,Bajo,27,Bajo,0,0.0,0.0,sin cambio relevante,0.9999252530915772,0.8647177339619011
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),EOLICA SAN PEDRO,-42.275408,-73.924112,10,Muy bajo,10,Muy bajo,0,0.0,0.0,sin cambio relevante,0.9999077838394577,0.9246044437299284
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),EOLICA SAN PEDRO II,-42.281201,-73.918781,10,Muy bajo,10,Muy bajo,0,0.0,0.0,sin cambio relevante,0.9999538934187353,0.8290949602986133
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),EOLICA TALINAY ORIENTE,-30.84637,-71.569722,30,Medio,30,Medio,0,0.0,0.0,sin cambio relevante,0.9999363559974732,0.7320099661133532
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),EOLICA TALINAY PONIENTE,-30.811158,-71.652973,27,Bajo,27,Bajo,0,0.0,0.0,sin cambio relevante,0.9998791045475341,0.8012021498353784
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),EOLICA TALTAL,-25.080052,-69.857212,2,Muy bajo,2,Muy bajo,0,0.0,0.0,sin cambio relevante,0.999899984236332,0.756601121455887
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),EOLICA TOTORAL,-31.348495,-71.601863,34,Medio,34,Medio,0,0.0,0.0,sin cambio relevante,0.9997917613916909,0.8579498323771568
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),HUAJACHE,-37.746172,-73.568485,7,Muy bajo,7,Muy bajo,0,0.0,0.0,sin cambio relevante,0.9998357748773644,0.9226838043896396
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),MONTE REDONDO,-31.072585,-71.637106,34,Medio,34,Medio,0,0.0,0.0,sin cambio relevante,0.9997753423236801,0.9369855393054638
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),PARQUE EOLICO LA ESPERANZA,-37.605837,-72.534351,10,Muy bajo,10,Muy bajo,0,0.0,0.0,sin cambio relevante,0.9998849931029352,0.8747589409386501
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),PARQUE EOLICO RENAICO,-37.72064,-72.581145,17,Bajo,17,Bajo,0,0.0,0.0,sin cambio relevante,0.9998534072284356,0.9225647062122965
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),RAKI,-37.742828,-73.573405,7,Muy bajo,7,Muy bajo,0,0.0,0.0,sin cambio relevante,0.9998357689728208,0.9969734797559975
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),UCUQUER,-34.044211,-71.609813,22,Bajo,22,Bajo,0,0.0,0.0,sin cambio relevante,0.9999006872449978,0.9560202305243324
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),UCUQUER 2,-34.045154,-71.621387,21,Bajo,21,Bajo,0,0.0,0.0,sin cambio relevante,0.999825443195792,0.9020165190606464
+Sensibilidad del sitio,30 parques de referencia (catastro 2018),VALLE DE LOS VIENTOS,-22.517832,-68.817108,18,Bajo,18,Bajo,0,0.0,0.0,sin cambio relevante,0.9998990814334688,0.8912867231711805
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Los Cerrillos (Modificación),-34.13145,-71.6393,,,52,Alto,,,,puesto — → 1,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Canela II,-31.30271,-71.62336,55,Alto,51,Alto,-4,,,puesto 1 → 2,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Punta Colorada,-29.36834,-71.05051,46,Medio,51,Alto,5,,,puesto 5 → 3,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Totoral,-31.34493,-71.60351,51,Alto,51,Alto,0,,,puesto 3 → 4,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Manantiales (Modificación),-34.10393,-71.6294,,,51,Alto,,,,puesto — → 5,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Canela,-31.28757,-71.61613,46,Medio,44,Medio,-2,,,puesto 4 → 6,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Los Cururos,-31.03156,-71.63248,44,Medio,44,Medio,0,,,puesto 6 → 7,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),San Gabriel (Modificación),-37.69777,-72.51638,38,Medio,44,Medio,6,,,puesto 14 → 8,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Punta Sierra,-31.13639,-71.63589,42,Medio,42,Medio,0,,,puesto 8 → 9,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Negrete,-37.59883,-72.55632,40,Medio,41,Medio,1,,,puesto 11 → 10,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Talinay Oriente,-30.84678,-71.57813,38,Medio,40,Medio,2,,,puesto 13 → 11,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Monte Redondo,-31.07292,-71.63516,40,Medio,40,Medio,0,,,puesto 10 → 12,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Sarco,-28.86289,-71.42598,39,Medio,39,Medio,0,,,puesto 12 → 13,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Tolpán Sur,-37.68077,-72.59283,36,Medio,39,Medio,3,,,puesto 21 → 14,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Cabo Leones,-28.92628,-71.44245,36,Medio,38,Medio,2,,,puesto 17 → 15,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Punta Palmeras,-31.23684,-71.62554,37,Medio,38,Medio,1,,,puesto 16 → 16,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Alto Baguales 2,-45.52545,-72.10234,37,Medio,37,Medio,0,,,puesto 15 → 17,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Mesamávida,-37.50312,-72.47518,41,Medio,37,Medio,-4,,,puesto 9 → 18,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Pemuco,-36.96286,-72.14239,34,Medio,37,Medio,3,,,puesto 28 → 19,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Punta de Talca,-30.89763,-71.64015,36,Medio,37,Medio,1,,,puesto 20 → 20,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica San Juan,-28.88508,-71.46885,36,Medio,36,Medio,0,,,puesto 19 → 21,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Cabo Leones II,-28.97623,-71.44462,36,Medio,35,Medio,-1,,,puesto 18 → 22,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Talinay Poniente,-30.81454,-71.65782,35,Medio,35,Medio,0,,,puesto 23 → 23,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),La Estrella,-34.15218,-71.60705,35,Medio,35,Medio,0,,,puesto 24 → 24,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Ucuquer,-34.04431,-71.61124,36,Medio,35,Medio,-1,,,puesto 22 → 25,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Cabo Leones III,-28.92083,-71.49215,34,Medio,34,Medio,0,,,puesto 25 → 26,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),El Toqui,-45.02526,-71.96813,34,Medio,34,Medio,0,,,puesto 26 → 27,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica El Arrayán,-30.58742,-71.70164,34,Medio,34,Medio,0,,,puesto 27 → 28,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Atacama,-28.96272,-71.48492,33,Medio,33,Medio,0,,,puesto 29 → 29,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Cardonal (Modificación),-34.08238,-71.67063,,,32,Medio,,,,puesto — → 30,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Cuel,-37.51275,-72.47919,30,Medio,31,Medio,1,,,puesto 36 → 31,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Ucuquer II,-34.04302,-71.62327,31,Medio,31,Medio,0,,,puesto 34 → 32,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Valle de los Vientos,-22.51556,-68.8151,31,Medio,31,Medio,0,,,puesto 35 → 33,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),La Cabaña,-37.79839,-72.58192,30,Medio,30,Medio,0,,,puesto 37 → 34,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Ckhúri,-22.1004,-68.58701,29,Bajo,29,Bajo,0,,,puesto 38 → 35,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica San Pedro II,-42.27827,-73.91397,25,Bajo,29,Bajo,4,,,puesto 49 → 36,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),La Flor,-37.66814,-72.60159,32,Medio,29,Bajo,-3,,,puesto 32 → 37,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Malleco Sur,-38.0275,-72.25977,24,Bajo,29,Bajo,5,,,puesto 59 → 38,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Renaico I,-37.71949,-72.57894,31,Medio,29,Bajo,-2,,,puesto 33 → 39,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Cabo Negro,-52.94947,-70.82923,28,Bajo,28,Bajo,0,,,puesto 39 → 40,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),El Maiten,-37.27014,-72.55496,27,Bajo,28,Bajo,1,,,puesto 42 → 41,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Eolica Lebu III,-37.68236,-73.64207,28,Bajo,28,Bajo,0,,,puesto 40 → 42,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Los Buenos Aires,-37.53384,-72.50475,32,Medio,28,Bajo,-4,,,puesto 31 → 43,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),La Esperanza,-37.60756,-72.53802,27,Bajo,28,Bajo,1,,,puesto 43 → 44,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Llanos del Viento,-23.77616,-69.96981,24,Bajo,28,Bajo,4,,,puesto 56 → 45,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Piloto H2V HIF,-52.85094,-70.95611,28,Bajo,28,Bajo,0,,,puesto 41 → 46,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Lebu,-37.68778,-73.64839,27,Bajo,27,Bajo,0,,,puesto 44 → 47,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Vientos Patagónicos,-52.93706,-70.83278,27,Bajo,27,Bajo,0,,,puesto 45 → 48,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),PMGD El Arrebol,-37.53851,-73.59342,26,Bajo,26,Bajo,0,,,puesto 46 → 49,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Parque Eólico Calama,-22.47593,-68.78338,25,Bajo,26,Bajo,1,,,puesto 51 → 50,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Renaico II,-37.74212,-72.55463,26,Bajo,26,Bajo,0,,,puesto 47 → 51,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica San Pedro,-42.27435,-73.92646,25,Bajo,25,Bajo,0,,,puesto 48 → 52,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Los Olmos,-37.66703,-72.46435,25,Bajo,25,Bajo,0,,,puesto 50 → 53,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Alena,-37.53165,-72.56027,24,Bajo,24,Bajo,0,,,puesto 52 → 54,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),El Nogal,-37.58937,-72.41995,24,Bajo,24,Bajo,0,,,puesto 54 → 55,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Las Peñas,-37.25714,-73.42511,24,Bajo,24,Bajo,0,,,puesto 55 → 56,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Lomas de Duqueco,-37.52291,-72.39209,24,Bajo,24,Bajo,0,,,puesto 57 → 57,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Malleco Norte,-37.98724,-72.2485,24,Bajo,24,Bajo,0,,,puesto 58 → 58,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),San Matías,-37.42056,-72.5774,24,Bajo,24,Bajo,0,,,puesto 61 → 59,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Sierra Gorda Este,-22.87927,-68.97142,24,Bajo,24,Bajo,0,,,puesto 62 → 60,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Tchamma,-22.50169,-69.08098,24,Bajo,24,Bajo,0,,,puesto 63 → 61,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Huajache,-37.74779,-73.56682,23,Bajo,23,Bajo,0,,,puesto 64 → 62,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Raki,-37.74286,-73.57331,23,Bajo,23,Bajo,0,,,puesto 65 → 63,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Puelche Sur,-41.03143,-72.99952,22,Bajo,22,Bajo,0,,,puesto 66 → 64,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Aurora,-41.24741,-73.15384,21,Bajo,21,Bajo,0,,,puesto 67 → 65,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Cerro Tigre,-23.76191,-69.92681,20,Bajo,20,Bajo,0,,,puesto 68 → 66,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Taltal,-25.07609,-69.85143,20,Bajo,20,Bajo,0,,,puesto 69 → 67,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Pampa Fidelia,-24.96383,-69.63334,20,Bajo,20,Bajo,0,,,puesto 73 → 68,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Antofagasta,-24.89631,-69.7963,19,Bajo,19,Bajo,0,,,puesto 74 → 69,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Horizonte,-24.9351,-69.88383,,,19,Bajo,,,,puesto — → 70,,
+Vigente,Ranking: 71 parques OPC (después) vs 75 (antes),Kallpa,-24.92215,-69.98101,19,Bajo,19,Bajo,0,,,puesto 75 → 71,,
+Vigente,Ranking: sale (solo antes),Manantiales,-34.10127,-71.63294,52,Alto,,,,,,puesto 2 → fuera,,
+Vigente,Ranking: sale (solo antes),Los Cerrillos,-34.12929,-71.62825,43,Medio,,,,,,puesto 7 → fuera,,
+Vigente,Ranking: sale (solo antes),Cardonal,-34.07718,-71.66781,32,Medio,,,,,,puesto 30 → fuera,,
+Vigente,Ranking: sale (solo antes),Campo Lindo Etapa 1,-37.41278,-72.49436,24,Bajo,,,,,,puesto 53 → fuera,,
+Vigente,Ranking: sale (solo antes),Horizonte Norte,-24.96227,-69.869,20,Bajo,,,,,,puesto 70 → fuera,,
+Vigente,Ranking: sale (solo antes),Horizonte Sur,-24.96227,-69.869,20,Bajo,,,,,,puesto 71 → fuera,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Punta Sierra,-31.13639,-71.63589,36,Medio,36,Medio,0,,,puesto 2 → 1,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Canela II,-31.30271,-71.62336,36,Medio,35,Medio,-1,,,puesto 1 → 2,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Los Cururos,-31.03156,-71.63248,35,Medio,35,Medio,0,,,puesto 3 → 3,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Canela,-31.28757,-71.61613,34,Medio,34,Medio,0,,,puesto 4 → 4,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Totoral,-31.34493,-71.60351,34,Medio,34,Medio,0,,,puesto 5 → 5,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Monte Redondo,-31.07292,-71.63516,34,Medio,34,Medio,0,,,puesto 6 → 6,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Punta Palmeras,-31.23684,-71.62554,31,Medio,31,Medio,0,,,puesto 7 → 7,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Alto Baguales 2,-45.52545,-72.10234,30,Medio,30,Medio,0,,,puesto 8 → 8,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Punta Colorada,-29.36834,-71.05051,28,Bajo,30,Medio,2,,,puesto 12 → 9,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Talinay Oriente,-30.84678,-71.57813,30,Medio,30,Medio,0,,,puesto 9 → 10,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Sarco,-28.86289,-71.42598,30,Medio,30,Medio,0,,,puesto 10 → 11,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica El Arrayán,-30.58742,-71.70164,29,Bajo,29,Bajo,0,,,puesto 11 → 12,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Cabo Leones,-28.92628,-71.44245,26,Bajo,28,Bajo,2,,,puesto 17 → 13,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Punta de Talca,-30.89763,-71.64015,27,Bajo,28,Bajo,1,,,puesto 16 → 14,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Talinay Poniente,-30.81454,-71.65782,27,Bajo,27,Bajo,0,,,puesto 14 → 15,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Los Cerrillos (Modificación),-34.13145,-71.6393,,,27,Bajo,,,,puesto — → 16,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Manantiales (Modificación),-34.10393,-71.6294,,,27,Bajo,,,,puesto — → 17,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),El Toqui,-45.02526,-71.96813,26,Bajo,26,Bajo,0,,,puesto 18 → 18,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica San Juan,-28.88508,-71.46885,27,Bajo,26,Bajo,-1,,,puesto 13 → 19,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Cabo Leones II,-28.97623,-71.44462,25,Bajo,25,Bajo,0,,,puesto 19 → 20,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Cabo Leones III,-28.92083,-71.49215,23,Bajo,23,Bajo,0,,,puesto 21 → 21,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),La Estrella,-34.15218,-71.60705,23,Bajo,23,Bajo,0,,,puesto 22 → 22,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Atacama,-28.96272,-71.48492,22,Bajo,22,Bajo,0,,,puesto 23 → 23,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Ucuquer,-34.04431,-71.61124,22,Bajo,22,Bajo,0,,,puesto 24 → 24,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Cardonal (Modificación),-34.08238,-71.67063,,,20,Bajo,,,,puesto — → 25,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Tolpán Sur,-37.68077,-72.59283,18,Bajo,19,Bajo,1,,,puesto 27 → 26,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Ucuquer II,-34.04302,-71.62327,21,Bajo,19,Bajo,-2,,,puesto 25 → 27,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),La Cabaña,-37.79839,-72.58192,17,Bajo,18,Bajo,1,,,puesto 30 → 28,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Ckhúri,-22.1004,-68.58701,17,Bajo,17,Bajo,0,,,puesto 29 → 29,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),La Flor,-37.66814,-72.60159,17,Bajo,17,Bajo,0,,,puesto 31 → 30,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Valle de los Vientos,-22.51556,-68.8151,18,Bajo,17,Bajo,-1,,,puesto 28 → 31,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Negrete,-37.59883,-72.55632,14,Bajo,15,Bajo,1,,,puesto 36 → 32,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Piloto H2V HIF,-52.85094,-70.95611,15,Bajo,15,Bajo,0,,,puesto 33 → 33,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Renaico I,-37.71949,-72.57894,17,Bajo,15,Bajo,-2,,,puesto 32 → 34,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),San Gabriel (Modificación),-37.69777,-72.51638,14,Bajo,15,Bajo,1,,,puesto 37 → 35,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Cabo Negro,-52.94947,-70.82923,14,Bajo,14,Bajo,0,,,puesto 34 → 36,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Vientos Patagónicos,-52.93706,-70.83278,14,Bajo,14,Bajo,0,,,puesto 38 → 37,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Pemuco,-36.96286,-72.14239,12,Bajo,13,Bajo,1,,,puesto 42 → 38,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Eolica Lebu III,-37.68236,-73.64207,12,Bajo,12,Bajo,0,,,puesto 40 → 39,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Lebu,-37.68778,-73.64839,12,Bajo,12,Bajo,0,,,puesto 41 → 40,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Mesamávida,-37.50312,-72.47518,14,Bajo,12,Bajo,-2,,,puesto 35 → 41,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Renaico II,-37.74212,-72.55463,13,Bajo,12,Bajo,-1,,,puesto 39 → 42,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Cuel,-37.51275,-72.47919,10,Muy bajo,11,Muy bajo,1,,,puesto 45 → 43,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica San Pedro II,-42.27827,-73.91397,10,Muy bajo,11,Muy bajo,1,,,puesto 48 → 44,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Malleco Sur,-38.0275,-72.25977,9,Muy bajo,11,Muy bajo,2,,,puesto 55 → 45,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),PMGD El Arrebol,-37.53851,-73.59342,11,Muy bajo,11,Muy bajo,0,,,puesto 44 → 46,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),El Maiten,-37.27014,-72.55496,10,Muy bajo,10,Muy bajo,0,,,puesto 46 → 47,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Los Buenos Aires,-37.53384,-72.50475,11,Muy bajo,10,Muy bajo,-1,,,puesto 43 → 48,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica San Pedro,-42.27435,-73.92646,10,Muy bajo,10,Muy bajo,0,,,puesto 47 → 49,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),La Esperanza,-37.60756,-72.53802,10,Muy bajo,10,Muy bajo,0,,,puesto 49 → 50,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Los Olmos,-37.66703,-72.46435,10,Muy bajo,10,Muy bajo,0,,,puesto 50 → 51,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Parque Eólico Calama,-22.47593,-68.78338,9,Muy bajo,10,Muy bajo,1,,,puesto 56 → 52,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Alena,-37.53165,-72.56027,9,Muy bajo,9,Muy bajo,0,,,puesto 51 → 53,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),El Nogal,-37.58937,-72.41995,9,Muy bajo,9,Muy bajo,0,,,puesto 52 → 54,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Las Peñas,-37.25714,-73.42511,9,Muy bajo,9,Muy bajo,0,,,puesto 53 → 55,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),San Matías,-37.42056,-72.5774,9,Muy bajo,9,Muy bajo,0,,,puesto 58 → 56,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Sierra Gorda Este,-22.87927,-68.97142,9,Muy bajo,9,Muy bajo,0,,,puesto 59 → 57,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Tchamma,-22.50169,-69.08098,9,Muy bajo,9,Muy bajo,0,,,puesto 60 → 58,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Lomas de Duqueco,-37.52291,-72.39209,8,Muy bajo,8,Muy bajo,0,,,puesto 62 → 59,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Malleco Norte,-37.98724,-72.2485,9,Muy bajo,8,Muy bajo,-1,,,puesto 54 → 60,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Huajache,-37.74779,-73.56682,7,Muy bajo,7,Muy bajo,0,,,puesto 63 → 61,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Raki,-37.74286,-73.57331,7,Muy bajo,7,Muy bajo,0,,,puesto 64 → 62,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Aurora,-41.24741,-73.15384,4,Muy bajo,4,Muy bajo,0,,,puesto 65 → 63,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Llanos del Viento,-23.77616,-69.96981,3,Muy bajo,4,Muy bajo,1,,,puesto 67 → 64,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Puelche Sur,-41.03143,-72.99952,4,Muy bajo,4,Muy bajo,0,,,puesto 66 → 65,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Eólica Taltal,-25.07609,-69.85143,2,Muy bajo,2,Muy bajo,0,,,puesto 68 → 66,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Antofagasta,-24.89631,-69.7963,1,Muy bajo,1,Muy bajo,0,,,puesto 69 → 67,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Cerro Tigre,-23.76191,-69.92681,1,Muy bajo,1,Muy bajo,0,,,puesto 70 → 68,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Horizonte,-24.9351,-69.88383,,,1,Muy bajo,,,,puesto — → 69,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Kallpa,-24.92215,-69.98101,1,Muy bajo,1,Muy bajo,0,,,puesto 73 → 70,,
+Sensibilidad del sitio,Ranking: 71 parques OPC (después) vs 75 (antes),Pampa Fidelia,-24.96383,-69.63334,1,Muy bajo,1,Muy bajo,0,,,puesto 75 → 71,,
+Sensibilidad del sitio,Ranking: sale (solo antes),Manantiales,-34.10127,-71.63294,27,Bajo,,,,,,puesto 15 → fuera,,
+Sensibilidad del sitio,Ranking: sale (solo antes),Los Cerrillos,-34.12929,-71.62825,25,Bajo,,,,,,puesto 20 → fuera,,
+Sensibilidad del sitio,Ranking: sale (solo antes),Cardonal,-34.07718,-71.66781,20,Bajo,,,,,,puesto 26 → fuera,,
+Sensibilidad del sitio,Ranking: sale (solo antes),Campo Lindo Etapa 1,-37.41278,-72.49436,8,Muy bajo,,,,,,puesto 61 → fuera,,
+Sensibilidad del sitio,Ranking: sale (solo antes),Horizonte Norte,-24.96227,-69.869,1,Muy bajo,,,,,,puesto 71 → fuera,,
+Sensibilidad del sitio,Ranking: sale (solo antes),Horizonte Sur,-24.96227,-69.869,1,Muy bajo,,,,,,puesto 72 → fuera,,
+Vigente,Puntos de control,"Arica, precordillera",-18.5,-69.6,1,Muy bajo,1,Muy bajo,0,0.0,0.0,sin cambio relevante,0,0
+Vigente,Puntos de control,Pozo Almonte,-20.25,-69.79,24,Bajo,24,Bajo,0,0.0,0.0,sin cambio relevante,0,0
+Vigente,Puntos de control,Valle de los Vientos (parque),-22.52,-68.82,30,Medio,27,Bajo,-3,-2.05,-0.0,cercanía a parques,0.8724838479504692,0.7649885943100844
+Vigente,Puntos de control,"Calama, desierto alejado",-22.9,-68.2,10,Muy bajo,10,Muy bajo,0,0.0,0.0,sin cambio relevante,0,0
+Vigente,Puntos de control,Taltal (parque),-25.08,-69.86,18,Bajo,14,Bajo,-4,-4.35,0.0,cercanía a parques,0.9063202196702784,0.6778570194546689
+Vigente,Puntos de control,"Taltal, costa alejada",-25.4,-70.5,16,Bajo,16,Bajo,0,0.0,0.0,sin cambio relevante,0,0
+Vigente,Puntos de control,Copiapó,-27.37,-70.33,19,Bajo,19,Bajo,0,0.0,0.0,sin cambio relevante,0,0
+Vigente,Puntos de control,San Juan (parque),-28.88,-71.47,34,Medio,32,Medio,-2,-2.15,0.0,cercanía a parques,0.9208250317895952,0.808046258342805
+Vigente,Puntos de control,Freirina (nido),-28.95,-71.23,30,Medio,30,Medio,0,0.0,0.0,sin cambio relevante,0,0
+Vigente,Puntos de control,Punta Colorada (parque),-29.37,-71.04,44,Medio,39,Medio,-5,-4.83,0.0,cercanía a parques,0.9087079602882429,0.6549822711982662
+Vigente,Puntos de control,Laguna El Cepo (nido),-30.265,-70.301,35,Medio,35,Medio,0,0.0,0.0,sin cambio relevante,0,0
+Vigente,Puntos de control,Talinay (parque),-30.83,-71.6,32,Medio,33,Medio,1,1.27,-0.0,cercanía a parques,0,0.06659427187372557
+Vigente,Puntos de control,"Ovalle, interior alejado",-30.6,-70.9,18,Bajo,18,Bajo,0,0.0,0.0,sin cambio relevante,0,0
+Vigente,Puntos de control,Canela (parque),-31.29,-71.61,47,Medio,46,Medio,-1,-1.7,0.0,cercanía a parques,0.8753832870570922,0.785963285903807
+Vigente,Puntos de control,Farellones (nido),-33.366,-70.307,38,Medio,38,Medio,0,0.0,0.0,sin cambio relevante,0,0
+Vigente,Puntos de control,"Santiago, ciudad",-33.45,-70.66,20,Bajo,20,Bajo,0,0.0,0.0,sin cambio relevante,0,0
+Vigente,Puntos de control,Ucuquer (parque),-34.04,-71.61,29,Bajo,29,Bajo,0,-0.15,0.0,sin cambio relevante,0.8438471624074583,0.8357728663592925
+Vigente,Puntos de control,"Curicó, cordillera",-35,-70.9,21,Bajo,21,Bajo,0,0.0,0.0,sin cambio relevante,0,0
+Vigente,Puntos de control,"Cuel, Los Ángeles (parque)",-37.51,-72.48,29,Bajo,30,Medio,1,0.94,0.0,cercanía a parques,0.8461358223194395,0.895326042928643
+Vigente,Puntos de control,Lebu (parque),-37.68,-73.65,24,Bajo,23,Bajo,-1,-1.12,0.0,cercanía a parques,0.8105361455553345,0.7514770876761211
+Vigente,Puntos de control,Temuco,-38.74,-72.6,11,Muy bajo,11,Muy bajo,0,0.0,0.0,sin cambio relevante,0,0
+Vigente,Puntos de control,Antillanca (nido),-40.785,-72.191,27,Bajo,27,Bajo,0,0.0,0.0,sin cambio relevante,0,0
+Vigente,Puntos de control,"Chiloé, San Pedro (parque)",-42.28,-73.92,24,Bajo,21,Bajo,-3,-2.32,-0.0,cercanía a parques,0.9443439635327247,0.8226390501593075
+Vigente,Puntos de control,Cerro Castillo (nido),-46.066,-72.017,32,Medio,32,Medio,0,0.0,0.0,sin cambio relevante,0,0
+Vigente,Puntos de control,Laguna Sofía (nido),-51.566,-72.609,33,Medio,33,Medio,0,0.0,0.0,sin cambio relevante,0,0
+Vigente,Puntos de control,Cabo Negro (parque),-52.95,-70.83,27,Bajo,27,Bajo,0,0.05,0.0,sin cambio relevante,0.9710234491878932,0.9738924984284204
+Sensibilidad del sitio,Puntos de control,"Arica, precordillera",-18.5,-69.6,1,Muy bajo,1,Muy bajo,0,0.0,0.0,sin cambio relevante,0,0
+Sensibilidad del sitio,Puntos de control,Pozo Almonte,-20.25,-69.79,11,Muy bajo,11,Muy bajo,0,0.0,0.0,sin cambio relevante,0,0
+Sensibilidad del sitio,Puntos de control,Valle de los Vientos (parque),-22.52,-68.82,18,Bajo,18,Bajo,0,0.0,0.0,sin cambio relevante,0.8724838479504692,0.7649885943100844
+Sensibilidad del sitio,Puntos de control,"Calama, desierto alejado",-22.9,-68.2,14,Bajo,14,Bajo,0,0.0,0.0,sin cambio relevante,0,0
+Sensibilidad del sitio,Puntos de control,Taltal (parque),-25.08,-69.86,2,Muy bajo,2,Muy bajo,0,0.0,0.0,sin cambio relevante,0.9063202196702784,0.6778570194546689
+Sensibilidad del sitio,Puntos de control,"Taltal, costa alejada",-25.4,-70.5,25,Bajo,25,Bajo,0,0.0,0.0,sin cambio relevante,0,0
+Sensibilidad del sitio,Puntos de control,Copiapó,-27.37,-70.33,23,Bajo,23,Bajo,0,0.0,0.0,sin cambio relevante,0,0
+Sensibilidad del sitio,Puntos de control,San Juan (parque),-28.88,-71.47,26,Bajo,26,Bajo,0,0.0,0.0,sin cambio relevante,0.9208250317895952,0.808046258342805
+Sensibilidad del sitio,Puntos de control,Freirina (nido),-28.95,-71.23,52,Alto,52,Alto,0,0.0,0.0,sin cambio relevante,0,0
+Sensibilidad del sitio,Puntos de control,Punta Colorada (parque),-29.37,-71.04,28,Bajo,28,Bajo,0,0.0,0.0,sin cambio relevante,0.9087079602882429,0.6549822711982662
+Sensibilidad del sitio,Puntos de control,Laguna El Cepo (nido),-30.265,-70.301,64,Alto,64,Alto,0,0.0,0.0,sin cambio relevante,0,0
+Sensibilidad del sitio,Puntos de control,Talinay (parque),-30.83,-71.6,33,Medio,33,Medio,0,0.0,0.0,sin cambio relevante,0,0.06659427187372557
+Sensibilidad del sitio,Puntos de control,"Ovalle, interior alejado",-30.6,-70.9,33,Medio,33,Medio,0,0.0,0.0,sin cambio relevante,0,0
+Sensibilidad del sitio,Puntos de control,Canela (parque),-31.29,-71.61,35,Medio,35,Medio,0,0.0,0.0,sin cambio relevante,0.8753832870570922,0.785963285903807
+Sensibilidad del sitio,Puntos de control,Farellones (nido),-33.366,-70.307,67,Alto,67,Alto,0,0.0,0.0,sin cambio relevante,0,0
+Sensibilidad del sitio,Puntos de control,"Santiago, ciudad",-33.45,-70.66,28,Bajo,28,Bajo,0,0.0,0.0,sin cambio relevante,0,0
+Sensibilidad del sitio,Puntos de control,Ucuquer (parque),-34.04,-71.61,21,Bajo,21,Bajo,0,0.0,0.0,sin cambio relevante,0.8438471624074583,0.8357728663592925
+Sensibilidad del sitio,Puntos de control,"Curicó, cordillera",-35,-70.9,36,Medio,36,Medio,0,0.0,0.0,sin cambio relevante,0,0
+Sensibilidad del sitio,Puntos de control,"Cuel, Los Ángeles (parque)",-37.51,-72.48,11,Muy bajo,11,Muy bajo,0,0.0,0.0,sin cambio relevante,0.8461358223194395,0.895326042928643
+Sensibilidad del sitio,Puntos de control,Lebu (parque),-37.68,-73.65,13,Bajo,13,Bajo,0,0.0,0.0,sin cambio relevante,0.8105361455553345,0.7514770876761211
+Sensibilidad del sitio,Puntos de control,Temuco,-38.74,-72.6,10,Muy bajo,10,Muy bajo,0,0.0,0.0,sin cambio relevante,0,0
+Sensibilidad del sitio,Puntos de control,Antillanca (nido),-40.785,-72.191,50,Alto,50,Alto,0,0.0,0.0,sin cambio relevante,0,0
+Sensibilidad del sitio,Puntos de control,"Chiloé, San Pedro (parque)",-42.28,-73.92,10,Muy bajo,10,Muy bajo,0,0.0,0.0,sin cambio relevante,0.9443439635327247,0.8226390501593075
+Sensibilidad del sitio,Puntos de control,Cerro Castillo (nido),-46.066,-72.017,58,Alto,58,Alto,0,0.0,0.0,sin cambio relevante,0,0
+Sensibilidad del sitio,Puntos de control,Laguna Sofía (nido),-51.566,-72.609,59,Alto,59,Alto,0,0.0,0.0,sin cambio relevante,0,0
+Sensibilidad del sitio,Puntos de control,Cabo Negro (parque),-52.95,-70.83,15,Bajo,15,Bajo,0,0.0,0.0,sin cambio relevante,0.9710234491878932,0.9738924984284204
+Vigente,Potencial eólico (resumen),2277 áreas,,,9.48,,9.49,,0.01,,,23 áreas cambian de clase,,
+Sensibilidad del sitio,Potencial eólico (resumen),2277 áreas,,,13.23,,13.23,,0,,,0 áreas cambian de clase,,

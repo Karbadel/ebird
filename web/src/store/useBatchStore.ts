@@ -8,7 +8,8 @@ export interface BatchRow {
   id: string;
   nombre: string;
   region: string;
-  comuna: string;
+  /** Identificador del parque en la capa por estado (p. ej. PE_031). */
+  idParque: string;
   potenciaMw: number | null;
   lat: number;
   lng: number;
@@ -33,8 +34,8 @@ interface BatchState {
   clear(): void;
 }
 
-// `potencia_mw` es número en parques_eolicos.geojson (en el catastro 2018 venía como
-// texto); se acepta ambos y se redondea a 1 decimal.
+// `potencia_mw` es número en parques_eolicos_estado.geojson (en el catastro 2018 venía
+// como texto); se acepta ambos y se redondea a 1 decimal.
 function numFrom(v: unknown): number | null {
   if (v == null || v === '') return null;
   const n = Number(v);
@@ -51,7 +52,7 @@ export function configSignature(config: RiskVar[]): string {
 const nextFrame = (): Promise<void> => new Promise((res) => requestAnimationFrame(() => res()));
 
 // Puntúa en lote los parques eólicos operativos (categoría OPC de
-// data['parques_eolicos'], ya cargado por el motor: 75 parques) con los MISMOS
+// data['parques_eolicos'], ya cargado por el motor: 71 parques) con los MISMOS
 // pesos/config que la consulta puntual. Reutiliza riskAtPoint; no duplica lógica.
 export const useBatchStore = create<BatchState>((set) => ({
   rows: null,
@@ -78,7 +79,7 @@ export const useBatchStore = create<BatchState>((set) => ({
     const rows: BatchRow[] = [];
     // El cómputo es síncrono y `lineas` (2,1 MB) lo hace pesado; se trocea cediendo
     // el hilo cada pocos parques para que la barra de progreso anime y la pestaña
-    // no se congele. Son 75 parques → unos segundos en total.
+    // no se congele. Son 71 parques → unos segundos en total.
     const CHUNK = 6;
     let done = 0;
     for (const f of parques.features) {
@@ -93,7 +94,7 @@ export const useBatchStore = create<BatchState>((set) => ({
         id: `${lat.toFixed(4)},${lng.toFixed(4)}`,
         nombre: String(p['nombre'] ?? 's/n'),
         region: String(p['region'] ?? ''),
-        comuna: String(p['comuna'] ?? ''),
+        idParque: String(p['id_parque'] ?? ''),
         potenciaMw: numFrom(p['potencia_mw']),
         lat,
         lng,

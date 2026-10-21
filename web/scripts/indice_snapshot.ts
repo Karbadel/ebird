@@ -4,7 +4,7 @@
  * Puntúa, con el motor TypeScript y los archivos de web/public/data/:
  *   · «parques30»: los 30 parques del catastro 2018 (riesgo/wind.geojson, archivo
  *     conservado solo para esta comparación) — la línea base histórica;
- *   · «ranking»: los parques operativos (categoría OPC) de parques_eolicos.geojson,
+ *   · «ranking»: los parques operativos (categoría OPC) de parques_eolicos_estado.geojson,
  *     el mismo conjunto que puntúa el ranking del Motor;
  *   · «control»: 26 puntos fijos repartidos por Chile (norte, centro, sur; cerca y
  *     lejos de parques y nidos).
@@ -74,7 +74,7 @@ for (const p of RISK_PROFILES) {
     const [lng, lat] = (f.geometry as { coordinates: number[] }).coordinates as [number, number];
     const pr = f.properties ?? {};
     return {
-      nombre: pr['nombre'], region: pr['region'], comuna: pr['comuna'], estado: pr['estado'],
+      nombre: pr['nombre'], region: pr['region'], id_parque: pr['id_parque'], estado: pr['estado'],
       lat, lng, mw: Number(pr['potencia_mw']), ...score(lat, lng, cfg),
     };
   });

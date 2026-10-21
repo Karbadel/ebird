@@ -6,11 +6,11 @@ import type { BatchRow } from '../store/useBatchStore';
 export function exportBatchCsv(rows: BatchRow[]): void {
   if (!rows.length) return;
   const critLabels = rows[0]!.rows.map((r) => r.label);
-  const header = ['#', 'Parque', 'Región', 'Comuna', 'Potencia_MW', 'Lat', 'Lng', 'Indice_0_100', 'Categoria', ...critLabels];
+  const header = ['#', 'Parque', 'Región', 'Id_parque', 'Potencia_MW', 'Lat', 'Lng', 'Indice_0_100', 'Categoria', ...critLabels];
   const esc = (v: unknown) => `"${String(v ?? '').replace(/"/g, '""')}"`;
   const lines = rows.map((row, i) => {
     const crit = row.rows.map((r) => (r.score == null ? 's/d' : r.score.toFixed(3)));
-    return [i + 1, row.nombre, row.region, row.comuna, row.potenciaMw ?? '', row.lat.toFixed(5), row.lng.toFixed(5), row.total, row.category.label, ...crit]
+    return [i + 1, row.nombre, row.region, row.idParque, row.potenciaMw ?? '', row.lat.toFixed(5), row.lng.toFixed(5), row.total, row.category.label, ...crit]
       .map(esc)
       .join(',');
   });

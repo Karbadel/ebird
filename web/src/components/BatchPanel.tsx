@@ -98,7 +98,7 @@ export default function BatchPanel() {
       {!rows && !running && (
         <p style={{ fontSize: 12, marginTop: 10, color: 'color-mix(in srgb,var(--color-text) 60%,transparent)' }}>
           Puntúa {nOperativos != null ? `los ${nOperativos} parques eólicos operativos` : 'los parques eólicos operativos'}{' '}
-          (en operación o en pruebas, catastro MINENERGIA junio 2026) con los pesos actuales del motor y
+          (en operación o en pruebas, capa de parques por estado MINENERGIA, corte 30-06-2026) con los pesos actuales del motor y
           ordénalos por índice de riesgo de colisión. El clic en una fila vuela al parque y abre su ficha de riesgo.
         </p>
       )}
@@ -132,7 +132,7 @@ export default function BatchPanel() {
           >
             Índice calculado con los pesos actuales del motor y datos regionales (idoneidad de hábitat, carga
             ganadera, veranadas), no una evaluación en terreno parque por parque. La cercanía a parques eólicos
-            considera los 180 parques del catastro (operativos, en evaluación y aprobados: efecto acumulado) y es
+            considera los parques vigentes del catastro por estado (operativos, en evaluación, aprobados y en construcción: efecto acumulado; no cuenta los caducados, rechazados ni desistidos) y es
             constante en este ranking (cada parque se evalúa en su propia ubicación), por lo que el orden lo
             determinan los demás criterios. No sustituye la evaluación ambiental de cada proyecto.
           </p>

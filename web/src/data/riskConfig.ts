@@ -14,7 +14,8 @@ export interface RiskVar {
 }
 
 export const DEFAULT_RISK_CONFIG: RiskVar[] = [
-  // Parques eólicos: los 180 del catastro MINENERGIA (jun 2026) — OPC, En SEIA y Otros —,
+  // Parques eólicos: los 179 vigentes del catastro MINENERGIA por estado (corte 30-06-2026)
+  // — OPC, En SEIA y Otros; los caducados, rechazados y desistidos no suman —,
   // no solo los operativos: mide el efecto acumulado de parques en evaluación y aprobados.
   // El id de la variable sigue siendo `wind` (los perfiles y los enlaces lo referencian).
   { id: 'wind', label: 'Cercanía a parques eólicos', kind: 'proximity', layerId: 'parques_eolicos', weight: 20, decayKm: 3, enabled: true },
@@ -103,7 +104,7 @@ export function riskCategory(score: number): RiskCategory {
 /** Capas GeoJSON que alimentan el motor: id → ruta bajo web/public/data/. El id de
  *  `parques_eolicos` es el que usa la variable `wind` (layerId). */
 export const RISK_LAYER_FILES: Record<string, string> = {
-  parques_eolicos: 'layers/parques_eolicos.geojson',
+  parques_eolicos: 'layers/parques_eolicos_estado.geojson',
   lineas: 'riesgo/lineas.geojson',
   nidos: 'riesgo/nidos.geojson',
   colisiones: 'riesgo/colisiones.geojson',
@@ -120,12 +121,11 @@ export const RISK_GRID_FILES = {
   abundancia: 'riesgo/abundancia_grid.json',
 } as const;
 
-/** Categorías de `parques_eolicos.geojson` que cuentan en el criterio «Cercanía a
+/** Categorías de `parques_eolicos_estado.geojson` que cuentan en el criterio «Cercanía a
  *  parques eólicos»: OPC (operación o pruebas), En SEIA (en calificación) y Otros
- *  (aprobado o en construcción). Acotar a p. ej. ['OPC'] deja solo los operativos;
- *  `null` = las tres (decisión del cliente: efecto acumulado con proyectos en
- *  evaluación y aprobados). */
-export const PARQUES_CATEGORIAS_INDICE: readonly string[] | null = null;
+ *  (aprobado o en construcción). EXCLUYE «No vigente» (caducado, rechazado, desistido):
+ *  es referencia histórica y no suma. Acotar a p. ej. ['OPC'] deja solo los operativos. */
+export const PARQUES_CATEGORIAS_INDICE: readonly string[] | null = ['OPC', 'En SEIA', 'Otros'];
 
-/** Categoría de `parques_eolicos.geojson` que se puntúa en el ranking del Motor. */
+/** Categoría de `parques_eolicos_estado.geojson` que se puntúa en el ranking del Motor. */
 export const PARQUES_CATEGORIA_RANKING = 'OPC';
