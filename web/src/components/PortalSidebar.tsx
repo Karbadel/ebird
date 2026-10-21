@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { Fragment, useMemo, useRef, useState } from 'react';
 import { usePortalStore, LAYER_GROUPS, type LayerGroupId } from '../store/usePortalStore';
 import { useDataStore } from '../store/useDataStore';
 import { applyFilters, useFilterStore } from '../store/useFilterStore';
@@ -9,6 +9,8 @@ import { GROUPS, type Group, type Observation } from '../types';
 import InfoTip from './InfoTip';
 import DummyBadge from './DummyBadge';
 import { useCapasConteo, fmtN } from '../lib/capasConteo';
+import { EOLICO_ESTADOS, EOLICO_LAYER_IDS } from '../data/portal';
+import { useEolicoConteos } from '../lib/eolicoConteos';
 
 const norm = (s: string) =>
   s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
@@ -203,6 +205,8 @@ function CapasSidebar() {
   const addUserLayer = usePortalStore((s) => s.addUserLayer);
   const toggleUserLayer = usePortalStore((s) => s.toggleUserLayer);
   const removeUserLayer = usePortalStore((s) => s.removeUserLayer);
+  const eolicoEstados = usePortalStore((s) => s.eolicoEstados);
+  const toggleEolicoEstado = usePortalStore((s) => s.toggleEolicoEstado);
 
   const fileInput = useRef<HTMLInputElement>(null);
   const [importErr, setImportErr] = useState<string | null>(null);
@@ -233,6 +237,7 @@ function CapasSidebar() {
     () => new Set<LayerGroupId>(['condor', 'eolico', 'recurso', 'contexto']),
   );
   const conteos = useCapasConteo();
+  const estadoN = useEolicoConteos(['parques_eolicos'])['parques_eolicos'] ?? null;
 
   const activeCount = useMemo(() => layers.filter((l) => l.on).length, [layers]);
 
@@ -302,6 +307,11 @@ function CapasSidebar() {
           // Al filtrar, expande los grupos con resultados para no ocultarlos.
           const isOpen = open.has(g.id) || (filtering && items.length > 0);
           const onCount = items.filter((l) => l.on).length;
+          // El filtro por estado se muestra bajo la última capa eólica visible, mientras
+          // alguna de las tres esté encendida.
+          const eolicoItems = items.filter((x) => EOLICO_LAYER_IDS.includes(x.id));
+          const eolicoLastId = eolicoItems[eolicoItems.length - 1]?.id;
+          const eolicoAlgunaOn = layers.some((x) => EOLICO_LAYER_IDS.includes(x.id) && x.on);
           return (
             <div className="lgroup" key={g.id}>
               <button className="lgroup-head" onClick={() => toggleGroup(g.id)}>
@@ -312,7 +322,8 @@ function CapasSidebar() {
               {isOpen && (
                 <div className="lgroup-items">
                   {items.map((l) => (
-                    <div className="lyr-wrap" key={l.id}>
+                    <Fragment key={l.id}>
+                    <div className="lyr-wrap">
                       <label className="lyr" title={l.src}>
                         <input
                           type="checkbox"
@@ -381,7 +392,7 @@ function CapasSidebar() {
                               checked={l.buffer.on}
                               onChange={() => toggleBuffer(l.id)}
                             />
-                            Buffer
+                            Buffer de proximidad
                           </label>
                           {l.buffer.on && (
                             <>
@@ -411,6 +422,30 @@ function CapasSidebar() {
                         </div>
                       )}
                     </div>
+                    {l.id === eolicoLastId && eolicoAlgunaOn && (
+                      <div className="estfilt" role="group" aria-label="Filtro por estado de las capas eólicas">
+                        <div className="estfilt-title">Filtro por estado · aplica a parques, aerogeneradores y áreas</div>
+                        <div className="estfilt-sub">Los números son n.º de parques por estado.</div>
+                        {[true, false].map((vig) => (
+                          <fieldset className="estfilt-grp" key={String(vig)}>
+                            <legend>{vig ? 'Vigentes' : 'No vigentes'}</legend>
+                            {EOLICO_ESTADOS.filter((e) => e.vigente === vig).map((e) => (
+                              <label className="estfilt-opt" key={e.key}>
+                                <input
+                                  type="checkbox"
+                                  checked={eolicoEstados[e.key]}
+                                  onChange={() => toggleEolicoEstado(e.key)}
+                                />
+                                <i style={{ background: e.color }} />
+                                <span>{e.label}</span>
+                                <b className="mono">{estadoN ? fmtN(estadoN[e.key] ?? 0) : ''}</b>
+                              </label>
+                            ))}
+                          </fieldset>
+                        ))}
+                      </div>
+                    )}
+                    </Fragment>
                   ))}
                 </div>
               )}

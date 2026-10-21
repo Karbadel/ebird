@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import type { FeatureCollection } from 'geojson';
-import { ABUNDANCIA_RAMP, GEN_SWATCH, PARQUES_SWATCH } from '../data/portal';
+import { ABUNDANCIA_RAMP, GEN_SWATCH, EOLICO_SWATCH, EOLICO_ESTADOS_INICIAL, type EolicoEstadoKey } from '../data/portal';
 import { useRiskStore } from './useRiskStore';
 import { useFieldStore } from './useFieldStore';
 
@@ -103,8 +103,9 @@ const LAYERS: PortalLayer[] = [
   { id: 'area_predictiva', group: 'condor', n: 'Área predictiva (eBird S&T 2023)', src: 'eBird Status and Trends 2023', sw: 'rgba(90,90,110,.25)', on: false, cita: CITA_EBIRD_ST, sinDescarga: SIN_DESCARGA_EBIRD, help: `Área en la que eBird Status and Trends 2023 genera predicciones de abundancia para el cóndor andino (fuera de ella la abundancia no se estima: «sin dato»). Recortada al marco del portal y simplificada. Capa solo visual: no entra al índice de riesgo. Cita: ${CITA_EBIRD_ST}` },
   { id: 'dormideros', group: 'condor', n: 'Dormideros de cóndor', src: DUMMY_SRC, sw: DUMMY_SW, on: false, dummy: true, help: DUMMY_HELP },
   // Infraestructura energética
-  { id: 'parques_eolicos', group: 'eolico', n: 'Parques eólicos (OPC · En SEIA · Otros)', src: 'MINENERGIA · jun 2026 · por categoría', sw: PARQUES_SWATCH, on: false, buffer: { on: false, km: 3 }, help: 'Los 180 parques eólicos del catastro nacional de generación (MINENERGIA, junio 2026), coloreados por categoría: OPC = en operación o en pruebas (75); En SEIA = en calificación ambiental (18); Otros = aprobados o en construcción (87). Son los que usa el motor de índice: alimentan el criterio «Cercanía a parques eólicos» (por defecto 20 %, influencia 3 km) e INCLUYEN los proyectos en evaluación y aprobados (efecto acumulado, no solo los operativos). El ranking del Motor de Índice puntúa los 75 OPC. El buffer dibuja la distancia de influencia (solo visual).' },
-  { id: 'turb', group: 'eolico', n: 'Aerogeneradores', src: 'MINENERGIA · jun 2026', sw: '#8f8168', on: false, help: '7.162 aerogeneradores (MINENERGIA, junio 2026, todos los estados). Capa nueva con estado OPC/SEIA/Otros en preparación. Capa de contexto: no entra al índice (el criterio de cercanía usa los parques eólicos, no los aerogeneradores).' },
+  { id: 'parques_eolicos', group: 'eolico', n: 'Parques eólicos por estado', src: 'MINENERGIA · corte 30-06-2026 · por estado', sw: EOLICO_SWATCH, on: false, buffer: { on: false, km: 3 }, help: 'Parques eólicos del catastro de MINENERGIA con corte al 30-06-2026 (210 parques: 179 vigentes y 31 no vigentes), un punto por parque ubicado en el centro de sus aerogeneradores, coloreado por estado: en calificación (18), aprobado (76), en construcción (14), en pruebas (2), en operación (69), y los no vigentes caducado (9), rechazado (5) y desistido (17). Por defecto se ven solo los vigentes; los no vigentes se encienden en el filtro por estado, bajo las capas, y se consultan igual (su información histórica es valiosa). El índice de riesgo usa los 179 vigentes en el criterio «Cercanía a parques eólicos» (por defecto 20 %, influencia 3 km), que incluye proyectos en evaluación y aprobados (efecto acumulado, no solo los operativos); los no vigentes no suman. El ranking del Motor puntúa los 71 parques OPC (en operación o en pruebas). El buffer de proximidad de esta capa es un anillo configurable de solo visual, distinto de las áreas oficiales 5 × diámetro de rotor.' },
+  { id: 'turb', group: 'eolico', n: 'Aerogeneradores por estado', src: 'MINENERGIA · corte 30-06-2026 · por estado', sw: EOLICO_SWATCH, on: false, help: '6.619 aerogeneradores de los 210 parques (MINENERGIA, corte 30-06-2026), coloreados por el estado de su parque y filtrables con el filtro por estado (por defecto solo los vigentes). Cada punto indica la potencia del parque (no la de la turbina individual) y el diámetro de rotor; en 13 aerogeneradores en operación el diámetro es una estimación (promedio de los parques operativos, 128 m). Capa de contexto: no entra al índice (el criterio de cercanía usa los parques, no los aerogeneradores).' },
+  { id: 'buffers_5d', group: 'eolico', n: 'Áreas buffer 5 × diámetro de rotor', src: 'MINENERGIA · corte 30-06-2026 · por estado', sw: 'rgba(63,127,196,.35)', on: false, help: 'Área oficial de MINENERGIA (corte 30-06-2026) formada por un círculo de radio 5 × diámetro de rotor alrededor de cada aerogenerador, unida por parque (210 áreas). Es un dato oficial del catastro y es DISTINTA del «buffer de proximidad» configurable que el panel ofrece en otras capas (anillo en km, solo visual). Usa el mismo color por estado y el mismo filtro. Capa de contexto: no entra al índice.' },
   { id: 'lineas', group: 'eolico', n: 'Líneas de transmisión', src: 'Coordinador · SIC', sw: '#35617a', on: false, buffer: { on: false, km: 1 }, help: '958 tramos de líneas de transmisión (Coordinador Eléctrico). La colisión con tendidos eléctricos es una amenaza documentada para el cóndor. Alimenta el criterio «Cercanía a líneas de transmisión» (por defecto 20 %, influencia 2 km).' },
   { id: 'projects', group: 'eolico', n: 'Otros proyectos de generación', src: 'MINENERGIA · jun 2026 · sin eólicos · por estado', sw: GEN_SWATCH, on: false, help: 'Catastro nacional de instalaciones y proyectos de generación eléctrica SIN los parques eólicos (que tienen su propia capa), coloreado por estado del proyecto (de en calificación a en operación). Fuente: MINENERGIA, junio 2026. Composición: Solar FV 1.400, Termoeléctrico 242, Hidro 248, Bioenergía 46, Solar CSP 5, Geotermia 2. Capa de contexto energético nacional; no entra al índice.' },
   // Recurso eólico
@@ -147,6 +148,9 @@ interface PortalState {
   baseLayer: 'osm' | 'satellite';
   /** Colorea la capa de potencial eólico por categoría del índice de riesgo. */
   windpotByRisk: boolean;
+  /** Filtro por estado común a las 3 capas eólicas (parques, aerogeneradores y áreas
+   *  buffer 5 × diámetro de rotor): true = visible. Vigentes encendidos por defecto. */
+  eolicoEstados: Record<EolicoEstadoKey, boolean>;
 
   toggleLayer(id: string): void;
   setOpacity(id: string, value: number): void;
@@ -183,6 +187,10 @@ interface PortalState {
   /** Activa/desactiva el coloreado por riesgo del potencial eólico (al activar,
    *  enciende la capa). */
   setWindpotByRisk(on: boolean): void;
+  /** Enciende/apaga un estado del filtro de las capas eólicas. */
+  toggleEolicoEstado(key: EolicoEstadoKey): void;
+  /** Fija varios estados a la vez (p. ej. «todos los vigentes»). */
+  setEolicoEstados(keys: readonly EolicoEstadoKey[], on: boolean): void;
 }
 
 // Al salir de la pestaña Riesgo o de la página del visor apaga la consulta de
@@ -216,6 +224,7 @@ export const usePortalStore = create<PortalState>((set) => ({
   abundanciaP99: null,
   baseLayer: 'osm',
   windpotByRisk: false,
+  eolicoEstados: { ...EOLICO_ESTADOS_INICIAL },
 
   toggleLayer: (id) =>
     set((s) => ({ layers: s.layers.map((l) => (l.id === id ? { ...l, on: !l.on } : l)) })),
@@ -285,6 +294,16 @@ export const usePortalStore = create<PortalState>((set) => ({
   setDensityDomain: (densityDomain) => set({ densityDomain }),
   setAbundanciaP99: (abundanciaP99) => set({ abundanciaP99 }),
   setBaseLayer: (baseLayer) => set({ baseLayer }),
+  toggleEolicoEstado: (key) =>
+    set((s) => ({ eolicoEstados: { ...s.eolicoEstados, [key]: !s.eolicoEstados[key] } })),
+  setEolicoEstados: (keys, on) =>
+    set((s) => {
+      const next = { ...s.eolicoEstados };
+      keys.forEach((k) => {
+        next[k] = on;
+      });
+      return { eolicoEstados: next };
+    }),
   setWindpotByRisk: (on) =>
     set((s) => ({
       windpotByRisk: on,

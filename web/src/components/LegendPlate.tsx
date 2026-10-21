@@ -1,5 +1,5 @@
 import { usePortalStore } from '../store/usePortalStore';
-import { ABUNDANCIA_RAMP, HABITAT_LEGEND, RISK_LABELS, GEN_ESTADOS, PARQUES_CATEGORIAS } from '../data/portal';
+import { ABUNDANCIA_RAMP, HABITAT_LEGEND, RISK_LABELS, GEN_ESTADOS, EOLICO_ESTADOS, EOLICO_LAYER_IDS } from '../data/portal';
 import { RISK_CAT_COLORS } from '../data/riskConfig';
 import { AYUDA } from '../data/ayuda';
 
@@ -22,6 +22,7 @@ export default function LegendPlate() {
   const densityDomain = usePortalStore((s) => s.densityDomain);
   const windpotByRisk = usePortalStore((s) => s.windpotByRisk);
   const abundanciaP99 = usePortalStore((s) => s.abundanciaP99);
+  const eolicoEstados = usePortalStore((s) => s.eolicoEstados);
   if (!open) return null;
 
   const isOn = (id: string) => layers.find((l) => l.id === id)?.on ?? false;
@@ -33,7 +34,8 @@ export default function LegendPlate() {
   const densidadOn = isOn('ebird_densidad');
   const projectsOn = isOn('projects');
   const windpotOn = isOn('windpot');
-  const parquesOn = isOn('parques_eolicos');
+  const parquesOn = EOLICO_LAYER_IDS.some(isOn);
+  const parquesBuf = isOn('buffers_5d');
   const dummyOn = layers.some((l) => l.dummy && l.on);
 
   return (
@@ -150,16 +152,22 @@ export default function LegendPlate() {
       {parquesOn && (
         <>
           <span className="lbl" style={{ display: 'block', marginTop: lead || densidadOn || projectsOn ? 10 : 0 }}>
-            Parques eólicos · categoría
+            Estado del proyecto eólico
           </span>
           <div className="lgd-cats">
-            {PARQUES_CATEGORIAS.map((c) => (
-              <div className="lgd-cat" key={c.key}>
-                <i style={{ background: c.color, borderRadius: '50%' }} />
-                <span>{c.label}</span>
+            {EOLICO_ESTADOS.filter((e) => eolicoEstados[e.key]).map((e) => (
+              <div className="lgd-cat" key={e.key}>
+                <i style={{ background: e.color, borderRadius: '50%' }} />
+                <span>{e.label}{e.vigente ? '' : ' (no vigente)'}</span>
               </div>
             ))}
+            {EOLICO_ESTADOS.every((e) => !eolicoEstados[e.key]) && (
+              <span className="lgd-caption">Ningún estado seleccionado en el filtro.</span>
+            )}
           </div>
+          {parquesBuf && (
+            <span className="lgd-caption">Áreas: radio de 5 × diámetro de rotor (oficial MINENERGIA)</span>
+          )}
         </>
       )}
 
@@ -199,10 +207,6 @@ export default function LegendPlate() {
       <div className="lgd-row">
         <span className="lgd-x">✕</span>
         <span>Colisión de cóndor confirmada</span>
-      </div>
-      <div className="lgd-row">
-        <span className="lgd-turb" />
-        <span>Aerogenerador (contexto)</span>
       </div>
     </div>
   );

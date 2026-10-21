@@ -102,18 +102,43 @@ export const GEN_ESTADO_COLOR: Record<string, string> = Object.fromEntries(
 // Gradiente para el swatch del sidebar (representa las 5 categorías de estado).
 export const GEN_SWATCH = `linear-gradient(90deg,${GEN_ESTADOS.map((e) => e.color).join(',')})`;
 
-// Categorías de la capa «Parques eólicos (OPC · En SEIA · Otros)» (id
-// 'parques_eolicos'). La clave debe coincidir con la propiedad `categoria` del
-// GeoJSON (src/build_capas_derivadas.py, a partir del `estado`).
-export const PARQUES_CATEGORIAS: { key: string; label: string; color: string }[] = [
-  { key: 'OPC', label: 'OPC · en operación o en pruebas', color: '#2f7d4f' },
-  { key: 'En SEIA', label: 'En SEIA · en calificación', color: '#8e5fbf' },
-  { key: 'Otros', label: 'Otros · aprobado o en construcción', color: '#3f7fc4' },
+// Estados de las tres capas eólicas por estado (parques, aerogeneradores y áreas
+// buffer 5 × diámetro de rotor; MINENERGIA, corte 30-06-2026). `key` = propiedad
+// `estado_key` de los GeoJSON. Los 5 estados vigentes reutilizan los colores de
+// GEN_ESTADOS (misma lectura que «Otros proyectos de generación»); los 3 no
+// vigentes van en grises apagados pero distinguibles entre sí (gris medio, gris
+// oscuro violáceo y beige grisáceo). El conteo de parques por estado se calcula del GeoJSON
+// (lib/eolicoConteos.ts).
+const genColor = (k: string) => GEN_ESTADO_COLOR[k] ?? '#8a8a8a';
+export type EolicoEstadoKey =
+  | 'calificacion' | 'aprobado' | 'construccion' | 'pruebas' | 'operacion'
+  | 'caducado' | 'rechazado' | 'desistido';
+export interface EolicoEstado {
+  key: EolicoEstadoKey;
+  label: string;
+  color: string;
+  vigente: boolean;
+}
+export const EOLICO_ESTADOS: EolicoEstado[] = [
+  { key: 'calificacion', label: 'En calificación', color: genColor('En Calificación'), vigente: true },
+  { key: 'aprobado', label: 'Aprobado', color: genColor('Aprobado'), vigente: true },
+  { key: 'construccion', label: 'En construcción', color: genColor('En Construcción'), vigente: true },
+  { key: 'pruebas', label: 'En pruebas', color: genColor('En Pruebas'), vigente: true },
+  { key: 'operacion', label: 'En operación', color: genColor('En Operación'), vigente: true },
+  { key: 'caducado', label: 'Caducado', color: '#8c8c8c', vigente: false },
+  { key: 'rechazado', label: 'Rechazado', color: '#2e2a30', vigente: false },
+  { key: 'desistido', label: 'Desistido', color: '#cfc6b2', vigente: false },
 ];
-export const PARQUE_CAT_COLOR: Record<string, string> = Object.fromEntries(
-  PARQUES_CATEGORIAS.map((c) => [c.key, c.color]),
+export const EOLICO_ESTADO_COLOR: Record<string, string> = Object.fromEntries(
+  EOLICO_ESTADOS.map((e) => [e.key, e.color]),
 );
-export const PARQUES_SWATCH = `linear-gradient(90deg,${PARQUES_CATEGORIAS.map((c) => c.color).join(',')})`;
+// Estado inicial del filtro: vigentes encendidos, no vigentes apagados.
+export const EOLICO_ESTADOS_INICIAL: Record<EolicoEstadoKey, boolean> = Object.fromEntries(
+  EOLICO_ESTADOS.map((e) => [e.key, e.vigente]),
+) as Record<EolicoEstadoKey, boolean>;
+// Ids de las tres capas eólicas que comparten el filtro por estado.
+export const EOLICO_LAYER_IDS: readonly string[] = ['parques_eolicos', 'turb', 'buffers_5d'];
+export const EOLICO_SWATCH = `linear-gradient(90deg,${EOLICO_ESTADOS.map((e) => e.color).join(',')})`;
 
 // Color del trazo/relleno de las capas dummy en el mapa y la leyenda (ámbar).
 export const DUMMY_COLOR = '#d98c00';

@@ -8,6 +8,8 @@ import SpeciesInfo from './SpeciesInfo';
 import InfoTip from './InfoTip';
 import DummyBadge from './DummyBadge';
 import { useCapasConteo, fmtN } from '../lib/capasConteo';
+import { useEolicoConteos } from '../lib/eolicoConteos';
+import { EOLICO_LAYER_IDS, EOLICO_ESTADOS } from '../data/portal';
 
 const fmt = (n: number) => n.toLocaleString('es-CL');
 
@@ -87,6 +89,14 @@ function ActiveLayersPanel() {
   const userLayers = usePortalStore((s) => s.userLayers);
   const conteos = useCapasConteo();
   const active = useMemo(() => layers.filter((l) => l.on), [layers]);
+  // Capas eólicas por estado: «X de N» según el filtro por estado vigente.
+  const eolicoEstados = usePortalStore((s) => s.eolicoEstados);
+  const eolicoConteos = useEolicoConteos(active.filter((l) => EOLICO_LAYER_IDS.includes(l.id)).map((l) => l.id));
+  const visibles = (id: string): number | null => {
+    const c = eolicoConteos[id];
+    if (!c) return null;
+    return EOLICO_ESTADOS.reduce((a, e) => a + (eolicoEstados[e.key] ? (c[e.key] ?? 0) : 0), 0);
+  };
   const activeUser = useMemo(() => userLayers.filter((u) => u.on), [userLayers]);
 
   if (active.length === 0 && activeUser.length === 0) {
@@ -119,7 +129,13 @@ function ActiveLayersPanel() {
             {l.dummy ? (
               <DummyBadge />
             ) : (
-              c && <span className="mono" title={c.unidad}>{fmtN(c.n)} {c.unidad}</span>
+              c && (
+                <span className="mono" title={c.unidad}>
+                  {EOLICO_LAYER_IDS.includes(l.id) && visibles(l.id) !== null
+                    ? `${fmtN(visibles(l.id)!)} de ${fmtN(c.n)} ${c.unidad}`
+                    : `${fmtN(c.n)} ${c.unidad}`}
+                </span>
+              )
             )}
             <div className="d">
               <span>{groupTitle(l.group)}</span>

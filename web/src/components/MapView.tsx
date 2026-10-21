@@ -9,7 +9,18 @@ import { useRiskStore } from '../store/useRiskStore';
 import { useMeasureStore, segmentKm, fmtKm } from '../store/useMeasureStore';
 import { useFieldStore, FIELD_STYLES } from '../store/useFieldStore';
 import { useWindpotRiskStore } from '../store/useWindpotRiskStore';
-import { GEN_ESTADO_COLOR, PARQUE_CAT_COLOR, DUMMY_COLOR } from '../data/portal';
+import { GEN_ESTADO_COLOR, EOLICO_ESTADO_COLOR, EOLICO_LAYER_IDS, DUMMY_COLOR, type EolicoEstadoKey } from '../data/portal';
+import { eolicoPopupHtml, type EolicoTipo } from '../lib/eolicoPopup';
+
+// Popups de TODAS las capas: al abrirse, el autopan deja libre la franja del buscador de
+// comunas (arriba) y de los controles del mapa (derecha) para que no tapen el popup. En
+// pantallas angostas el ancho máximo se acota al del mapa y los márgenes se reducen.
+const POPUP_ANGOSTO = typeof window !== 'undefined' && window.innerWidth <= 600;
+L.Popup.mergeOptions({
+  autoPanPaddingTopLeft: POPUP_ANGOSTO ? [10, 100] : [20, 100],
+  autoPanPaddingBottomRight: POPUP_ANGOSTO ? [60, 20] : [70, 20],
+  ...(POPUP_ANGOSTO ? { maxWidth: Math.max(170, window.innerWidth - 190) } : {}),
+});
 
 type RGB = [number, number, number];
 // Rampa de color del choropleth de densidad eBird (idéntica al visor de riesgo fuente).
@@ -20,13 +31,22 @@ const EBIRD_RAMP: RGB[] = [
 // Buffers de proximidad (anillo visual por capa): archivo GeoJSON de cada capa
 // bufferable y color del anillo. Es SOLO visual (no altera el índice de riesgo).
 const BUFFER_FILES: Record<string, string> = {
-  parques_eolicos: 'layers/parques_eolicos.geojson',
+  parques_eolicos: 'layers/parques_eolicos_estado.geojson',
   lineas: 'riesgo/lineas.geojson',
   nidos: 'riesgo/nidos.geojson',
   colisiones: 'riesgo/colisiones.geojson',
   vertederos: 'riesgo/vertederos.geojson',
 };
 const BUFFER_COLOR = '#e6a23c';
+// Capas eólicas por estado (comparten el filtro por estado del panel): archivo y tipo
+// de popup de cada una.
+const EOLICO_FILES: Record<string, { file: string; tipo: EolicoTipo }> = {
+  parques_eolicos: { file: 'layers/parques_eolicos_estado.geojson', tipo: 'parque' },
+  turb: { file: 'layers/aerogeneradores_estado.geojson', tipo: 'aerogenerador' },
+  buffers_5d: { file: 'layers/buffers_5d_rotor.geojson', tipo: 'area' },
+};
+const estadoVisible = (f: Feature) =>
+  usePortalStore.getState().eolicoEstados[String(f.properties?.['estado_key'] ?? '') as EolicoEstadoKey] === true;
 
 function rampColor(v: number, ramp: RGB[]): string {
   const t = Math.max(0, Math.min(1, v)) * (ramp.length - 1);
@@ -98,6 +118,9 @@ export default function MapView() {
   const bufferKmRef = useRef<Record<string, number>>({});
   const bufferTimerRef = useRef<Record<string, number>>({});
   const comunasCacheRef = useRef<FeatureCollection | null>(null);
+  // GeoJSON crudo de las capas eólicas por estado: al cambiar el filtro se reconstruye
+  // la capa desde este cache, sin volver a pedir el archivo.
+  const eolicoDataRef = useRef<Record<string, FeatureCollection>>({});
   const loadingRef = useRef<Set<string>>(new Set());
   const filteredRef = useRef<Site[]>([]);
   const activeRef = useRef<string | null>(activeSite);
@@ -173,6 +196,35 @@ export default function MapView() {
     });
   }
 
+  // Construye una capa eólica por estado respetando el filtro vigente (puntos
+  // coloreados por `estado_key`; las áreas buffer, polígonos semitransparentes que
+  // se dibujan al fondo del canvas para no tapar los puntos).
+  function buildEolico(id: string, fc: FeatureCollection): L.GeoJSON {
+    const canvas = canvasRef.current!;
+    const tipo = EOLICO_FILES[id]!.tipo;
+    const colorOf = (f?: Feature) => EOLICO_ESTADO_COLOR[String(f?.properties?.['estado_key'] ?? '')] ?? '#8a8a8a';
+    const group = L.geoJSON(fc, {
+      filter: estadoVisible,
+      ...(tipo === 'area'
+        ? { style: (f?: Feature) => ({ renderer: canvas, color: colorOf(f), weight: 1, fillColor: colorOf(f), fillOpacity: 0.22 }) }
+        : {
+            pointToLayer: (f: Feature, ll: L.LatLng) =>
+              tipo === 'parque'
+                ? L.circleMarker(ll, { renderer: canvas, radius: 5.5, color: '#ffffff', weight: 2, fillColor: colorOf(f), fillOpacity: 1 })
+                : L.circleMarker(ll, { renderer: canvas, radius: 3, color: '#ffffff', weight: 0.7, fillColor: colorOf(f), fillOpacity: 0.95 }),
+          }),
+      onEachFeature: (f, l) => {
+        const p = (f.properties ?? {}) as Record<string, unknown>;
+        l.bindPopup(() => eolicoPopupHtml(p, tipo));
+        if (p['nombre']) l.bindTooltip(String(p['nombre']), { sticky: true });
+      },
+    });
+    if (tipo === 'area') {
+      group.on('add', () => group.eachLayer((l) => (l as L.Path).bringToBack()));
+    }
+    return group;
+  }
+
   // Cargadores diferidos de las capas GeoJSON (KMZ convertidos): se traen del
   // servidor solo cuando el usuario activa la capa por primera vez.
   function loaderFor(id: string): (() => Promise<L.Layer>) | null {
@@ -195,9 +247,17 @@ export default function MapView() {
       (_f: Feature, ll: L.LatLng) =>
         L.circleMarker(ll, { renderer: canvas, radius, color, weight: 1, fillColor: color, fillOpacity });
 
-    // Capas KMZ — aerogeneradores como campo de contexto (punto neutro atenuado)
-    if (id === 'turb')
-      return loadLayers('aerogeneradores.geojson', { pointToLayer: pt('#8f8168', 1.8, 0.5), onEachFeature: bindName });
+    // Capas eólicas por estado (parques, aerogeneradores, áreas buffer 5 × D).
+    if (EOLICO_FILES[id])
+      return async () => {
+        const { file } = EOLICO_FILES[id]!;
+        let fc = eolicoDataRef.current[id];
+        if (!fc) {
+          fc = await fetchJson(`data/${file}`);
+          eolicoDataRef.current[id] = fc;
+        }
+        return buildEolico(id, fc);
+      };
     if (id === 'protected')
       return loadLayers('areas_protegidas.geojson', {
         style: () => ({ renderer: canvas, color: '#416180', weight: 1, fillColor: '#b5d9fd', fillOpacity: 0.18 }),
@@ -280,25 +340,6 @@ export default function MapView() {
           l.bindPopup(
             `<b>Zona de influencia de ${p['radio_km'] ?? 10} km</b><br>Colisión ${p['fecha'] ?? ''} ${p['anio'] ?? ''} · ${p['proyecto'] ?? ''}` +
               (p['region'] ? `<br>${p['region']}` : ''),
-          );
-        },
-      });
-
-    // Parques eólicos por categoría (OPC · En SEIA · Otros): 180 del catastro de
-    // generación; el color sale de la propiedad `categoria`.
-    if (id === 'parques_eolicos')
-      return loadLayers('parques_eolicos.geojson', {
-        pointToLayer: (f, ll) => {
-          const color = PARQUE_CAT_COLOR[String(f.properties?.['categoria'] ?? '')] ?? '#8a8a8a';
-          return L.circleMarker(ll, { renderer: canvas, radius: 5, color: '#ffffff', weight: 1, fillColor: color, fillOpacity: 0.95 });
-        },
-        onEachFeature: (f, l) => {
-          const p = f.properties ?? {};
-          const pot = p['potencia_mw'] != null ? `${p['potencia_mw']} MW · ` : '';
-          const lugar = [p['comuna'], p['region']].filter(Boolean).join(', ');
-          l.bindPopup(
-            `<b>${p['nombre'] ?? ''}</b><br>${p['categoria'] ?? ''} · ${p['estado'] ?? ''}<br>${pot}${lugar}` +
-              (p['titular'] ? `<br><span style="opacity:.7">${p['titular']}</span>` : ''),
           );
         },
       });
@@ -429,6 +470,7 @@ export default function MapView() {
 
     const rings: Feature[] = [];
     for (const f of fc.features) {
+      if (id === 'parques_eolicos' && !estadoVisible(f)) continue; // solo los estados visibles
       try {
         const b = buffer(f, km, { units: 'kilometers', steps: 24 });
         if (b) rings.push(b);
@@ -612,6 +654,32 @@ export default function MapView() {
     });
   }, [layers]);
 
+  // Filtro por estado de las capas eólicas: reconstruye las capas ya cargadas desde
+  // el cache (sin nuevo fetch) y descarta el anillo de proximidad de los parques para
+  // que el efecto de buffers lo rehaga con los estados visibles.
+  const eolicoEstados = usePortalStore((s) => s.eolicoEstados);
+  useEffect(() => {
+    const map = mapInstance.map;
+    if (!map || !canvasRef.current) return;
+    EOLICO_LAYER_IDS.forEach((id) => {
+      const old = groupsRef.current[id];
+      const fc = eolicoDataRef.current[id];
+      if (!old || !fc) return;
+      const wasOn = map.hasLayer(old);
+      if (wasOn) map.removeLayer(old);
+      const next = buildEolico(id, fc);
+      groupsRef.current[id] = next;
+      if (wasOn) next.addTo(map);
+    });
+    const bg = bufferGroupsRef.current['parques_eolicos'];
+    if (bg) {
+      if (map.hasLayer(bg)) map.removeLayer(bg);
+      delete bufferGroupsRef.current['parques_eolicos'];
+      delete bufferKmRef.current['parques_eolicos'];
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [eolicoEstados]);
+
   // Buffers de proximidad por capa. El anillo se muestra solo si la capa está
   // encendida y su buffer activo. Primer dibujo inmediato; cambios de radio (km)
   // con debounce, porque recalcular turf.buffer sobre capas pesadas (líneas,
@@ -641,7 +709,7 @@ export default function MapView() {
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [layers]);
+  }, [layers, eolicoEstados]);
 
   // Cambio de capa base OSM ↔ satélite. La base va siempre al fondo para no tapar
   // las capas de riesgo (canvas) que se dibujan encima.
@@ -678,6 +746,7 @@ export default function MapView() {
       const [lng, lat] = c.geometry.coordinates as [number, number];
       const style = FIELD_STYLES[c.tipo];
       L.circleMarker([lat, lng], {
+        renderer: canvasRef.current!,
         radius: 6,
         color: '#fff',
         weight: 1.5,
@@ -834,6 +903,7 @@ export default function MapView() {
     }
     if (riskResult) {
       riskMarkerRef.current = L.circleMarker([riskResult.lat, riskResult.lng], {
+        renderer: canvasRef.current!,
         radius: 9,
         color: riskResult.category.color,
         weight: 2,
@@ -852,13 +922,14 @@ export default function MapView() {
 
     const latlngs = measurePoints.map((p) => L.latLng(p.lat, p.lng));
     if (latlngs.length > 1) {
-      L.polyline(latlngs, { color: '#c0392b', weight: 2, dashArray: '5,4' }).addTo(layer);
+      L.polyline(latlngs, { renderer: canvasRef.current!, color: '#c0392b', weight: 2, dashArray: '5,4' }).addTo(layer);
     }
     let cum = 0;
     measurePoints.forEach((p, i) => {
       if (i > 0) cum += segmentKm(measurePoints[i - 1]!, p);
       const last = i === measurePoints.length - 1;
       L.circleMarker([p.lat, p.lng], {
+        renderer: canvasRef.current!,
         radius: last ? 5 : 3.5,
         color: '#c0392b',
         weight: 2,

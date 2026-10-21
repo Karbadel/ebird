@@ -36,7 +36,7 @@ export const AYUDA = {
   variables:
     'Peso: importancia relativa de cada criterio (se normaliza sobre la suma de los activos, no necesita sumar 100). Distancia de influencia: hasta dónde «llega» un elemento; el puntaje de cercanía baja linealmente de 1 (encima) a 0 (a esa distancia). Desmarca una variable para excluirla. Un criterio sin dato en el punto (p. ej. terreno fuera de Atacama–Maule, idoneidad al norte de 20°S o abundancia fuera del área de predicción de eBird) se excluye y el resto se renormaliza.',
   criterioParques:
-    'Distancia al parque eólico más cercano entre los 180 del catastro MINENERGIA (junio 2026). Incluye los operativos (75) y también los proyectos en evaluación ambiental (18) y los aprobados o en construcción (87): mide el efecto acumulado de parques existentes y proyectados, no solo los que hoy tienen turbinas.',
+    'Distancia al parque eólico más cercano entre los 179 vigentes del catastro MINENERGIA (corte 30-06-2026). Incluye los operativos (71) y también los proyectos en evaluación ambiental (18) y los aprobados o en construcción (90); no cuenta los caducados, rechazados ni desistidos: mide el efecto acumulado de parques existentes y proyectados, no solo los que hoy tienen turbinas.',
   criterioHabitat:
     'Idoneidad ambiental para el cóndor (0–1) del raster oficial de Estrada Pacheco et al. (2025), resolución ≈ 830 m: el valor del raster en el punto es el puntaje. Sin dato al norte de ≈ 20°S (fuera de la cobertura del raster).',
   criterioAbundancia:
