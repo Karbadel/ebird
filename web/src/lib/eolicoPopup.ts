@@ -1,4 +1,4 @@
-import { EOLICO_ESTADO_COLOR } from '../data/portal';
+import { EOLICO_ESTADO_COLOR, EOLICO_ESTADO_BORDE } from '../data/portal';
 
 type Props = Record<string, unknown>;
 
@@ -18,11 +18,12 @@ export type EolicoTipo = 'parque' | 'aerogenerador' | 'area';
  *  áreas buffer 5 × diámetro de rotor). Todo el texto del dato va escapado. */
 export function eolicoPopupHtml(p: Props, tipo: EolicoTipo): string {
   const color = EOLICO_ESTADO_COLOR[String(p['estado_key'] ?? '')] ?? '#8a8a8a';
+  const borde = EOLICO_ESTADO_BORDE[String(p['estado_key'] ?? '')];
   const titulo =
     tipo === 'area' ? `Área buffer 5 × diámetro de rotor · ${esc(p['nombre'])}` : esc(p['nombre']);
   const lineas: string[] = [
     `<b>${titulo}</b>`,
-    `<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${color};margin-right:5px"></span>${esc(p['estado'])}` +
+    `<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${color};margin-right:5px${borde ? `;box-shadow:inset 0 0 0 1px ${borde}` : ''}"></span>${esc(p['estado'])}` +
       (p['vigente'] === false ? ' · no vigente' : ''),
     `<b>Potencia del parque:</b> ${num(p['potencia_mw'], 1)} MW`,
     `<b>Titular:</b> ${esc(p['titular'])}`,

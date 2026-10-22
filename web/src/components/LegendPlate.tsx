@@ -157,7 +157,7 @@ export default function LegendPlate() {
           <div className="lgd-cats">
             {EOLICO_ESTADOS.filter((e) => eolicoEstados[e.key]).map((e) => (
               <div className="lgd-cat" key={e.key}>
-                <i style={{ background: e.color, borderRadius: '50%' }} />
+                <i style={{ background: e.color, borderRadius: '50%', ...(e.borde && { boxShadow: `inset 0 0 0 1px ${e.borde}` }) }} />
                 <span>{e.label}{e.vigente ? '' : ' (no vigente)'}</span>
               </div>
             ))}

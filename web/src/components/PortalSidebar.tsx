@@ -436,7 +436,7 @@ function CapasSidebar() {
                                   checked={eolicoEstados[e.key]}
                                   onChange={() => toggleEolicoEstado(e.key)}
                                 />
-                                <i style={{ background: e.color }} />
+                                <i style={{ background: e.color, ...(e.borde && { boxShadow: `inset 0 0 0 1px ${e.borde}` }) }} />
                                 <span>{e.label}</span>
                                 <b className="mono">{estadoN ? fmtN(estadoN[e.key] ?? 0) : ''}</b>
                               </label>

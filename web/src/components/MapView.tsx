@@ -9,7 +9,7 @@ import { useRiskStore } from '../store/useRiskStore';
 import { useMeasureStore, segmentKm, fmtKm } from '../store/useMeasureStore';
 import { useFieldStore, FIELD_STYLES } from '../store/useFieldStore';
 import { useWindpotRiskStore } from '../store/useWindpotRiskStore';
-import { GEN_ESTADO_COLOR, EOLICO_ESTADO_COLOR, EOLICO_LAYER_IDS, DUMMY_COLOR, type EolicoEstadoKey } from '../data/portal';
+import { GEN_ESTADO_COLOR, EOLICO_ESTADO_COLOR, EOLICO_ESTADO_BORDE, EOLICO_LAYER_IDS, DUMMY_COLOR, type EolicoEstadoKey } from '../data/portal';
 import { eolicoPopupHtml, type EolicoTipo } from '../lib/eolicoPopup';
 
 // Popups de TODAS las capas: al abrirse, el autopan deja libre la franja del buscador de
@@ -203,15 +203,17 @@ export default function MapView() {
     const canvas = canvasRef.current!;
     const tipo = EOLICO_FILES[id]!.tipo;
     const colorOf = (f?: Feature) => EOLICO_ESTADO_COLOR[String(f?.properties?.['estado_key'] ?? '')] ?? '#8a8a8a';
+    // Contorno: el del estado si lo define (relleno blanco); si no, el habitual.
+    const bordeOf = (f: Feature | undefined, base: string) => EOLICO_ESTADO_BORDE[String(f?.properties?.['estado_key'] ?? '')] ?? base;
     const group = L.geoJSON(fc, {
       filter: estadoVisible,
       ...(tipo === 'area'
-        ? { style: (f?: Feature) => ({ renderer: canvas, color: colorOf(f), weight: 1, fillColor: colorOf(f), fillOpacity: 0.22 }) }
+        ? { style: (f?: Feature) => ({ renderer: canvas, color: bordeOf(f, colorOf(f)), weight: 1, fillColor: colorOf(f), fillOpacity: 0.22 }) }
         : {
             pointToLayer: (f: Feature, ll: L.LatLng) =>
               tipo === 'parque'
-                ? L.circleMarker(ll, { renderer: canvas, radius: 5.5, color: '#ffffff', weight: 2, fillColor: colorOf(f), fillOpacity: 1 })
-                : L.circleMarker(ll, { renderer: canvas, radius: 3, color: '#ffffff', weight: 0.7, fillColor: colorOf(f), fillOpacity: 0.95 }),
+                ? L.circleMarker(ll, { renderer: canvas, radius: 5.5, color: bordeOf(f, '#ffffff'), weight: 2, fillColor: colorOf(f), fillOpacity: 1 })
+                : L.circleMarker(ll, { renderer: canvas, radius: 3, color: bordeOf(f, '#ffffff'), weight: 0.7, fillColor: colorOf(f), fillOpacity: 0.95 }),
           }),
       onEachFeature: (f, l) => {
         const p = (f.properties ?? {}) as Record<string, unknown>;
