@@ -173,3 +173,25 @@ las marcadas ** solo en parques y buffers):
 - [x] QA + revisión gráfica (correcciones aplicadas; detalles anteriores al cambio en `TODO.md`)
 - [ ] Commits por tema (con OK de José)
 - [ ] Deploy a producción (cuando José lo pida)
+
+## Corrección de la fuente (2026-10-22)
+
+El encargado de los datos envió de nuevo `05_AE_2026_Junio_EnOperacion` y
+`05_Buff_5x_D_Rot_2026_Junio_EnOperacion` sin los duplicados de PE_031 Malleco Sur (77 AE) y
+PE_024 Eólica Lebu (Ampliación) (5 AE), con sus buffers; el resto es idéntico. Se reemplazaron
+en `data/eolico_2026_06/` (originales en `_original_2026-10-21/`) y se ajustaron los conteos
+esperados de `src/build_eolico_estados.py` (211 parques y 6.634 aerogeneradores leídos, 15
+excluidos). Con eso las tres capas publicadas quedaron idénticas byte a byte.
+
+Campo Lindo (Modificación, PE_079) sigue en `Mapear = No`, pero el encargado confirmó que
+debe aparecer (la marca es un campo interno de su base de datos). El script lo publica vía
+`MAPEAR_CONFIRMADOS`: 211 parques (180 vigentes: OPC 72 · En SEIA 18 · Otros 90; 31 no
+vigentes), 6.634 aerogeneradores y 211 áreas. En operación pasa de 69 a 70 y el ranking del
+Motor de 71 a 72 parques. Se actualizaron los textos de ayuda con esas cifras.
+
+**Colores por estado** (definidos por el encargado, 22-10-2026): En calificación gris
+`#8c8c8c`, Aprobado verde `#2e9e44`, En construcción amarillo `#f2c40f`, En pruebas naranja
+`#f07f12`, En operación rojo `#d62828`, Caducado blanco `#ffffff` (con contorno gris
+`#555555` para que se vea sobre el mapa), Rechazado morado `#7b3fa6`, Desistido negro
+`#111111`. Se aplican a parques, aerogeneradores, áreas buffer, leyenda, filtro y popups.
+«Otros proyectos de generación» mantiene su paleta anterior.

@@ -38,10 +38,11 @@
 - [x] **Aerogeneradores con estado** e incorporación al motor: HECHO 2026-10-21 con los
       16 KMZ de MINENERGIA (corte 30-06-2026); ver `docs/plan-capas-eolicas-2026-10-21.md` y
       `docs/comparacion-indice-2026-10-21.md`.
-- [ ] **Confirmar con el proveedor de las capas eólicas** que Eólica Lebu (Ampliación,
-      PE_024) y Campo Lindo (Modificación, PE_079), marcados `Mapear = No`, son duplicados.
-      Hoy se excluyen por completo (también PE_031 Malleco Sur, agregado de PE_031_1 +
-      PE_031_2). Para incluirlos: `INCLUIR_PARQUES_SIN_MAPEAR` en `src/build_eolico_estados.py`.
+- [x] **Duplicados de las capas eólicas** (2026-10-22): el encargado corrigió el KMZ `05`
+      (En Operación) quitando Eólica Lebu (Ampliación, PE_024) y Malleco Sur (PE_031); confirmó
+      que Campo Lindo (Modificación, PE_079) debe aparecer aunque venga `Mapear = No` (campo
+      interno de su base). Ahora 211 parques (180 vigentes, OPC 72) y 6.634 aerogeneradores.
+      Colores por estado definidos por él, en `EOLICO_ESTADOS` (`web/src/data/portal.ts`).
 - [ ] **Distancia del criterio de parques:** hoy al centroide de los aerogeneradores (bajó
       −2,1 pts en promedio los 30 parques de referencia frente al punto del catastro viejo).
       Variantes a evaluar: aerogenerador más cercano o borde del buffer 5 × D.

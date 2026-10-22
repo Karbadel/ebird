@@ -52,7 +52,7 @@ export function configSignature(config: RiskVar[]): string {
 const nextFrame = (): Promise<void> => new Promise((res) => requestAnimationFrame(() => res()));
 
 // Puntúa en lote los parques eólicos operativos (categoría OPC de
-// data['parques_eolicos'], ya cargado por el motor: 71 parques) con los MISMOS
+// data['parques_eolicos'], ya cargado por el motor: 72 parques) con los MISMOS
 // pesos/config que la consulta puntual. Reutiliza riskAtPoint; no duplica lógica.
 export const useBatchStore = create<BatchState>((set) => ({
   rows: null,
@@ -79,7 +79,7 @@ export const useBatchStore = create<BatchState>((set) => ({
     const rows: BatchRow[] = [];
     // El cómputo es síncrono y `lineas` (2,1 MB) lo hace pesado; se trocea cediendo
     // el hilo cada pocos parques para que la barra de progreso anime y la pestaña
-    // no se congele. Son 71 parques → unos segundos en total.
+    // no se congele. Son 72 parques → unos segundos en total.
     const CHUNK = 6;
     let done = 0;
     for (const f of parques.features) {

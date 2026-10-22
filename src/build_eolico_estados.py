@@ -16,12 +16,14 @@ Escribe en `web/public/data/layers/`:
                                     aerogeneradores).
 - `buffers_5d_rotor.geojson`        Polygon/MultiPolygon por parque, simplificado (~5 m).
 
-Se excluyen por completo (aerogeneradores, punto de parque y buffer) los 3 parques con
-todos sus aerogeneradores en `Mapear = No`: PE_031 (Malleco Sur, agregado de PE_031_1 +
-PE_031_2), PE_024 (Eólica Lebu, Ampliación) y PE_079 (Campo Lindo, Modificación). Lebu y
-Campo Lindo vienen marcados por el proveedor; pendiente de confirmar. Con
-`INCLUIR_PARQUES_SIN_MAPEAR = True` se conservarían punto y buffer de esos parques.
-Salida: 210 parques, 210 buffers, 6.619 aerogeneradores (6.716 leídos, 97 excluidos).
+El KMZ `05` (En Operación) es la corrección del proveedor del 22-10-2026, que quita los
+registros duplicados de PE_031 (Malleco Sur, agregado de PE_031_1 + PE_031_2) y PE_024
+(Eólica Lebu, Ampliación). PE_079 (Campo Lindo, Modificación) sigue marcado `Mapear = No`,
+pero el encargado confirmó que debe aparecer (es un campo interno de su base de datos): se
+publica (ver `MAPEAR_CONFIRMADOS`). Si apareciera otro parque con todos sus aerogeneradores
+en `Mapear = No`, se excluye por completo (aerogeneradores, punto de parque y buffer); con
+`INCLUIR_PARQUES_SIN_MAPEAR = True` se conservarían su punto y su buffer.
+Salida: 211 parques, 211 buffers, 6.634 aerogeneradores (todos los leídos).
 
 Puro stdlib. Uso:
     python src/build_eolico_estados.py
@@ -50,9 +52,12 @@ OUT_BUFFERS = LAYERS / "buffers_5d_rotor.geojson"
 PRECISION = 5
 TOLERANCIA_GRADOS = 0.00005  # ~5 m
 MAX_BYTES_BUFFERS = 2.5 * 1024 * 1024
-# Parques con todos sus aerogeneradores en `Mapear = No` (PE_024, PE_031, PE_079): se excluyen
-# por completo (punto, buffer y aerogeneradores), respetando la marca del proveedor.
+# Parques con todos sus aerogeneradores en `Mapear = No`: se excluyen por completo
+# (punto, buffer y aerogeneradores), respetando la marca del proveedor.
 INCLUIR_PARQUES_SIN_MAPEAR = False
+# Parques marcados `Mapear = No` que el encargado de los datos confirmó que deben aparecer
+# (22-10-2026: la marca de PE_079 Campo Lindo es un campo interno de su base de datos).
+MAPEAR_CONFIRMADOS = {"PE_079"}
 
 # (prefijo de archivo, estado_key, texto original de Est_JUN26, categoria)
 ESTADOS = [
@@ -68,10 +73,10 @@ ESTADOS = [
 
 DIAM_PROMEDIO_OPC = 128  # m, promedio de los parques OPC (campo Di_Pro_OPC)
 
-ESPERADO_PARQUES = 213  # leídos en los KMZ
-ESPERADO_PARQUES_SALIDA = 210  # tras excluir los 3 parques sin aerogeneradores mapeables
-ESPERADO_AE_TOTAL = 6716
-ESPERADO_AE_EXCLUIDOS = 97
+ESPERADO_PARQUES = 211  # leídos en los KMZ
+ESPERADO_PARQUES_SALIDA = 211  # ninguno excluido (PE_079 confirmado)
+ESPERADO_AE_TOTAL = 6634
+ESPERADO_AE_EXCLUIDOS = 0
 
 RE_FILA = re.compile(r"<tr[^>]*>\s*<td>([^<]*)</td>\s*<td>([^<]*)</td>\s*</tr>")
 RE_PLACEMARK = re.compile(r"<Placemark\b.*?</Placemark>", re.S)
@@ -263,7 +268,7 @@ def main() -> None:
                     # En los parques OPC el rotor igual al promedio (128 m) es un valor imputado.
                     # Los demás estados traen Di_Pro_OPC solo como referencia (no es dato del parque).
                     "imputado": categoria == "OPC" and numero(attrs["Diam_Rotor"]) == DIAM_PROMEDIO_OPC,
-                    "mapear": attrs.get("Mapear", "Si") != "No",
+                    "mapear": attrs.get("Mapear", "Si") != "No" or attrs["ID_Unico"] in MAPEAR_CONFIRMADOS,
                     "lon": lon,
                     "lat": lat,
                 }

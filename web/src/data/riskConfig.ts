@@ -14,7 +14,7 @@ export interface RiskVar {
 }
 
 export const DEFAULT_RISK_CONFIG: RiskVar[] = [
-  // Parques eólicos: los 179 vigentes del catastro MINENERGIA por estado (corte 30-06-2026)
+  // Parques eólicos: los 180 vigentes del catastro MINENERGIA por estado (corte 30-06-2026)
   // — OPC, En SEIA y Otros; los caducados, rechazados y desistidos no suman —,
   // no solo los operativos: mide el efecto acumulado de parques en evaluación y aprobados.
   // El id de la variable sigue siendo `wind` (los perfiles y los enlaces lo referencian).
